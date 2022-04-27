@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medico/apis/Variables.dart';
 class GetStarted extends StatefulWidget {
   @override
   _GetStartedState createState() => _GetStartedState();
@@ -17,7 +18,8 @@ class _GetStartedState extends State<GetStarted> {
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).accentColor.withOpacity(0.8),
+           // color: Theme.of(context).accentColor.withOpacity(0.8), // Original code
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.8), // My code
           ),
           child: Center(
             child: Column(
@@ -26,7 +28,8 @@ class _GetStartedState extends State<GetStarted> {
                 Container(
                   margin: EdgeInsets.all(12.0),
                   child: Text(
-                    'Welcome To \n Medico',
+                    // 'Welcome To \n Medico',
+                    'Welcome To \n ${Variables().AppName}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color:Theme.of(context).primaryColor.withOpacity(0.8),

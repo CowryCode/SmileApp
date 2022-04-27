@@ -74,7 +74,6 @@ class _DoctorsListState extends State<DoctorsList> {
                   return SizedBox(height: 4.0);
                 },
                 itemBuilder: (context,index){
-                  
                   return DoctorsCardWidget(
                     doctors: doctorsList.doctors.elementAt(index),
                   );

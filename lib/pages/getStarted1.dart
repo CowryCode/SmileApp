@@ -44,7 +44,7 @@ class _GetStarted1State extends State<GetStarted1> {
                     fontFamily: "Poppins"
                   ),
               ),
-            ],  
+            ],
           ),
           Container(
             padding: const EdgeInsets.only(left: 12.0,right: 24.0),

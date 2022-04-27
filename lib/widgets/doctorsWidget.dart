@@ -12,12 +12,12 @@ class _DoctorsCardWidgetState extends State<DoctorsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150.0,
+      // height: 150.0,
+      height: MediaQuery.of(context).size.height * 0.25,
         padding: const EdgeInsets.all(6.0),
-        child:FlatButton(        
+        child:FlatButton(
           highlightColor: Theme.of(context).primaryColor,
           onPressed: (){
-            Navigator.of(context).pushNamed('/doctorProfil');
           },
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
@@ -49,6 +49,14 @@ class _DoctorsCardWidgetState extends State<DoctorsCardWidget> {
                             fontFamily: 'Poppins',
                             fontSize: 12.0,
                             color: this.widget.doctors.color,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '9:30AM - 8:00PM',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 10.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -91,14 +99,41 @@ class _DoctorsCardWidgetState extends State<DoctorsCardWidget> {
                             ),
                           ],
                         ),
-                        Text(
-                          '9:30AM - 8:00PM',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              IconButton(
+                                icon: const Icon(Icons.call),
+                                color: Theme.of(context).colorScheme.secondary,
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/chat');
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.video_call),
+                                color: Theme.of(context).colorScheme.secondary,
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/chat');
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.chat),
+                                color: Theme.of(context).colorScheme.secondary,
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/chat');
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.person),
+                                // color: Colors.green,
+                                color: Theme.of(context).colorScheme.secondary,
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/doctorProfil');
+                                },
+                              ),
+                            ]
+                        )
+
                       ],
                     ),
                   ],

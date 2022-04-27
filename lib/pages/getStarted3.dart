@@ -25,7 +25,7 @@ class _GetStarted3State extends State<GetStarted3> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-              'Book Diagonstic',
+              'Book Diagonstic 1',
                 style: TextStyle(
                   color:Colors.black,
                   fontWeight: FontWeight.bold,

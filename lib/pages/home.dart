@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:medico/apis/Variables.dart';
 
 class Home extends StatefulWidget {
   final String value;
@@ -23,7 +24,8 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.only(left:20.0,right: 20.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
-                  color: Theme.of(context).accentColor,
+                  // color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +34,7 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Digital Dibia',
+                          '${Variables().AppName}',
                           style: TextStyle(
                             fontSize:22.0,
                             fontFamily: 'Poppins',
@@ -91,9 +93,10 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ],
-          ),      
+          ),
           Container(
-            margin: const EdgeInsets.only(top: 6.0,bottom: 6.0),
+            // margin: const EdgeInsets.only(top: 6.0,bottom: 6.0),
+            margin: const EdgeInsets.only(top: 0.5,bottom: 6.0),
             padding: const EdgeInsets.only(left: 30.0 , right: 35.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +105,8 @@ class _HomeState extends State<Home> {
                 Column(
                   children: <Widget>[
                     Text(
-                      "Doctors",
+                      // "Doctors",
+                      "Care Providers",
                       style: TextStyle(
                         fontSize:12.0,
                         fontFamily: 'Poppins',
@@ -123,7 +127,7 @@ class _HomeState extends State<Home> {
                 Column(
                   children: <Widget>[
                     Text(
-                      "Medicines",
+                      "Triage",
                       style: TextStyle(
                         fontSize:12.0,
                         fontFamily: 'Poppins',
@@ -132,7 +136,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     Text(
-                      "Order medicine",
+                      "Severity Verification",
                       style: TextStyle(
                         fontSize:10.0,
                         fontFamily: 'Poppins',
@@ -144,7 +148,7 @@ class _HomeState extends State<Home> {
                 Column(
                   children: <Widget>[
                     Text(
-                      "Diagnostic",
+                      "Hospitals",
                       style: TextStyle(
                         fontSize:12.0,
                         fontFamily: 'Poppins',
@@ -153,7 +157,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     Text(
-                      "Book test",
+                      "Near you",
                       style: TextStyle(
                         fontSize:10.0,
                         fontFamily: 'Poppins',
@@ -162,6 +166,39 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+              ],
+            ),
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: (){},
+                  child: Text(
+                    'Our Services ',
+                    style: TextStyle(
+                        fontSize:12.0,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).focusColor
+                    ),
+                  ),
+                ),
+                FlatButton(
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/doctors");
+                  },
+                  child: Text(
+                    'See All',
+                    style: TextStyle(
+                      fontSize:12.0,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                )
               ],
             ),
           ),

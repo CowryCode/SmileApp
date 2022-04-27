@@ -70,8 +70,6 @@ class RouteGenerator {
       case '/health':
         return MaterialPageRoute(builder: (_) => HealthTips());
 
-
-
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
