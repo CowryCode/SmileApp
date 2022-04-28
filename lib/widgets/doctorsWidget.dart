@@ -106,14 +106,14 @@ class _DoctorsCardWidgetState extends State<DoctorsCardWidget> {
                                 icon: const Icon(Icons.call),
                                 color: Theme.of(context).colorScheme.secondary,
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed('/chat');
+                                  Navigator.of(context).pushNamed('/voicecall');
                                 },
                               ),
                               IconButton(
                                 icon: const Icon(Icons.video_call),
                                 color: Theme.of(context).colorScheme.secondary,
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed('/chat');
+                                  Navigator.of(context).pushNamed('/voicecall');
                                 },
                               ),
                               IconButton(

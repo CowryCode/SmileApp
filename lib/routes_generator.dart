@@ -4,6 +4,7 @@ import 'package:medico/pages/book-test-online1.dart';
 import 'package:medico/pages/book-test-online2.dart';
 import 'package:medico/pages/book-test-online3.dart';
 import 'package:medico/pages/book-test-online4.dart';
+import 'package:medico/pages/custompages/voicecall.dart';
 import 'package:medico/pages/doctor-book-1.dart';
 import 'package:medico/pages/doctor-book-2.dart';
 import 'package:medico/pages/health.dart';
@@ -69,6 +70,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => AppointmentsList());
       case '/health':
         return MaterialPageRoute(builder: (_) => HealthTips());
+
+        // MY CUSTOM ROUTE START
+      case '/voicecall' :
+        return MaterialPageRoute(builder: (_) => VioceCallWidget());
+
+       // END OF MY CUSTOME ROUTE
 
       default:
         // If there is no such named route in the switch statement, e.g. /third
