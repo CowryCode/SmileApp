@@ -73,10 +73,28 @@ class _HomeState extends State<Home> {
                      FlatButton(
                       padding: EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(150)),
+                          borderRadius: BorderRadius.circular(150)),
                       onPressed: (){
-                        Navigator.of(context).pushNamed('/medecines');
+                         // Navigator.of(context).pushNamed('/medecines');
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Severity accessment'),
+                            content: const Text('This feature is still under R&D will be implemented soon!'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
                       },
+
                       child:ball("images/pill.png",Theme.of(context).scaffoldBackgroundColor),
                     ),
                      FlatButton(
@@ -84,7 +102,7 @@ class _HomeState extends State<Home> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(150)),
                       onPressed: (){
-                        Navigator.of(context).pushNamed('/bookTest');
+                        Navigator.of(context).pushNamed('/hospitals');
                       },
                       child:ball("images/microscope.png",Theme.of(context).scaffoldBackgroundColor),
                     ),

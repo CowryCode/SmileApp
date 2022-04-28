@@ -4,6 +4,8 @@ import 'package:medico/pages/book-test-online1.dart';
 import 'package:medico/pages/book-test-online2.dart';
 import 'package:medico/pages/book-test-online3.dart';
 import 'package:medico/pages/book-test-online4.dart';
+import 'package:medico/pages/custompages/hospitaldetail.dart';
+import 'package:medico/pages/custompages/hospitals.dart';
 import 'package:medico/pages/custompages/voicecall.dart';
 import 'package:medico/pages/doctor-book-1.dart';
 import 'package:medico/pages/doctor-book-2.dart';
@@ -74,7 +76,10 @@ class RouteGenerator {
         // MY CUSTOM ROUTE START
       case '/voicecall' :
         return MaterialPageRoute(builder: (_) => VioceCallWidget());
-
+      case '/hospitals' :
+        return MaterialPageRoute(builder: (_) => HospitalsList());
+      case '/hospitaldetail' :
+        return MaterialPageRoute(builder: (_) => HospitalDetail());
        // END OF MY CUSTOME ROUTE
 
       default:

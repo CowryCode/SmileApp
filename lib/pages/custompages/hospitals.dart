@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:medico/models/doctor.dart' as model;
+import 'package:medico/models/mymodels/hospital.dart' as model;
 import 'package:medico/models/user.dart';
-import 'package:medico/widgets/doctorsWidget.dart';
+import 'package:medico/widgets/mywidgets/hospitalsCardWidget.dart';
 import 'package:medico/widgets/searchWidget.dart';
-class DoctorsList extends StatefulWidget {
+class HospitalsList extends StatefulWidget {
   final User currentUser=User.init().getCurrentUser();
   @override
-  _DoctorsListState createState() => _DoctorsListState();
+  _HospitalsListState createState() => _HospitalsListState();
 }
 
-class _DoctorsListState extends State<DoctorsList> {
-  model.DoctorsList doctorsList;
+class _HospitalsListState extends State<HospitalsList> {
+  model.HospitalList hospitalList;
   @override
   void initState() {
-    this.doctorsList = new model.DoctorsList();
+    this.hospitalList = new model.HospitalList();
     super.initState();
   }
   @override
@@ -23,14 +24,14 @@ class _DoctorsListState extends State<DoctorsList> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color:Theme.of(context).primaryColor )
-         ,
+          ,
           onPressed: (){
             Navigator.of(context).pushNamed('/home', arguments:[widget.currentUser.name,widget.currentUser.phoneNumber]);
           },
         ),
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Doctors',
+          'Partner Hospitals',
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -45,43 +46,43 @@ class _DoctorsListState extends State<DoctorsList> {
           children: <Widget>[
             Stack(
               children: <Widget>[
-                 Container(
+                Container(
                   height: 20,
                   padding: const EdgeInsets.only(top:0,left:12.0,right: 12.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
                     color: Theme.of(context).accentColor,
                   ),
-                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 0.0,left: 12.0,right: 12.0),
                   child:SearchBarWidget(),
                 ),
               ],
             ),
-            
+
             Container(
-              decoration: BoxDecoration(            
-               color: Colors.transparent,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
               ),
               child: ListView.separated(
                 shrinkWrap: true,
                 primary: false,
-                itemCount: doctorsList.doctors.length,
+                itemCount: hospitalList.hospitals.length,
                 separatorBuilder: (context,index){
                   return SizedBox(height: 4.0);
                 },
                 itemBuilder: (context,index){
-                  return DoctorsCardWidget(
-                    doctors: doctorsList.doctors.elementAt(index),
+                  return HospitalsCardWidget(
+                    hospitals: hospitalList.hospitals.elementAt(index),
                   );
                 },
               ),
             ),
           ],
-        ),      
+        ),
       ),
     );
   }
-  
+
 }
