@@ -29,6 +29,8 @@ dependencies:
   flutter_svg: ^1.0.3
   curved_navigation_bar: ^1.0.3
   flutter_form_builder: ^7.1.1
+  form_builder_validators: ^8.1.1
+  meta: ^1.7.0
 
 dev_dependencies:
   flutter_test:

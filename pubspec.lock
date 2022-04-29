@@ -83,6 +83,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.1.1"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_page_indicator:
     dependency: transitive
     description:
@@ -109,6 +114,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  form_builder_validators:
+    dependency: "direct main"
+    description:
+      name: form_builder_validators
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "8.1.1"
   intl:
     dependency: transitive
     description:
@@ -124,7 +136,7 @@ packages:
     source: hosted
     version: "0.12.10"
   meta:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: meta
       url: "https://pub.dartlang.org"

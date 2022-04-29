@@ -66,37 +66,37 @@ class _PhoneLoginState extends State<PhoneLogin> {
                           margin: EdgeInsets.only(top: 20.0 ,left: 12.0,right: 12.0),
                           decoration: BoxDecoration(
                             border: Border.all(width: 1.0,color: Color(0xdddddddd)),
-                            borderRadius: BorderRadius.circular(12.0),                          
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                            child:Center(
-                              child: FormBuilderTextField(
-                                initialValue: '',
-                                // attribute: 'CountryID',
-                                name: 'CountryID',
+                          child:Center(
+                            child: FormBuilderTextField(
+                              initialValue: '',
+                              // attribute: 'CountryID',
+                              name: 'CountryID',
                               autovalidateMode: AutovalidateMode.always,
                               // validators: [
                               //   FormBuilderValidators.required()
                               // ],
-                              keyboardType: TextInputType.number,                            
+                              keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(right: 3,left: 3),
-                                border: InputBorder.none, 
+                                border: InputBorder.none,
                                 prefixText: "+",
                                 prefixStyle: TextStyle(
-                                  color: Colors.black
+                                    color: Colors.black
                                 ),
                               ),
-                          ),
                             ),
+                          ),
                         ),
                         Expanded(
                           child: Container(
-                          height: 40.0,
-                          margin: EdgeInsets.only(top: 20.0 ,left: 12.0,right: 12.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1.0,color: Color(0xdddddddd)),
-                            borderRadius: BorderRadius.circular(12.0),                          
-                          ),
+                            height: 40.0,
+                            margin: EdgeInsets.only(top: 20.0 ,left: 12.0,right: 12.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1.0,color: Color(0xdddddddd)),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
                             child:Center(
                               child: FormBuilderTextField(
                                 initialValue: "",
@@ -106,14 +106,14 @@ class _PhoneLoginState extends State<PhoneLogin> {
                                 // validators: [
                                 //   FormBuilderValidators.required()
                                 // ],
-                                keyboardType: TextInputType.number,                            
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(top: 6,left:12,right: 12),
-                                  border: InputBorder.none, 
+                                  border: InputBorder.none,
                                   suffixIcon:Icon(Icons.verified_user),
                                   prefixText: "",
                                   prefixStyle: TextStyle(
-                                    color: Colors.black
+                                      color: Colors.black
                                   ),
                                 ),
                               ),
@@ -137,18 +137,18 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       child: Container(
                         child:  Center(
                           child:Text(
-                            'Submit', 
+                            'Submit',
                             style:  TextStyle(
-                              fontSize: 18.0, 
+                              fontSize: 18.0,
                               color: Theme.of(context).primaryColor,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.bold,
                             ),
-                          ),  
+                          ),
                         ),
-                      ),   
+                      ),
                     ),
-                  ),      
+                  ),
                 ],
               ),
             ),

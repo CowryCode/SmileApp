@@ -78,9 +78,9 @@ class _AcountWidgetState extends State<AcountWidget> {
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           child: RaisedButton(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             onPressed: (){
-                              
+                              Navigator.of(context).pushNamed('/completeprofile');
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
@@ -88,18 +88,18 @@ class _AcountWidgetState extends State<AcountWidget> {
                             child: Container(
                               child:  Center(
                                 child:Text(
-                                  'Complete your profile', 
+                                  'Complete your profile',
                                   style:  TextStyle(
-                                    fontSize: 10.0, 
+                                    fontSize: 10.0,
                                     color: Theme.of(context).primaryColor,
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold,
                                   ),
-                                ),  
+                                ),
                               ),
+                            ),
                             ),   
                           ),
-                        ),    
                       ],
                     ),
                   ),

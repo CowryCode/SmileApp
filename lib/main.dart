@@ -33,6 +33,8 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(fontSize: 12.0, color: config.Colors().secondDarkColor(1)),
           bodyText2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w600, color: config.Colors().secondDarkColor(1)),
           caption: TextStyle(fontSize: 12.0, color: config.Colors().secondDarkColor(0.7)),
+          // CUSTOM STYLES CREATED
+          // END OF CUSTOM STYLE
           // headline: TextStyle(fontSize: 20.0, color: config.Colors().secondDarkColor(1)),
           // display1: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600, color: config.Colors().secondDarkColor(1)),
           // display2: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600, color: config.Colors().secondDarkColor(1)),
