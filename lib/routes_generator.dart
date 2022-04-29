@@ -6,6 +6,7 @@ import 'package:medico/pages/book-test-online3.dart';
 import 'package:medico/pages/book-test-online4.dart';
 import 'package:medico/pages/custompages/hospitaldetail.dart';
 import 'package:medico/pages/custompages/hospitals.dart';
+import 'package:medico/pages/custompages/services.dart';
 import 'package:medico/pages/custompages/voicecall.dart';
 import 'package:medico/pages/doctor-book-1.dart';
 import 'package:medico/pages/doctor-book-2.dart';
@@ -80,6 +81,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HospitalsList());
       case '/hospitaldetail' :
         return MaterialPageRoute(builder: (_) => HospitalDetail());
+      case '/services':
+        return MaterialPageRoute(builder: (_) => ServicesList());
        // END OF MY CUSTOME ROUTE
 
       default:

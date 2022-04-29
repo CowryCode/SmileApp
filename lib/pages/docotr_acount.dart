@@ -73,7 +73,7 @@ class _DoctorAcountState extends State<DoctorAcount> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                "Prime",
+                                "Available",
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 14.0,
@@ -103,7 +103,19 @@ class _DoctorAcountState extends State<DoctorAcount> {
                               ),
                               Center(
                                 child:Text(
-                                  "${currentDoctor.description}",
+                                  // "${currentDoctor.description}",
+                                  "Toronto General - University Health Network",
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 14.0,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child:Text(
+                                  // "${currentDoctor.description}",
+                                  "Toronto - Canada",
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 14.0,
@@ -210,7 +222,7 @@ class _DoctorAcountState extends State<DoctorAcount> {
                         ),
                       ),
                       Container(
-                        height: 30.0,
+                        height: 40.0,
                         decoration: BoxDecoration(
                           border: Border.all(width: 1.5,color: Theme.of(context).accentColor),
                           borderRadius: BorderRadius.circular(20.0)
@@ -220,15 +232,41 @@ class _DoctorAcountState extends State<DoctorAcount> {
                               borderRadius: BorderRadius.circular(20.0)
                           ),
                           onPressed: (){},
-                          child: Text(
-                            'Book',
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).accentColor,
-                            ),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: const Icon(Icons.call),
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/voicecall');
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.video_call),
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/voicecall');
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.chat),
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/chat');
+                                  },
+                                ),
+                              ]
                           ),
+                          // child: Text(
+                          //   'Book',
+                          //   style: TextStyle(
+                          //     fontFamily: 'Poppins',
+                          //     fontSize: 14.0,
+                          //     fontWeight: FontWeight.bold,
+                          //     color: Theme.of(context).accentColor,
+                          //   ),
+                          // ),
                         ), 
                       ),
                                
@@ -267,35 +305,35 @@ class _DoctorAcountState extends State<DoctorAcount> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30.0,child: Center(child: Container(height: 1.0,color: Colors.grey[400].withOpacity(0.1),),)),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.location_on,color:Theme.of(context).hintColor.withOpacity(0.5),),
-                      Text(
-                        '92/3rd Floor, outer Ring Road,\nChandra Layout',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 12.0,
-                          color: Colors.grey,
-
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 6.0,),
-                  SizedBox(
-                    height: 120,
-                    width: double.maxFinite,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        image:DecorationImage(
-                          image:AssetImage('images/gps.png'),
-                          fit: BoxFit.cover,
-                        )
-                      ),
-                    ),
-                  ),
+                  // SizedBox(height: 30.0,child: Center(child: Container(height: 1.0,color: Colors.grey[400].withOpacity(0.1),),)),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Icon(Icons.location_on,color:Theme.of(context).hintColor.withOpacity(0.5),),
+                  //     Text(
+                  //       '92/3rd Floor, outer Ring Road,\nChandra Layout',
+                  //       style: TextStyle(
+                  //         fontFamily: 'Poppins',
+                  //         fontSize: 12.0,
+                  //         color: Colors.grey,
+                  //
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: 6.0,),
+                  // SizedBox(
+                  //   height: 120,
+                  //   width: double.maxFinite,
+                  //   child: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(16.0),
+                  //       image:DecorationImage(
+                  //         image:AssetImage('images/gps.png'),
+                  //         fit: BoxFit.cover,
+                  //       )
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(height: 30.0,child: Center(child: Container(height: 1.0,color: Colors.grey[400].withOpacity(0.1),),)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -331,6 +369,14 @@ class _DoctorAcountState extends State<DoctorAcount> {
                   ),
                   SizedBox(height: 6.0,),
                   Text(
+                    'Alumo Bitters',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 12.0,
+                      color:Theme.of(context).hintColor,
+                    ),
+                  ),
+                  Text(
                     'Dermitologist',
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -356,23 +402,23 @@ class _DoctorAcountState extends State<DoctorAcount> {
                       color:Theme.of(context).hintColor,
                     ),
                   ),
-                  SizedBox(height: 30.0,child: Center(child: Container(height: 1.0,color: Colors.grey[400].withOpacity(0.1),),)),
-                  Text(
-                    'ALSO PRACTICES AT',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 14.0,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: 6.0,),
-                  Column(
-                    children: <Widget>[
-                      card("images/asset-2.png","Dr.Mickel Nick","B.Sc DDVL Demilitologist","4.2"),
-                      SizedBox(height: 30.0,child: Center(child: Container(height: 1.0,color: Colors.grey[350].withOpacity(0.1),),)),
-                      card("images/asset-3.png","Dr.Steve Robert","B.Sc DDVL Demilitologist","3.6"),
-                    ],
-                  ),
+                 // SizedBox(height: 30.0,child: Center(child: Container(height: 1.0,color: Colors.grey[400].withOpacity(0.1),),)),
+                  // Text(
+                  //   'ALSO PRACTICES AT',
+                  //   style: TextStyle(
+                  //     fontFamily: 'Poppins',
+                  //     fontSize: 14.0,
+                  //     color: Colors.grey,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 6.0,),
+                  // Column(
+                  //   children: <Widget>[
+                  //     card("images/asset-2.png","Dr.Mickel Nick","B.Sc DDVL Demilitologist","4.2"),
+                  //     SizedBox(height: 30.0,child: Center(child: Container(height: 1.0,color: Colors.grey[350].withOpacity(0.1),),)),
+                  //     card("images/asset-3.png","Dr.Steve Robert","B.Sc DDVL Demilitologist","3.6"),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

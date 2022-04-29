@@ -121,12 +121,13 @@ class _AcountWidgetState extends State<AcountWidget> {
               ),
               child: Column(
                 children: <Widget>[
-                  _dropDownListe(Icon(Icons.bubble_chart,color: Theme.of(context).accentColor,),'My Doctors',1,'/mydoctors',context),
-                  _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).accentColor,),'Appointments',1,'/appointment',context),
-                  _dropDownListe(Icon(Icons.card_giftcard,color: Theme.of(context).accentColor,),'Health Interest',1,'/health',context),
-                  _dropDownListe(Icon(Icons.payment,color: Theme.of(context).accentColor,),'My Payments',1,'',context),
-                  _dropDownListe(Icon(Icons.local_offer,color: Theme.of(context).accentColor,),'Offers',1,'/offers',context),
-                  _dropDownListe(Icon(Icons.arrow_upward,color: Theme.of(context).accentColor,),'Logout',0,'/signup',context),
+                  _dropDownListe(Icon(Icons.bubble_chart,color: Theme.of(context).colorScheme.secondary,),'My Doctors',1,'/mydoctors',context),
+                  _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).colorScheme.secondary,),'Appointments',1,'/appointment',context),
+                  _dropDownListe(Icon(Icons.card_giftcard,color: Theme.of(context).colorScheme.secondary,),'Health Tips',1,'/health',context),
+                  _dropDownListe(Icon(Icons.local_offer,color: Theme.of(context).colorScheme.secondary,),'Services',1,'/services',context),
+                  _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Support',1,'',context),
+                  _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Payments Method',1,'',context),
+                  _dropDownListe(Icon(Icons.arrow_upward,color: Theme.of(context).colorScheme.secondary,),'Logout',0,'/signup',context),
 
                 ],
               ),
