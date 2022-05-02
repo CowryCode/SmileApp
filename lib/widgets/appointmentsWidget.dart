@@ -72,18 +72,34 @@ class _AppointmentsWidgetState extends State<AppointmentsWidget> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          child: IconButton(
+                            padding: EdgeInsets.all(0),
+                            onPressed: (){
+                              //Navigator.of(context).pushNamed('/chat');
+                            },
+                            icon: Icon(Icons.edit),
+                            iconSize: 20,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                        Container(
+                          child: IconButton(
+                            padding: EdgeInsets.all(0),
+                            onPressed: (){
+                              //Navigator.of(context).pushNamed('/chat');
+                            },
+                            icon: Icon(Icons.cancel),
+                            iconSize: 20,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ],
+                    )
                     
-                    Container(
-                      child: IconButton(  
-                        padding: EdgeInsets.all(0),
-                        onPressed: (){
-                          //Navigator.of(context).pushNamed('/chat');
-                        },
-                        icon: Icon(Icons.calendar_today),
-                        iconSize: 20,
-                        color: Theme.of(context).accentColor,
-                      ),
-                    ),
+
                   ],
                 ),
               ),
