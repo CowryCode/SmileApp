@@ -66,7 +66,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(150)),
                         onPressed: (){
-                          Navigator.of(context).pushNamed('/doctors');
+                          Navigator.of(context).pushNamed('/mypatients');
                         },
                         child:ball("images/nurse.png",Theme.of(context).scaffoldBackgroundColor),
                       ),
