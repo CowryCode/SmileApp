@@ -124,7 +124,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                     children: <Widget>[
                       Text(
                         // "Doctors",
-                        "Care Providers",
+                        "Patient List",
                         style: TextStyle(
                           fontSize:12.0,
                           fontFamily: 'Poppins',
@@ -133,7 +133,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                         ),
                       ),
                       Text(
-                        "Search doctors",
+                        "Patients Under \n Care",
                         style: TextStyle(
                           fontSize:10.0,
                           fontFamily: 'Poppins',
@@ -145,7 +145,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Triage",
+                        "Encounters",
                         style: TextStyle(
                           fontSize:12.0,
                           fontFamily: 'Poppins',
@@ -154,7 +154,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                         ),
                       ),
                       Text(
-                        "Severity Verification",
+                        "Patient Encounter \n Journals",
                         style: TextStyle(
                           fontSize:10.0,
                           fontFamily: 'Poppins',
@@ -166,7 +166,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Hospitals",
+                        "Service Requests",
                         style: TextStyle(
                             fontSize:12.0,
                             fontFamily: 'Poppins',
@@ -175,7 +175,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                         ),
                       ),
                       Text(
-                        "Near you",
+                        "Requests from \n Patients",
                         style: TextStyle(
                           fontSize:10.0,
                           fontFamily: 'Poppins',
@@ -194,7 +194,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                   FlatButton(
                     onPressed: (){},
                     child: Text(
-                      'Our Services ',
+                      'Latest Updates',
                       style: TextStyle(
                           fontSize:12.0,
                           fontFamily: 'Poppins',
@@ -288,7 +288,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                   FlatButton(
                     onPressed: (){},
                     child: Text(
-                      'Doctors nearly  you ',
+                      'Patients in queue',
                       style: TextStyle(
                           fontSize:12.0,
                           fontFamily: 'Poppins',
