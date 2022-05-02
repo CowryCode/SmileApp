@@ -1,3 +1,5 @@
+import 'package:form_builder_validators/localization/l10n.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:medico/config/app_config.dart' as config;
 import 'package:flutter/material.dart';
 import 'package:medico/routes_generator.dart';
@@ -8,6 +10,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting('pt_BR', null);
     return MaterialApp(
       title: 'Ecommerce Flutter UI',
       initialRoute: '/',
@@ -78,6 +81,21 @@ class MyApp extends StatelessWidget {
           // caption: TextStyle(fontSize: 12.0, color: config.Colors().secondColor(0.6)),
         ),
       ),
+      localizationsDelegates: [
+        FormBuilderLocalizations.delegate,
+        // GlobalMaterialLocalizations.delegate,
+        // GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''),
+        Locale('es', ''),
+        Locale('fa', ''),
+        Locale('fr', ''),
+        Locale('ja', ''),
+        Locale('pt', ''),
+        Locale('sk', ''),
+        Locale('pl', ''),
+      ],
     );
   }
 }

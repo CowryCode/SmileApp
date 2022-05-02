@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:medico/models/conversation.dart';
-import 'package:medico/models/doctor.dart';
-import 'package:medico/models/user.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 class CompleteProfile extends StatefulWidget {
-  CompleteProfile({Key key}) : super(key: key);
+  // CompleteProfile({Key key}) : super(key: key);
   @override
   _CompleteProfileState createState() => _CompleteProfileState();
 }
@@ -20,6 +19,8 @@ class _CompleteProfileState extends State<CompleteProfile> {
   String countryCode = "";
   String phoneNumber = "";
   final myController = TextEditingController();
+
+  get genderOptions => ["Option 1", "Option 2", "Option 3"];
 
   @override
   void dispose() {
@@ -49,68 +50,212 @@ class _CompleteProfileState extends State<CompleteProfile> {
         ),
       ),
       body:Center(
-        child: Container(
+            child: SingleChildScrollView(
               // START OF MY EDIT
-              padding: const EdgeInsets.all(0.0),
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.5,
-              alignment: Alignment.center,
+              // padding: const EdgeInsets.all(0.0),
+              padding: const EdgeInsets.only(top: 12.0, bottom:12.0, left: 18.0,right: 18.0),
+              // width: MediaQuery.of(context).size.width * 0.9,
+              // height: MediaQuery.of(context).size.height * 3,
+              // alignment: Alignment.center,
               child: FormBuilder(
                 key: _formKey,
-                child: Column(
+                  child:Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    getTextField(
+                    getTextField(context,
                         filedName: "username",
                         fieldLabel: "Enter your username",
                         prefixIcon: Icon(Icons.verified_user_outlined),
                         fieldValidator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.minLength(15),
+                        FormBuilderValidators.minLength(5),
                       ]),
                     ),
                     SizedBox(height: 10,),
-                    getTextField(
+                    getTextField(context,
                         filedName: "name",
                         fieldLabel: "Enter your Fullname",
                         prefixIcon: Icon(Icons.person),
                         fieldValidator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.minLength(15),
+                        FormBuilderValidators.minLength(5),
                       ]),
                     ),
                     SizedBox(height: 10,),
-                    getTextField(
+                    getTextField(context,
                         filedName: "email",
                         fieldLabel: "Enter your Email address",
                         prefixIcon: Icon(Icons.email_outlined),
                         fieldValidator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
-                        FormBuilderValidators.minLength(25),
+                        FormBuilderValidators.minLength(5),
                           FormBuilderValidators.email(errorText: "This field should contain valid email")
                       ]),
                     ),
-
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState.saveAndValidate()) {
-                          print(_formKey.currentState.value['email']);
-                          print(_formKey.currentState.value['password']);
-                        }
+                    SizedBox(height: 10,),
+                    FormBuilderSlider(
+                      name: 'slider',
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.min(6),
+                      ]),
+                      onChanged: (text) {
+                          print("The text is : ${text}");
                       },
-                      child: const Text('Save'),
+                      min: 2.0,
+                      max: 20.0,
+                      initialValue: 7.0,
+                      divisions: 20,
+                      activeColor: Colors.red,
+                      inactiveColor: Colors.pink[100],
+                      decoration: InputDecoration(
+                        labelText: 'Show doctors within (km)',
+                        labelStyle: Theme.of(context).textTheme.subtitle2,
+                      ),
                     ),
-                  ],
+                    FormBuilderFilterChip(
+                      name: 'filter_chip',
+                      decoration: InputDecoration(
+                        labelText: 'Select Service of Interest',
+                        labelStyle: Theme.of(context).textTheme.subtitle2,
+                      ),
+                      options: [
+                        FormBuilderFieldOption(
+                            value: 'Dibia Igbo', child: Text('Dibia Igbo')),
+                        FormBuilderFieldOption(
+                            value: 'Yoruba Dibia', child: Text('Yoruba Dibia')),
+                        FormBuilderFieldOption(
+                            value: 'Express Doc. Ateention', child: Text('Express Doc. Ateention')),
+                        FormBuilderFieldOption(
+                            value: 'PHS', child: Text('PHS')),
+                        FormBuilderFieldOption(
+                            value: 'vitals Monitoring', child: Text('vitals Monitoring')),
+                      ],
+                    ),
+                    FormBuilderChoiceChip(
+                      name: 'choice_chip',
+                      decoration: InputDecoration(
+                        labelText: 'Select alert option',
+                        labelStyle: Theme.of(context).textTheme.subtitle2,
+                      ),
+                      options: [
+                        FormBuilderFieldOption(
+                            value: 'Test', child: Text('Service Notification')),
+                        FormBuilderFieldOption(
+                            value: 'Test 1', child: Text('Doctor Availability')),
+                        FormBuilderFieldOption(
+                            value: 'Test 2', child: Text('Appointments')),
+                        FormBuilderFieldOption(
+                            value: 'Test 3', child: Text('Queue Progress')),
+                        FormBuilderFieldOption(
+                            value: 'Test 4', child: Text('No Notification')),
+                      ],
+                    ),
+                    FormBuilderDateTimePicker(
+                      name: 'date',
+                      // onChanged: _onChanged,
+                      inputType: InputType.time,
+                      decoration: InputDecoration(
+                        labelText: 'Appointment Time',
+                        labelStyle: Theme.of(context).textTheme.subtitle2,
+                      ),
+                      initialTime: TimeOfDay(hour: 8, minute: 0),
+                      initialValue: DateTime.now(),
+                      enabled: true,
+                    ),
+                    FormBuilderDateRangePicker(
+                      name: 'date_range',
+                      firstDate: DateTime(1970),
+                      lastDate: DateTime(2030),
+                      format: DateFormat('yyyy-MM-dd'),
+                      onChanged: (text) {
+                           print("The text is : ${text}");
+                         },
+                        decoration: InputDecoration(
+                        labelText: 'Date Range',
+                        helperText: 'Helper text',
+                          helperStyle: Theme.of(context).textTheme.subtitle2,
+                        hintText: 'Hint text',
+                          labelStyle: Theme.of(context).textTheme.subtitle2,
+                        ),
+                        ),
+                        FormBuilderCheckbox(
+                        name: 'accept_terms',
+                        initialValue: false,
+                        onChanged: _onChanged,
+                        title: RichText(
+                        text: TextSpan(
+                        children: [
+                        TextSpan(
+                        text: 'I have read and agree to the ',
+                        style: TextStyle(color: Colors.black),
+                        ),
+                        TextSpan(
+                        text: 'Terms and Conditions',
+                        style: TextStyle(color: Colors.blue),
+                        ),
+                       ],
+                      ),
+                     ),
+                      validator: FormBuilderValidators.equal(
+                        context,
+                        errorText:
+                        'You must accept terms and conditions to continue',
+                      ),
+                    ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     _formKey.currentState.validate();
+                    //     print(_formKey.currentState.value['username']);
+                    //     print(_formKey.currentState.value['name']);
+                    //     print(_formKey.currentState.value['email']);
+                    //   },
+                    //   child: const Text('Save'),
+                    // ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: MaterialButton(
+                            color: Theme.of(context).accentColor,
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              _formKey.currentState.save();
+                              if (_formKey.currentState.validate()) {
+                                print(_formKey.currentState.value);
+                              } else {
+                                print("validation failed");
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: MaterialButton(
+                            color: Theme.of(context).colorScheme.secondary,
+                            child: Text(
+                              "Reset",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              _formKey.currentState.reset();
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+                   ],
+                  ),
                 ),
-              ),
+                ),
+                ),
+              );
           // END OF MY EDITH
-      ),
-    )
-    );
   }
 
-  FormBuilderTextField getTextField({ @required String filedName, @required String fieldLabel, @required Icon prefixIcon, FormFieldValidator<String> fieldValidator}){
+  FormBuilderTextField getTextField(BuildContext context, { @required String filedName, @required String fieldLabel, @required Icon prefixIcon, FormFieldValidator<String> fieldValidator}){
     return FormBuilderTextField(
       name: filedName,
       obscureText: false, // For Passwords
@@ -138,11 +283,11 @@ class _CompleteProfileState extends State<CompleteProfile> {
           borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.5),
         ),
       ),
-      validator: fieldValidator,
-      // validator: FormBuilderValidators.compose([
-      //   FormBuilderValidators.required(),
-      //   FormBuilderValidators.minLength(6),
-      // ]),
+      // validator: fieldValidator,
+      validator: FormBuilderValidators.compose([
+        FormBuilderValidators.required(),
+        FormBuilderValidators.minLength(6),
+      ]),
 
       onChanged: (text) {
         print("The text is : ${text}");
@@ -150,4 +295,8 @@ class _CompleteProfileState extends State<CompleteProfile> {
     );
   }
 
+
+  void _onChanged(bool value) {
+      print("_onchnage called");
+  }
 }
