@@ -9,6 +9,8 @@ import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
 import 'package:medico/pages/custompages/patient/hospitals.dart';
 import 'package:medico/pages/custompages/patient/voicecall.dart';
 import 'package:medico/pages/custompages/patient/services.dart';
+import 'package:medico/pages/custompages/provider/providerhome.dart';
+import 'package:medico/pages/custompages/provider/providertabs.dart';
 import 'package:medico/pages/doctor-book-1.dart';
 import 'package:medico/pages/doctor-book-2.dart';
 import 'package:medico/pages/health.dart';
@@ -78,6 +80,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HealthTips());
 
         // MY CUSTOM ROUTE START
+       // PATIENT
       case '/voicecall' :
         return MaterialPageRoute(builder: (_) => VioceCallWidget());
       case '/hospitals' :
@@ -88,6 +91,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ServicesList());
       case '/completeprofile':
         return MaterialPageRoute(builder: (_) => CompleteProfile());
+        // PROVIDER
+      case '/providerhome':
+        return MaterialPageRoute(builder: (_) =>  ProviderTabsWidget(acountInfos: args,));
        // END OF MY CUSTOME ROUTE
 
       default:

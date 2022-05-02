@@ -89,7 +89,7 @@ class _SignUpState extends State<SignUp> {
                 elevation: 0.2,
                 color: Theme.of(context).primaryColor,
                 onPressed: (){
-                  Navigator.of(context).pushNamed("/home",arguments: [currentUser.name,currentUser.phoneNumber]);
+                  Navigator.of(context).pushNamed("/providerhome",arguments: [currentUser.name,currentUser.phoneNumber]);
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
