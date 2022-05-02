@@ -165,9 +165,13 @@ class _CompleteProfileState extends State<CompleteProfile> {
                     ),
                     FormBuilderDateRangePicker(
                       name: 'date_range',
-                      firstDate: DateTime(1970),
-                      lastDate: DateTime(2030),
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime.now(),
                       format: DateFormat('yyyy-MM-dd'),
+                      initialValue: DateTimeRange(
+                        start: DateTime(2021),
+                        end: DateTime.now()
+                      ),
                       onChanged: (text) {
                            print("The text is : ${text}");
                          },

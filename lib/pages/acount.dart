@@ -126,7 +126,7 @@ class _AcountWidgetState extends State<AcountWidget> {
                   _dropDownListe(Icon(Icons.card_giftcard,color: Theme.of(context).colorScheme.secondary,),'Health Tips',1,'/health',context),
                   _dropDownListe(Icon(Icons.local_offer,color: Theme.of(context).colorScheme.secondary,),'Services',1,'/services',context),
                   _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Support',1,'',context),
-                  _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Payments Method',1,'',context),
+                  _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Payment Methods',1,'',context),
                   _dropDownListe(Icon(Icons.arrow_upward,color: Theme.of(context).colorScheme.secondary,),'Logout',0,'/signup',context),
 
                 ],
