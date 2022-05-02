@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medico/models/doctor.dart' as model;
-import 'package:medico/models/mymodels/hospital.dart' as model;
+import 'package:medico/models/mymodels/patientmodels/hospital.dart' as model;
 import 'package:medico/models/user.dart';
-import 'package:medico/widgets/mywidgets/hospitalsCardWidget.dart';
+import 'package:medico/widgets/mywidgets/patientwidgets/hospitalsCardWidget.dart';
 import 'package:medico/widgets/searchWidget.dart';
 class HospitalsList extends StatefulWidget {
   final User currentUser=User.init().getCurrentUser();

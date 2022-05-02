@@ -14,7 +14,9 @@ class _SignUpState extends State<SignUp> {
     
       return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        body: Column(
+        body: SingleChildScrollView(
+
+         child: Column(
           mainAxisAlignment:MainAxisAlignment.spaceBetween,
           children: [
             Container(
@@ -29,8 +31,90 @@ class _SignUpState extends State<SignUp> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0)),
-                  color: Theme.of(context).accentColor.withOpacity(0.8),
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
                   ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 20.0,right:50.0,left: 50.0 ),
+              height: 40,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.10), offset: Offset(0,4), blurRadius: 10)
+                ],
+              ),
+              child: RaisedButton(
+                elevation: 0.2,
+                color: Theme.of(context).primaryColor,
+                onPressed: (){
+                  Navigator.of(context).pushNamed("/home",arguments: [currentUser.name,currentUser.phoneNumber]);
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: Container(
+                  child:  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+                        Image(
+                          image: AssetImage('images/google-fill.png'),
+                        ),
+                        Text(
+                          'Patient Platform',
+                          style:  TextStyle(
+                            fontSize: 16.0,
+                            color: Theme.of(context).focusColor,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 20.0,right:50.0,left: 50.0 ),
+              height: 40,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.10), offset: Offset(0,4), blurRadius: 10)
+                ],
+              ),
+              child: RaisedButton(
+                elevation: 0.2,
+                color: Theme.of(context).primaryColor,
+                onPressed: (){
+                  Navigator.of(context).pushNamed("/home",arguments: [currentUser.name,currentUser.phoneNumber]);
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: Container(
+                  child:  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+                        Image(
+                          image: AssetImage('images/google-fill.png'),
+                        ),
+                        Text(
+                          'Provider Platform',
+                          style:  TextStyle(
+                            fontSize: 16.0,
+                            color: Theme.of(context).focusColor,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
             Container(
@@ -194,7 +278,9 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),   
             ),*/
+
           ],
+        ),
         ),
     );
   }

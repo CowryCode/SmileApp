@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medico/models/doctor.dart' as model;
-import 'package:medico/models/mymodels/hospital.dart' as model;
+import 'package:medico/models/mymodels/patientmodels/hospital.dart' as model;
 
 class HospitalsCardWidget extends StatefulWidget {
   final model.Hospital hospitals;

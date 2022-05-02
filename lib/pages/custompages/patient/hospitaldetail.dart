@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:medico/models/doctor.dart';
-import 'package:medico/models/mymodels/hospital.dart';
+import 'package:medico/models/mymodels/patientmodels/hospital.dart';
 import 'package:medico/models/user.dart';
 class HospitalDetail extends StatefulWidget {
 

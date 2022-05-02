@@ -4,11 +4,11 @@ import 'package:medico/pages/book-test-online1.dart';
 import 'package:medico/pages/book-test-online2.dart';
 import 'package:medico/pages/book-test-online3.dart';
 import 'package:medico/pages/book-test-online4.dart';
-import 'package:medico/pages/custompages/completeprofile.dart';
-import 'package:medico/pages/custompages/hospitaldetail.dart';
-import 'package:medico/pages/custompages/hospitals.dart';
-import 'package:medico/pages/custompages/services.dart';
-import 'package:medico/pages/custompages/voicecall.dart';
+import 'package:medico/pages/custompages/patient/completeprofile.dart';
+import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
+import 'package:medico/pages/custompages/patient/hospitals.dart';
+import 'package:medico/pages/custompages/patient/voicecall.dart';
+import 'package:medico/pages/custompages/patient/services.dart';
 import 'package:medico/pages/doctor-book-1.dart';
 import 'package:medico/pages/doctor-book-2.dart';
 import 'package:medico/pages/health.dart';
@@ -26,6 +26,8 @@ import 'package:medico/pages/phoneNumber_login.dart';
 import 'package:medico/pages/signup.dart';
 import 'package:medico/pages/tabs.dart';
 import 'package:medico/pages/verification_number.dart';
+
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

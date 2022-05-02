@@ -83,8 +83,6 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: [
         FormBuilderLocalizations.delegate,
-        // GlobalMaterialLocalizations.delegate,
-        // GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
         Locale('en', ''),
