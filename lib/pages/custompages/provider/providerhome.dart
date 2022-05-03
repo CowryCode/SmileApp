@@ -336,9 +336,9 @@ class _ProviderHomeState extends State<ProviderHome> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  card("images/asset-1.png","Dr.Alina james","B.Sc DDVL Demilitologist","4.2"),
-                  card("images/asset-2.png","Dr.Steve Robert","B.Sc DDVL Demilitologist","3.6"),
-                  card("images/asset-3.png","Dr. Senila Aaraf","B.Sc DDVL Demilitologist ","4.3"),
+                  card("images/asset-1.png","Dr.Alina james","Emergency","1"),
+                  card("images/asset-2.png","Dr.Steve Robert","Emergency","3"),
+                  card("images/asset-3.png","Dr. Senila Aaraf","Emergency","2"),
                 ],
               ),
             ),
@@ -412,8 +412,12 @@ class _ProviderHomeState extends State<ProviderHome> {
                           ),
                           Row(
                             children: <Widget>[
-                              Icon(Icons.star,color: Colors.yellow,),
-                              Text(rank,style: TextStyle(fontFamily: 'Poppins',),),
+                              Icon(Icons.timer,color: Theme.of(context).colorScheme.secondary,),
+                              Text('Priority : ${rank}',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Theme.of(context).colorScheme.secondary,
+                                ),),
                             ],
                           )
                         ],
