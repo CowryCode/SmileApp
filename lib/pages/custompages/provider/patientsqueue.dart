@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/doctor.dart' as model;
+import 'package:medico/models/mymodels/providermodels/patient.dart' as model;
 import 'package:medico/models/user.dart';
 import 'package:medico/widgets/doctorsWidget.dart';
+import 'package:medico/widgets/mywidgets/providerwidgets/mypatientwidget.dart';
+import 'package:medico/widgets/mywidgets/providerwidgets/patientQueueWidget.dart';
 import 'package:medico/widgets/searchWidget.dart';
 class PatientQueueList extends StatefulWidget {
   final User currentUser=User.init().getCurrentUser();
@@ -10,10 +12,10 @@ class PatientQueueList extends StatefulWidget {
 }
 
 class _PatientQueueListState extends State<PatientQueueList> {
-  model.DoctorsList doctorsList;
+  model.PatientsList patientsList;
   @override
   void initState() {
-    this.doctorsList = new model.DoctorsList();
+    this.patientsList = new model.PatientsList();
     super.initState();
   }
   @override
@@ -68,13 +70,13 @@ class _PatientQueueListState extends State<PatientQueueList> {
               child: ListView.separated(
                 shrinkWrap: true,
                 primary: false,
-                itemCount: doctorsList.doctors.length,
+                itemCount: patientsList.patients.length,
                 separatorBuilder: (context,index){
                   return SizedBox(height: 4.0);
                 },
                 itemBuilder: (context,index){
-                  return DoctorsCardWidget(
-                    doctors: doctorsList.doctors.elementAt(index),
+                  return PatientQueueCardWidget(
+                    patients: patientsList.patients.elementAt(index),
                   );
                 },
               ),
