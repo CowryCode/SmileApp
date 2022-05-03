@@ -18,7 +18,7 @@ class _MyPatientsCardWidgetState extends State<MyPatientsCardWidget> {
             FlatButton(
               padding: EdgeInsets.all(0),
               onPressed: (){
-                Navigator.of(context).pushNamed('/doctorProfil');
+                Navigator.of(context).pushNamed('/patientencounterprofile');
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),

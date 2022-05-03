@@ -79,7 +79,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
-                              title: const Text('Severity accessment'),
+                              title: const Text('New Feature'),
                               content: const Text('This feature is still under R&D will be implemented soon!'),
                               actions: <Widget>[
                                 TextButton(
@@ -102,7 +102,24 @@ class _ProviderHomeState extends State<ProviderHome> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(150)),
                         onPressed: (){
-                          Navigator.of(context).pushNamed('/hospitals');
+                          // Navigator.of(context).pushNamed('/hospitals');
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('New Feature'),
+                              content: const Text('This feature is still under R&D will be implemented soon!'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         child:ball("images/microscope.png",Theme.of(context).scaffoldBackgroundColor),
                       ),
@@ -145,7 +162,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Encounters",
+                        "Coming Soon",
                         style: TextStyle(
                           fontSize:12.0,
                           fontFamily: 'Poppins',
@@ -154,7 +171,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                         ),
                       ),
                       Text(
-                        "Patient Encounter \n Journals",
+                        "Yet to come \n feature",
                         style: TextStyle(
                           fontSize:10.0,
                           fontFamily: 'Poppins',
@@ -166,7 +183,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Service Requests",
+                        "Coming Soon",
                         style: TextStyle(
                             fontSize:12.0,
                             fontFamily: 'Poppins',
@@ -175,7 +192,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                         ),
                       ),
                       Text(
-                        "Requests from \n Patients",
+                        "Yet to come \n feature",
                         style: TextStyle(
                           fontSize:10.0,
                           fontFamily: 'Poppins',
@@ -299,7 +316,7 @@ class _ProviderHomeState extends State<ProviderHome> {
                   ),
                   FlatButton(
                     onPressed: (){
-                      Navigator.of(context).pushNamed("/doctors");
+                      Navigator.of(context).pushNamed("/patientqueuelist");
                     },
                     child: Text(
                       'See All',

@@ -10,6 +10,8 @@ import 'package:medico/pages/custompages/patient/hospitals.dart';
 import 'package:medico/pages/custompages/patient/voicecall.dart';
 import 'package:medico/pages/custompages/patient/services.dart';
 import 'package:medico/pages/custompages/provider/my-patients.dart';
+import 'package:medico/pages/custompages/provider/patientencounterprofile.dart';
+import 'package:medico/pages/custompages/provider/patientsqueue.dart';
 import 'package:medico/pages/custompages/provider/providerhome.dart';
 import 'package:medico/pages/custompages/provider/providertabs.dart';
 import 'package:medico/pages/doctor-book-1.dart';
@@ -97,7 +99,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>  ProviderTabsWidget(acountInfos: args,));
       case '/mypatients':
         return MaterialPageRoute(builder: (_) =>  MyPatientsList());
-       // END OF MY CUSTOME ROUTE
+      case '/patientencounterprofile':
+        return MaterialPageRoute(builder: (_) =>  PatientEncounterProfile());
+      case '/patientqueuelist':
+        return MaterialPageRoute(builder: (_) => PatientQueueList());
+    // END OF MY CUSTOME ROUTE
 
       default:
         // If there is no such named route in the switch statement, e.g. /third
