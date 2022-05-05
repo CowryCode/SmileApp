@@ -205,7 +205,7 @@ class _HomeState extends State<Home> {
                 ),
                 FlatButton(
                   onPressed: (){
-                    Navigator.of(context).pushNamed("/doctors");
+                    Navigator.of(context).pushNamed("/services");
                   },
                   child: Text(
                     'See All',
@@ -288,7 +288,7 @@ class _HomeState extends State<Home> {
                 FlatButton(
                   onPressed: (){},
                   child: Text(
-                    'Doctors nearly  you ',
+                    'Doctors near you ',
                     style: TextStyle(
                     fontSize:12.0,
                     fontFamily: 'Poppins',

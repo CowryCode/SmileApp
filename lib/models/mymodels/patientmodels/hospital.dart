@@ -21,17 +21,17 @@ class HospitalList{
   HospitalList(){
     this._hospitalsList =[
       new Hospital("Sunnybrook Health Sciences Centre", "B.Sc DDVL Demilitologist 26 years of experience",
-          "images/asset-1.png","Toronto - Canada", Colors.green),
+          "images/asset-1a.jpeg","Toronto - Canada", Colors.green),
       new Hospital("Mount Sinai Hospital", "B.Sc DDVL Demilitologist 26 years of experience",
-          "images/asset-2.png","Toronto - Canada", Colors.green),
+          "images/asset-2a.jpeg","Toronto - Canada", Colors.green),
       new Hospital("North York General Hospital", "B.Sc DDVL Demilitologist 26 years of experience",
-          "images/asset-3.png","Toronto - Canada", Colors.green),
+          "images/asset-3a.jpeg","Toronto - Canada", Colors.green),
       new Hospital("Jewish General Hospital", "B.Sc DDVL Demilitologist 26 years of experience",
-          "images/asset-4.png","Montreal - Canada", Colors.red),
+          "images/asset-4a.jpeg","Montreal - Canada", Colors.red),
       new Hospital("Rockyview General Hospital", "B.Sc DDVL Demilitologist 26 years of experience",
-          "images/asset-5.png","Calgary - Canada", Colors.green),
+          "images/asset-5a.jpeg","Calgary - Canada", Colors.green),
       new Hospital("Vancouver General Hospital", "B.Sc DDVL Demilitologist 26 years of experience",
-          "images/asset-6.png","Vancouver - Canada", Colors.green),
+          "images/asset-6a.jpeg","Vancouver - Canada", Colors.green),
     ];
   }
   List<Hospital> get hospitals => _hospitalsList;

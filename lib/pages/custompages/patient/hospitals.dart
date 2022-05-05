@@ -29,7 +29,7 @@ class _HospitalsListState extends State<HospitalsList> {
             Navigator.of(context).pushNamed('/home', arguments:[widget.currentUser.name,widget.currentUser.phoneNumber]);
           },
         ),
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(
           'Partner Hospitals',
           style: TextStyle(
@@ -51,7 +51,7 @@ class _HospitalsListState extends State<HospitalsList> {
                   padding: const EdgeInsets.only(top:0,left:12.0,right: 12.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
                 Padding(

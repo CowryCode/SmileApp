@@ -222,7 +222,24 @@ class _ProviderHomeState extends State<ProviderHome> {
                   ),
                   FlatButton(
                     onPressed: (){
-                      Navigator.of(context).pushNamed("/doctors");
+                      // Navigator.of(context).pushNamed("/doctors");
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('New Feature'),
+                          content: const Text('This feature is still under R&D will be implemented soon!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
                     },
                     child: Text(
                       'See All',
