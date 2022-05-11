@@ -58,192 +58,70 @@ class _HomeState extends State<Home> {
               Container(
                 margin: const EdgeInsets.only(top: 80.0),
                 padding: const EdgeInsets.only(left: 30.0 , right: 30.0),
-                child:Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(150)),
-                      onPressed: (){
-                        Navigator.of(context).pushNamed('/doctors');
-                      },
-                      child:ball("images/nurse.png",Theme.of(context).scaffoldBackgroundColor),
-                    ),
-                     FlatButton(
-                      padding: EdgeInsets.all(0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(150)),
-                      onPressed: (){
-                         // Navigator.of(context).pushNamed('/medecines');
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Severity accessment'),
-                            content: const Text('This feature is still under R&D will be implemented soon!'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'Cancel'),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-
-                      child:ball("images/pill.png",Theme.of(context).scaffoldBackgroundColor),
-                    ),
-                     FlatButton(
-                      padding: EdgeInsets.all(0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(150)),
-                      onPressed: (){
-                        Navigator.of(context).pushNamed('/hospitals');
-                      },
-                      child:ball("images/microscope.png",Theme.of(context).scaffoldBackgroundColor),
-                    ),
-
-                  ],
-                ),
+                // child:Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     FlatButton(
+                //       padding: EdgeInsets.all(0),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(150)),
+                //       onPressed: (){
+                //         Navigator.of(context).pushNamed('/doctors');
+                //       },
+                //       child:ball("images/nurse.png",Theme.of(context).scaffoldBackgroundColor),
+                //     ),
+                //      FlatButton(
+                //       padding: EdgeInsets.all(0),
+                //       shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(150)),
+                //       onPressed: (){
+                //          // Navigator.of(context).pushNamed('/medecines');
+                //         showDialog<String>(
+                //           context: context,
+                //           builder: (BuildContext context) => AlertDialog(
+                //             title: const Text('Severity accessment'),
+                //             content: const Text('This feature is still under R&D will be implemented soon!'),
+                //             actions: <Widget>[
+                //               TextButton(
+                //                 onPressed: () => Navigator.pop(context, 'Cancel'),
+                //                 child: const Text('Cancel'),
+                //               ),
+                //               TextButton(
+                //                 onPressed: () => Navigator.pop(context, 'OK'),
+                //                 child: const Text('OK'),
+                //               ),
+                //             ],
+                //           ),
+                //         );
+                //       },
+                //
+                //       child:ball("images/pill.png",Theme.of(context).scaffoldBackgroundColor),
+                //     ),
+                //      FlatButton(
+                //       padding: EdgeInsets.all(0),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(150)),
+                //       onPressed: (){
+                //         Navigator.of(context).pushNamed('/hospitals');
+                //       },
+                //       child:ball("images/microscope.png",Theme.of(context).scaffoldBackgroundColor),
+                //     ),
+                //
+                //   ],
+                // ),
               ),
             ],
           ),
-          Container(
-            // margin: const EdgeInsets.only(top: 6.0,bottom: 6.0),
-            margin: const EdgeInsets.only(top: 0.5,bottom: 6.0),
-            padding: const EdgeInsets.only(left: 30.0 , right: 35.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Text(
-                      // "Doctors",
-                      "Care Providers",
-                      style: TextStyle(
-                        fontSize:12.0,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).focusColor,
-                      ),
-                    ),
-                     Text(
-                      "Search doctors",
-                      style: TextStyle(
-                        fontSize:10.0,
-                        fontFamily: 'Poppins',
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      "Triage",
-                      style: TextStyle(
-                        fontSize:12.0,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).focusColor,
-                      ),
-                    ),
-                    Text(
-                      "Severity Verification",
-                      style: TextStyle(
-                        fontSize:10.0,
-                        fontFamily: 'Poppins',
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      "Hospitals",
-                      style: TextStyle(
-                        fontSize:12.0,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).focusColor
-                      ),
-                    ),
-                    Text(
-                      "Near you",
-                      style: TextStyle(
-                        fontSize:10.0,
-                        fontFamily: 'Poppins',
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+
+          SizedBox(height: 10,),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                FlatButton(
-                  onPressed: (){},
-                  child: Text(
-                    'Our Services ',
-                    style: TextStyle(
-                        fontSize:12.0,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).focusColor
-                    ),
-                  ),
-                ),
-                FlatButton(
-                  onPressed: (){
-                    Navigator.of(context).pushNamed("/services");
-                  },
-                  child: Text(
-                    'See All',
-                    style: TextStyle(
-                      fontSize:12.0,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(vertical: 6, horizontal: 0),
-            child:CarouselSlider(
-              // START OF My Code
-              options: CarouselOptions(
-                // height: 100,
-                height: (MediaQuery.of(context).size.width) * 0.4,
-                aspectRatio: 16/9,
-                viewportFraction: 0.8, initialPage: 0,
-                enableInfiniteScroll: true,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: true,
-                scrollDirection: Axis.horizontal,
-              ),
-              // END OF MY CODE
-              items: <Widget>[
                 Container(
-                  height: 200.0,
-                  margin: const EdgeInsets.only(left: 12.0),
+                  height: 100.0,
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  margin: const EdgeInsets.only(left: 5, right: 5, top: 10),
                   decoration: BoxDecoration(
                     border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
                     borderRadius: BorderRadius.circular(16.0),
@@ -255,24 +133,26 @@ class _HomeState extends State<Home> {
 
                 ),
                 Container(
-                  height: 200.0,
-                  margin: const EdgeInsets.only(left: 12.0),
+                  height: 100.0,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  margin: const EdgeInsets.only( top: 10),
                   decoration: BoxDecoration(
-                   border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
+                    border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
                     borderRadius: BorderRadius.circular(16.0),
-                     image: DecorationImage(
+                    image: DecorationImage(
                       image:AssetImage('images/13nov_resize.jpg',),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                 Container(
-                  height: 200.0,
-                  margin: const EdgeInsets.only(left: 12.0),
+                Container(
+                  height: 100.0,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  margin: const EdgeInsets.only(left: 5, right: 5, top: 10),
                   decoration: BoxDecoration(
                     border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
                     borderRadius: BorderRadius.circular(16.0),
-                     image: DecorationImage(
+                    image: DecorationImage(
                       image:AssetImage('images/medical-lab-technician-85654102.jpg',),
                       fit: BoxFit.cover,
                     ),
@@ -281,6 +161,55 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
+          SizedBox(height: 10,),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  height: 100.0,
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  margin: const EdgeInsets.only(left: 5, right: 5, top: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
+                    borderRadius: BorderRadius.circular(16.0),
+                    image: DecorationImage(
+                      image:AssetImage('images/doctor-productivity.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+                ),
+                Container(
+                  height: 100.0,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  margin: const EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
+                    borderRadius: BorderRadius.circular(16.0),
+                    image: DecorationImage(
+                      image:AssetImage('images/13nov_resize.jpg',),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 100.0,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  margin: const EdgeInsets.only(left: 5, right: 5, top: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
+                    borderRadius: BorderRadius.circular(16.0),
+                    image: DecorationImage(
+                      image:AssetImage('images/medical-lab-technician-85654102.jpg',),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10,),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -288,7 +217,7 @@ class _HomeState extends State<Home> {
                 FlatButton(
                   onPressed: (){},
                   child: Text(
-                    'Doctors near you ',
+                    'Unread SmilePacks',
                     style: TextStyle(
                     fontSize:12.0,
                     fontFamily: 'Poppins',

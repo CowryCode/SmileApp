@@ -35,88 +35,88 @@ class _SignUpState extends State<SignUp> {
                   ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 20.0,right:50.0,left: 50.0 ),
-              height: 40,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.10), offset: Offset(0,4), blurRadius: 10)
-                ],
-              ),
-              child: RaisedButton(
-                elevation: 0.2,
-                color: Theme.of(context).primaryColor,
-                onPressed: (){
-                  Navigator.of(context).pushNamed("/home",arguments: [currentUser.name,currentUser.phoneNumber]);
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: Container(
-                  child:  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:[
-                        Image(
-                          image: AssetImage('images/google-fill.png'),
-                        ),
-                        Text(
-                          'Patient Platform',
-                          style:  TextStyle(
-                            fontSize: 16.0,
-                            color: Theme.of(context).focusColor,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20.0,right:50.0,left: 50.0 ),
-              height: 40,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.10), offset: Offset(0,4), blurRadius: 10)
-                ],
-              ),
-              child: RaisedButton(
-                elevation: 0.2,
-                color: Theme.of(context).primaryColor,
-                onPressed: (){
-                  Navigator.of(context).pushNamed("/providerhome",arguments: [currentUser.name,currentUser.phoneNumber]);
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: Container(
-                  child:  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:[
-                        Image(
-                          image: AssetImage('images/google-fill.png'),
-                        ),
-                        Text(
-                          'Provider Platform',
-                          style:  TextStyle(
-                            fontSize: 16.0,
-                            color: Theme.of(context).focusColor,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.only(top: 20.0,right:50.0,left: 50.0 ),
+            //   height: 40,
+            //   decoration: BoxDecoration(
+            //     boxShadow: [
+            //       BoxShadow(
+            //           color: Colors.grey.withOpacity(0.10), offset: Offset(0,4), blurRadius: 10)
+            //     ],
+            //   ),
+            //   child: RaisedButton(
+            //     elevation: 0.2,
+            //     color: Theme.of(context).primaryColor,
+            //     onPressed: (){
+            //       Navigator.of(context).pushNamed("/home",arguments: [currentUser.name,currentUser.phoneNumber]);
+            //     },
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(30.0),
+            //     ),
+            //     child: Container(
+            //       child:  Center(
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children:[
+            //             Image(
+            //               image: AssetImage('images/google-fill.png'),
+            //             ),
+            //             Text(
+            //               'Patient Platform',
+            //               style:  TextStyle(
+            //                 fontSize: 16.0,
+            //                 color: Theme.of(context).focusColor,
+            //                 fontFamily: 'Poppins',
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Container(
+            //   margin: EdgeInsets.only(top: 20.0,right:50.0,left: 50.0 ),
+            //   height: 40,
+            //   decoration: BoxDecoration(
+            //     boxShadow: [
+            //       BoxShadow(
+            //           color: Colors.grey.withOpacity(0.10), offset: Offset(0,4), blurRadius: 10)
+            //     ],
+            //   ),
+            //   child: RaisedButton(
+            //     elevation: 0.2,
+            //     color: Theme.of(context).primaryColor,
+            //     onPressed: (){
+            //       Navigator.of(context).pushNamed("/providerhome",arguments: [currentUser.name,currentUser.phoneNumber]);
+            //     },
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(30.0),
+            //     ),
+            //     child: Container(
+            //       child:  Center(
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children:[
+            //             Image(
+            //               image: AssetImage('images/google-fill.png'),
+            //             ),
+            //             Text(
+            //               'Provider Platform',
+            //               style:  TextStyle(
+            //                 fontSize: 16.0,
+            //                 color: Theme.of(context).focusColor,
+            //                 fontFamily: 'Poppins',
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
               margin: EdgeInsets.only(top: 50.0,right:50.0,left: 50.0 ),
               height: 40,
