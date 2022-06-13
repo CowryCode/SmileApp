@@ -3,7 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:medico/pages/acount.dart';
 import 'package:medico/pages/conversations.dart' as prefix0;
 import 'package:medico/pages/custompages/provider/providerhome.dart';
-import 'package:medico/pages/home.dart';
+import 'package:medico/pages/custompages/home.dart';
 
 class ProviderTabsWidget extends StatefulWidget {
 

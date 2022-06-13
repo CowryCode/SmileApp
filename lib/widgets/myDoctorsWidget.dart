@@ -62,9 +62,7 @@ class _MyDoctorsCardWidgetState extends State<MyDoctorsCardWidget> {
                               Text(
                                 '${widget.doctors.description}',
                                 textWidthBasis: TextWidthBasis.longestLine,
-                                
                                 style: TextStyle(
-
                                   color: Colors.grey,
                                   fontFamily: 'Poppins',
                                   fontSize: 12.0,

@@ -75,14 +75,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Medecines());
       case '/medecinesSeconde':
         return MaterialPageRoute(builder: (_) => MedecinesSlected());
-      case '/mydoctors':
-        return MaterialPageRoute(builder: (_) => MyDoctorsList());
       case '/appointment':
         return MaterialPageRoute(builder: (_) => AppointmentsList());
       case '/health':
         return MaterialPageRoute(builder: (_) => HealthTips());
 
         // MY CUSTOM ROUTE START
+    // SMILE APP
+      case '/mydoctors':
+        return MaterialPageRoute(builder: (_) => MyDoctorsList());
+    // SMILE APP
        // PATIENT
       case '/voicecall' :
         return MaterialPageRoute(builder: (_) => VioceCallWidget());
