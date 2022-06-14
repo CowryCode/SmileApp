@@ -21,12 +21,6 @@ class _DoctorAcountState extends State<DoctorAcount> {
               Icons.arrow_back,
               color:Theme.of(context).primaryColor
           ),
-          // onPressed: (){
-          //   Navigator.of(context).pushNamed('/home', arguments:[currentUser.name,currentUser.phoneNumber]);
-          // },
-          // onPressed: (){
-          //   Navigator.of(context).pushNamed('/doctors');
-          // },
           onPressed: (){
             Navigator.of(context).pop();
           },
