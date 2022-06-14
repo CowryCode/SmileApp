@@ -4,6 +4,7 @@ import 'package:medico/pages/book-test-online1.dart';
 import 'package:medico/pages/book-test-online2.dart';
 import 'package:medico/pages/book-test-online3.dart';
 import 'package:medico/pages/book-test-online4.dart';
+import 'package:medico/pages/custompages/emotions.dart';
 import 'package:medico/pages/custompages/patient/completeprofile.dart';
 import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
 import 'package:medico/pages/custompages/patient/hospitals.dart';
@@ -22,7 +23,7 @@ import 'package:medico/pages/medecines.dart';
 import 'package:medico/pages/my-doctors.dart';
 import 'package:medico/pages/offers.dart';
 import 'package:medico/pages/Welcome.dart';
-import 'package:medico/pages/chat.dart';
+import 'package:medico/pages/custompages/chat.dart';
 import 'package:medico/pages/createAccount.dart';
 import 'package:medico/pages/docotr_acount.dart';
 import 'package:medico/pages/doctors.dart';
@@ -51,8 +52,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CreateAcount());  
       case '/home':
         return MaterialPageRoute(builder: (_) => TabsWidget(acountInfos: args,));
-      case '/chat' :
-        return MaterialPageRoute(builder: (_) => ChatWidget());
       case '/doctors':
         return MaterialPageRoute(builder: (_) => DoctorsList());  
       case '/doctorProfil':
@@ -84,6 +83,10 @@ class RouteGenerator {
     // SMILE APP
       case '/mydoctors':
         return MaterialPageRoute(builder: (_) => MyDoctorsList());
+      case '/chat' :
+        return MaterialPageRoute(builder: (_) => ChatWidget());
+      case '/emotions':
+        return MaterialPageRoute(builder: (_) => Emotions());
     // SMILE APP
        // PATIENT
       case '/voicecall' :
