@@ -565,9 +565,6 @@ class _EmotionsState extends State<Emotions> {
       case 2:
         newColor = Colors.red;
         break;
-      case 3:
-        newColor = Colors.red;
-        break;
 
     }
     return TextButton(
