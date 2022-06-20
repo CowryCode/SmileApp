@@ -1,10 +1,29 @@
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:medico/config/app_config.dart' as config;
 import 'package:flutter/material.dart';
 import 'package:medico/routes_generator.dart';
 
-void main() => runApp(MyApp());
+// void main() => runApp(MyApp()); // Original Code
+
+List<CameraDescription> cameras = [];
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  cameras = await availableCameras();
+
+  try {
+    cameras = await availableCameras();
+
+  } on CameraException catch (e) {
+    print(e.toString());
+  }
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

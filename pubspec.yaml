@@ -33,6 +33,12 @@ dependencies:
   form_builder_validators: ^8.1.1
   meta: ^1.7.0
   intl: ^0.17.0
+  # Smile Detection
+  google_mlkit_face_detection: ^0.3.0
+  image_picker: ^0.8.5+3
+  camera: ^0.9.8+1
+  camera_android: 0.9.7+1
+  camera_avfoundation: 0.9.7+1
 
 dev_dependencies:
   flutter_test:
