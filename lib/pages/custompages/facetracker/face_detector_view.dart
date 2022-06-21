@@ -61,6 +61,7 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
       String text = 'Faces found: ${faces.length}\n\n';
       for (final face in faces) {
         text += 'face: ${face.boundingBox}\n\n';
+        print(" SMILE Probability is :  ${face.smilingProbability}");
       }
       _text = text;
       // TODO: set _customPaint to draw boundingRect on top of image

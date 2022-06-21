@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:medico/models/chat.dart';
 import 'package:medico/models/doctor.dart';
@@ -11,14 +13,15 @@ class ChatMessageListItem extends StatelessWidget {
 
   final Animation animation;
 
-  ChatMessageListItem({this.chat, this.animation});
+ChatMessageListItem({this.chat, this.animation});
 
   @override
   Widget build(BuildContext context) {
     return new SizeTransition(
       sizeFactor: new CurvedAnimation(parent: animation, curve: Curves.decelerate),
       child:
-          currentUser.name == this.chat.user.name ? getSentMessageLayout(context) : getReceivedMessageLayout(context),
+       //  currentUser.name == this.chat.user.name ? getSentMessageLayout(context) : getReceivedMessageLayout(context), // Original
+         chat.messageType == "Sent" ? getSentMessageLayout(context) : getReceivedMessageLayout(context),
     );
   }
 
@@ -27,7 +30,8 @@ class ChatMessageListItem extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.2),
+          //  color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withOpacity(0.8),
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16), bottomLeft: Radius.circular(16), topRight: Radius.circular(16))),
         padding: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
@@ -39,7 +43,7 @@ class ChatMessageListItem extends StatelessWidget {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(this.chat.user.name, style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).accentColor,fontWeight: FontWeight.bold),),
+                 new Text(this.chat.user.name, style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).accentColor,fontWeight: FontWeight.bold),),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(chat.text,style: TextStyle(fontFamily: 'Poppins',),),
@@ -91,7 +95,7 @@ class ChatMessageListItem extends StatelessWidget {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(currentDoctor.name, style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),),
+                  new Text("SmileBot", style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(

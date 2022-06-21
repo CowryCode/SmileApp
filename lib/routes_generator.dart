@@ -6,6 +6,7 @@ import 'package:medico/pages/book-test-online3.dart';
 import 'package:medico/pages/book-test-online4.dart';
 import 'package:medico/pages/custompages/emotions.dart';
 import 'package:medico/pages/custompages/facetracker/SmileTracker.dart';
+import 'package:medico/pages/custompages/home.dart';
 import 'package:medico/pages/custompages/patient/completeprofile.dart';
 import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
 import 'package:medico/pages/custompages/patient/hospitals.dart';
@@ -41,8 +42,10 @@ class RouteGenerator {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
     switch(settings.name){
+      // case '/' :
+      //   return MaterialPageRoute(builder: (_) => Welcome());
       case '/' :
-        return MaterialPageRoute(builder: (_) => Welcome());      
+        return MaterialPageRoute(builder: (_) => Home());
       case '/signup' :
         return MaterialPageRoute(builder: (_) => SignUp());
       case '/phone':

@@ -15,8 +15,6 @@ class ConversationList{
   ConversationList(){
     this._conversationList =[
       new Conversation.advanced("images/asset-1.png",'Dr.Alina james',new Chat.init().getChat(),),
-      new Conversation.advanced("images/asset-6.png",'Dr.Nemeli Aaraf',new Chat.init().getChat(),),
-
     ];
   }
   List<Conversation> get conversation => _conversationList;
