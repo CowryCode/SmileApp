@@ -24,12 +24,6 @@ class SmileHome extends StatelessWidget {
                     children: [
                       // CustomCard('Barcode Scanning', BarcodeScannerView()),
                       CustomCard('Face Detection', FaceDetectorView()),
-                      // CustomCard('Image Labeling', ImageLabelView()),
-                      // CustomCard('Object Detection', ObjectDetectorView()),
-                      // CustomCard('Text Recognition', TextRecognizerView()),
-                      // CustomCard('Digital Ink Recognition', DigitalInkView()),
-                      // CustomCard('Pose Detection', PoseDetectorView()),
-                      // CustomCard('Selfie Segmentation', SelfieSegmenterView()),
                     ],
                   ),
                   SizedBox(

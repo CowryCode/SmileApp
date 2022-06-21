@@ -66,7 +66,6 @@ class _HomeState extends State<Home> {
           SizedBox(height: 1,),
           TextButton(
             onPressed: (){
-              // Navigator.of(context).pushNamed('/doctorProfil');
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
@@ -80,7 +79,8 @@ class _HomeState extends State<Home> {
                     ),
                     TextButton(
                       onPressed: (){
-                        Navigator.popAndPushNamed(context, '/doctorProfil');
+                      //  Navigator.of(context).pushNamed('/smilegram');
+                        Navigator.of(context).popAndPushNamed('/smilegram');
                        },
                       child: const Text('Yes'),
                     ),

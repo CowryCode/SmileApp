@@ -5,6 +5,7 @@ import 'package:medico/pages/book-test-online2.dart';
 import 'package:medico/pages/book-test-online3.dart';
 import 'package:medico/pages/book-test-online4.dart';
 import 'package:medico/pages/custompages/emotions.dart';
+import 'package:medico/pages/custompages/facetracker/SmileTracker.dart';
 import 'package:medico/pages/custompages/patient/completeprofile.dart';
 import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
 import 'package:medico/pages/custompages/patient/hospitals.dart';
@@ -87,6 +88,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ChatWidget());
       case '/emotions':
         return MaterialPageRoute(builder: (_) => Emotions());
+      case '/smilegram':
+        return MaterialPageRoute(builder: (_) => SmileHome());
     // SMILE APP
        // PATIENT
       case '/voicecall' :
