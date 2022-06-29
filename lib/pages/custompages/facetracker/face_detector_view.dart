@@ -1,7 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:medico/pages/custompages/facetracker/face_detector_painter.dart';
+import 'package:medico/pages/custompages/statemanagement/actions.dart';
+import 'package:medico/pages/custompages/statemanagement/models/sgmessage.dart';
+import 'package:medico/pages/custompages/statemanagement/my_app_state.dart';
 
 import 'camera_view.dart';
 
@@ -22,6 +26,23 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   bool _isBusy = false;
   CustomPaint _customPaint;
   String _text;
+
+  // Start
+  int _count = 0; // My Code
+  String _msg = ""; // My Code
+  String _fulltext = "I am a living testimony testimony that God is good"; // My Code
+  // int _tokenIndex = 0; // My Code
+  //var _tokenArray ;
+  List<String> _tokenArray ;
+  int _tokenArrayLength;
+
+  @override
+  void initState() {
+    super.initState();
+    _tokenArray = _fulltext.split(" ");
+    _tokenArrayLength = _tokenArray.length;
+  }
+  //  End
 
   @override
   void dispose() {
@@ -61,6 +82,20 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
       // MY CODE
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
+        // State Update
+        SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+        double prob = face.smilingProbability;
+      //  if(_tokenIndex < _tokenArrayLength && prob > 0.7){
+        if(sgMessage.tokenIndex < _tokenArrayLength && prob > 0.7){
+          _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
+          int updatedTokenIndex = sgMessage.tokenIndex + 1;
+          SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex);
+          StoreProvider.of<MyAppState>(context).dispatch(
+              UpdateSGmessageAction(sgMSG)
+          );
+          _count += 1;
+        }
+        // End State Update
       }
       // MY CODE
     } else {

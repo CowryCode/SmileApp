@@ -47,7 +47,7 @@ class RouteGenerator {
       // case '/' :
       //   return MaterialPageRoute(builder: (_) => Welcome());
       case '/' :
-        return MaterialPageRoute(builder: (_) => ReduxScreen()); //Home());
+        return MaterialPageRoute(builder: (_) => Home()); // ReduxScreen());
       case '/signup' :
         return MaterialPageRoute(builder: (_) => SignUp());
       case '/phone':

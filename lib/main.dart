@@ -9,6 +9,9 @@ import 'package:medico/config/app_config.dart' as config;
 import 'package:medico/pages/custompages/redux/app_state.dart';
 import 'package:medico/pages/custompages/redux/models/drink.dart';
 import 'package:medico/pages/custompages/redux/reducer.dart';
+import 'package:medico/pages/custompages/statemanagement/models/sgmessage.dart';
+import 'package:medico/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:medico/pages/custompages/statemanagement/sg_message_reducer.dart';
 import 'package:medico/routes_generator.dart';
 
 import 'package:redux/redux.dart';
@@ -62,21 +65,26 @@ Future<void> main() async {  // The code before I added Flutter_redux
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  final Store<AppState> _store = Store<AppState>(
-      updateDrinksReducer,
-      initialState: AppState(drinks:[
-        Drink("Water", true),
-        Drink("Coka Cola", false),
-        Drink("Juice", true),
-        Drink("Alcohol", false)
-      ]
-      )
+  // final Store<AppState> _store = Store<AppState>(
+  //     updateDrinksReducer,
+  //     initialState: AppState(drinks:[
+  //       Drink("Water", true),
+  //       Drink("Coka Cola", false),
+  //       Drink("Juice", true),
+  //       Drink("Alcohol", false)
+  //     ]
+  //     )
+  // );
+  final Store<MyAppState> _store = Store<MyAppState>(
+      updateSGmessageReducer,
+      initialState: MyAppState(
+        sg_message: SGMessage(content: "", updated: false),)
   );
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
-    return StoreProvider<AppState>(
+    return StoreProvider<MyAppState>(
       store: _store,
       child: MaterialApp(
         title: 'Ecommerce Flutter UI',
