@@ -18,6 +18,7 @@ import 'package:medico/pages/custompages/provider/patientencounterprofile.dart';
 import 'package:medico/pages/custompages/provider/patientsqueue.dart';
 import 'package:medico/pages/custompages/provider/providerhome.dart';
 import 'package:medico/pages/custompages/provider/providertabs.dart';
+import 'package:medico/pages/custompages/redux/redux_screen.dart';
 import 'package:medico/pages/doctor-book-1.dart';
 import 'package:medico/pages/doctor-book-2.dart';
 import 'package:medico/pages/health.dart';
@@ -46,7 +47,7 @@ class RouteGenerator {
       // case '/' :
       //   return MaterialPageRoute(builder: (_) => Welcome());
       case '/' :
-        return MaterialPageRoute(builder: (_) => Home());
+        return MaterialPageRoute(builder: (_) => ReduxScreen()); //Home());
       case '/signup' :
         return MaterialPageRoute(builder: (_) => SignUp());
       case '/phone':

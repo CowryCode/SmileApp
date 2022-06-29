@@ -5,10 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../main.dart';
 
 enum ScreenMode { liveFeed, gallery }
+enum Actions { Increment }
+
 
 class CameraView extends StatefulWidget {
   CameraView(
@@ -182,6 +183,7 @@ class _CameraViewState extends State<CameraView> {
             });
           },
         ),
+
         SizedBox(height: 20,),
         Text(
           'Hi, I am fine?',
@@ -193,7 +195,7 @@ class _CameraViewState extends State<CameraView> {
         _cameraDisplay()
       ],
     );
-   // return body;
+   return body;
   }
 
 
