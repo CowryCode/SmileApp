@@ -13,7 +13,8 @@ class FaceDetectorView extends StatefulWidget {
 class _FaceDetectorViewState extends State<FaceDetectorView> {
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
-      enableContours: true,
+      //enableContours: true, // Original code
+      enableContours: false,
       enableClassification: true,
     ),
   );
@@ -32,7 +33,7 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   @override
   Widget build(BuildContext context) {
     return CameraView(
-      title: 'Face Detector',
+      title: 'Face & SMIL Detector',
       customPaint: _customPaint,
       text: _text,
       onImage: (inputImage) {
@@ -57,11 +58,15 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
           inputImage.inputImageData.size,
           inputImage.inputImageData.imageRotation);
       _customPaint = CustomPaint(painter: painter);
+      // MY CODE
+      for (final face in faces) {
+        print(" SMILE Probability is :  ${face.smilingProbability}");
+      }
+      // MY CODE
     } else {
       String text = 'Faces found: ${faces.length}\n\n';
       for (final face in faces) {
         text += 'face: ${face.boundingBox}\n\n';
-        print(" SMILE Probability is :  ${face.smilingProbability}");
       }
       _text = text;
       // TODO: set _customPaint to draw boundingRect on top of image

@@ -43,9 +43,19 @@ class _CameraViewState extends State<CameraView> {
   final bool _allowPicker = true;
   bool _changingCameraLens = false;
 
+  int _count = 0; // My Code
+  String _msg = ""; // My Code
+  String _fulltext = "I am a living testimony testimony that God is good"; // My Code
+  int _tokenIndex = 0; // My Code
+  var _tokenArray ;
+  int _tokenArrayLength;
+
   @override
   void initState() {
     super.initState();
+
+    _tokenArray = _fulltext.split(" ");
+    _tokenArrayLength = _tokenArray.length;
 
     _imagePicker = ImagePicker();
 
@@ -99,8 +109,8 @@ class _CameraViewState extends State<CameraView> {
         ],
       ),
       body: _body(),
-      floatingActionButton: _floatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+     // floatingActionButton: _floatingActionButton(), // I removed the floating button
+     // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // I removed the floating Button
     );
   }
 
@@ -121,6 +131,16 @@ class _CameraViewState extends State<CameraView> {
         ));
   }
 
+  // DO NOT DELETE
+  // Widget _body() { // the Original Code
+  //   Widget body;
+  //   if (_mode == ScreenMode.liveFeed) {
+  //     body = _liveFeedBody();
+  //   } else {
+  //     body = _galleryBody();
+  //   }
+  //   return body;
+  // }
   Widget _body() {
     Widget body;
     if (_mode == ScreenMode.liveFeed) {
@@ -128,8 +148,54 @@ class _CameraViewState extends State<CameraView> {
     } else {
       body = _galleryBody();
     }
-    return body;
+    return Column(
+      children: [
+        SizedBox(height: 20,),
+        Text(
+          // 'Hello, How are you?',
+          _msg,
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 20,),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(scale: animation, child: child);
+          },
+          child: Text(
+            '$_count %',
+            key: ValueKey<int>(_count),
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ),
+        ElevatedButton(
+          child: const Text('Increment'),
+          onPressed: () {
+            setState(() {
+              if(_tokenIndex < _tokenArrayLength){
+                _msg = _msg + " " + _tokenArray[_tokenIndex];
+                _tokenIndex += 1;
+              }
+              _count += 1;
+            });
+          },
+        ),
+        SizedBox(height: 20,),
+        Text(
+          'Hi, I am fine?',
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 20,),
+        _cameraDisplay()
+      ],
+    );
+   // return body;
   }
+
 
   Widget _liveFeedBody() {
     if (_controller?.value.isInitialized == false) {
@@ -346,4 +412,68 @@ class _CameraViewState extends State<CameraView> {
 
     widget.onImage(inputImage);
   }
+
+  // MY CODE
+  Widget _cameraDisplay() {
+    if (_controller?.value.isInitialized == false) {
+      return Container();
+    }
+
+    final size = MediaQuery.of(context).size;
+    // calculate scale depending on screen and camera ratios
+    // this is actually size.aspectRatio / (1 / camera.aspectRatio)
+    // because camera preview size is received as landscape
+    // but we're calculating for portrait orientation
+    var scale = size.aspectRatio * _controller.value.aspectRatio;
+
+    // to prevent scaling down, invert the value
+    if (scale < 1) scale = 1 / scale;
+
+    // added by me
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    // end of added by me
+
+    return Container(
+       color: Theme.of(context).colorScheme.secondary,
+       height: MediaQuery.of(context).size.height * 0.5,
+       width: MediaQuery.of(context).size.width,
+      child: Stack(
+        fit: StackFit.loose,
+        children: <Widget>[
+          Transform.scale(
+            scale: 1,
+            child: Center(
+              child: _changingCameraLens
+                  ? Center(
+                child: const Text('Changing camera lens'),
+              )
+                  : CameraPreview(_controller),
+            ),
+          ),
+          // if (widget.customPaint != null) widget.customPaint,
+          // Positioned(
+          //   bottom: 100,
+          //   left: 50,
+          //   right: 50,
+          //   child: Slider(
+          //     value: zoomLevel,
+          //     min: minZoomLevel,
+          //     max: maxZoomLevel,
+          //     onChanged: (newSliderValue) {
+          //       setState(() {
+          //         zoomLevel = newSliderValue;
+          //         _controller.setZoomLevel(zoomLevel);
+          //       });
+          //     },
+          //     divisions: (maxZoomLevel - 1).toInt() < 1
+          //         ? null
+          //         : (maxZoomLevel - 1).toInt(),
+          //   ),
+          // )
+        ],
+      ),
+    );
+  }
+  // MY CODE
 }
