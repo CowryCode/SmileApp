@@ -95,23 +95,30 @@ class _CameraViewState extends State<CameraView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color:Theme.of(context).primaryColor ),
+          onPressed: (){
+            Navigator.of(context).popAndPushNamed('/');
+          },
+        ),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(widget.title),
-        actions: [
-          if (_allowPicker)
-            Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: _switchScreenMode,
-                child: Icon(
-                  _mode == ScreenMode.liveFeed
-                      ? Icons.photo_library_outlined
-                      : (Platform.isIOS
-                      ? Icons.camera_alt_outlined
-                      : Icons.camera),
-                ),
-              ),
-            ),
-        ],
+        // actions: [
+        //   if (_allowPicker)
+        //     Padding(
+        //       padding: EdgeInsets.only(right: 20.0),
+        //       child: GestureDetector(
+        //         onTap: _switchScreenMode,
+        //         child: Icon(
+        //           _mode == ScreenMode.liveFeed
+        //               ? Icons.photo_library_outlined
+        //               : (Platform.isIOS
+        //               ? Icons.camera_alt_outlined
+        //               : Icons.camera),
+        //         ),
+        //       ),
+        //     ),
+        // ],
       ),
       body: _body(),
      // floatingActionButton: _floatingActionButton(), // I removed the floating button
