@@ -119,18 +119,18 @@ class _CompleteProfileState extends State<CompleteProfile> {
                         labelText: 'Select Service of Interest',
                         labelStyle: Theme.of(context).textTheme.subtitle2,
                       ),
-                      options: [
-                        FormBuilderFieldOption(
-                            value: 'Dibia Igbo', child: Text('Dibia Igbo')),
-                        FormBuilderFieldOption(
-                            value: 'Yoruba Dibia', child: Text('Yoruba Dibia')),
-                        FormBuilderFieldOption(
-                            value: 'Express Doc. Ateention', child: Text('Express Doc. Ateention')),
-                        FormBuilderFieldOption(
-                            value: 'PHS', child: Text('PHS')),
-                        FormBuilderFieldOption(
-                            value: 'vitals Monitoring', child: Text('vitals Monitoring')),
-                      ],
+                     // options: [
+                      //   FormBuilderFieldOption(
+                      //       value: 'Dibia Igbo', child: Text('Dibia Igbo')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'Yoruba Dibia', child: Text('Yoruba Dibia')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'Express Doc. Ateention', child: Text('Express Doc. Ateention')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'PHS', child: Text('PHS')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'vitals Monitoring', child: Text('vitals Monitoring')),
+                      // ],
                     ),
                     FormBuilderChoiceChip(
                       name: 'choice_chip',
@@ -138,18 +138,18 @@ class _CompleteProfileState extends State<CompleteProfile> {
                         labelText: 'Select alert option',
                         labelStyle: Theme.of(context).textTheme.subtitle2,
                       ),
-                      options: [
-                        FormBuilderFieldOption(
-                            value: 'Test', child: Text('Service Notification')),
-                        FormBuilderFieldOption(
-                            value: 'Test 1', child: Text('Doctor Availability')),
-                        FormBuilderFieldOption(
-                            value: 'Test 2', child: Text('Appointments')),
-                        FormBuilderFieldOption(
-                            value: 'Test 3', child: Text('Queue Progress')),
-                        FormBuilderFieldOption(
-                            value: 'Test 4', child: Text('No Notification')),
-                      ],
+                      // options: [
+                      //   FormBuilderFieldOption(
+                      //       value: 'Test', child: Text('Service Notification')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'Test 1', child: Text('Doctor Availability')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'Test 2', child: Text('Appointments')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'Test 3', child: Text('Queue Progress')),
+                      //   FormBuilderFieldOption(
+                      //       value: 'Test 4', child: Text('No Notification')),
+                      // ],
                     ),
                     FormBuilderDateTimePicker(
                       name: 'date',

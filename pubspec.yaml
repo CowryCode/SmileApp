@@ -36,11 +36,11 @@ dependencies:
   # Smile Detection
   google_mlkit_face_detection: ^0.3.0
   image_picker: ^0.8.5+3
-  camera: ^0.9.8+1
-  camera_android: 0.9.7+1
-  camera_avfoundation: 0.9.7+1
+  camera: ^0.10.0
+  camera_android: ^0.10.0
+  camera_avfoundation: ^0.9.8+2
   # State management with flutter Redux
-  flutter_redux: ^0.9.0
+  flutter_redux: ^0.10.0
 
 dev_dependencies:
   flutter_test:
