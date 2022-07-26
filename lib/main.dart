@@ -53,11 +53,13 @@ Future<void> main() async {  // The code before I added Flutter_redux
   WidgetsFlutterBinding.ensureInitialized();
 
   cameras = await availableCameras();
+  print("It got here 1,2,3 ");
 
   try {
     cameras = await availableCameras();
-
+    print("It got here 4,5,6");
   } on CameraException catch (e) {
+    print("Threw error");
     print(e.toString());
   }
   runApp(MyApp());
