@@ -46,8 +46,8 @@ class RouteGenerator {
     switch(settings.name){
       // case '/' :
       //   return MaterialPageRoute(builder: (_) => Welcome());
-      case '/' :
-        return MaterialPageRoute(builder: (_) => Home()); // ReduxScreen());
+      // case '/' :
+      //   return MaterialPageRoute(builder: (_) => Home()); // ReduxScreen());
       case '/signup' :
         return MaterialPageRoute(builder: (_) => SignUp());
       case '/phone':
@@ -87,6 +87,8 @@ class RouteGenerator {
 
         // MY CUSTOM ROUTE START
     // SMILE APP
+      case '/' :
+        return MaterialPageRoute(builder: (_) => Home());
       case '/mydoctors':
         return MaterialPageRoute(builder: (_) => MyDoctorsList());
       case '/chat' :

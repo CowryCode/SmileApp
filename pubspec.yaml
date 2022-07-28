@@ -41,6 +41,8 @@ dependencies:
   camera_avfoundation: ^0.9.8+2
   # State management with flutter Redux
   flutter_redux: ^0.10.0
+  # Animated Text
+  animated_text_kit: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,9 @@ flutter:
     - images/custom/mytribe.jpg
     - images/custom/pucketbuddy.jpg
     - images/custom/smilegram.jpg
+    - images/custom/gift.png
+    - images/custom/giftopen.png
+    - images/custom/giftopen1.png
     - images/image-home.jpeg
     - images/facebook-fill.png
     - images/google-fill.png
