@@ -10,6 +10,7 @@ import 'package:medico/pages/custompages/redux/app_state.dart';
 import 'package:medico/pages/custompages/redux/models/drink.dart';
 import 'package:medico/pages/custompages/redux/reducer.dart';
 import 'package:medico/pages/custompages/statemanagement/models/sgmessage.dart';
+import 'package:medico/pages/custompages/statemanagement/models/timerdatamodel.dart';
 import 'package:medico/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:medico/pages/custompages/statemanagement/sg_message_reducer.dart';
 import 'package:medico/routes_generator.dart';
@@ -53,11 +54,8 @@ Future<void> main() async {  // The code before I added Flutter_redux
   WidgetsFlutterBinding.ensureInitialized();
 
   cameras = await availableCameras();
-  print("It got here 1,2,3 ");
-
   try {
     cameras = await availableCameras();
-    print("It got here 4,5,6");
   } on CameraException catch (e) {
     print("Threw error");
     print(e.toString());
@@ -80,7 +78,9 @@ class MyApp extends StatelessWidget {
   final Store<MyAppState> _store = Store<MyAppState>(
       updateSGmessageReducer,
       initialState: MyAppState(
-        sg_message: SGMessage(content: "", updated: false),)
+        sg_message: SGMessage(content: "", updated: false),
+        luckPotTimerstatemodel: LuckPotTimerstatemodel(activate: false)
+      )
   );
   @override
   Widget build(BuildContext context) {

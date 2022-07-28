@@ -1,105 +1,98 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:medico/pages/custompages/animation_views/luckmatrix_countdown.dart';
 
 class LuckPot extends StatefulWidget {
-  const LuckPot({Key key}) : super(key: key);
 
+  const LuckPot({Key key}) : super(key: key);
   @override
   _LuckPotState createState() => _LuckPotState();
 }
 
-class _LuckPotState extends State<LuckPot>{
+class _LuckPotState extends State<LuckPot> {
   int _value = 0;
   bool _activated = false;
   int _activation_index = -1;
-  final Duration timerTastoPremuto = Duration(days: 0,hours: 0, minutes: 10);
+  final Duration timerTastoPremuto = Duration(seconds: 10);
 
   double _tweenMax = 24;
 
   @override
   void initState() {
-    randomize();
+   // randomize();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height * 0.5,
         child: LuckMatrics());
-       // child: giftAlert());
   }
 
   Widget LuckMatrics() {
     return Wrap(
       children: List<Widget>.generate(
         20,
-        (int index) {
+            (int index) {
           return _activation_index == index && _activated == true
-               ?
-              // IconButton(
-              //     key: Key("$index"),
-              //     icon: const Icon(Icons.call),
-              //     color: Theme.of(context).colorScheme.secondary,
-              //     onPressed: () {},
-              //   )
-                ChoiceChip(
-                  key: Key('$index'),
-                  selectedColor: Theme.of(context).primaryColor,
-                  avatar: Image.asset("images/custom/giftopen1.png"),
-                  elevation: 6.0,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  label: Text('open', style: TextStyle(color: Colors.red),),
-                  selected: _value == index,
-                  onSelected: (bool selected) {
-                    setState(() {
-                      _value = selected ? index : _value;
-                      print("Selected Value is $_value");
-                      //TODO: REPLACE THE TITLE WITH ACTUAL DATA
-                      showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
-                    });
-                  },
-                )
+              ?
+          ChoiceChip(
+            key: Key('$index'),
+            selectedColor: Theme.of(context).primaryColor,
+            avatar: Image.asset("images/custom/giftopen1.png"),
+            elevation: 6.0,
+            backgroundColor: Theme.of(context).primaryColor,
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            label: Text('open', style: TextStyle(color: Colors.red),),
+            selected: _value == index,
+            onSelected: (bool selected) {
+              setState(() {
+                _value = selected ? index : _value;
+                print("Selected Value is $_value");
+                //TODO: REPLACE THE TITLE WITH ACTUAL DATA
+                showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
+              });
+            },
+          )
               : ChoiceChip(
-                  key: Key('$index'),
-                  avatar: Image.asset("images/custom/gift.png"),
-                  elevation: 6.0,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
-                  selected: _value == index,
-                  onSelected: (bool selected) {
-                    setState(() {
-                    //  _value = selected ? index : null;
-                      _value = selected ? index : _value;
-                     // _activated = index == 10 ? true : false;
-                      print("Selected Value if $_value");
-                     // showAlertDialog(context: context,title: "Total points: 67", message: "Message", repeat: true, amount: index);
-                    });
-                  },
-                );
+            key: Key('$index'),
+            avatar: Image.asset("images/custom/gift.png"),
+            elevation: 6.0,
+            backgroundColor: Theme.of(context).primaryColor,
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
+            selected: _value == index,
+            onSelected: (bool selected) {
+              setState(() {
+                //  _value = selected ? index : null;
+                _value = selected ? index : _value;
+                // _activated = index == 10 ? true : false;
+                print("Selected Value if $_value");
+
+              });
+            },
+          );
         },
       ).toList(),
     );
   }
 
-
   void randomize(){
     int _start = timerTastoPremuto.inMilliseconds;
     Random random = new Random();
-    const oneDecimal = const Duration(milliseconds: 1000);
+    const oneDecimal = const Duration(seconds: 1);
     Timer _timer = new Timer.periodic(
         oneDecimal,
             (Timer timer) =>
             setState(() {
               _value = random.nextInt(23);
               print('Timer is : $_start  Index Value is $_value');
-              if (_start < 600000) {
+              if (_start < 1000) {
                 _activated = true;
                 _activation_index = _value;
                 timer.cancel();
@@ -221,9 +214,5 @@ class _LuckPotState extends State<LuckPot>{
       },
     );
   }
-
-
-
 }
-
 

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medico/apis/Variables.dart';
+import 'package:medico/pages/custompages/animation_views/luckmatrix_countdown.dart';
 import 'package:medico/pages/custompages/canva/gift_view.dart';
 import 'package:medico/pages/custompages/canva/luckpot_view.dart';
 
@@ -267,6 +268,7 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
+          LuckMetrixCountDown(),
           LuckPot(),
         ],
       ),
@@ -358,9 +360,4 @@ class _HomeState extends State<Home> {
     );
 
   }
-
-
-
-
-
 }
