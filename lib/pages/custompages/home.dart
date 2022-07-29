@@ -268,7 +268,7 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          LuckMetrixCountDown(),
+         // LuckMetrixCountDown(),
           LuckPot(),
         ],
       ),

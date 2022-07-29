@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:medico/pages/custompages/animation_views/luckmatrix_countdown.dart';
 
 class LuckPot extends StatefulWidget {
@@ -16,13 +17,13 @@ class _LuckPotState extends State<LuckPot> {
   int _value = 0;
   bool _activated = false;
   int _activation_index = -1;
-  final Duration timerTastoPremuto = Duration(seconds: 10);
+  final Duration timerTastoPremuto = Duration(seconds: 20);
 
-  double _tweenMax = 24;
+  int progressBarvalue = 20;
 
   @override
   void initState() {
-   // randomize();
+   _randomize();
   }
 
   @override
@@ -31,58 +32,134 @@ class _LuckPotState extends State<LuckPot> {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.5,
-        child: LuckMatrics());
+        // child: LuckMatrics(),
+      child:  Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          progressBarvalue != 0?  SizedBox(
+            height: 30,
+            child: AnimatedTextKit(
+                repeatForever: true,
+                animatedTexts: [
+                  ScaleAnimatedText('Remaining $progressBarvalue!',
+                      scalingFactor: 0.2,
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 20
+                      )),
+                ],
+              ),
+          ) : SizedBox(
+                height: 30,
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: Text(
+                  'Click on your opened gift !',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                  ),),
+          ),
+          LuckMatrics()
+        ],
+      ),
+    );
   }
 
   Widget LuckMatrics() {
     return Wrap(
-      children: List<Widget>.generate(
-        20,
-            (int index) {
-          return _activation_index == index && _activated == true
-              ?
-          ChoiceChip(
-            key: Key('$index'),
-            selectedColor: Theme.of(context).primaryColor,
-            avatar: Image.asset("images/custom/giftopen1.png"),
-            elevation: 6.0,
-            backgroundColor: Theme.of(context).primaryColor,
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            label: Text('open', style: TextStyle(color: Colors.red),),
-            selected: _value == index,
-            onSelected: (bool selected) {
-              setState(() {
-                _value = selected ? index : _value;
-                print("Selected Value is $_value");
-                //TODO: REPLACE THE TITLE WITH ACTUAL DATA
-                showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
-              });
-            },
-          )
-              : ChoiceChip(
-            key: Key('$index'),
-            avatar: Image.asset("images/custom/gift.png"),
-            elevation: 6.0,
-            backgroundColor: Theme.of(context).primaryColor,
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
-            selected: _value == index,
-            onSelected: (bool selected) {
-              setState(() {
-                //  _value = selected ? index : null;
-                _value = selected ? index : _value;
-                // _activated = index == 10 ? true : false;
-                print("Selected Value if $_value");
+        children: List<Widget>.generate(
+          20,
+              (int index) {
+            return _activation_index == index && _activated == true
+                ?
+            ChoiceChip(
+              key: Key('$index'),
+              selectedColor: Theme.of(context).primaryColor,
+              avatar: Image.asset("images/custom/giftopen1.png"),
+              elevation: 6.0,
+              backgroundColor: Theme.of(context).primaryColor,
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              label: Text('open', style: TextStyle(color: Colors.red),),
+              selected: _value == index,
+              onSelected: (bool selected) {
+                setState(() {
+                  _value = selected ? index : _value;
+                  print("Selected Value is $_value");
+                  showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
+                });
+              },
+            )
+                : ChoiceChip(
+              key: Key('$index'),
+              avatar: Image.asset("images/custom/gift.png"),
+              elevation: 6.0,
+              backgroundColor: Theme.of(context).primaryColor,
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
+              selected: _value == index,
+              onSelected: (bool selected) {
+                setState(() {
+                  //  _value = selected ? index : null;
+                  _value = selected ? index : _value;
+                   _activated = true;
+                  print("Selected Value if $_value");
 
-              });
-            },
-          );
-        },
-      ).toList(),
-    );
+                });
+              },
+            );
+          },
+        ).toList(),
+      );
+    // return Wrap(
+    //   children: List<Widget>.generate(
+    //     20,
+    //         (int index) {
+    //       return _activation_index == index && _activated == true
+    //           ?
+    //       ChoiceChip(
+    //         key: Key('$index'),
+    //         selectedColor: Theme.of(context).primaryColor,
+    //         avatar: Image.asset("images/custom/giftopen1.png"),
+    //         elevation: 6.0,
+    //         backgroundColor: Theme.of(context).primaryColor,
+    //         padding: const EdgeInsets.only(left: 10, right: 10),
+    //         label: Text('open', style: TextStyle(color: Colors.red),),
+    //         selected: _value == index,
+    //         onSelected: (bool selected) {
+    //           setState(() {
+    //             _value = selected ? index : _value;
+    //             print("Selected Value is $_value");
+    //             //TODO: REPLACE THE TITLE WITH ACTUAL DATA
+    //             showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
+    //           });
+    //         },
+    //       )
+    //           : ChoiceChip(
+    //         key: Key('$index'),
+    //         avatar: Image.asset("images/custom/gift.png"),
+    //         elevation: 6.0,
+    //         backgroundColor: Theme.of(context).primaryColor,
+    //         padding: const EdgeInsets.only(left: 10, right: 10),
+    //         label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
+    //         selected: _value == index,
+    //         onSelected: (bool selected) {
+    //           setState(() {
+    //             //  _value = selected ? index : null;
+    //             _value = selected ? index : _value;
+    //              _activated = true;
+    //             print("Selected Value if $_value");
+    //
+    //           });
+    //         },
+    //       );
+    //     },
+    //   ).toList(),
+    // );
   }
 
-  void randomize(){
+  void _randomize(){
     int _start = timerTastoPremuto.inMilliseconds;
     Random random = new Random();
     const oneDecimal = const Duration(seconds: 1);
@@ -98,6 +175,7 @@ class _LuckPotState extends State<LuckPot> {
                 timer.cancel();
               } else {
                 _start = _start - 1000;
+                  progressBarvalue = progressBarvalue - 1;
               }
               // if (_start < 100) {
               //   timer.cancel();
@@ -178,7 +256,7 @@ class _LuckPotState extends State<LuckPot> {
           _activation_index = -1;
         });
           Navigator.of(context).pop();
-          randomize();
+          _randomize();
       },
     );
 
@@ -188,6 +266,7 @@ class _LuckPotState extends State<LuckPot> {
       onPressed: () {
         setState(() {
           _activation_index = -1;
+          progressBarvalue += 2;
         });
         Navigator.of(context).popAndPushNamed("/");
         // randomize();

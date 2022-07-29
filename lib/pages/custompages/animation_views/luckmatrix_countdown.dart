@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class LuckMetrixCountDownState extends State<LuckMetrixCountDown> with TickerPro
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
+  bool activateCountdown = false;
 
   @override
   void initState() {
@@ -104,6 +106,25 @@ class LuckMetrixCountDownState extends State<LuckMetrixCountDown> with TickerPro
                         ),
                       ),
                     ),
+                    ChoiceChip(
+                      selectedColor: Theme.of(context).primaryColor,
+                      avatar: Image.asset("images/custom/giftopen1.png"),
+                      elevation: 6.0,
+                      backgroundColor: Theme.of(context).primaryColor,
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      label: Text('open', style: TextStyle(color: Colors.red),),
+                      selected: activateCountdown,
+                      onSelected: (bool selected) {
+                        if (controller.isAnimating)
+                          controller.stop();
+                        else {
+                          controller.reverse(
+                              from: controller.value == 0.0
+                                  ? 1.0
+                                  : controller.value);
+                        }
+                      },
+                    ),
                     AnimatedBuilder(
                         animation: controller,
                         builder: (context, child) {
@@ -131,6 +152,32 @@ class LuckMetrixCountDownState extends State<LuckMetrixCountDown> with TickerPro
           );
         }
     );
+  }
+
+
+
+  void _randomize(){
+    int _start = Duration(seconds: 5).inMilliseconds;
+    Random random = new Random();
+    const oneDecimal = const Duration(seconds: 1);
+    Timer _timer = new Timer.periodic(
+        oneDecimal,
+            (Timer timer) =>
+            setState(() {
+              print("Activation value is : $activateCountdown");
+              if (_start < 1000) {
+                activateCountdown = true;
+                print("Activation value is : $activateCountdown");
+                timer.cancel();
+              } else {
+                _start = _start - 1000;
+              }
+              // if (_start < 100) {
+              //   timer.cancel();
+              // } else {
+              //   _start = _start - 400;
+              // }
+            }));
   }
 }
 
