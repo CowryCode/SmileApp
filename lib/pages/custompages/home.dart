@@ -96,7 +96,8 @@ class _HomeState extends State<Home> {
               width: MediaQuery.of(context).size.width * 0.90,
               margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
+               // color: Theme.of(context).colorScheme.secondary,
+                color: Colors.orange,
                 border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
                 borderRadius: BorderRadius.circular(16.0),
                 // image: DecorationImage(
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> {
                   SizedBox(width: 2.0,),
                   Icon(FontAwesomeIcons.faceSmileBeam,color: Theme.of(context).primaryColor, size: 40,),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text("Smile-Gram",
                           style: TextStyle(
@@ -221,7 +222,8 @@ class _HomeState extends State<Home> {
               width: MediaQuery.of(context).size.width * 0.90,
               margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Colors.blueGrey,
+              //  color: Theme.of(context).colorScheme.secondary,
                 border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
                 borderRadius: BorderRadius.circular(16.0),
                 // image: DecorationImage(
@@ -235,7 +237,7 @@ class _HomeState extends State<Home> {
                   SizedBox(width: 2.0,),
                   Icon(FontAwesomeIcons.peopleGroup,color: Theme.of(context).primaryColor, size: 40,),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text("My Tribe",style: TextStyle(
                           fontFamily: 'Poppins',
@@ -244,8 +246,8 @@ class _HomeState extends State<Home> {
                           color: Theme.of(context).primaryColor),
                         textAlign: TextAlign.center,
                       ),
-                      Text("Chat with our AI bot \n "
-                          "Adamma !\n "
+                      Text("Just click a button to see to  \n "
+                          "interact with anonemous users \n globally! "
                           ,style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
                     ],
                   ),

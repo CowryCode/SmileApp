@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
     return StoreProvider<MyAppState>(
       store: _store,
       child: MaterialApp(
-        title: 'Ecommerce Flutter UI',
+        title: 'Thesis App',
         initialRoute: '/',
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
