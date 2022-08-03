@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:medico/pages/acount.dart';
 import 'package:medico/pages/conversations.dart' as prefix0;
 import 'package:medico/pages/custompages/home.dart';
+import 'package:medico/pages/custompages/user_profile_widget.dart';
 
 class NavigateTabsWidget extends StatefulWidget {
 
@@ -34,7 +35,7 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
       case 2 :
         currentTitle = 'profile';
        // return AcountWidget(acountInfos: ["${widget.acountInfos[0]}","${widget.acountInfos[1]}"],);
-        return Home();
+        return PatientAcountWidget();
       default:
         currentTitle = 'Home';
      //   return Home(value: "${widget.acountInfos[0]}");

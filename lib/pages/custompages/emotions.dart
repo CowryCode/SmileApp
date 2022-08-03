@@ -30,6 +30,7 @@ class _EmotionsState extends State<Emotions> {
   bool Clicked3 = false;
   bool Clicked4 = false;
   bool Clicked5 = false;
+  bool Clicked6 = false;
 
   Color color0;
   Color color1;
@@ -37,6 +38,7 @@ class _EmotionsState extends State<Emotions> {
   Color color3;
   Color color4;
   Color color5;
+  Color color6;
 
   @override
   initState() {
@@ -47,6 +49,7 @@ class _EmotionsState extends State<Emotions> {
     color3 = randomColor();
     color4 = randomColor();
     color5 = randomColor();
+    color6 = randomColor();
     isClicked = false;
   }
 
@@ -466,10 +469,10 @@ class _EmotionsState extends State<Emotions> {
                           onPressed: () {
                             // changeColor();
                             setState(() {
-                              if (Clicked5 == true) {
-                                Clicked5 = false;
+                              if (Clicked6 == true) {
+                                Clicked6 = false;
                               } else {
-                                Clicked5 = true;
+                                Clicked6 = true;
                               }
                             });
                           },
@@ -478,7 +481,7 @@ class _EmotionsState extends State<Emotions> {
                             width: MediaQuery.of(context).size.width * 0.40,
                             // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
                             decoration: BoxDecoration(
-                              color: Clicked5 == true
+                              color: Clicked6 == true
                                   ? Colors.green
                                   : Colors.white,
                               // color: Theme.of(context).primaryColor,
@@ -503,7 +506,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Sick ",
+                                  " Lonely ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,
