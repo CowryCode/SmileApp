@@ -92,7 +92,7 @@ class _HomeState extends State<Home> {
               );
             },
             child: Container(
-              height: 120.0,
+            //  height: 120.0,
               width: MediaQuery.of(context).size.width * 0.90,
               margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
               decoration: BoxDecoration(
@@ -105,16 +105,27 @@ class _HomeState extends State<Home> {
                 // ),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SizedBox(width: 10,),
-                  Icon(FontAwesomeIcons.faceSmileBeam,color: Theme.of(context).primaryColor, size: 60,),
-                  SizedBox(width: 10,),
-                  Text("Smile-Gram",style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor),
+                  SizedBox(width: 2.0,),
+                  Icon(FontAwesomeIcons.faceSmileBeam,color: Theme.of(context).primaryColor, size: 40,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Smile-Gram",
+                          style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                          textAlign: TextAlign.center
+                      ),
+                      Text("A smile can get you a gift and  \n "
+                          "compose a great text. Try it !\n "
+                          ,style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center,),
+                    ],
                   ),
+                  Icon(FontAwesomeIcons.angleRight,color: Theme.of(context).primaryColor, size: 40,),
                 ],
               ),
             ),
@@ -157,16 +168,26 @@ class _HomeState extends State<Home> {
                 // ),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SizedBox(width: 10,),
-                  Icon(FontAwesomeIcons.message,color: Theme.of(context).primaryColor, size: 60,),
-                  SizedBox(width: 10,),
-                  Text("Pocket Buddy",style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor),
+                  SizedBox(width: 2.0,),
+                  Icon(FontAwesomeIcons.message,color: Theme.of(context).primaryColor, size: 40,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Pocket Buddy",style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                          textAlign: TextAlign.center
+                      ),
+                      Text("Chat with our AI bot \n "
+                          "Adamma !\n "
+                          ,style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+                    ],
                   ),
+                  Icon(FontAwesomeIcons.angleRight,color: Theme.of(context).primaryColor, size: 40,),
                 ],
               ),
             ),
@@ -209,16 +230,26 @@ class _HomeState extends State<Home> {
                 // ),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SizedBox(width: 10,),
-                  Icon(FontAwesomeIcons.peopleGroup,color: Theme.of(context).primaryColor, size: 60,),
-                  SizedBox(width: 30,),
-                  Text("My Tribe",style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor),
+                  SizedBox(width: 2.0,),
+                  Icon(FontAwesomeIcons.peopleGroup,color: Theme.of(context).primaryColor, size: 40,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("My Tribe",style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text("Chat with our AI bot \n "
+                          "Adamma !\n "
+                          ,style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+                    ],
                   ),
+                  Icon(FontAwesomeIcons.angleRight,color: Theme.of(context).primaryColor, size: 40,),
                 ],
               ),
             ),
@@ -269,10 +300,10 @@ class _HomeState extends State<Home> {
             ),
           ),
          // LuckMetrixCountDown(),
-          LuckPot(),
+        //  LuckPot(),
         ],
       ),
-    ),
+     ),
     );
   }
   Widget ball(String image,Color color){

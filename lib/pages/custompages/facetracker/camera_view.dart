@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:medico/pages/custompages/canva/luckpot_view.dart';
 import 'package:medico/pages/custompages/statemanagement/actions.dart';
 import 'package:medico/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:medico/pages/custompages/statemanagement/my_app_state.dart';
@@ -162,74 +163,79 @@ class _CameraViewState extends State<CameraView> {
     }
     return StoreConnector<MyAppState,SGMessage >(
       converter: (store) => store.state.sg_message,
-      builder: (context, SGMessage currentMessagestate) =>Column(
-        children: [
-          SizedBox(height: 20,),
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return ScaleTransition(scale: animation, child: child);
-            },
-            child: Text(
-              //'$_count %',
-              currentMessagestate.content,
-              key: ValueKey<int>(_count),
-              style: Theme.of(context).textTheme.headline4,
+      builder: (context, SGMessage currentMessagestate) =>SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            SizedBox(height: 20,),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
+              child: Text(
+                //'$_count %',
+                currentMessagestate.content,
+                key: ValueKey<int>(_count),
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                child: const Text('Share'),
-                onPressed: () {
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Smile Gram'),
-                      content: const Text('Wow ! thanks for opting to share your smile . . .'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: (){
-                            Navigator.of(context).popAndPushNamed('/smilegram');
-                          },
-                          child: const Text('Confirm'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              SizedBox(width: 20,),
-              ElevatedButton(
-                child: const Text('Reset'),
-                onPressed: () {
-                  // setState(() {
-                  //   _tokenIndex = 0;
-                  // });
-                    SGMessage sgMSG = SGMessage(content: "", updated: true, tokenIndex: 0);
-                    StoreProvider.of<MyAppState>(context).dispatch(
-                        UpdateSGmessageAction(sgMSG)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: const Text('Share'),
+                  onPressed: () {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Smile Gram'),
+                        content: const Text('Wow ! thanks for opting to share your smile . . .'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: (){
+                              Navigator.of(context).popAndPushNamed('/smilegram');
+                            },
+                            child: const Text('Confirm'),
+                          ),
+                        ],
+                      ),
                     );
-                  _count += 1;
-                },
-              ),
-            ],
-          ),
-          SizedBox(height: 20,),
-          Text(
-            'Hi, I am fine?',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 20,),
-          _cameraDisplay()
-        ],
+                  },
+                ),
+                SizedBox(width: 20,),
+                ElevatedButton(
+                  child: const Text('Reset'),
+                  onPressed: () {
+                    // setState(() {
+                    //   _tokenIndex = 0;
+                    // });
+                      SGMessage sgMSG = SGMessage(content: "", updated: true, tokenIndex: 0);
+                      StoreProvider.of<MyAppState>(context).dispatch(
+                          UpdateSGmessageAction(sgMSG)
+                      );
+                    _count += 1;
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 20,),
+            Text(
+              'Hi, I am fine?',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20,),
+            LuckPot(),
+            SizedBox(height: 20,),
+            _cameraDisplay()
+          ],
+        ),
       ),
     );
    return body;

@@ -9,6 +9,7 @@ import 'package:medico/pages/custompages/emotions.dart';
 import 'package:medico/pages/custompages/facetracker/SmileTracker.dart';
 import 'package:medico/pages/custompages/facetracker/face_detector_view.dart';
 import 'package:medico/pages/custompages/home.dart';
+import 'package:medico/pages/custompages/navigationtabs.dart';
 import 'package:medico/pages/custompages/patient/completeprofile.dart';
 import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
 import 'package:medico/pages/custompages/patient/hospitals.dart';
@@ -89,7 +90,8 @@ class RouteGenerator {
         // MY CUSTOM ROUTE START
     // SMILE APP
       case '/' :
-        return MaterialPageRoute(builder: (_) => Home());
+      //  return MaterialPageRoute(builder: (_) => Home());
+        return MaterialPageRoute(builder: (_) => NavigateTabsWidget());
       case '/mydoctors':
         return MaterialPageRoute(builder: (_) => MyDoctorsList());
       case '/chat' :
