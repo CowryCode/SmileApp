@@ -156,7 +156,7 @@ class _EmotionsState extends State<Emotions> {
                             decoration: BoxDecoration(
                               color: Clicked0 == true
                                   ? Colors.green
-                                  : Colors.indigo,
+                                  : Colors.white,
                               // color: Theme.of(context).primaryColor,
                               border: Border.all(
                                   width: 1.0,
@@ -210,7 +210,7 @@ class _EmotionsState extends State<Emotions> {
                             decoration: BoxDecoration(
                               color: Clicked1 == true
                                   ? Colors.green
-                                  : Colors.indigo,
+                                  : Colors.white,
                               // color: Theme.of(context).primaryColor,
                               border: Border.all(
                                   width: 1.0,
@@ -264,7 +264,7 @@ class _EmotionsState extends State<Emotions> {
                             decoration: BoxDecoration(
                               color: Clicked2 == true
                                   ? Colors.green
-                                  : Colors.indigo,
+                                  : Colors.white,
                               // color: Theme.of(context).primaryColor,
                               border: Border.all(
                                   width: 1.0,
@@ -318,7 +318,7 @@ class _EmotionsState extends State<Emotions> {
                             decoration: BoxDecoration(
                               color: Clicked3 == true
                                   ? Colors.green
-                                  : Colors.indigo,
+                                  : Colors.white,
                               // color: Theme.of(context).primaryColor,
                               border: Border.all(
                                   width: 1.0,
@@ -372,7 +372,7 @@ class _EmotionsState extends State<Emotions> {
                             decoration: BoxDecoration(
                               color: Clicked4 == true
                                   ? Colors.green
-                                  : Colors.indigo,
+                                  : Colors.white,
                               // color: Theme.of(context).primaryColor,
                               border: Border.all(
                                   width: 1.0,
@@ -426,7 +426,7 @@ class _EmotionsState extends State<Emotions> {
                             decoration: BoxDecoration(
                               color: Clicked5 == true
                                   ? Colors.green
-                                  : Colors.indigo,
+                                  : Colors.white,
                               // color: Theme.of(context).primaryColor,
                               border: Border.all(
                                   width: 1.0,
@@ -480,7 +480,7 @@ class _EmotionsState extends State<Emotions> {
                             decoration: BoxDecoration(
                               color: Clicked5 == true
                                   ? Colors.green
-                                  : Colors.indigo,
+                                  : Colors.white,
                               // color: Theme.of(context).primaryColor,
                               border: Border.all(
                                   width: 1.0,

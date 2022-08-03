@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          "${widget.value}",
+                          "Cowrycode",
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 16.0,
