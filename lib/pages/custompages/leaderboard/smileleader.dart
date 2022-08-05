@@ -127,6 +127,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
   }
 
   Widget _tribeLeaaderBoard(){
+
     return ListView.builder(
         itemCount: leaderBoardModelLIST.length,
         itemBuilder: (BuildContext context, int index) {
