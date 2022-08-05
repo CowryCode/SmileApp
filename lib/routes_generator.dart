@@ -60,8 +60,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => VerificationNumber(data: args));
       case '/createAcount':
         return MaterialPageRoute(builder: (_) => CreateAcount());  
-      case '/home':
-        return MaterialPageRoute(builder: (_) => TabsWidget(acountInfos: args,));
+      // case '/home':
+      //   return MaterialPageRoute(builder: (_) => TabsWidget(acountInfos: args,));
       case '/doctors':
         return MaterialPageRoute(builder: (_) => DoctorsList());  
       case '/doctorProfil':
@@ -95,6 +95,8 @@ class RouteGenerator {
     // SMILE APP
       case '/' :
       //  return MaterialPageRoute(builder: (_) => Home());
+        return MaterialPageRoute(builder: (_) => NavigateTabsWidget());
+      case '/home' :
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget());
       case '/mydoctors':
         return MaterialPageRoute(builder: (_) => MyDoctorsList());

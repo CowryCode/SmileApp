@@ -188,25 +188,6 @@ class _HomeState extends State<Home> {
           TextButton(
             onPressed: (){
               Navigator.of(context).pushNamed('/tribemessages');
-              // showDialog<String>(
-              //   context: context,
-              //   builder: (BuildContext context) => AlertDialog(
-              //     title: const Text('My Tribe'),
-              //     content: const Text('Get beautiful messages from across the world. Will you want to continue ?'),
-              //     actions: <Widget>[
-              //       TextButton(
-              //         onPressed: () => Navigator.pop(context, 'Cancel'),
-              //         child: const Text('Cancel'),
-              //       ),
-              //       TextButton(
-              //         onPressed: (){
-              //           Navigator.popAndPushNamed(context, '/emotions');
-              //         },
-              //         child: const Text('Yes'),
-              //       ),
-              //     ],
-              //   ),
-              // );
             },
             child: Container(
               height: 120.0,
