@@ -66,7 +66,7 @@ class _LuckPotState extends State<LuckPot> {
       ),
     );
   }
-
+//TODO: THE SIZE OF POINT GAINED IS (Probability of Smile * duration of smile)
   Widget LuckMatrics() {
     return Wrap(
         children: List<Widget>.generate(

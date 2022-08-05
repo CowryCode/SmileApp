@@ -19,12 +19,15 @@ class LeaderBoardModelLIST{
   List<LeaderBoardModel> _leaderboards;
   LeaderBoardModelLIST(){
     this._leaderboards = [
-    new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
+      new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
+      new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
+      new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
+      new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
       new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
       new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
       new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
       new LeaderBoardModel("Name 1", 10, 60.0, 'images/imageuser.png'),
     ];
   }
-  List<LeaderBoardModel> get leaderboards => _leaderboards;
+  List<LeaderBoardModel> get leaderboardlist => _leaderboards;
 }

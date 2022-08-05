@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:medico/models/doctor.dart' as model;
 import 'package:medico/models/mymodels/smilemodels/leaderboardmodel.dart';
-class SmileLeaderCardWidget extends StatefulWidget {
+
+
+
+class TribeLeaderCardWidget extends StatefulWidget {
   final LeaderBoardModel leader;
-  const SmileLeaderCardWidget({Key key, this.leader}) : super(key: key);
+  const TribeLeaderCardWidget({Key key, this.leader}) : super(key: key);
 
   @override
-  _SmileLeaderCardWidgetState createState() => _SmileLeaderCardWidgetState();
+  _TribeLeaderCardWidgetState createState() => _TribeLeaderCardWidgetState();
 }
 
-class _SmileLeaderCardWidgetState extends State<SmileLeaderCardWidget> {
+class _TribeLeaderCardWidgetState extends State<TribeLeaderCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
