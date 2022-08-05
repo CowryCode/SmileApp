@@ -96,14 +96,9 @@ class _HomeState extends State<Home> {
               width: MediaQuery.of(context).size.width * 0.90,
               margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
               decoration: BoxDecoration(
-               // color: Theme.of(context).colorScheme.secondary,
                 color: Colors.orange,
                 border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
                 borderRadius: BorderRadius.circular(16.0),
-                // image: DecorationImage(
-                //   image:AssetImage('images/custom/smilegram.jpg'),
-                //   fit: BoxFit.cover,
-                // ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,10 +158,6 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).colorScheme.secondary,
                 border: Border.all(width:  1.0 , color: Colors.grey.withOpacity(0.2)),
                 borderRadius: BorderRadius.circular(16.0),
-                // image: DecorationImage(
-                //   image:AssetImage('images/custom/smilegram.jpg'),
-                //   fit: BoxFit.cover,
-                // ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,26 +187,26 @@ class _HomeState extends State<Home> {
           SizedBox(height: 1,),
           TextButton(
             onPressed: (){
-              // Navigator.of(context).pushNamed('/doctorProfil');
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('My Tribe'),
-                  content: const Text('Get beautiful messages from across the world. Will you want to continue ?'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: (){
-                        Navigator.popAndPushNamed(context, '/emotions');
-                      },
-                      child: const Text('Yes'),
-                    ),
-                  ],
-                ),
-              );
+              Navigator.of(context).pushNamed('/tribemessages');
+              // showDialog<String>(
+              //   context: context,
+              //   builder: (BuildContext context) => AlertDialog(
+              //     title: const Text('My Tribe'),
+              //     content: const Text('Get beautiful messages from across the world. Will you want to continue ?'),
+              //     actions: <Widget>[
+              //       TextButton(
+              //         onPressed: () => Navigator.pop(context, 'Cancel'),
+              //         child: const Text('Cancel'),
+              //       ),
+              //       TextButton(
+              //         onPressed: (){
+              //           Navigator.popAndPushNamed(context, '/emotions');
+              //         },
+              //         child: const Text('Yes'),
+              //       ),
+              //     ],
+              //   ),
+              // );
             },
             child: Container(
               height: 120.0,

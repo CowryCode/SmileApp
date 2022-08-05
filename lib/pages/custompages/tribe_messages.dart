@@ -3,8 +3,12 @@ import 'package:medico/models/doctor.dart' as model;
 import 'package:medico/models/mymodels/smilemodels/leaderboardmodel.dart';
 import 'package:medico/models/user.dart';
 import 'package:medico/pages/custompages/leaderboard/tribeleader_widget.dart';
+import 'package:medico/pages/custompages/tribe_message_widget.dart';
 import 'package:medico/widgets/doctorsWidget.dart';
 import 'package:medico/widgets/searchWidget.dart';
+
+
+
 class TribeMessageList extends StatefulWidget {
   final User currentUser=User.init().getCurrentUser();
   @override
@@ -34,7 +38,7 @@ class _TribeMessageListState extends State<TribeMessageList> {
         ),
         backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(
-          'Doctors',
+          'Tribe Messages',
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -44,8 +48,7 @@ class _TribeMessageListState extends State<TribeMessageList> {
         ),
 
       ),
-      body: SingleChildScrollView(
-        child:Column(
+      body: Column(
           children: <Widget>[
             Stack(
               children: <Widget>[
@@ -57,43 +60,26 @@ class _TribeMessageListState extends State<TribeMessageList> {
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 0.0,left: 12.0,right: 12.0),
-                  child:SearchBarWidget(),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 0.0,left: 12.0,right: 12.0),
+                //   child:SearchBarWidget(),
+                // ),
               ],
             ),
 
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-              ),
-              child: ListView.builder(
-                  itemCount: _leaderBoardModelLIST.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return TribeLeaderCardWidget(
-                      leader: _leaderBoardModelLIST.elementAt(index),
-                            );
-                  }),
+             //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
+             Flexible(
+               child: ListView.builder(
+                itemCount: _leaderBoardModelLIST.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TribeMessageCardWidget(
+                    leader: _leaderBoardModelLIST.elementAt(index), );
+                }),
+             ),
 
-              // ListView.separated(
-              //   shrinkWrap: true,
-              //   primary: false,
-              //  // itemCount: doctorsList.doctors.length,
-              //   itemCount: _leaderBoardModelLIST.length,
-              //   separatorBuilder: (context,index){
-              //     return SizedBox(height: 4.0);
-              //   },
-              //   itemBuilder: (context,index){
-              //     return DoctorsCardWidget(
-              //       doctors: doctorsList.doctors.elementAt(index),
-              //     );
-              //   },
-              // ),
-            ),
           ],
         ),
-      ),
+
     );
   }
 

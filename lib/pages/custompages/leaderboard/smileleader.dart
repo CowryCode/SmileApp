@@ -27,7 +27,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -52,7 +52,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(FontAwesomeIcons.faceSmileBeam,color: Colors.white,semanticLabel: "Smile Gram",)),
-              Tab(icon: Icon(FontAwesomeIcons.message, color: Colors.white,semanticLabel: "Pocket Buddy",)),
+            //  Tab(icon: Icon(FontAwesomeIcons.message, color: Colors.white,semanticLabel: "Pocket Buddy",)),
               Tab(icon: Icon(FontAwesomeIcons.peopleGroup,color: Colors.white,semanticLabel: "My Tribe",)),
             ],
           ),
@@ -62,7 +62,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
           children: [
             _smileGramLeaderboar(),
            //  Icon(FontAwesomeIcons.faceSmileBeam,color: Colors.green,semanticLabel: "Smile Gram",),
-            Icon(FontAwesomeIcons.message, color: Colors.green,semanticLabel: "Pocket Buddy",),
+          //  Icon(FontAwesomeIcons.message, color: Colors.green,semanticLabel: "Pocket Buddy",),
             _tribeLeaaderBoard(),
            // Icon(FontAwesomeIcons.peopleGroup,color: Colors.green,semanticLabel: "My Tribe",),
           ],

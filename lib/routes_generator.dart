@@ -22,6 +22,7 @@ import 'package:medico/pages/custompages/provider/patientsqueue.dart';
 import 'package:medico/pages/custompages/provider/providerhome.dart';
 import 'package:medico/pages/custompages/provider/providertabs.dart';
 import 'package:medico/pages/custompages/redux/redux_screen.dart';
+import 'package:medico/pages/custompages/tribe_messages.dart';
 import 'package:medico/pages/doctor-book-1.dart';
 import 'package:medico/pages/doctor-book-2.dart';
 import 'package:medico/pages/health.dart';
@@ -89,6 +90,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HealthTips());
 
 
+
         // MY CUSTOM ROUTE START
     // SMILE APP
       case '/' :
@@ -105,7 +107,10 @@ class RouteGenerator {
         //return MaterialPageRoute(builder: (_) => SmileHome());
       case '/leaderboard':
         return MaterialPageRoute(builder: (_) => LeadderBoard());
+      case '/tribemessages':
+        return MaterialPageRoute(builder: (_) => TribeMessageList());
     // SMILE APP
+
 
 
        // PATIENT
