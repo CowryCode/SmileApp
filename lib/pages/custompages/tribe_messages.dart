@@ -5,7 +5,7 @@ import 'package:medico/models/doctor.dart' as model;
 import 'package:medico/models/mymodels/smilemodels/leaderboardmodel.dart';
 import 'package:medico/models/user.dart';
 import 'package:medico/pages/custompages/leaderboard/tribeleader_widget.dart';
-import 'package:medico/pages/custompages/tribe_message_widget.dart';
+import 'package:medico/pages/custompages/tribe_pending_task_widget.dart';
 import 'package:medico/widgets/doctorsWidget.dart';
 import 'package:medico/widgets/searchWidget.dart';
 

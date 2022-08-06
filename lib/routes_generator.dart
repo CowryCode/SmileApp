@@ -16,6 +16,7 @@ import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
 import 'package:medico/pages/custompages/patient/hospitals.dart';
 import 'package:medico/pages/custompages/patient/voicecall.dart';
 import 'package:medico/pages/custompages/patient/services.dart';
+import 'package:medico/pages/custompages/pending_task_tribe.dart';
 import 'package:medico/pages/custompages/provider/my-patients.dart';
 import 'package:medico/pages/custompages/provider/patientencounterprofile.dart';
 import 'package:medico/pages/custompages/provider/patientsqueue.dart';
@@ -111,6 +112,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LeadderBoard());
       case '/tribemessages':
         return MaterialPageRoute(builder: (_) => TribeMessageList());
+      case '/tribependingtasks':
+        return MaterialPageRoute(builder: (_) => TribePendingTaskList());
     // SMILE APP
 
 
