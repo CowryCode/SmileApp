@@ -536,15 +536,21 @@ class _EmotionsState extends State<Emotions> {
                               Theme.of(context).primaryColor.withOpacity(0.8),
                         ),
                       ),
-                      Text(
-                        "Done",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontFamily: 'Poppins',
-                          color:
+                      TextButton(
+                          onPressed: (){
+                            Navigator.of(context).popAndPushNamed('/home');
+                          },
+                          child: Text(
+                            "Done",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontFamily: 'Poppins',
+                              color:
                               Theme.of(context).primaryColor.withOpacity(0.8),
-                        ),
+                            ),
+                          ),
                       ),
+
                     ],
                   ),
                 ],
