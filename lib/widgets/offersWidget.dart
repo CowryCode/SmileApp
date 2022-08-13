@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/offer.dart' as model;
+import 'package:SmileApp/models/offer.dart' as model;
 
 class OffersCardWidget extends StatefulWidget {
  

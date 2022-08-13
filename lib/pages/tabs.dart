@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:medico/pages/acount.dart';
-import 'package:medico/pages/conversations.dart' as prefix0;
+import 'package:SmileApp/pages/acount.dart';
+import 'package:SmileApp/pages/conversations.dart' as prefix0;
 import 'custompages/home.dart';
 
 class TabsWidget extends StatefulWidget {

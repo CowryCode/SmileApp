@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/mymodels/providermodels/patient.dart' as model;
+import 'package:SmileApp/models/mymodels/providermodels/patient.dart' as model;
 class PatientQueueCardWidget extends StatefulWidget {
   final model.Patient patients;
   const PatientQueueCardWidget({Key key, this.patients}) : super(key: key);

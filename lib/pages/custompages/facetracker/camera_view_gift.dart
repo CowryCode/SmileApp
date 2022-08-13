@@ -16,8 +16,8 @@ enum ScreenMode { liveFeed, gallery }
 enum Actions { Increment }
 
 
-class CameraView extends StatefulWidget {
-  CameraView(
+class CameraViewGift extends StatefulWidget {
+  CameraViewGift(
       {Key key,
          this.title,
          this.customPaint,
@@ -35,10 +35,10 @@ class CameraView extends StatefulWidget {
   final CameraLensDirection initialDirection;
 
   @override
-  _CameraViewState createState() => _CameraViewState();
+  _CameraViewGiftState createState() => _CameraViewGiftState();
 }
 
-class _CameraViewState extends State<CameraView> {
+class _CameraViewGiftState extends State<CameraViewGift> {
   ScreenMode _mode = ScreenMode.liveFeed;
   CameraController _controller;
   File _image;
@@ -231,8 +231,8 @@ class _CameraViewState extends State<CameraView> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20,),
-            LuckPot(),
-            SizedBox(height: 20,),
+           // LuckPot(),
+           // SizedBox(height: 20,),
             _cameraDisplay()
           ],
         ),
@@ -496,6 +496,7 @@ class _CameraViewState extends State<CameraView> {
                   : CameraPreview(_controller),
             ),
           ),
+          LuckPot(),
           // if (widget.customPaint != null) widget.customPaint,
           // Positioned(
           //   bottom: 100,

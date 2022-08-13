@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:medico/pages/custompages/redux/models/drink.dart';
+import 'package:SmileApp/pages/custompages/redux/models/drink.dart';
 
 class DrinksWidget extends StatelessWidget {
   final Drink drink;

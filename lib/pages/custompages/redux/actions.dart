@@ -2,7 +2,7 @@
 // application to your store. They are the only source of information
 // for the store. You send them to the store using store.dispatch().
 
-import 'package:medico/pages/custompages/redux/models/drink.dart';
+import 'package:SmileApp/pages/custompages/redux/models/drink.dart';
 
 class UpdateDrinkAction{
   final Drink updateDrink;

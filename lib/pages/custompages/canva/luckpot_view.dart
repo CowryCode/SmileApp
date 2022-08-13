@@ -4,7 +4,11 @@ import 'dart:math';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:medico/pages/custompages/animation_views/luckmatrix_countdown.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:SmileApp/pages/custompages/animation_views/luckmatrix_countdown.dart';
+import 'package:SmileApp/pages/custompages/redux/app_state.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 
 class LuckPot extends StatefulWidget {
 
@@ -38,18 +42,33 @@ class _LuckPotState extends State<LuckPot> {
         children: [
           progressBarvalue != 0?  SizedBox(
             height: 30,
-            child: AnimatedTextKit(
-                repeatForever: true,
-                animatedTexts: [
-                  ScaleAnimatedText('Remaining $progressBarvalue!',
-                      scalingFactor: 0.2,
-                      textStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.secondary,
-                        fontSize: 20
-                      )),
-                ],
-              ),
+            // child: AnimatedTextKit(
+            //     repeatForever: true,
+            //     animatedTexts: [
+            //       ScaleAnimatedText('Remaining $progressBarvalue!',
+            //           scalingFactor: 0.2,
+            //           textStyle: TextStyle(
+            //               fontWeight: FontWeight.bold,
+            //               color: Theme.of(context).colorScheme.secondary,
+            //             fontSize: 20
+            //           )),
+            //     ],
+            //   ),
+            child: StoreConnector<MyAppState, LuckPotTimerstatemodel>(
+              converter: (store) => store.state.luckPotTimerstatemodel,
+              builder: (context, LuckPotTimerstatemodel luckpot) =>  AnimatedTextKit(
+                  repeatForever: true,
+                  animatedTexts: [
+                    ScaleAnimatedText('Remaining $progressBarvalue! Smiling ? ${luckpot.activate}',
+                        scalingFactor: 0.2,
+                        textStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.secondary,
+                          fontSize: 20
+                        )),
+                  ],
+                ),
+            ),
           ) : SizedBox(
                 height: 30,
                 width: MediaQuery.of(context).size.width * 0.8,

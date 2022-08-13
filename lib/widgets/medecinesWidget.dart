@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/medecine.dart' as model;
+import 'package:SmileApp/models/medecine.dart' as model;
 
 class MedecinesWidget extends StatefulWidget {
 

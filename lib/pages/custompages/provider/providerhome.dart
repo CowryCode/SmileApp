@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:medico/apis/Variables.dart';
+import 'package:SmileApp/apis/Variables.dart';
 
 class ProviderHome extends StatefulWidget {
   final String value;

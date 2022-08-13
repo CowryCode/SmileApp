@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:medico/pages/custompages/facetracker/face_detector_view.dart';
+import 'package:SmileApp/pages/custompages/facetracker/face_detector_view.dart';
 
 class SmileHome extends StatelessWidget {
   @override

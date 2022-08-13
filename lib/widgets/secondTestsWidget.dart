@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/test.dart' as model;
+import 'package:SmileApp/models/test.dart' as model;
 
 class TestsSlected extends StatefulWidget {
 

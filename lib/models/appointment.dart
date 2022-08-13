@@ -1,5 +1,6 @@
+import 'package:SmileApp/models/doctor.dart';
 import 'package:flutter/material.dart';
-import 'package:medico/models/doctor.dart';
+import 'package:SmileApp/models/doctor.dart';
 
 class Appointment{
   String id =UniqueKey().toString();

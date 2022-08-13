@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medico/apis/Variables.dart';
+import 'package:SmileApp/apis/Variables.dart';
 class GetStarted extends StatefulWidget {
   @override
   _GetStartedState createState() => _GetStartedState();

@@ -1,6 +1,6 @@
 
-import 'package:medico/pages/custompages/statemanagement/actions.dart';
-import 'package:medico/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 
 MyAppState updateSGmessageReducer(MyAppState state, dynamic action){
   if(action is UpdateSGmessageAction){

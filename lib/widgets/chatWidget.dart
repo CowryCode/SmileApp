@@ -2,9 +2,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:medico/models/chat.dart';
-import 'package:medico/models/doctor.dart';
-import 'package:medico/models/user.dart';
+import 'package:SmileApp/models/chat.dart';
+import 'package:SmileApp/models/doctor.dart';
+import 'package:SmileApp/models/user.dart';
 
 class ChatMessageListItem extends StatelessWidget {
   final Chat chat;

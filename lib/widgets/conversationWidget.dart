@@ -1,5 +1,5 @@
 import'package:flutter/material.dart';
-import 'package:medico/models/conversation.dart' as model;
+import 'package:SmileApp/models/conversation.dart' as model;
 class ConversationItemWidget extends StatefulWidget {
   final model.Conversation conversation;
   const ConversationItemWidget({Key key, this.conversation}) : super(key: key);

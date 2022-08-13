@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/medecine.dart' as model;
-import 'package:medico/models/user.dart';
-import 'package:medico/widgets/medecinesSlected.dart';
+import 'package:SmileApp/models/medecine.dart' as model;
+import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/widgets/medecinesSlected.dart';
 class MedecinesSlected extends StatefulWidget {
   @override
   _MedecinesSlectedState createState() => _MedecinesSlectedState();

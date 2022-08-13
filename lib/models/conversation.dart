@@ -1,4 +1,4 @@
-import 'package:medico/models/chat.dart';
+import 'package:SmileApp/models/chat.dart';
 
 
 class Conversation{

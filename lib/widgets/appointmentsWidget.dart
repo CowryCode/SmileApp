@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/appointment.dart' as model;
-import 'package:medico/models/user.dart';
+import 'package:SmileApp/models/appointment.dart' as model;
+import 'package:SmileApp/models/user.dart';
 class AppointmentsWidget extends StatefulWidget {
   final model.Appointment appointment;
   const AppointmentsWidget({Key key, this.appointment}) : super(key: key);

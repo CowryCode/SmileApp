@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/doctor.dart';
-import 'package:medico/models/user.dart';
+import 'package:SmileApp/models/doctor.dart';
+import 'package:SmileApp/models/user.dart';
 class DoctorBookFirstStep extends StatefulWidget {
   @override
   _DoctorBookFirstStepState createState() => _DoctorBookFirstStepState();

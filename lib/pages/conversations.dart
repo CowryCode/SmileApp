@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/conversation.dart' as model;
-import 'package:medico/widgets/conversationWidget.dart';
-import 'package:medico/widgets/searchWidget.dart';
+import 'package:SmileApp/models/conversation.dart' as model;
+import 'package:SmileApp/widgets/conversationWidget.dart';
+import 'package:SmileApp/widgets/searchWidget.dart';
 
 class Conversation extends StatefulWidget {
   @override

@@ -2,19 +2,21 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/pages/custompages/facetracker/face_detector_painter.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 
 import 'camera_view.dart';
 
-class FaceDetectorView extends StatefulWidget {
+class FaceDetectorGiftView extends StatefulWidget {
   @override
-  _FaceDetectorViewState createState() => _FaceDetectorViewState();
+  _FaceDetectorGiftViewState createState() => _FaceDetectorGiftViewState();
 }
 
-class _FaceDetectorViewState extends State<FaceDetectorView> {
+class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
       //enableContours: true, // Original code
@@ -53,8 +55,8 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
 
   @override
   Widget build(BuildContext context) {
-    return CameraView(
-      title: 'Face & SMIL Detector',
+    return CameraViewGift(
+      title: 'Smile for Gift',
       customPaint: _customPaint,
       text: _text,
       onImage: (inputImage) {
@@ -90,9 +92,14 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
           _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
           int updatedTokenIndex = sgMessage.tokenIndex + 1;
           SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex);
+
+          bool smiling = StoreProvider.of<MyAppState>(context).state.luckPotTimerstatemodel.activate;
           StoreProvider.of<MyAppState>(context).dispatch(
-              UpdateSGmessageAction(sgMSG)
+              LuckPotTimerAction(LuckPotTimerstatemodel(activate: !smiling))
           );
+          // StoreProvider.of<MyAppState>(context).dispatch(
+          //     UpdateSGmessageAction(sgMSG)
+          // );
           _count += 1;
         }
         // End State Update

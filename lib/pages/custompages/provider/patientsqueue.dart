@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/mymodels/providermodels/patient.dart' as model;
-import 'package:medico/models/user.dart';
-import 'package:medico/widgets/doctorsWidget.dart';
-import 'package:medico/widgets/mywidgets/providerwidgets/mypatientwidget.dart';
-import 'package:medico/widgets/mywidgets/providerwidgets/patientQueueWidget.dart';
-import 'package:medico/widgets/searchWidget.dart';
+import 'package:SmileApp/models/mymodels/providermodels/patient.dart' as model;
+import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/widgets/doctorsWidget.dart';
+import 'package:SmileApp/widgets/mywidgets/providerwidgets/mypatientwidget.dart';
+import 'package:SmileApp/widgets/mywidgets/providerwidgets/patientQueueWidget.dart';
+import 'package:SmileApp/widgets/searchWidget.dart';
 class PatientQueueList extends StatefulWidget {
   final User currentUser=User.init().getCurrentUser();
   @override

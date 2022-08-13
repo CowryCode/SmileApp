@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:medico/models/chat.dart';
-import 'package:medico/models/conversation.dart';
-import 'package:medico/models/doctor.dart';
-import 'package:medico/models/user.dart';
-import 'package:medico/widgets/chatWidget.dart';
+import 'package:SmileApp/models/chat.dart';
+import 'package:SmileApp/models/conversation.dart';
+import 'package:SmileApp/models/doctor.dart';
+import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/widgets/chatWidget.dart';
 
 
 class ChatWidget extends StatefulWidget {

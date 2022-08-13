@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:medico/models/doctor.dart' as model;
-import 'package:medico/models/mymodels/smilemodels/leaderboardmodel.dart' as leaderboard;
-import 'package:medico/models/mymodels/smilemodels/leaderboardmodel.dart';
-import 'package:medico/models/user.dart';
-import 'package:medico/pages/custompages/leaderboard/tribeleader_widget.dart';
-import 'package:medico/widgets/doctorsWidget.dart';
-import 'package:medico/widgets/searchWidget.dart';
+import 'package:SmileApp/models/doctor.dart' as model;
+import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart' as leaderboard;
+import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
+import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/pages/custompages/leaderboard/tribeleader_widget.dart';
+import 'package:SmileApp/widgets/doctorsWidget.dart';
+import 'package:SmileApp/widgets/searchWidget.dart';
 class LeadderBoard extends StatefulWidget {
   // final User currentUser=User.init().getCurrentUser();
  // final LeaderBoardModel leaderBoardModel = LeaderBoardModel.init().getCurrentLeaderBoardModel();

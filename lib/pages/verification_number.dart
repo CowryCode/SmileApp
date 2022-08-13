@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:medico/models/user.dart';
+import 'package:SmileApp/models/user.dart';
 //import 'package:flutter/services.dart';
 
 class VerificationNumber extends StatefulWidget {

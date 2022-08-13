@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:medico/models/user.dart';
-import 'package:medico/pages/custompages/redux/app_state.dart';
+import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/pages/custompages/redux/app_state.dart';
 
 class PatientAcountWidget extends StatefulWidget {
 

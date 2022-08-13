@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/test.dart' as model;
-import 'package:medico/models/user.dart';
-import 'package:medico/widgets/searchWidget.dart';
-import 'package:medico/widgets/testsWidget.dart';
+import 'package:SmileApp/models/test.dart' as model;
+import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/widgets/searchWidget.dart';
+import 'package:SmileApp/widgets/testsWidget.dart';
 class BookTestsOnline extends StatefulWidget {
   @override
   _BookTestsOnlineState createState() => _BookTestsOnlineState();

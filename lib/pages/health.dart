@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:medico/models/user.dart';
+import 'package:SmileApp/models/user.dart';
 class HealthTips extends StatefulWidget {
   @override
   _HealthTipsState createState() => _HealthTipsState();

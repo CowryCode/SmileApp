@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/mymodels/patientmodels/service.dart' as model;
+import 'package:SmileApp/models/mymodels/patientmodels/service.dart' as model;
 
 class ServicesCardWidget extends StatefulWidget {
 

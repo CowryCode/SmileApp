@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/doctor.dart' as model;
-import 'package:medico/models/user.dart';
-import 'package:medico/widgets/doctorsWidget.dart';
-import 'package:medico/widgets/searchWidget.dart';
+import 'package:SmileApp/models/doctor.dart' as model;
+import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/widgets/doctorsWidget.dart';
+import 'package:SmileApp/widgets/searchWidget.dart';
 class DoctorsList extends StatefulWidget {
   final User currentUser=User.init().getCurrentUser();
   @override

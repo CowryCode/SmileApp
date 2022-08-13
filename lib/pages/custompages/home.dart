@@ -2,10 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:medico/apis/Variables.dart';
-import 'package:medico/pages/custompages/animation_views/luckmatrix_countdown.dart';
-import 'package:medico/pages/custompages/canva/gift_view.dart';
-import 'package:medico/pages/custompages/canva/luckpot_view.dart';
+import 'package:SmileApp/apis/Variables.dart';
+import 'package:SmileApp/pages/custompages/animation_views/luckmatrix_countdown.dart';
+import 'package:SmileApp/pages/custompages/canva/gift_view.dart';
+import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
 
 class Home extends StatefulWidget {
   final String value;
@@ -77,8 +77,11 @@ class _HomeState extends State<Home> {
                       'image with your smile, do you want to continue?'),
                   actions: <Widget>[
                     TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: const Text('Cancel'),
+                    //  onPressed: () => Navigator.pop(context, 'Cancel'),
+                    onPressed: (){
+                      Navigator.of(context).popAndPushNamed('/smilegramgift');
+                     },
+                      child: const Text('Smile Gift'),
                     ),
                     TextButton(
                       onPressed: (){

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:medico/models/doctor.dart' as model;
-import 'package:medico/models/mymodels/smilemodels/leaderboardmodel.dart';
+import 'package:SmileApp/models/doctor.dart' as model;
+import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
 
 
 
@@ -106,7 +106,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                         showfulltext = !showfulltext;
                       });
                     },
-                    child: Text("Send")
+                    child: Text("Send", style: TextStyle(color: Theme.of(context).colorScheme.secondary),)
                 )
               ],
             ),

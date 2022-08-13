@@ -1,46 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:medico/pages/appointment.dart';
-import 'package:medico/pages/book-test-online1.dart';
-import 'package:medico/pages/book-test-online2.dart';
-import 'package:medico/pages/book-test-online3.dart';
-import 'package:medico/pages/book-test-online4.dart';
-import 'package:medico/pages/custompages/animation_views/countdown_widget.dart';
-import 'package:medico/pages/custompages/emotions.dart';
-import 'package:medico/pages/custompages/facetracker/SmileTracker.dart';
-import 'package:medico/pages/custompages/facetracker/face_detector_view.dart';
-import 'package:medico/pages/custompages/home.dart';
-import 'package:medico/pages/custompages/leaderboard/smileleader.dart';
-import 'package:medico/pages/custompages/navigationtabs.dart';
-import 'package:medico/pages/custompages/patient/completeprofile.dart';
-import 'package:medico/pages/custompages/patient/hospitaldetail.dart';
-import 'package:medico/pages/custompages/patient/hospitals.dart';
-import 'package:medico/pages/custompages/patient/voicecall.dart';
-import 'package:medico/pages/custompages/patient/services.dart';
-import 'package:medico/pages/custompages/pending_task_tribe.dart';
-import 'package:medico/pages/custompages/provider/my-patients.dart';
-import 'package:medico/pages/custompages/provider/patientencounterprofile.dart';
-import 'package:medico/pages/custompages/provider/patientsqueue.dart';
-import 'package:medico/pages/custompages/provider/providerhome.dart';
-import 'package:medico/pages/custompages/provider/providertabs.dart';
-import 'package:medico/pages/custompages/redux/redux_screen.dart';
-import 'package:medico/pages/custompages/tribe_messages.dart';
-import 'package:medico/pages/doctor-book-1.dart';
-import 'package:medico/pages/doctor-book-2.dart';
-import 'package:medico/pages/health.dart';
-import 'package:medico/pages/medeciens-2.dart';
-import 'package:medico/pages/medecines.dart';
-import 'package:medico/pages/my-doctors.dart';
-import 'package:medico/pages/offers.dart';
-import 'package:medico/pages/Welcome.dart';
-import 'package:medico/pages/custompages/chat.dart';
-import 'package:medico/pages/createAccount.dart';
-import 'package:medico/pages/docotr_acount.dart';
-import 'package:medico/pages/doctors.dart';
+import 'package:SmileApp/pages/appointment.dart';
+import 'package:SmileApp/pages/book-test-online1.dart';
+import 'package:SmileApp/pages/book-test-online2.dart';
+import 'package:SmileApp/pages/book-test-online3.dart';
+import 'package:SmileApp/pages/book-test-online4.dart';
+import 'package:SmileApp/pages/custompages/animation_views/countdown_widget.dart';
+import 'package:SmileApp/pages/custompages/emotions.dart';
+import 'package:SmileApp/pages/custompages/facetracker/SmileTracker.dart';
+import 'package:SmileApp/pages/custompages/facetracker/face_detector_view.dart';
+import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';
+import 'package:SmileApp/pages/custompages/home.dart';
+import 'package:SmileApp/pages/custompages/leaderboard/smileleader.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
+import 'package:SmileApp/pages/custompages/patient/completeprofile.dart';
+import 'package:SmileApp/pages/custompages/patient/hospitaldetail.dart';
+import 'package:SmileApp/pages/custompages/patient/hospitals.dart';
+import 'package:SmileApp/pages/custompages/patient/voicecall.dart';
+import 'package:SmileApp/pages/custompages/patient/services.dart';
+import 'package:SmileApp/pages/custompages/pending_task_tribe.dart';
+import 'package:SmileApp/pages/custompages/provider/my-patients.dart';
+import 'package:SmileApp/pages/custompages/provider/patientencounterprofile.dart';
+import 'package:SmileApp/pages/custompages/provider/patientsqueue.dart';
+import 'package:SmileApp/pages/custompages/provider/providerhome.dart';
+import 'package:SmileApp/pages/custompages/provider/providertabs.dart';
+import 'package:SmileApp/pages/custompages/redux/redux_screen.dart';
+import 'package:SmileApp/pages/custompages/tribe_messages.dart';
+import 'package:SmileApp/pages/doctor-book-1.dart';
+import 'package:SmileApp/pages/doctor-book-2.dart';
+import 'package:SmileApp/pages/health.dart';
+import 'package:SmileApp/pages/medeciens-2.dart';
+import 'package:SmileApp/pages/medecines.dart';
+import 'package:SmileApp/pages/my-doctors.dart';
+import 'package:SmileApp/pages/offers.dart';
+import 'package:SmileApp/pages/Welcome.dart';
+import 'package:SmileApp/pages/custompages/chat.dart';
+import 'package:SmileApp/pages/createAccount.dart';
+import 'package:SmileApp/pages/docotr_acount.dart';
+import 'package:SmileApp/pages/doctors.dart';
 
-import 'package:medico/pages/phoneNumber_login.dart';
-import 'package:medico/pages/signup.dart';
-import 'package:medico/pages/tabs.dart';
-import 'package:medico/pages/verification_number.dart';
+import 'package:SmileApp/pages/phoneNumber_login.dart';
+import 'package:SmileApp/pages/signup.dart';
+import 'package:SmileApp/pages/tabs.dart';
+import 'package:SmileApp/pages/verification_number.dart';
 
 
 
@@ -107,7 +108,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Emotions());
       case '/smilegram':
         return MaterialPageRoute(builder: (_) => FaceDetectorView());
-        //return MaterialPageRoute(builder: (_) => SmileHome());
+       // return MaterialPageRoute(builder: (_) => SmileHome());
+      case '/smilegramgift':
+        return MaterialPageRoute(builder: (_) => FaceDetectorGiftView());
       case '/leaderboard':
         return MaterialPageRoute(builder: (_) => LeadderBoard());
       case '/tribemessages':

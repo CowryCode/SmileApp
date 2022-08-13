@@ -7,8 +7,8 @@
 // TODO 6: return a new AppState with the changes we want to do
 // TODO 7: if the action is a unkown type return the prev. state
 
-import 'package:medico/pages/custompages/redux/actions.dart';
-import 'package:medico/pages/custompages/redux/app_state.dart';
+import 'package:SmileApp/pages/custompages/redux/actions.dart';
+import 'package:SmileApp/pages/custompages/redux/app_state.dart';
 
 AppState updateDrinksReducer(AppState state, dynamic action) {
   if (action is UpdateDrinkAction) {

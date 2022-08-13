@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:medico/pages/custompages/redux/actions.dart';
-import 'package:medico/pages/custompages/redux/app_state.dart';
-import 'package:medico/pages/custompages/redux/constants.dart';
-import 'package:medico/pages/custompages/redux/drinks_widget.dart';
-import 'package:medico/pages/custompages/redux/models/drink.dart';
+import 'package:SmileApp/pages/custompages/redux/actions.dart';
+import 'package:SmileApp/pages/custompages/redux/app_state.dart';
+import 'package:SmileApp/pages/custompages/redux/constants.dart';
+import 'package:SmileApp/pages/custompages/redux/drinks_widget.dart';
+import 'package:SmileApp/pages/custompages/redux/models/drink.dart';
 
 // Widget
 class ReduxScreen extends StatelessWidget {

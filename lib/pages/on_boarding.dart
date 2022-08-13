@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medico/models/on_boarding.dart';
+import 'package:SmileApp/models/on_boarding.dart';
 
 class OnBoardingWidget extends StatefulWidget {
   @override

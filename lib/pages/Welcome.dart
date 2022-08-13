@@ -1,6 +1,6 @@
 import'package:flutter/material.dart';
-import 'package:medico/pages/on_boarding.dart';
-import 'package:medico/pages/getStarted.dart';
+import 'package:SmileApp/pages/on_boarding.dart';
+import 'package:SmileApp/pages/getStarted.dart';
 class Welcome extends StatefulWidget {
   @override
   _WelcomeState createState() => _WelcomeState();

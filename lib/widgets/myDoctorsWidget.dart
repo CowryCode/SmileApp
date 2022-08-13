@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medico/models/doctor.dart' as model;
+import 'package:SmileApp/models/doctor.dart' as model;
 class MyDoctorsCardWidget extends StatefulWidget {
   final model.Doctor doctors;
   const MyDoctorsCardWidget({Key key, this.doctors}) : super(key: key);
