@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
+import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,18 +17,18 @@ import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import '../../../main.dart';
 
 enum ScreenMode { liveFeed, gallery }
-enum Actions { Increment }
 
+enum Actions { Increment }
 
 class CameraViewGift extends StatefulWidget {
   CameraViewGift(
       {Key key,
-         this.title,
-         this.customPaint,
-        this.text,
-         this.onImage,
-        this.onScreenModeChanged,
-        this.initialDirection = CameraLensDirection.back})
+      this.title,
+      this.customPaint,
+      this.text,
+      this.onImage,
+      this.onScreenModeChanged,
+      this.initialDirection = CameraLensDirection.back, this.readmessage = false})
       : super(key: key);
 
   final String title;
@@ -34,9 +38,14 @@ class CameraViewGift extends StatefulWidget {
   final Function(ScreenMode mode) onScreenModeChanged;
   final CameraLensDirection initialDirection;
 
+  // Added this for my study logic
+  final bool readmessage;
+
   @override
   _CameraViewGiftState createState() => _CameraViewGiftState();
 }
+//TODO: Read and Send Smile Pack with a smile
+//TODO: While smiling and all the text have been revealed, the Face of the sender shows (and gets deleted immediately)
 
 class _CameraViewGiftState extends State<CameraViewGift> {
   ScreenMode _mode = ScreenMode.liveFeed;
@@ -51,10 +60,23 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   int _count = 0; // My Code
   String _msg = ""; // My Code
-  String _fulltext = "I am a living testimony testimony that God is good"; // My Code
+  String _fulltext =
+      "I am a living testimony testimony that God is good"; // My Code
   int _tokenIndex = 0; // My Code
-  var _tokenArray ;
+  var _tokenArray;
+
   int _tokenArrayLength;
+
+
+
+  int _value = 0;
+  bool _activated = false;
+  int _activation_index = -1;
+  final Duration timerTastoPremuto = Duration(seconds: 20);
+
+  int progressBarvalue = 20;
+
+
 
   @override
   void initState() {
@@ -66,24 +88,25 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     _imagePicker = ImagePicker();
 
     if (cameras.any(
-          (element) =>
-      element.lensDirection == widget.initialDirection &&
+      (element) =>
+          element.lensDirection == widget.initialDirection &&
           element.sensorOrientation == 90,
     )) {
       _cameraIndex = cameras.indexOf(
         cameras.firstWhere((element) =>
-        element.lensDirection == widget.initialDirection &&
+            element.lensDirection == widget.initialDirection &&
             element.sensorOrientation == 90),
       );
     } else {
       _cameraIndex = cameras.indexOf(
         cameras.firstWhere(
-              (element) => element.lensDirection == widget.initialDirection,
+          (element) => element.lensDirection == widget.initialDirection,
         ),
       );
     }
 
     _startLiveFeed();
+   // _randomize();
   }
 
   @override
@@ -97,8 +120,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color:Theme.of(context).primaryColor ),
-          onPressed: (){
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+          onPressed: () {
             Navigator.of(context).popAndPushNamed('/');
           },
         ),
@@ -122,8 +145,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         // ],
       ),
       body: _body(),
-     // floatingActionButton: _floatingActionButton(), // I removed the floating button
-     // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // I removed the floating Button
+      // floatingActionButton: _floatingActionButton(), // I removed the floating button
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // I removed the floating Button
     );
   }
 
@@ -161,86 +184,100 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     } else {
       body = _galleryBody();
     }
-    return StoreConnector<MyAppState,SGMessage >(
+    return StoreConnector<MyAppState, SGMessage>(
       converter: (store) => store.state.sg_message,
-      builder: (context, SGMessage currentMessagestate) =>SingleChildScrollView(
+      builder: (context, SGMessage currentMessagestate) =>
+          SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            SizedBox(height: 20,),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return ScaleTransition(scale: animation, child: child);
-              },
-              child: Text(
-                //'$_count %',
-                currentMessagestate.content,
-                key: ValueKey<int>(_count),
-                style: Theme.of(context).textTheme.headline4,
-              ),
+            SizedBox(
+              height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: const Text('Share'),
-                  onPressed: () {
-                    showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: const Text('Smile Gram'),
-                        content: const Text('Wow ! thanks for opting to share your smile . . .'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'Cancel'),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: (){
-                              Navigator.of(context).popAndPushNamed('/smilegram');
-                            },
-                            child: const Text('Confirm'),
-                          ),
+            ((){
+              if(widget.readmessage){
+               return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    return ScaleTransition(scale: animation, child: child);
+                  },
+                  child: Text(
+                    'Smile Text Content',
+                   // currentMessagestate.content,
+                    key: ValueKey<int>(_count),
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                );
+              }else{
+                return SizedBox(height: 5,);
+              }
+            }()),
+            ((){
+              if(!widget.readmessage){
+                return  SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Target Point: 20',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox( width: 20,),
+                      Text(
+                        'Your point : ',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      AnimatedTextKit(
+                        repeatForever: true,
+                        animatedTexts: [
+                          RotateAnimatedText("Rotate", )
                         ],
                       ),
-                    );
-                  },
-                ),
-                SizedBox(width: 20,),
-                ElevatedButton(
-                  child: const Text('Reset'),
+                    ],
+                  ),
+                );
+              }else{
+                return SizedBox(height: 5,);
+              }
+            }()),
+            SizedBox(
+              height: 20,
+            ),
+            // LuckPot(),
+            // SizedBox(height: 20,),
+            _cameraDisplay(),
+            SizedBox(
+              height: 20,
+            ),
+            ((){
+              if(!widget.readmessage){
+                return ElevatedButton(
+                  child: const Text('Try Again', ),
                   onPressed: () {
-                    // setState(() {
-                    //   _tokenIndex = 0;
-                    // });
-                      SGMessage sgMSG = SGMessage(content: "", updated: true, tokenIndex: 0);
-                      StoreProvider.of<MyAppState>(context).dispatch(
-                          UpdateSGmessageAction(sgMSG)
-                      );
+
+                    SGMessage sgMSG =
+                    SGMessage(content: "", updated: true, tokenIndex: 0);
+                    StoreProvider.of<MyAppState>(context)
+                        .dispatch(UpdateSGmessageAction(sgMSG));
                     _count += 1;
                   },
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Text(
-              'Hi, I am fine?',
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20,),
-           // LuckPot(),
-           // SizedBox(height: 20,),
-            _cameraDisplay()
+                );
+              }else{
+                return SizedBox(height: 5,);
+              }
+            }())
           ],
         ),
       ),
     );
-   return body;
+    return body;
   }
-
 
   Widget _liveFeedBody() {
     if (_controller?.value.isInitialized == false) {
@@ -267,8 +304,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             child: Center(
               child: _changingCameraLens
                   ? Center(
-                child: const Text('Changing camera lens'),
-              )
+                      child: const Text('Changing camera lens'),
+                    )
                   : CameraPreview(_controller),
             ),
           ),
@@ -301,20 +338,20 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     return ListView(shrinkWrap: true, children: [
       _image != null
           ? SizedBox(
-        height: 400,
-        width: 400,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Image.file(_image),
-            if (widget.customPaint != null) widget.customPaint,
-          ],
-        ),
-      )
+              height: 400,
+              width: 400,
+              child: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  Image.file(_image),
+                  if (widget.customPaint != null) widget.customPaint,
+                ],
+              ),
+            )
           : Icon(
-        Icons.image,
-        size: 200,
-      ),
+              Icons.image,
+              size: 200,
+            ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
@@ -424,19 +461,19 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     final bytes = allBytes.done().buffer.asUint8List();
 
     final Size imageSize =
-    Size(image.width.toDouble(), image.height.toDouble());
+        Size(image.width.toDouble(), image.height.toDouble());
 
     final camera = cameras[_cameraIndex];
     final imageRotation =
-    InputImageRotationValue.fromRawValue(camera.sensorOrientation);
+        InputImageRotationValue.fromRawValue(camera.sensorOrientation);
     if (imageRotation == null) return;
 
     final inputImageFormat =
-    InputImageFormatValue.fromRawValue(image.format.raw);
+        InputImageFormatValue.fromRawValue(image.format.raw);
     if (inputImageFormat == null) return;
 
     final planeData = image.planes.map(
-          (Plane plane) {
+      (Plane plane) {
         return InputImagePlaneMetadata(
           bytesPerRow: plane.bytesPerRow,
           height: plane.height,
@@ -453,7 +490,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
 
     final inputImage =
-    InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
 
     widget.onImage(inputImage);
   }
@@ -480,9 +517,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // end of added by me
 
     return Container(
-       color: Theme.of(context).colorScheme.secondary,
-       height: MediaQuery.of(context).size.height * 0.5,
-       width: MediaQuery.of(context).size.width,
+      color: Theme.of(context).colorScheme.secondary,
+      height: MediaQuery.of(context).size.height * 0.5,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
@@ -491,12 +528,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             child: Center(
               child: _changingCameraLens
                   ? Center(
-                child: const Text('Changing camera lens'),
-              )
+                      child: const Text('Changing camera lens'),
+                    )
                   : CameraPreview(_controller),
             ),
           ),
-          LuckPot(),
+         // LuckPot(),
+          _giftMatrix()
           // if (widget.customPaint != null) widget.customPaint,
           // Positioned(
           //   bottom: 100,
@@ -521,5 +559,196 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       ),
     );
   }
-  // MY CODE
+  Widget _giftMatrix(){
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.5,
+      // child: LuckMatrics(),
+      child:  Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          progressBarvalue != 0?  SizedBox(
+            height: 30,
+            child:AnimatedTextKit(
+                repeatForever: true,
+                animatedTexts: [
+                  ScaleAnimatedText('Remaining $progressBarvalue! Smiling Probability :  ',
+                      scalingFactor: 0.2,
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontSize: 20
+                      )),
+                ],
+              ),
+          ) : SizedBox(
+            height: 30,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Text(
+              'Click on your opened gift !',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: 20,
+              ),),
+          ),
+         // _LuckMatrics()
+        ],
+      ),
+    );
+  }
+
+  //TODO: THE SIZE OF POINT GAINED IS (Probability of Smile * duration of smile)
+  Widget _LuckMatrics() {
+    return Wrap(
+      children: List<Widget>.generate(
+        20,
+            (int index) {
+          return _activation_index == index && _activated == true
+              ?
+          ChoiceChip(
+            key: Key('$index'),
+            selectedColor: Theme.of(context).primaryColor,
+            avatar: Image.asset("images/custom/giftopen1.png"),
+            elevation: 6.0,
+            backgroundColor: Theme.of(context).primaryColor,
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            label: Text('open', style: TextStyle(color: Colors.red),),
+            selected: _value == index,
+            onSelected: (bool selected) {
+              setState(() {
+                _value = selected ? index : _value;
+                print("Selected Value is $_value");
+                showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
+              });
+            },
+          )
+              : ChoiceChip(
+            key: Key('$index'),
+            avatar: Image.asset("images/custom/gift.png"),
+            elevation: 6.0,
+            backgroundColor: Theme.of(context).primaryColor,
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
+            selected: _value == index,
+            onSelected: (bool selected) {
+              setState(() {
+                //  _value = selected ? index : null;
+                _value = selected ? index : _value;
+                _activated = true;
+                print("Selected Value if $_value");
+
+              });
+            },
+          );
+        },
+      ).toList(),
+    );
+  }
+
+  showAlertDialog({@required BuildContext context, @required String title, @required String message, @required int amount}) {
+
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("Try Again"),
+      onPressed: () {
+        // KICK START SMILING
+        setState(() {
+          _activation_index = -1;
+        });
+        Navigator.of(context).pop();
+        _randomize();
+      },
+    );
+
+    // set up the button
+    Widget cancelButton = TextButton(
+      child: Text("Cancel"),
+      onPressed: () {
+        setState(() {
+          _activation_index = -1;
+          progressBarvalue += 2;
+        });
+        Navigator.of(context).popAndPushNamed("/");
+        // randomize();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      // title: Text("My title"),
+      title: Text(title),
+      // content: Text(message),
+      content:  giftAlert(amountWon: amount),
+      actions: [
+        cancelButton,
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  Widget giftAlert({@required int amountWon}){
+    return Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            image:DecorationImage(
+              image:AssetImage('images/custom/giftopen1.png'),
+              fit: BoxFit.cover,)),
+        child: Stack(
+          children: <Widget>[
+            Center(
+              //  child: Text(' Congratulations! your won $_value points', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
+              child: DefaultTextStyle(
+                style: const TextStyle(
+                    fontSize: 30.0,
+                    fontFamily: 'SF',
+                    color: Colors.red
+                ),
+                child: Center(
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      ScaleAnimatedText('$amountWon points won!',scalingFactor: 0.2),
+                      ScaleAnimatedText('Congratulations !',scalingFactor: 0.2),
+                      ScaleAnimatedText('10 points won!',scalingFactor: 0.2),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )
+    );
+  }
+
+  void _randomize(){
+    int _start = timerTastoPremuto.inMilliseconds;
+    Random random = new Random();
+    const oneDecimal = const Duration(seconds: 1);
+    Timer _timer = new Timer.periodic(
+        oneDecimal,
+            (Timer timer) =>
+            setState(() {
+              _value = random.nextInt(23);
+              print('Timer is : $_start  Index Value is $_value');
+              if (_start < 1000) {
+                _activated = true;
+                _activation_index = _value;
+                timer.cancel();
+              } else {
+                _start = _start - 1000;
+                progressBarvalue = progressBarvalue - 1;
+              }
+            }));
+  }
+
 }

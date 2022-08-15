@@ -204,8 +204,6 @@ class _LuckPotState extends State<LuckPot> {
             }));
   }
 
-
-
   Widget giftAlert({@required int amountWon}){
     return Container(
         decoration: BoxDecoration(

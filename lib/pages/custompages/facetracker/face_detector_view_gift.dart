@@ -88,18 +88,18 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
         double prob = face.smilingProbability;
       //  if(_tokenIndex < _tokenArrayLength && prob > 0.7){
-        if(sgMessage.tokenIndex < _tokenArrayLength && prob > 0.7){
+        if(sgMessage.tokenIndex < _tokenArrayLength && prob > 0.5){
           _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
           int updatedTokenIndex = sgMessage.tokenIndex + 1;
           SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex);
 
-          bool smiling = StoreProvider.of<MyAppState>(context).state.luckPotTimerstatemodel.activate;
-          StoreProvider.of<MyAppState>(context).dispatch(
-              LuckPotTimerAction(LuckPotTimerstatemodel(activate: !smiling))
-          );
+          // bool smiling = StoreProvider.of<MyAppState>(context).state.luckPotTimerstatemodel.activate;
           // StoreProvider.of<MyAppState>(context).dispatch(
-          //     UpdateSGmessageAction(sgMSG)
+          //     LuckPotTimerAction(LuckPotTimerstatemodel(activate: !smiling))
           // );
+          StoreProvider.of<MyAppState>(context).dispatch(
+              UpdateSGmessageAction(sgMSG)
+          );
           _count += 1;
         }
         // End State Update
