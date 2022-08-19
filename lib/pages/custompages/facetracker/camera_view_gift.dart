@@ -178,6 +178,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //   return body;
   // }
   Widget _body() {
+    int highestpoint = 20;
+
     Widget body;
     if (_mode == ScreenMode.liveFeed) {
       body = _liveFeedBody();
@@ -202,8 +204,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                     return ScaleTransition(scale: animation, child: child);
                   },
                   child: Text(
-                    'Smile Text Content',
-                   // currentMessagestate.content,
+                    currentMessagestate.content,
                     key: ValueKey<int>(_count),
                     style: Theme.of(context).textTheme.headline4,
                   ),
@@ -214,44 +215,57 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             }()),
             ((){
               if(!widget.readmessage){
-                return  SizedBox(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Target Point: 20',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox( width: 20,),
-                      Text(
-                        'Your point : ',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      AnimatedTextKit(
-                        repeatForever: true,
-                        animatedTexts: [
-                          RotateAnimatedText("Rotate", )
-                        ],
-                      ),
-                    ],
-                  ),
-                );
+                  return SizedBox(
+                    height: 50,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Target Point: $highestpoint',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                        ),
+                        SizedBox(width: 20,),
+                        Text(
+                          'Your point : ',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                        ),
+                        AnimatedTextKit(
+                          repeatForever: true,
+                          animatedTexts: [
+                            RotateAnimatedText(
+                              "${currentMessagestate.tokenIndex}",)
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
               }else{
                 return SizedBox(height: 5,);
               }
             }()),
-            SizedBox(
-              height: 20,
-            ),
-            // LuckPot(),
-            // SizedBox(height: 20,),
-            _cameraDisplay(),
+            SizedBox(height: 20,),
+            ((){
+              if(currentMessagestate.iscompleted){
+                _stopLiveFeed();
+                if(highestpoint > currentMessagestate.tokenIndex){
+                  return giftAlert(message: "Oops smile tensity reduced",  amountWon: currentMessagestate.tokenIndex);
+                }else{
+                  return giftAlert(message: "Congratulations!", amountWon: currentMessagestate.tokenIndex);
+                }
+              }else {
+                int remaining = highestpoint - currentMessagestate.tokenIndex;
+                 return _cameraDisplay(pointsleft: remaining);
+              }
+            }()),
+          //  _cameraDisplay(),
             SizedBox(
               height: 20,
             ),
@@ -260,7 +274,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return ElevatedButton(
                   child: const Text('Try Again', ),
                   onPressed: () {
-
                     SGMessage sgMSG =
                     SGMessage(content: "", updated: true, tokenIndex: 0);
                     StoreProvider.of<MyAppState>(context)
@@ -496,7 +509,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   // MY CODE
-  Widget _cameraDisplay() {
+  Widget _cameraDisplay({@required int pointsleft}) {
     if (_controller?.value.isInitialized == false) {
       return Container();
     }
@@ -533,28 +546,22 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   : CameraPreview(_controller),
             ),
           ),
+          Center(
+            child: AnimatedTextKit(
+              repeatForever: true,
+              animatedTexts: [
+                ScaleAnimatedText(' $pointsleft points to go !',
+                    scalingFactor: 0.2,
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 20
+                    )),
+              ],
+            ),
+          ),
          // LuckPot(),
-          _giftMatrix()
-          // if (widget.customPaint != null) widget.customPaint,
-          // Positioned(
-          //   bottom: 100,
-          //   left: 50,
-          //   right: 50,
-          //   child: Slider(
-          //     value: zoomLevel,
-          //     min: minZoomLevel,
-          //     max: maxZoomLevel,
-          //     onChanged: (newSliderValue) {
-          //       setState(() {
-          //         zoomLevel = newSliderValue;
-          //         _controller.setZoomLevel(zoomLevel);
-          //       });
-          //     },
-          //     divisions: (maxZoomLevel - 1).toInt() < 1
-          //         ? null
-          //         : (maxZoomLevel - 1).toInt(),
-          //   ),
-          // )
+         // _giftMatrix()
         ],
       ),
     );
@@ -576,7 +583,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       scalingFactor: 0.2,
                       textStyle: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.secondary,
+                         // color: Theme.of(context).primaryColor,
+                          color: Colors.red,
                           fontSize: 20
                       )),
                 ],
@@ -696,12 +704,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  Widget giftAlert({@required int amountWon}){
+  Widget giftAlert({@required String message, @required int amountWon}){
     return Container(
+      height: MediaQuery.of(context).size.height * 0.8,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
             image:DecorationImage(
-              image:AssetImage('images/custom/giftopen1.png'),
+              image:AssetImage('images/custom/giftopen.png'),
               fit: BoxFit.cover,)),
         child: Stack(
           children: <Widget>[
@@ -717,9 +726,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   child: AnimatedTextKit(
                     repeatForever: true,
                     animatedTexts: [
-                      ScaleAnimatedText('$amountWon points won!',scalingFactor: 0.2),
-                      ScaleAnimatedText('Congratulations !',scalingFactor: 0.2),
-                      ScaleAnimatedText('10 points won!',scalingFactor: 0.2),
+                      ScaleAnimatedText('$amountWon points won!',scalingFactor: 0.2, textAlign: TextAlign.center),
+                      ScaleAnimatedText('$message !',scalingFactor: 0.2, textAlign: TextAlign.center),
+                      ScaleAnimatedText('$amountWon points won!',scalingFactor: 0.2, textAlign: TextAlign.center),
                     ],
                   ),
                 ),

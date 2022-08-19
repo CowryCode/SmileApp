@@ -1,9 +1,10 @@
 // SG stands for Smile Gram
 class SGMessage{
-  String content;
-  bool updated;
+  final String content;
+  final bool updated;
   // Management Variables
-  int tokenIndex ;
+  final int tokenIndex ;
+  bool iscompleted;
 
-  SGMessage({this.content, this.updated, this.tokenIndex = 0});
+  SGMessage({this.content, this.updated, this.tokenIndex = 0, this.iscompleted = false});
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -6,17 +8,22 @@ import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/pages/custompages/facetracker/face_detector_painter.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 
-import 'camera_view.dart';
-
 class FaceDetectorGiftView extends StatefulWidget {
+
+ // final String msg;
+ // final bool readmessage;
+  final List<Object> data;
+
+  FaceDetectorGiftView({Key key, this.data});
+
   @override
   _FaceDetectorGiftViewState createState() => _FaceDetectorGiftViewState();
 }
 
 class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
+
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
       //enableContours: true, // Original code
@@ -32,15 +39,19 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   // Start
   int _count = 0; // My Code
   String _msg = ""; // My Code
-  String _fulltext = "I am a living testimony testimony that God is good"; // My Code
+  // String _fulltext = "I am a living testimony testimony that God is good"; // My Code
   // int _tokenIndex = 0; // My Code
   //var _tokenArray ;
   List<String> _tokenArray ;
   int _tokenArrayLength;
 
+  bool readmessage = false;
+
   @override
   void initState() {
     super.initState();
+    String _fulltext = widget.data[0];
+    readmessage =  widget.data[1];
     _tokenArray = _fulltext.split(" ");
     _tokenArrayLength = _tokenArray.length;
   }
@@ -63,10 +74,12 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         processImage(inputImage);
       },
       initialDirection: CameraLensDirection.front,
+      readmessage: readmessage,
     );
   }
 
   Future<void> processImage(InputImage inputImage) async {
+
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
@@ -87,21 +100,33 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         // State Update
         SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
         double prob = face.smilingProbability;
-      //  if(_tokenIndex < _tokenArrayLength && prob > 0.7){
-        if(sgMessage.tokenIndex < _tokenArrayLength && prob > 0.5){
-          _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
-          int updatedTokenIndex = sgMessage.tokenIndex + 1;
-          SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex);
+        if(readmessage) {
+          if (sgMessage.tokenIndex < _tokenArrayLength && prob > 0.5) {
+            _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
+            int updatedTokenIndex = sgMessage.tokenIndex + 1;
+            SGMessage sgMSG = SGMessage(
+                content: _msg, updated: true, tokenIndex: updatedTokenIndex);
 
-          // bool smiling = StoreProvider.of<MyAppState>(context).state.luckPotTimerstatemodel.activate;
-          // StoreProvider.of<MyAppState>(context).dispatch(
-          //     LuckPotTimerAction(LuckPotTimerstatemodel(activate: !smiling))
-          // );
-          StoreProvider.of<MyAppState>(context).dispatch(
-              UpdateSGmessageAction(sgMSG)
-          );
-          _count += 1;
+            StoreProvider.of<MyAppState>(context).dispatch(
+                UpdateSGmessageAction(sgMSG)
+            );
+            _count += 1;
+          }
+        } else {
+          if( prob > 0.5){
+            int updatedTokenIndex = sgMessage.tokenIndex + 1;
+            SGMessage sgMSG = SGMessage(
+                content: _msg, updated: true, tokenIndex: updatedTokenIndex);
+            StoreProvider.of<MyAppState>(context).dispatch(
+                UpdateSGmessageAction(sgMSG)
+            );
+          }else{
+            SGMessage sgMSG = SGMessage(
+                content: _msg, updated: true, tokenIndex: sgMessage.tokenIndex, iscompleted: true );
+            StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+          }
         }
+
         // End State Update
       }
       // MY CODE

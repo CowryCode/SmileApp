@@ -1,3 +1,4 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -73,22 +74,21 @@ class _HomeState extends State<Home> {
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: const Text('Smile Gram'),
-                  content: const Text('This action will help you create wonderful '
-                      'image with your smile, do you want to continue?'),
+                  content: const Text('Beat the highest smile score to win redeemable points! '),
                   actions: <Widget>[
                     TextButton(
                     //  onPressed: () => Navigator.pop(context, 'Cancel'),
                     onPressed: (){
-                      Navigator.of(context).popAndPushNamed('/smilegramgift');
+                      Navigator.of(context).pop();
                      },
-                      child: const Text('Smile Gift'),
+                      child: const Text('Cancel'),
                     ),
                     TextButton(
                       onPressed: (){
                       //  Navigator.of(context).pushNamed('/smilegram');
-                        Navigator.of(context).popAndPushNamed('/smilegram');
+                        Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: ['No message', false]);
                        },
-                      child: const Text('Yes'),
+                      child: const Text('Continue'),
                     ),
                   ],
                 ),
@@ -232,52 +232,55 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 1,),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton(
-                  onPressed: (){},
-                  child: Text(
-                    'Unread SmilePacks',
-                    style: TextStyle(
-                    fontSize:12.0,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).focusColor
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+            // Container(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: (){},
+                    child: Text(
+                      'Unread SmilePacks',
+                      style: TextStyle(
+                          fontSize:12.0,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).focusColor
+                      ),
                     ),
                   ),
-                ),
-                FlatButton(
-                  onPressed: (){
-                    Navigator.of(context).pushNamed("/doctors");
-                  },
-                  child: Text(
-                    'See All',
-                    style: TextStyle(
-                    fontSize:12.0,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).accentColor,
+                  FlatButton(
+                    onPressed: (){
+                      Navigator.of(context).pushNamed("/doctors");
+                    },
+                    child: Text(
+                      'See All',
+                      style: TextStyle(
+                        fontSize:12.0,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).accentColor,
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
+            // ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  card("images/asset-1.png","South Africa",),
+                  card("images/asset-2.png","Ontario Canada",),
+                  card("images/asset-3.png","Dr. Senila Aaraf",),
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 180.0,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                card("images/asset-1.png","Dr.Alina james","B.Sc DDVL Demilitologist","4.2"),
-                card("images/asset-2.png","Dr.Steve Robert","B.Sc DDVL Demilitologist","3.6"),
-                card("images/asset-3.png","Dr. Senila Aaraf","B.Sc DDVL Demilitologist ","4.3"),
-              ],
-            ),
-          ),
-         // LuckMetrixCountDown(),
-        //  LuckPot(),
+          ],),
+
         ],
       ),
      ),
@@ -308,62 +311,43 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget card(String image,String title,String subTitle,String rank){
+  Widget card(String image,String message,){
     return 
      Stack(
      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [BoxShadow( color: Theme.of(context).primaryColor .withOpacity(0.1), offset: Offset(0,4), blurRadius: 10)],
-        ),
-        width: 140.0,
-        height: 140.0,
-        child: Card(
-          elevation: 0.2,
-          child: Wrap(
-            children: <Widget>[
-              Container(
-                margin:EdgeInsets.symmetric(horizontal: 0.0,vertical:40.0),
-                child:ListTile(
-                  title: Text(
-                    title,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 10.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    ),
-                  subtitle: Column(
-                    children: <Widget>[
-                      Text(
-                        subTitle,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              boxShadow: [BoxShadow( color: Theme.of(context).primaryColor .withOpacity(0.1), offset: Offset(0,4), blurRadius: 10)],
+          ),
+          width: 140.0,
+          //height: 110.0,
+          child: Card(
+            elevation: 0.2,
+            margin: EdgeInsets.all(15),
+            child: Wrap(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Icon(Icons.email_rounded, color: Theme.of(context).colorScheme.secondary,),
+                    Text(
+                      "From \n $message",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 10.0
-                        ),
                       ),
-                      Row(
-                        children: <Widget>[
-                          Icon(Icons.star,color: Colors.yellow,),
-                          Text(rank,style: TextStyle(fontFamily: 'Poppins',),),
-                        ],
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
       ),
-        Container(
-          margin:EdgeInsets.symmetric(horizontal: 30.0,vertical:0.0),
-          child:ballcard(image,Colors.transparent),
-        ),
+        // Container(
+        //   margin:EdgeInsets.symmetric(horizontal: 30.0,vertical:0.0),
+        //  child:ballcard(image,Colors.transparent),
+        // ),
      ],
     );
 

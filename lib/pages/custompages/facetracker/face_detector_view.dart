@@ -96,6 +96,9 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
           _count += 1;
         }
         // End State Update
+
+
+
       }
       // MY CODE
     } else {

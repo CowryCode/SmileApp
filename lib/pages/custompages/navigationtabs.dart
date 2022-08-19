@@ -1,3 +1,4 @@
+import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:SmileApp/pages/acount.dart';
@@ -31,11 +32,12 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
         return Home();
       case 1 :
         currentTitle = 'chat';  
-        return prefix0.Conversation();
+       // return prefix0.Conversation();
+        return TribePage();
       case 2 :
         currentTitle = 'profile';
        // return AcountWidget(acountInfos: ["${widget.acountInfos[0]}","${widget.acountInfos[1]}"],);
-        return PatientAcountWidget();
+        return UserAcountWidget();
       default:
         currentTitle = 'Home';
      //   return Home(value: "${widget.acountInfos[0]}");

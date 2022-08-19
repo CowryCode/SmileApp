@@ -4,16 +4,16 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:SmileApp/models/user.dart';
 import 'package:SmileApp/pages/custompages/redux/app_state.dart';
 
-class PatientAcountWidget extends StatefulWidget {
+class UserAcountWidget extends StatefulWidget {
 
  // final List<String> acountInfos;
 
-  const PatientAcountWidget({Key key}) : super(key: key);
+  const UserAcountWidget({Key key}) : super(key: key);
   @override
-  _PatientAcountWidgetState createState() => _PatientAcountWidgetState();
+  _UserAcountWidgetState createState() => _UserAcountWidgetState();
 }
 
-class _PatientAcountWidgetState extends State<PatientAcountWidget> {
+class _UserAcountWidgetState extends State<UserAcountWidget> {
   //User currentUser = new User.init().getCurrentUser();
   @override
   Widget build(BuildContext context) {
