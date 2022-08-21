@@ -67,4 +67,13 @@ class Colors {
   Color accentDarkColor(double opacity) {
     return this._accentDarkColor.withOpacity(opacity);
   }
+
+  TextStyle customContenttext(){
+    return TextStyle(
+      fontFamily: 'Poppins',
+      fontSize: 12.0,
+      fontWeight: FontWeight.bold,
+      color:  Color(0x73000000),
+    );
+  }
 }

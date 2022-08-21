@@ -1,12 +1,9 @@
+import 'package:SmileApp/config/custom_design.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:SmileApp/models/doctor.dart' as model;
-import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart' as leaderboard;
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
-import 'package:SmileApp/models/user.dart';
 import 'package:SmileApp/pages/custompages/leaderboard/tribeleader_widget.dart';
-import 'package:SmileApp/widgets/doctorsWidget.dart';
-import 'package:SmileApp/widgets/searchWidget.dart';
+
 class LeadderBoard extends StatefulWidget {
   // final User currentUser=User.init().getCurrentUser();
  // final LeaderBoardModel leaderBoardModel = LeaderBoardModel.init().getCurrentLeaderBoardModel();
@@ -106,11 +103,11 @@ class _LeadderBoardState extends State<LeadderBoard> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget> [
-                        Text("${index + 1}"),
+                        Text("${index + 1}",),
                         SizedBox(width: 5,),
                         Text("Name $index"),
                         SizedBox(width: 10,),
-                        Icon(FontAwesomeIcons.star, color: Colors.white,),
+                        Icon(FontAwesomeIcons.star, color: Theme.of(context).primaryColor,),
                      //   Icon(Icons.card_giftcard_rounded, color: Colors.white,),
                         SizedBox(width: 20,),
                         Text("${index * 10}%"),

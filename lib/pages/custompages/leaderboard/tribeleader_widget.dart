@@ -1,3 +1,4 @@
+import 'package:SmileApp/config/custom_design.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/doctor.dart' as model;
@@ -56,11 +57,7 @@ class _TribeLeaderCardWidgetState extends State<TribeLeaderCardWidget> {
                         child: Text(
                           '${widget.leader.name}',
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: CustomeStyling().customContenttext(),
                         ),
                       ),
                       Row(
@@ -78,11 +75,7 @@ class _TribeLeaderCardWidgetState extends State<TribeLeaderCardWidget> {
                                 Text(
                                   //TODO: THIS WILL BE UPDATED FROM DB (IF IT'S MORE THAN 1000 CONVERT IT IN K)
                                   '5k',
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: CustomeStyling().customContenttext(),
                                 ),
                               ],
                             ),
@@ -99,11 +92,7 @@ class _TribeLeaderCardWidgetState extends State<TribeLeaderCardWidget> {
                                 Text(
                                   //TODO: THIS WILL BE UPDATED FROM DB (IF IT'S MORE THAN 1000 CONVERT IT IN K)
                                   '2.3k',
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: CustomeStyling().customContenttext(),
                                 ),
                               ],
                             ),
@@ -120,11 +109,7 @@ class _TribeLeaderCardWidgetState extends State<TribeLeaderCardWidget> {
                                 Text(
                                   //TODO: THIS WILL BE UPDATED FROM DB (IF IT'S MORE THAN 1000 CONVERT IT IN K)
                                   '600',
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: CustomeStyling().customContenttext(),
                                 ),
                               ],
                             ),
@@ -145,11 +130,7 @@ class _TribeLeaderCardWidgetState extends State<TribeLeaderCardWidget> {
               child: Text(
                   '${widget.leader.name} ',
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: CustomeStyling().customContenttext(),
                 ),
             ),
             visible: showfulltext,

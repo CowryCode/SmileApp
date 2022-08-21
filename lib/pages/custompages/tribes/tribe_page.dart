@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
 import 'package:SmileApp/models/user.dart';
-import 'package:SmileApp/pages/custompages/tribe_pending_task_widget.dart';
-
-
 
 
 class TribePage extends StatefulWidget {

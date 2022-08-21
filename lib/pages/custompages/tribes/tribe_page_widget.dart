@@ -1,3 +1,4 @@
+import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
@@ -61,11 +62,14 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                       child: Text(
                         'Message from Someone in Australia ${widget.leader.name}',
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: CustomeStyling().customContenttext(),
+
+                        // TextStyle(
+                        //   fontFamily: 'Poppins',
+                        //   fontSize: 12.0,
+                        //   fontWeight: FontWeight.bold,
+                        //   color: Colors.black45,
+                        // ),
                       ),
                     ),
                     //TODO: Color this button
@@ -101,9 +105,18 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("Respond"),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Respond',
+                                    style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                                  ),
+                                ],
+                              ),
+                            ),
                             SizedBox(width: 20,),
-                            Icon(FontAwesomeIcons.envelope),
+                            Icon(FontAwesomeIcons.envelope, color: Theme.of(context).colorScheme.secondary,),
                           ],
                         ),
                     )

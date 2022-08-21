@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:SmileApp/pages/custompages/facetracker/camera_view.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -66,8 +67,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
 
   @override
   Widget build(BuildContext context) {
+
     return CameraViewGift(
-      title: 'Smile for Gift',
+      title: readmessage? 'Smile and Hold' : 'Smile for Gift',
       customPaint: _customPaint,
       text: _text,
       onImage: (inputImage) {

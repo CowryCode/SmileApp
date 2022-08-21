@@ -1,4 +1,5 @@
 
+import 'package:SmileApp/config/custom_design.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,9 @@ class _HomeState extends State<Home> {
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: const Text('Smile Gram'),
-                  content: const Text('Beat the highest smile score to win redeemable points! '),
+                  content: const Text('Beat the highest smile score to win redeemable points! ',
+                    style: TextStyle(color: Colors.black45),
+                  ),
                   actions: <Widget>[
                     TextButton(
                     //  onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -120,8 +123,8 @@ class _HomeState extends State<Home> {
                           textAlign: TextAlign.center
                       ),
                       Text("A smile can get you a gift and  \n "
-                          "compose a great text. Try it !\n "
-                          ,style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center,),
+                          "compose a great text. Try it !\n ",
+                          style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center,),
                     ],
                   ),
                   Icon(FontAwesomeIcons.angleRight,color: Theme.of(context).primaryColor, size: 40,),
@@ -137,7 +140,9 @@ class _HomeState extends State<Home> {
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: const Text('Pocket Buddy'),
-                  content: const Text('Do you want to chat with the AI bot ?'),
+                  content: Text('Do you want to chat with the AI bot ?',
+                    style: CustomeStyling().customContenttext(),
+                  ),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -179,7 +184,8 @@ class _HomeState extends State<Home> {
                       ),
                       Text("Chat with our AI bot \n "
                           "Adamma !\n "
-                          ,style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+                          ,style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center),
                     ],
                   ),
                   Icon(FontAwesomeIcons.angleRight,color: Theme.of(context).primaryColor, size: 40,),
@@ -221,8 +227,8 @@ class _HomeState extends State<Home> {
                           color: Theme.of(context).primaryColor),
                         textAlign: TextAlign.center,
                       ),
-                      Text("Just click a button to see to  \n "
-                          "interact with anonemous users \n globally! "
+                      Text("Just click this button to interact \n "
+                          "with our anonymous users \n globally! "
                           ,style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
                     ],
                   ),
@@ -247,13 +253,13 @@ class _HomeState extends State<Home> {
                           fontSize:12.0,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).focusColor
+                          color: Theme.of(context).colorScheme.secondary
                       ),
                     ),
                   ),
                   FlatButton(
                     onPressed: (){
-                      Navigator.of(context).pushNamed("/doctors");
+                      Navigator.of(context).pushNamed("/tribeunreadmessages");
                     },
                     child: Text(
                       'See All',
@@ -261,7 +267,7 @@ class _HomeState extends State<Home> {
                         fontSize:12.0,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   )
@@ -331,11 +337,12 @@ class _HomeState extends State<Home> {
                   children: <Widget>[
                     Icon(Icons.email_rounded, color: Theme.of(context).colorScheme.secondary,),
                     Text(
-                      "From \n $message",
+                      "From : \n $message",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontSize: 10.0
+                          fontSize: 10.0,
+                        color: Colors.black45,
                       ),
                     ),
                   ],

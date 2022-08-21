@@ -1,3 +1,4 @@
+import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/pages/appointment.dart';
 import 'package:SmileApp/pages/book-test-online1.dart';
@@ -117,6 +118,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => TribeMessageList());
       case '/tribependingtasks':
         return MaterialPageRoute(builder: (_) => TribePendingTaskList());
+      case '/tribeunreadmessages':
+        return MaterialPageRoute(builder: (_) => TribePage());
     // SMILE APP
 
 

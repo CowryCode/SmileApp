@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
@@ -109,6 +110,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
    // _randomize();
   }
 
+  // Added this code //
+
+  //
+
   @override
   void dispose() {
     _stopLiveFeed();
@@ -178,6 +183,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //   return body;
   // }
   Widget _body() {
+    //Todo: Add real value 
     int highestpoint = 20;
 
     Widget body;
@@ -216,42 +222,99 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ((){
               if(!widget.readmessage){
                   return SizedBox(
-                    height: 50,
+                    height: 60,
                     width: MediaQuery
                         .of(context)
                         .size
                         .width * 0.9,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Target Point: $highestpoint',
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-                        ),
-                        SizedBox(width: 20,),
-                        Text(
-                          'Your point : ',
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-                        ),
-                        AnimatedTextKit(
-                          repeatForever: true,
-                          animatedTexts: [
-                            RotateAnimatedText(
-                              "${currentMessagestate.tokenIndex}",)
-                          ],
-                        ),
-                      ],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                     children: <Widget> [
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.start,
+                             children: <Widget> [
+                               Text(
+                                 'Target Point: ',
+                                 textAlign: TextAlign.center,
+                                 overflow: TextOverflow.ellipsis,
+                                 style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: Colors.black45,
+                                   fontFamily: 'Poppins',
+                                   fontSize: 14.0,
+                                 ),
+                               ),
+                               SizedBox(width: 3,),
+                               Text(
+                                 // '$highestpoint',
+                                 (highestpoint > currentMessagestate.tokenIndex) ? '$highestpoint' : '${currentMessagestate.tokenIndex}',
+                                 textAlign: TextAlign.center,
+                                 overflow: TextOverflow.ellipsis,
+                                 style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: Colors.red,
+                                   fontSize: 14.0,
+                                 ),
+                               ),
+                             ],
+                           ),
+                           SizedBox(width: 20,),
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.start,
+                             children: <Widget> [
+                               Text(
+                                 'Your point : ',
+                                 textAlign: TextAlign.center,
+                                 overflow: TextOverflow.ellipsis,
+                                 style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: Colors.black45,
+                                   fontFamily: 'Poppins',
+                                   fontSize: 14.0,
+                                 ),
+                               ),
+                               SizedBox(width: 3,),
+                               AnimatedTextKit(
+                                 repeatForever: true,
+                                 animatedTexts: [
+                                   ScaleAnimatedText('${currentMessagestate.tokenIndex}',
+                                       scalingFactor: 0.2,
+                                       textStyle: TextStyle(
+                                         fontWeight: FontWeight.bold,
+                                         color: Colors.red,
+                                         fontSize: 16.0,
+                                       )),
+                                   ScaleAnimatedText('${currentMessagestate.tokenIndex}',
+                                       scalingFactor: 0.2,
+                                       textStyle: TextStyle(
+                                         fontWeight: FontWeight.bold,
+                                         color: Colors.red,
+                                         fontSize: 16.0,
+                                       ))
+                                   // RotateAnimatedText(
+                                   //     "${currentMessagestate.tokenIndex}",
+                                   //     textStyle: TextStyle(
+                                   //       fontWeight: FontWeight.bold,
+                                   //       color: Colors.red,
+                                   //       fontSize: 14.0,
+                                   //     )
+                                   // ),
+                                 ],
+                               ),
+                             ],
+                           ),
+                         ],
+                       ),
+                     ],
                     ),
                   );
               }else{
                 return SizedBox(height: 5,);
               }
             }()),
-            SizedBox(height: 20,),
             ((){
               if(currentMessagestate.iscompleted){
                 _stopLiveFeed();
@@ -272,7 +335,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ((){
               if(!widget.readmessage){
                 return ElevatedButton(
-                  child: const Text('Try Again', ),
+                  style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+                  child: const Text('Try Again',),
                   onPressed: () {
                     SGMessage sgMSG =
                     SGMessage(content: "", updated: true, tokenIndex: 0);
@@ -502,14 +566,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       planeData: planeData,
     );
 
-    final inputImage =
-        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+    final inputImage = InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
 
     widget.onImage(inputImage);
   }
 
   // MY CODE
-  Widget _cameraDisplay({@required int pointsleft}) {
+  Widget _cameraDisplay({@required int pointsleft,}) {
     if (_controller?.value.isInitialized == false) {
       return Container();
     }
@@ -550,12 +613,14 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             child: AnimatedTextKit(
               repeatForever: true,
               animatedTexts: [
-                ScaleAnimatedText(' $pointsleft points to go !',
+                ScaleAnimatedText(
+                    (pointsleft < 50) ? 'Congratulations ! \n New smile champion' : '',
                     scalingFactor: 0.2,
+                    textAlign: TextAlign.center,
                     textStyle: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 20
+                        color: Colors.red,
+                        fontSize: 16
                     )),
               ],
             ),
@@ -659,7 +724,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
     // set up the button
     Widget okButton = TextButton(
-      child: Text("Try Again"),
+      child: Text("Try Again 1"),
       onPressed: () {
         // KICK START SMILING
         setState(() {

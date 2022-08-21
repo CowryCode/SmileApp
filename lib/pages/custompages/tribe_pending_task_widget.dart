@@ -1,3 +1,4 @@
+import 'package:SmileApp/config/custom_design.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/doctor.dart' as model;
@@ -57,11 +58,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                       child: Text(
                         '${widget.leader.name}',
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: CustomeStyling().customContenttext(),
                       ),
                     ),
                     //TODO: Color this button
@@ -74,9 +71,8 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("Respond"),
                             SizedBox(width: 20,),
-                            Icon(FontAwesomeIcons.envelope),
+                            Icon(FontAwesomeIcons.pen, color: Theme.of(context).colorScheme.secondary,),
                           ],
                         ),
                     )
