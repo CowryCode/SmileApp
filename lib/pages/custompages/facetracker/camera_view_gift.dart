@@ -110,7 +110,34 @@ class _CameraViewGiftState extends State<CameraViewGift> {
    // _randomize();
   }
 
-  // Added this code //
+  // Added this code on 21-08-2021 //
+
+  void refreshCamera(){
+    _tokenArray = _fulltext.split(" ");
+    _tokenArrayLength = _tokenArray.length;
+
+    _imagePicker = ImagePicker();
+
+    if (cameras.any(
+          (element) =>
+      element.lensDirection == widget.initialDirection &&
+          element.sensorOrientation == 90,
+    )) {
+      _cameraIndex = cameras.indexOf(
+        cameras.firstWhere((element) =>
+        element.lensDirection == widget.initialDirection &&
+            element.sensorOrientation == 90),
+      );
+    } else {
+      _cameraIndex = cameras.indexOf(
+        cameras.firstWhere(
+              (element) => element.lensDirection == widget.initialDirection,
+        ),
+      );
+    }
+
+    _startLiveFeed();
+  }
 
   //
 
@@ -317,18 +344,20 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             }()),
             ((){
               if(currentMessagestate.iscompleted){
-                _stopLiveFeed();
-                if(highestpoint > currentMessagestate.tokenIndex){
-                  return giftAlert(message: "Oops smile tensity reduced",  amountWon: currentMessagestate.tokenIndex);
-                }else{
-                  return giftAlert(message: "Congratulations!", amountWon: currentMessagestate.tokenIndex);
-                }
+                // _stopLiveFeed();
+                // if(highestpoint > currentMessagestate.tokenIndex){
+                //   return giftAlert(message: "Oops smile tensity reduced",  amountWon: currentMessagestate.tokenIndex);
+                // }else{
+                //   return giftAlert(message: "Congratulations!", amountWon: currentMessagestate.tokenIndex);
+                // }
+                int remaining = highestpoint - currentMessagestate.tokenIndex;
+                return _cameraDisplay(pointsleft: remaining);
               }else {
                 int remaining = highestpoint - currentMessagestate.tokenIndex;
                  return _cameraDisplay(pointsleft: remaining);
               }
             }()),
-          //  _cameraDisplay(),
+           // _cameraDisplay(),
             SizedBox(
               height: 20,
             ),
@@ -338,6 +367,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
                   child: const Text('Try Again',),
                   onPressed: () {
+                    refreshCamera(); // Refresh
                     SGMessage sgMSG =
                     SGMessage(content: "", updated: true, tokenIndex: 0);
                     StoreProvider.of<MyAppState>(context)
@@ -576,6 +606,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     if (_controller?.value.isInitialized == false) {
       return Container();
     }
+
 
     final size = MediaQuery.of(context).size;
     // calculate scale depending on screen and camera ratios

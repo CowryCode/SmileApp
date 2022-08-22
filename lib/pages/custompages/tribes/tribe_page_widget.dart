@@ -79,7 +79,9 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
                               title: const Text('Smile Gram'),
-                              content: const Text('To read this you need to maintain smile for few seconds'),
+                              content: const Text('To read this you need to maintain smile for few seconds',
+                                style: TextStyle(color: Colors.black45),
+                              ),
                               actions: <Widget>[
                                 TextButton(
                                   //  onPressed: () => Navigator.pop(context, 'Cancel'),
