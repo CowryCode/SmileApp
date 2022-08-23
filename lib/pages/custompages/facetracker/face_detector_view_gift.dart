@@ -118,6 +118,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             _count += 1;
           }
         } else {
+          double roundedProb = changeDecimalplaces(value: prob, decimalplaces: 2);
           if (prob > 0.5) {
             int updatedTokenIndex = sgMessage.tokenIndex + 1;
             SGMessage sgMSG = SGMessage(
@@ -126,6 +127,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 tokenIndex: updatedTokenIndex,
                 iscompleted: false,
               showStartCountDown: false,
+              smileProbability: roundedProb * 100, // converting 0.9 to 90
             );
             StoreProvider.of<MyAppState>(context).dispatch(
                 UpdateSGmessageAction(sgMSG));
@@ -134,7 +136,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 content: _msg,
                 updated: true,
                 tokenIndex: sgMessage.tokenIndex,
-                iscompleted: true);
+                iscompleted: true,
+              smileProbability: roundedProb * 100,
+            );
             StoreProvider.of<MyAppState>(context).dispatch(
                 UpdateSGmessageAction(sgMSG));
           }
@@ -157,5 +161,10 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (mounted) {
       setState(() {});
     }
+  }
+
+  double changeDecimalplaces({@required double value, @required int decimalplaces}){
+    double newNum = double.parse((value).toStringAsFixed(decimalplaces));
+    return newNum;
   }
 }

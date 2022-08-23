@@ -5,11 +5,13 @@ class SGMessage{
   final int tokenIndex ;
   bool iscompleted;
   bool showStartCountDown;
+  double smileProbability;
 
   SGMessage({this.content,
     this.updated,
     this.tokenIndex = 0,
     this.iscompleted = false,
     this.showStartCountDown = true,
+    this.smileProbability = 0,
   });
 }

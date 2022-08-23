@@ -310,7 +310,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                              mainAxisAlignment: MainAxisAlignment.start,
                              children: <Widget> [
                                Text(
-                                 'Your point : ',
+                                 'Your point(s) : ',
                                  textAlign: TextAlign.center,
                                  overflow: TextOverflow.ellipsis,
                                  style: const TextStyle(
@@ -347,6 +347,39 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                                    //     )
                                    // ),
                                  ],
+                               ),
+                             ],
+                           ),
+                         ],
+                       ),
+                       SizedBox(height: 2,),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.start,
+                             children: <Widget> [
+                               Text(
+                                 'Smile rating is : ',
+                                 textAlign: TextAlign.center,
+                                 overflow: TextOverflow.ellipsis,
+                                 style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: Colors.black45,
+                                   fontFamily: 'Poppins',
+                                   fontSize: 14.0,
+                                 ),
+                               ),
+                               SizedBox(width: 3,),
+                               Text(
+                                 (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
+                                 textAlign: TextAlign.center,
+                                 overflow: TextOverflow.ellipsis,
+                                 style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: Colors.red,
+                                   fontSize: 14.0,
+                                 ),
                                ),
                              ],
                            ),
@@ -704,32 +737,43 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ),
           ((){
             SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
-            print("COUNT DOWN STARTED WITH VAL : ${sgMessage.showStartCountDown}");
             if(sgMessage.showStartCountDown == true){
-              return  Center(
-                // Count Down Widget
-                child: AnimatedTextKit(
-                  repeatForever: false,
-                  totalRepeatCount: 1,
-                  animatedTexts: [
-                    scaleValue(val: '5'),
-                    scaleValue(val: '4'),
-                    scaleValue(val: '3'),
-                    scaleValue(val: '2'),
-                    scaleValue(val: '1'),
-                  ],
-                  onFinished: (){
-                    SGMessage sgMSG = SGMessage(
-                      content: "",
-                      updated: true,
-                      tokenIndex: 0,
-                      iscompleted: false,
-                      showStartCountDown: false,
-                    );
-                    StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                    print("COUNT DOWN FINISHED WITH VAL : ${sgMSG.showStartCountDown}");
-
-                  },
+              return Center(
+                child:  Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget> [
+                    // Count Down Widget
+                  Text("Smile Detection starts in :",style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontSize: 18.0,
+                   ),
+                 ),
+                    SizedBox(height: 3,),
+                    Center(
+                      child: AnimatedTextKit(
+                        repeatForever: false,
+                        totalRepeatCount: 1,
+                        animatedTexts: [
+                          scaleValue(val: '5'),
+                          scaleValue(val: '4'),
+                          scaleValue(val: '3'),
+                          scaleValue(val: '2'),
+                          scaleValue(val: '1'),
+                        ],
+                        onFinished: (){
+                          SGMessage sgMSG = SGMessage(
+                            content: "",
+                            updated: true,
+                            tokenIndex: 0,
+                            iscompleted: false,
+                            showStartCountDown: false,
+                          );
+                          StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                        },
+                      ),
+                    ),
+                ],
                 ),
               );
             }else {
