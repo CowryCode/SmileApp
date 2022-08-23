@@ -28,7 +28,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
       //enableContours: true, // Original code
-      enableContours: false,
+      enableContours: true,
       enableClassification: true,
     ),
   );
@@ -100,36 +100,48 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
         // State Update
-        SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+        SGMessage sgMessage = StoreProvider
+            .of<MyAppState>(context)
+            .state
+            .sg_message;
         double prob = face.smilingProbability;
-        if(readmessage) {
+        if(sgMessage.showStartCountDown == false){
+        if (readmessage) {
           if (sgMessage.tokenIndex < _tokenArrayLength && prob > 0.5) {
             _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
             int updatedTokenIndex = sgMessage.tokenIndex + 1;
             SGMessage sgMSG = SGMessage(
-                content: _msg, updated: true, tokenIndex: updatedTokenIndex);
-
+                content: _msg, updated: true, tokenIndex: updatedTokenIndex, showStartCountDown: false);
             StoreProvider.of<MyAppState>(context).dispatch(
                 UpdateSGmessageAction(sgMSG)
             );
             _count += 1;
           }
         } else {
-          if( prob > 0.5){
+          if (prob > 0.5) {
             int updatedTokenIndex = sgMessage.tokenIndex + 1;
             SGMessage sgMSG = SGMessage(
-                content: _msg, updated: true, tokenIndex: updatedTokenIndex);
-            StoreProvider.of<MyAppState>(context).dispatch(
-                UpdateSGmessageAction(sgMSG)
+                content: _msg,
+                updated: true,
+                tokenIndex: updatedTokenIndex,
+                iscompleted: false,
+              showStartCountDown: false,
             );
-          }else{
+            StoreProvider.of<MyAppState>(context).dispatch(
+                UpdateSGmessageAction(sgMSG));
+          } else {
             SGMessage sgMSG = SGMessage(
-                content: _msg, updated: true, tokenIndex: sgMessage.tokenIndex, iscompleted: true );
-            StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                content: _msg,
+                updated: true,
+                tokenIndex: sgMessage.tokenIndex,
+                iscompleted: true);
+            StoreProvider.of<MyAppState>(context).dispatch(
+                UpdateSGmessageAction(sgMSG));
           }
         }
 
         // End State Update
+      }
       }
       // MY CODE
     } else {

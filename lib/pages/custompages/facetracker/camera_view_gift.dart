@@ -15,6 +15,7 @@ import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:flutter/services.dart';
 import '../../../main.dart';
 
 enum ScreenMode { liveFeed, gallery }
@@ -82,61 +83,76 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   @override
   void initState() {
     super.initState();
+    try {
+      _tokenArray = _fulltext.split(" ");
+      _tokenArrayLength = _tokenArray.length;
 
-    _tokenArray = _fulltext.split(" ");
-    _tokenArrayLength = _tokenArray.length;
+      _imagePicker = ImagePicker();
 
-    _imagePicker = ImagePicker();
-
-    if (cameras.any(
-      (element) =>
+      if (cameras.any(
+            (element) =>
+        element.lensDirection == widget.initialDirection &&
+            element.sensorOrientation == 90,
+      )) {
+        _cameraIndex = cameras.indexOf(
+          cameras.firstWhere((element) =>
           element.lensDirection == widget.initialDirection &&
-          element.sensorOrientation == 90,
-    )) {
-      _cameraIndex = cameras.indexOf(
-        cameras.firstWhere((element) =>
-            element.lensDirection == widget.initialDirection &&
-            element.sensorOrientation == 90),
-      );
-    } else {
-      _cameraIndex = cameras.indexOf(
-        cameras.firstWhere(
-          (element) => element.lensDirection == widget.initialDirection,
-        ),
-      );
-    }
+              element.sensorOrientation == 90),
+        );
+      } else {
+        _cameraIndex = cameras.indexOf(
+          cameras.firstWhere(
+                (element) => element.lensDirection == widget.initialDirection,
+          ),
+        );
+      }
+      _startLiveFeed();
+      // SET PREFERRED ORIENTATION
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown
+      ]);
+    }catch(e){
 
-    _startLiveFeed();
+    }
    // _randomize();
   }
 
   // Added this code on 21-08-2021 //
 
   void refreshCamera(){
-    _tokenArray = _fulltext.split(" ");
-    _tokenArrayLength = _tokenArray.length;
+    try {
+      _tokenArray = _fulltext.split(" ");
+      _tokenArrayLength = _tokenArray.length;
 
-    _imagePicker = ImagePicker();
+      _imagePicker = ImagePicker();
 
-    if (cameras.any(
-          (element) =>
-      element.lensDirection == widget.initialDirection &&
-          element.sensorOrientation == 90,
-    )) {
-      _cameraIndex = cameras.indexOf(
-        cameras.firstWhere((element) =>
+      if (cameras.any(
+            (element) =>
         element.lensDirection == widget.initialDirection &&
-            element.sensorOrientation == 90),
-      );
-    } else {
-      _cameraIndex = cameras.indexOf(
-        cameras.firstWhere(
-              (element) => element.lensDirection == widget.initialDirection,
-        ),
-      );
+            element.sensorOrientation == 90,
+      )) {
+        _cameraIndex = cameras.indexOf(
+          cameras.firstWhere((element) =>
+          element.lensDirection == widget.initialDirection &&
+              element.sensorOrientation == 90),
+        );
+      } else {
+        _cameraIndex = cameras.indexOf(
+          cameras.firstWhere(
+                (element) => element.lensDirection == widget.initialDirection,
+          ),
+        );
+      }
+      _startLiveFeed();
+      // SET PREFERRED ORIENTATION
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown
+      ]);
+    }catch(e){
+      //
     }
-
-    _startLiveFeed();
   }
 
   //
@@ -144,6 +160,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   @override
   void dispose() {
     _stopLiveFeed();
+
     super.dispose();
   }
 
@@ -344,12 +361,12 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             }()),
             ((){
               if(currentMessagestate.iscompleted){
-                // _stopLiveFeed();
-                // if(highestpoint > currentMessagestate.tokenIndex){
-                //   return giftAlert(message: "Oops smile tensity reduced",  amountWon: currentMessagestate.tokenIndex);
-                // }else{
-                //   return giftAlert(message: "Congratulations!", amountWon: currentMessagestate.tokenIndex);
-                // }
+                _stopLiveFeed();
+                if(highestpoint > currentMessagestate.tokenIndex){
+                  return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+                }else{
+                  return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+                }
                 int remaining = highestpoint - currentMessagestate.tokenIndex;
                 return _cameraDisplay(pointsleft: remaining);
               }else {
@@ -365,13 +382,17 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               if(!widget.readmessage){
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                  child: const Text('Try Again',),
+                  child: const Text('Refresh',),
                   onPressed: () {
                     refreshCamera(); // Refresh
-                    SGMessage sgMSG =
-                    SGMessage(content: "", updated: true, tokenIndex: 0);
-                    StoreProvider.of<MyAppState>(context)
-                        .dispatch(UpdateSGmessageAction(sgMSG));
+                    SGMessage sgMSG = SGMessage(
+                        content: "",
+                        updated: true,
+                        tokenIndex: 0,
+                        iscompleted: false,
+                      showStartCountDown: true,
+                    );
+                    StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                     _count += 1;
                   },
                 );
@@ -387,9 +408,22 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   Widget _liveFeedBody() {
-    if (_controller?.value.isInitialized == false) {
+
+    if(_controller != null){
+      if(_controller?.value != null){
+        if(_controller?.value.isInitialized == false){
+          return Container();
+        }
+      }else{
+        return Container();
+      }
+    }else{
       return Container();
     }
+    // Old working code
+    // if (_controller?.value.isInitialized == false) {
+    //   return Container();
+    // }
 
     final size = MediaQuery.of(context).size;
     // calculate scale depending on screen and camera ratios
@@ -603,9 +637,21 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   // MY CODE
   Widget _cameraDisplay({@required int pointsleft,}) {
-    if (_controller?.value.isInitialized == false) {
+    if(_controller != null){
+      if(_controller?.value != null){
+        if(_controller?.value.isInitialized == false){
+          return Container();
+        }
+      }else{
+        return Container();
+      }
+    }else{
       return Container();
     }
+    // Old working code
+    // if (_controller?.value.isInitialized == false) {
+    //   return Container();
+    // }
 
 
     final size = MediaQuery.of(context).size;
@@ -619,8 +665,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     if (scale < 1) scale = 1 / scale;
 
     // added by me
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+   // final height = MediaQuery.of(context).size.height;
+   // final width = MediaQuery.of(context).size.width;
     // end of added by me
 
     return Container(
@@ -645,7 +691,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               repeatForever: true,
               animatedTexts: [
                 ScaleAnimatedText(
-                    (pointsleft < 50) ? 'Congratulations ! \n New smile champion' : '',
+                    (pointsleft < 0) ? 'Congratulations ! \n New smile champion' : '',
                     scalingFactor: 0.2,
                     textAlign: TextAlign.center,
                     textStyle: TextStyle(
@@ -656,12 +702,57 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               ],
             ),
           ),
+          ((){
+            SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+            print("COUNT DOWN STARTED WITH VAL : ${sgMessage.showStartCountDown}");
+            if(sgMessage.showStartCountDown == true){
+              return  Center(
+                // Count Down Widget
+                child: AnimatedTextKit(
+                  repeatForever: false,
+                  totalRepeatCount: 1,
+                  animatedTexts: [
+                    scaleValue(val: '5'),
+                    scaleValue(val: '4'),
+                    scaleValue(val: '3'),
+                    scaleValue(val: '2'),
+                    scaleValue(val: '1'),
+                  ],
+                  onFinished: (){
+                    SGMessage sgMSG = SGMessage(
+                      content: "",
+                      updated: true,
+                      tokenIndex: 0,
+                      iscompleted: false,
+                      showStartCountDown: false,
+                    );
+                    StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                    print("COUNT DOWN FINISHED WITH VAL : ${sgMSG.showStartCountDown}");
+
+                  },
+                ),
+              );
+            }else {
+              return SizedBox(height: 1,);
+            }
+          }()),
          // LuckPot(),
          // _giftMatrix()
         ],
       ),
     );
   }
+
+  ScaleAnimatedText scaleValue({@required String val}){
+    return ScaleAnimatedText('$val',
+        scalingFactor: 0.2,
+        textStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.red,
+          fontSize: 35.0,
+        ));
+  }
+
   Widget _giftMatrix(){
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -703,104 +794,99 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   //TODO: THE SIZE OF POINT GAINED IS (Probability of Smile * duration of smile)
-  Widget _LuckMatrics() {
-    return Wrap(
-      children: List<Widget>.generate(
-        20,
-            (int index) {
-          return _activation_index == index && _activated == true
-              ?
-          ChoiceChip(
-            key: Key('$index'),
-            selectedColor: Theme.of(context).primaryColor,
-            avatar: Image.asset("images/custom/giftopen1.png"),
-            elevation: 6.0,
-            backgroundColor: Theme.of(context).primaryColor,
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            label: Text('open', style: TextStyle(color: Colors.red),),
-            selected: _value == index,
-            onSelected: (bool selected) {
-              setState(() {
-                _value = selected ? index : _value;
-                print("Selected Value is $_value");
-                showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
-              });
-            },
-          )
-              : ChoiceChip(
-            key: Key('$index'),
-            avatar: Image.asset("images/custom/gift.png"),
-            elevation: 6.0,
-            backgroundColor: Theme.of(context).primaryColor,
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
-            selected: _value == index,
-            onSelected: (bool selected) {
-              setState(() {
-                //  _value = selected ? index : null;
-                _value = selected ? index : _value;
-                _activated = true;
-                print("Selected Value if $_value");
+  // Widget _LuckMatrics() {
+  //   return Wrap(
+  //     children: List<Widget>.generate(
+  //       20,
+  //           (int index) {
+  //         return _activation_index == index && _activated == true
+  //             ?
+  //         ChoiceChip(
+  //           key: Key('$index'),
+  //           selectedColor: Theme.of(context).primaryColor,
+  //           avatar: Image.asset("images/custom/giftopen1.png"),
+  //           elevation: 6.0,
+  //           backgroundColor: Theme.of(context).primaryColor,
+  //           padding: const EdgeInsets.only(left: 10, right: 10),
+  //           label: Text('open', style: TextStyle(color: Colors.red),),
+  //           selected: _value == index,
+  //           onSelected: (bool selected) {
+  //             setState(() {
+  //               _value = selected ? index : _value;
+  //               print("Selected Value is $_value");
+  //               showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
+  //             });
+  //           },
+  //         )
+  //             : ChoiceChip(
+  //           key: Key('$index'),
+  //           avatar: Image.asset("images/custom/gift.png"),
+  //           elevation: 6.0,
+  //           backgroundColor: Theme.of(context).primaryColor,
+  //           padding: const EdgeInsets.only(left: 10, right: 10),
+  //           label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
+  //           selected: _value == index,
+  //           onSelected: (bool selected) {
+  //             setState(() {
+  //               //  _value = selected ? index : null;
+  //               _value = selected ? index : _value;
+  //               _activated = true;
+  //               print("Selected Value if $_value");
+  //
+  //             });
+  //           },
+  //         );
+  //       },
+  //     ).toList(),
+  //   );
+  // }
 
-              });
-            },
-          );
-        },
-      ).toList(),
-    );
-  }
-
-  showAlertDialog({@required BuildContext context, @required String title, @required String message, @required int amount}) {
-
-
-    // set up the button
-    Widget okButton = TextButton(
-      child: Text("Try Again 1"),
-      onPressed: () {
-        // KICK START SMILING
-        setState(() {
-          _activation_index = -1;
-        });
-        Navigator.of(context).pop();
-        _randomize();
-      },
-    );
-
-    // set up the button
-    Widget cancelButton = TextButton(
-      child: Text("Cancel"),
-      onPressed: () {
-        setState(() {
-          _activation_index = -1;
-          progressBarvalue += 2;
-        });
-        Navigator.of(context).popAndPushNamed("/");
-        // randomize();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      // title: Text("My title"),
-      title: Text(title),
-      // content: Text(message),
-      content:  giftAlert(amountWon: amount),
-      actions: [
-        cancelButton,
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+  // showAlertDialog({@required BuildContext context, @required String title, @required String message, @required int amount}) {
+  //   Widget okButton = TextButton(
+  //     child: Text("Try Again 1"),
+  //     onPressed: () {
+  //       // KICK START SMILING
+  //       setState(() {
+  //         _activation_index = -1;
+  //       });
+  //       Navigator.of(context).pop();
+  //       _randomize();
+  //     },
+  //   );
+  //
+  //   Widget cancelButton = TextButton(
+  //     child: Text("Cancel"),
+  //     onPressed: () {
+  //       setState(() {
+  //         _activation_index = -1;
+  //         progressBarvalue += 2;
+  //       });
+  //       Navigator.of(context).popAndPushNamed("/");
+  //       // randomize();
+  //     },
+  //   );
+  //
+  //   // set up the AlertDialog
+  //   AlertDialog alert = AlertDialog(
+  //     // title: Text("My title"),
+  //     title: Text(title),
+  //     // content: Text(message),
+  //     content:  giftAlert(amountWon: amount),
+  //     actions: [
+  //       cancelButton,
+  //       okButton,
+  //     ],
+  //   );
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return alert;
+  //     },
+  //   );
+  // }
 
   Widget giftAlert({@required String message, @required int amountWon}){
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
         decoration: BoxDecoration(

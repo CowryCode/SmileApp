@@ -2,9 +2,14 @@
 class SGMessage{
   final String content;
   final bool updated;
-  // Management Variables
   final int tokenIndex ;
   bool iscompleted;
+  bool showStartCountDown;
 
-  SGMessage({this.content, this.updated, this.tokenIndex = 0, this.iscompleted = false});
+  SGMessage({this.content,
+    this.updated,
+    this.tokenIndex = 0,
+    this.iscompleted = false,
+    this.showStartCountDown = true,
+  });
 }
