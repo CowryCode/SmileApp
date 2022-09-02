@@ -437,7 +437,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
                       child: const Text('Done',),
                       onPressed: () {
-
+                        _createAlertDialog(context);
                       },
                     ),
                   ],
@@ -1000,4 +1000,72 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             }));
   }
 
+
+  _createAlertDialog(BuildContext context){
+    final ThemeData themeData = Theme.of(context);
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context){
+          return AlertDialog(
+            title: Text("Emotion Track", style: TextStyle(color: Colors.black45),),
+            content: Text('Rate how happy you are ',
+              style: TextStyle(color: Colors.black45),
+            ),
+            actions: [
+              Column(
+                children: <Widget> [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Sad',
+                        onPressed: () {
+                          print("Clicked on 1");
+                          Navigator.of(context).popAndPushNamed('/home');
+                        },
+
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Not Happy',
+                        onPressed: () {
+                          print("Clicked on 2");
+                          Navigator.of(context).popAndPushNamed('/home');
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Neutral',
+                        onPressed: () {
+                          print("Clicked on 3");
+                          Navigator.of(context).popAndPushNamed('/home');
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Happy',
+                        onPressed: () {
+                          print("Clicked on 4");
+                          Navigator.of(context).popAndPushNamed('/home');
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Very Happy',
+                        onPressed: () {
+                          print("Clicked on 5");
+                          Navigator.of(context).popAndPushNamed('/home');
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              )
+
+            ],
+          );
+        });
+  }
 }
