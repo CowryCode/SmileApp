@@ -8,10 +8,10 @@ import 'package:SmileApp/pages/custompages/user_profile_widget.dart';
 
 class NavigateTabsWidget extends StatefulWidget {
 
-  // final List<String> acountInfos;
-  
-  // const NavigateTabsWidget({Key key, this.acountInfos}) : super(key: key);
-  const NavigateTabsWidget({Key key}) : super(key: key);
+ // final String value;
+  // const NavigateTabsWidget({Key key}) : super(key: key);
+  final bool showEmotionalert;
+  const NavigateTabsWidget({Key key, this.showEmotionalert}) : super(key: key);
 
   
   @override
@@ -22,14 +22,14 @@ class NavigateTabsWidget extends StatefulWidget {
 
 class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderStateMixin {
   AnimationController _controller;
-  int _page = 0;
+  int _page = 4;
   String currentTitle = 'Home';
   Widget _currentPage (int page){
     switch (page){
       case 0 :
         currentTitle = 'Home';
        // return Home(value: "${widget.acountInfos[0]}");
-        return Home();
+        return Home(checkEmotion: false,);
       case 1 :
         currentTitle = 'chat';  
        // return prefix0.Conversation();
@@ -41,7 +41,7 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
       default:
         currentTitle = 'Home';
      //   return Home(value: "${widget.acountInfos[0]}");
-        return Home();
+        return Home(checkEmotion: widget.showEmotionalert,);
 
     }
     

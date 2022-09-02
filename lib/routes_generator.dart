@@ -98,9 +98,9 @@ class RouteGenerator {
     // SMILE APP
       case '/' :
       //  return MaterialPageRoute(builder: (_) => Home());
-        return MaterialPageRoute(builder: (_) => NavigateTabsWidget());
+        return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: true,));
       case '/home' :
-        return MaterialPageRoute(builder: (_) => NavigateTabsWidget());
+        return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: false,));
       case '/mydoctors':
         return MaterialPageRoute(builder: (_) => MyDoctorsList());
       case '/chat' :

@@ -171,7 +171,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
           onPressed: () {
-            Navigator.of(context).popAndPushNamed('/');
+            Navigator.of(context).popAndPushNamed('/home');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -413,21 +413,34 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ),
             ((){
               if(!widget.readmessage){
-                return ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                  child: const Text('Refresh',),
-                  onPressed: () {
-                    refreshCamera(); // Refresh
-                    SGMessage sgMSG = SGMessage(
-                        content: "",
-                        updated: true,
-                        tokenIndex: 0,
-                        iscompleted: false,
-                      showStartCountDown: true,
-                    );
-                    StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                    _count += 1;
-                  },
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+                      child: const Text('Refresh',),
+                      onPressed: () {
+                        refreshCamera(); // Refresh
+                        SGMessage sgMSG = SGMessage(
+                          content: "",
+                          updated: true,
+                          tokenIndex: 0,
+                          iscompleted: false,
+                          showStartCountDown: true,
+                        );
+                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                        _count += 1;
+                      },
+                    ),
+                    SizedBox(width: 3,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+                      child: const Text('Done',),
+                      onPressed: () {
+
+                      },
+                    ),
+                  ],
                 );
               }else{
                 return SizedBox(height: 5,);
@@ -964,6 +977,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         )
     );
   }
+
 
   void _randomize(){
     int _start = timerTastoPremuto.inMilliseconds;

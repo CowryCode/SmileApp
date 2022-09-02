@@ -4,11 +4,11 @@ import 'package:SmileApp/pages/acount.dart';
 import 'package:SmileApp/pages/conversations.dart' as prefix0;
 import 'custompages/home.dart';
 
-class TabsWidget extends StatefulWidget {
+class TabsWidget_1 extends StatefulWidget {
 
   final List<String> acountInfos;
   
-  const TabsWidget({Key key, this.acountInfos}) : super(key: key);
+  const TabsWidget_1({Key key, this.acountInfos}) : super(key: key);
 
   
   @override
@@ -17,7 +17,7 @@ class TabsWidget extends StatefulWidget {
   }
 }
 
-class _BubblesState extends State<TabsWidget> with SingleTickerProviderStateMixin {
+class _BubblesState extends State<TabsWidget_1> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   int _page = 0;
   String currentTitle = 'Home';

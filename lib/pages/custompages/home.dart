@@ -10,14 +10,28 @@ import 'package:SmileApp/pages/custompages/canva/gift_view.dart';
 import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
 
 class Home extends StatefulWidget {
-  final String value;
-  const Home( {Key key, this.value}) : super(key: key);
+   final String value;
+  // const Home( {Key key, this.value}) : super(key: key);
+  final bool checkEmotion;
+  const Home( {Key key, this.value, @required this.checkEmotion}) : super(key: key);
  
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+
+  @override
+  void initState() {
+    super.initState();
+    print("The show dialogue status is : ${widget.checkEmotion}");
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if(widget.checkEmotion == true){
+        _createAlertDialog(context);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -357,6 +371,74 @@ class _HomeState extends State<Home> {
         // ),
      ],
     );
+  }
 
+
+  _createAlertDialog(BuildContext context){
+    final ThemeData themeData = Theme.of(context);
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context){
+          return AlertDialog(
+            title: Text("Emotion Track", style: TextStyle(color: Colors.black45),),
+            content: Text('Rate how happy you are ',
+              style: TextStyle(color: Colors.black45),
+            ),
+            actions: [
+              Column(
+                children: <Widget> [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:  [
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Sad',
+                        onPressed: () {
+                          print("Clicked on 1");
+                          Navigator.of(context).pop();
+                        },
+
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Not Happy',
+                        onPressed: () {
+                          print("Clicked on 2");
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Neutral',
+                        onPressed: () {
+                          print("Clicked on 3");
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Happy',
+                        onPressed: () {
+                          print("Clicked on 4");
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.star, color: Colors.black12,),
+                        tooltip: 'Very Happy',
+                        onPressed: () {
+                          print("Clicked on 5");
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              )
+
+            ],
+          );
+        });
   }
 }
