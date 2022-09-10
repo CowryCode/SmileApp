@@ -107,11 +107,27 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         double prob = face.smilingProbability;
         if(sgMessage.showStartCountDown == false){
         if (readmessage) {
-          if (sgMessage.tokenIndex < _tokenArrayLength && prob > 0.5) {
-            _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
+          if(sgMessage.tokenIndex < _tokenArrayLength ){
+            if (prob > 0.5) {
+              _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
+              int updatedTokenIndex = sgMessage.tokenIndex + 1;
+              SGMessage sgMSG = SGMessage(
+                  content: _msg, updated: true, tokenIndex: updatedTokenIndex, showStartCountDown: false);
+              StoreProvider.of<MyAppState>(context).dispatch(
+                  UpdateSGmessageAction(sgMSG)
+              );
+              _count += 1;
+            }
+          }else{
+            _msg = sgMessage.content;
             int updatedTokenIndex = sgMessage.tokenIndex + 1;
             SGMessage sgMSG = SGMessage(
-                content: _msg, updated: true, tokenIndex: updatedTokenIndex, showStartCountDown: false);
+                content: _msg,
+                updated: true,
+                tokenIndex: updatedTokenIndex,
+                showStartCountDown: false,
+              iscompleted: true
+            );
             StoreProvider.of<MyAppState>(context).dispatch(
                 UpdateSGmessageAction(sgMSG)
             );

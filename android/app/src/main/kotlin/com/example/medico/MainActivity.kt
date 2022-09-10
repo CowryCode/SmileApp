@@ -1,4 +1,4 @@
-package com.example.medico
+package com.cowrycode.smileapp
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

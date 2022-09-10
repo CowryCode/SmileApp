@@ -1,10 +1,15 @@
 
+import 'dart:io';
+
+import 'package:SmileApp/apis/secret.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/sg_message_reducer.dart';
 import 'package:SmileApp/routes_generator.dart';
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -68,18 +73,36 @@ Future<void> main() async {  // The code before I added Flutter_redux
   runApp(MyApp());
 }
 
+
+Future init() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if(Platform.isIOS){
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: ApiKey,
+          appId: AppId,
+          messagingSenderId: MessagingSenderID,
+          projectId: ProjectID
+      )).then((value) => {
+       FirebaseMessaging
+           .instance
+           .getInitialMessage()
+           .then((RemoteMessage message) {
+             if(message != null){
+               // Do Nothing
+             }
+       }),
+    });
+  }else{
+    await Firebase.initializeApp();
+  }
+  // FirebaseMessaging.instance.getToken().then((value) => {
+  //   print("FB TOken is : $value");
+  // });
+}
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  // final Store<AppState> _store = Store<AppState>(
-  //     updateDrinksReducer,
-  //     initialState: AppState(drinks:[
-  //       Drink("Water", true),
-  //       Drink("Coka Cola", false),
-  //       Drink("Juice", true),
-  //       Drink("Alcohol", false)
-  //     ]
-  //     )
-  // );
   final Store<MyAppState> _store = Store<MyAppState>(
       updateSGmessageReducer,
       initialState: MyAppState(

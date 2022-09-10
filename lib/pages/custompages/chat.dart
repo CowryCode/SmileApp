@@ -23,9 +23,9 @@ class _ChatWidgetState extends State<ChatWidget> {
 
   @override
   void dispose() {
+    super.dispose();
     // Clean up the controller when the widget is disposed.
     myController.dispose();
-    super.dispose();
   }
 
   @override
@@ -33,6 +33,12 @@ class _ChatWidgetState extends State<ChatWidget> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+          onPressed: () {
+            Navigator.of(context).popAndPushNamed('/');
+          },
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomLeft:Radius.circular(16.0),bottomRight: Radius.circular(16.0)),
         ),
@@ -227,4 +233,5 @@ class _ChatWidgetState extends State<ChatWidget> {
       ),
     );
   }
+
 }

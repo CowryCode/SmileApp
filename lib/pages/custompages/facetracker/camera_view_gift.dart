@@ -248,6 +248,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ),
             ((){
               if(widget.readmessage){
+                if(currentMessagestate.iscompleted){
+                  _createAlertDialog(context);
+                }
                return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 500),
                   transitionBuilder: (Widget child, Animation<double> animation) {
@@ -438,6 +441,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       child: const Text('Done',),
                       onPressed: () {
                         _createAlertDialog(context);
+                        _stopLiveFeed();
                       },
                     ),
                   ],

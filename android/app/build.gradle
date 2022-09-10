@@ -38,7 +38,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.medico"
+        applicationId "com.cowrycode.smileapp"  // Former Name "com.example.medico"
         minSdkVersion 21 // Former 16
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
@@ -59,9 +59,14 @@ flutter {
     source '../..'
 }
 
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    implementation 'com.google.firebase:firebase-analytics'
 }
