@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:SmileApp/models/mymodels/providermodels/patient.dart' as model;
 class PatientQueueCardWidget extends StatefulWidget {
   final model.Patient patients;
-  const PatientQueueCardWidget({Key key, this.patients}) : super(key: key);
+  const PatientQueueCardWidget({Key? key, required this.patients}) : super(key: key);
 
   @override
   _PatientQueueCardWidgetState createState() => _PatientQueueCardWidgetState();
@@ -159,7 +159,7 @@ class _PatientQueueCardWidgetState extends State<PatientQueueCardWidget> {
     );
   }
 
-  String onMedication({ @required bool isOnmedication}){
+  String onMedication({required bool isOnmedication}){
     if(isOnmedication){
       return "On Medication";
     }else{
@@ -167,7 +167,7 @@ class _PatientQueueCardWidgetState extends State<PatientQueueCardWidget> {
     }
   }
 
-  Color medStatusColor({ @required bool isOnmedication}){
+  Color medStatusColor({required bool isOnmedication}){
     if(isOnmedication){
       return Colors.red;
     }else{

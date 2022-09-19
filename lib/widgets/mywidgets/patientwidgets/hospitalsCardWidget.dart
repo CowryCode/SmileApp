@@ -4,7 +4,7 @@ import 'package:SmileApp/models/mymodels/patientmodels/hospital.dart' as model;
 
 class HospitalsCardWidget extends StatefulWidget {
   final model.Hospital hospitals;
-  const HospitalsCardWidget({Key key, this.hospitals}) : super(key: key);
+  const HospitalsCardWidget({Key? key, required this.hospitals}) : super(key: key);
 
   @override
   _HospitalsCardWidgetState createState() => _HospitalsCardWidgetState();
@@ -44,7 +44,7 @@ class _HospitalsCardWidgetState extends State<HospitalsCardWidget> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    ball(widget.hospitals.avatar,Colors.transparent),
+                    ball(image: widget.hospitals.avatar,color: Colors.transparent),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
@@ -155,7 +155,7 @@ class _HospitalsCardWidgetState extends State<HospitalsCardWidget> {
       ),
     );
   }
-  Widget ball(String image,Color color){
+  Widget ball({String? image, Color? color}){
     return Container(
       // height: 60,
       // width: 60.0,
@@ -164,7 +164,7 @@ class _HospitalsCardWidgetState extends State<HospitalsCardWidget> {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(16.0),
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover,
+        image: DecorationImage(image: AssetImage(image!), fit: BoxFit.cover,
         ),
 
       ),

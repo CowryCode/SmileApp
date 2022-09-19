@@ -13,12 +13,12 @@ class LeadderBoard extends StatefulWidget {
 
 class _LeadderBoardState extends State<LeadderBoard> {
  // model.DoctorsList doctorsList;
-  List<LeaderBoardModel> leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
+  List<LeaderBoardModel>? leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
   @override
   void initState() {
   //  this.doctorsList = new model.DoctorsList();
   //  _leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
-    print("THE SIZE IS ${leaderBoardModelLIST.length}");
+    print("THE SIZE IS ${leaderBoardModelLIST!.length}");
     super.initState();
   }
   @override
@@ -126,10 +126,10 @@ class _LeadderBoardState extends State<LeadderBoard> {
   Widget _tribeLeaaderBoard(){
 
     return ListView.builder(
-        itemCount: leaderBoardModelLIST.length,
+        itemCount: leaderBoardModelLIST!.length,
         itemBuilder: (BuildContext context, int index) {
           return TribeLeaderCardWidget(
-                              leader: leaderBoardModelLIST.elementAt(index),
+                              leader: leaderBoardModelLIST!.elementAt(index),
                             );
 
         });

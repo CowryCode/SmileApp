@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class LuckPotGift extends StatefulWidget {
-  const LuckPotGift({Key key}) : super(key: key);
+  const LuckPotGift({Key? key}) : super(key: key);
 
   @override
   _LuckPotGiftState createState() => _LuckPotGiftState();

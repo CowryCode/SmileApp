@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:SmileApp/models/doctor.dart' as model;
+
 class MyDoctorsCardWidget extends StatefulWidget {
   final model.Doctor doctors;
-  const MyDoctorsCardWidget({Key key, this.doctors}) : super(key: key);
-  
+  const MyDoctorsCardWidget({Key? key, required this.doctors}) : super(key: key);
+
   @override
   _MyDoctorsCardWidgetState createState() => _MyDoctorsCardWidgetState();
 }
@@ -43,7 +44,7 @@ class _MyDoctorsCardWidgetState extends State<MyDoctorsCardWidget> {
                       children: <Widget>[
                         Container(
                           margin: const EdgeInsets.only(right: 25.0),
-                          child:ball(this.widget.doctors.avatar),
+                          child:ball(this.widget.doctors.avatar!),
                         ),
                         Container(
                           width: 150,
@@ -75,7 +76,7 @@ class _MyDoctorsCardWidgetState extends State<MyDoctorsCardWidget> {
                       ],
                     ),
                     Container(
-                      child: IconButton(  
+                      child: IconButton(
                         padding: EdgeInsets.all(0),
                         onPressed: (){
                           Navigator.of(context).pushNamed('/chat');
@@ -93,7 +94,7 @@ class _MyDoctorsCardWidgetState extends State<MyDoctorsCardWidget> {
 
         ],
       )
-      
+
     );
   }
   Widget ball(String image){

@@ -9,8 +9,8 @@ import 'package:SmileApp/models/user.dart';
 class VerificationNumber extends StatefulWidget {
   final String data ;
   VerificationNumber({
-    Key key, 
-    @required this.data
+    Key? key,
+    required this.data
     }) : super(key: key);
   @override
   _VerificationNumberState createState() => _VerificationNumberState();
@@ -104,7 +104,7 @@ class _VerificationNumberState extends State<VerificationNumber> {
                     child: RaisedButton(
                       color: Theme.of(context).accentColor,
                       onPressed: (){
-                        if(_formKey.currentState.validate()){
+                        if(_formKey.currentState!.validate()){
                           Navigator.of(context).pushNamed('/home',arguments: [currentUser.name,currentUser.phoneNumber]);
                         }
                       },

@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class LuckMetrixCountDown extends StatefulWidget {
-  const LuckMetrixCountDown({Key key}) : super(key: key);
+  const LuckMetrixCountDown({Key? key}) : super(key: key);
 
   @override
   LuckMetrixCountDownState createState() => LuckMetrixCountDownState();
@@ -12,9 +12,10 @@ class LuckMetrixCountDown extends StatefulWidget {
 
 class LuckMetrixCountDownState extends State<LuckMetrixCountDown> with TickerProviderStateMixin{
 
-  AnimationController controller;
+  // AnimationController controller;
+  late AnimationController controller;
   String get timerString {
-    Duration duration = controller.duration * controller.value;
+    Duration duration = controller.duration! * controller.value;
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
@@ -186,9 +187,9 @@ class LuckMetrixCountDownState extends State<LuckMetrixCountDown> with TickerPro
 class CustomTimerPainter extends CustomPainter {
 
   CustomTimerPainter({
-    this.animation,
-    this.backgroundColor,
-    this.color,
+    required this.animation,
+    required this.backgroundColor,
+    required this.color,
   }) : super(repaint: animation);
 
   final Animation<double> animation;

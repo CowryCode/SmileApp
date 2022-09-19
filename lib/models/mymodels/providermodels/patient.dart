@@ -10,7 +10,7 @@ class Patient{
   String avatar;
   bool isOnmedication;
 
-  Patient.init();
+  //Patient.init();
   Patient(this.name,this.description,this.avatar,this.state,this.color, this.isOnmedication);
   Patient getCurrentDoctor() {
     return Patient("John Doe", "Last reported illness",
@@ -18,7 +18,7 @@ class Patient{
   }
 }
 class PatientsList{
-  List<Patient> _patientList;
+  List<Patient>? _patientList;
   PatientsList(){
     this._patientList =[
       new Patient("John Doe", "Last reported illness",
@@ -35,5 +35,5 @@ class PatientsList{
           "images/asset-6.png","Available", Colors.green, false),
     ];
   }
-  List<Patient> get patients => _patientList;
+  List<Patient>? get patients => _patientList;
 }

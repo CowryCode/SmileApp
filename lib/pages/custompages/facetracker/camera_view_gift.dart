@@ -24,11 +24,11 @@ enum Actions { Increment }
 
 class CameraViewGift extends StatefulWidget {
   CameraViewGift(
-      {Key key,
-      this.title,
-      this.customPaint,
-      this.text,
-      this.onImage,
+      {Key? key,
+      required this.title,
+      required this.customPaint,
+      required this.text,
+      required this.onImage,
       this.onScreenModeChanged,
       this.initialDirection = CameraLensDirection.back, this.readmessage = false})
       : super(key: key);
@@ -37,7 +37,8 @@ class CameraViewGift extends StatefulWidget {
   final CustomPaint customPaint;
   final String text;
   final Function(InputImage inputImage) onImage;
-  final Function(ScreenMode mode) onScreenModeChanged;
+  // final Function(ScreenMode mode) onScreenModeChanged;
+  Function(ScreenMode mode)? onScreenModeChanged;
   final CameraLensDirection initialDirection;
 
   // Added this for my study logic
@@ -51,10 +52,14 @@ class CameraViewGift extends StatefulWidget {
 
 class _CameraViewGiftState extends State<CameraViewGift> {
   ScreenMode _mode = ScreenMode.liveFeed;
-  CameraController _controller;
-  File _image;
-  String _path;
-  ImagePicker _imagePicker;
+  // CameraController _controller;
+  // File _image;
+  // String _path;
+  // ImagePicker _imagePicker;
+  CameraController? _controller;
+  File? _image;
+  String? _path;
+  ImagePicker? _imagePicker;
   int _cameraIndex = 0;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
@@ -67,7 +72,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   int _tokenIndex = 0; // My Code
   var _tokenArray;
 
-  int _tokenArrayLength;
+  late int _tokenArrayLength;
 
 
 
@@ -199,7 +204,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  Widget _floatingActionButton() {
+  Widget? _floatingActionButton() {
     if (_mode == ScreenMode.gallery) return null;
     if (cameras.length == 1) return null;
     return SizedBox(
@@ -480,7 +485,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // this is actually size.aspectRatio / (1 / camera.aspectRatio)
     // because camera preview size is received as landscape
     // but we're calculating for portrait orientation
-    var scale = size.aspectRatio * _controller.value.aspectRatio;
+    var scale = size.aspectRatio * _controller!.value.aspectRatio;
 
     // to prevent scaling down, invert the value
     if (scale < 1) scale = 1 / scale;
@@ -497,7 +502,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   ? Center(
                       child: const Text('Changing camera lens'),
                     )
-                  : CameraPreview(_controller),
+                  : CameraPreview(_controller!),
             ),
           ),
           if (widget.customPaint != null) widget.customPaint,
@@ -512,7 +517,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               onChanged: (newSliderValue) {
                 setState(() {
                   zoomLevel = newSliderValue;
-                  _controller.setZoomLevel(zoomLevel);
+                  _controller!.setZoomLevel(zoomLevel);
                 });
               },
               divisions: (maxZoomLevel - 1).toInt() < 1
@@ -534,7 +539,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               child: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
-                  Image.file(_image),
+                  Image.file(_image!),
                   if (widget.customPaint != null) widget.customPaint,
                 ],
               ),
@@ -588,7 +593,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       _startLiveFeed();
     }
     if (widget.onScreenModeChanged != null) {
-      widget.onScreenModeChanged(_mode);
+      widget.onScreenModeChanged!(_mode);
     }
     setState(() {});
   }
@@ -686,7 +691,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   // MY CODE
-  Widget _cameraDisplay({@required int pointsleft,}) {
+  Widget _cameraDisplay({required int pointsleft,}) {
     if(_controller != null){
       if(_controller?.value != null){
         if(_controller?.value.isInitialized == false){
@@ -709,7 +714,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // this is actually size.aspectRatio / (1 / camera.aspectRatio)
     // because camera preview size is received as landscape
     // but we're calculating for portrait orientation
-    var scale = size.aspectRatio * _controller.value.aspectRatio;
+    var scale = size.aspectRatio * _controller!.value.aspectRatio;
 
     // to prevent scaling down, invert the value
     if (scale < 1) scale = 1 / scale;
@@ -733,7 +738,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   ? Center(
                       child: const Text('Changing camera lens'),
                     )
-                  : CameraPreview(_controller),
+                  : CameraPreview(_controller!),
             ),
           ),
           Center(
@@ -804,7 +809,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  ScaleAnimatedText scaleValue({@required String val}){
+  ScaleAnimatedText scaleValue({required String val}){
     return ScaleAnimatedText('$val',
         scalingFactor: 0.2,
         textStyle: TextStyle(
@@ -946,7 +951,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //   );
   // }
 
-  Widget giftAlert({@required String message, @required int amountWon}){
+  Widget giftAlert({required String message, required int amountWon}){
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,

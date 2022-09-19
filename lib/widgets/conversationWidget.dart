@@ -2,7 +2,7 @@ import'package:flutter/material.dart';
 import 'package:SmileApp/models/conversation.dart' as model;
 class ConversationItemWidget extends StatefulWidget {
   final model.Conversation conversation;
-  const ConversationItemWidget({Key key, this.conversation}) : super(key: key);
+  const ConversationItemWidget({Key? key, required this.conversation}) : super(key: key);
   @override
   _ConversationItemWidgetState createState() => _ConversationItemWidgetState();
 }
@@ -22,7 +22,7 @@ class _ConversationItemWidgetState extends State<ConversationItemWidget> {
               children: <Widget>[
                 Container(
                 margin: const EdgeInsets.only(right: 25.0),
-                child:ball(this.widget.conversation.image),
+                child:ball(image: this.widget.conversation.image),
               ),
                 Container(
                 child: Text(
@@ -48,12 +48,12 @@ class _ConversationItemWidgetState extends State<ConversationItemWidget> {
       ),
     );
   }
-  Widget ball(String image){
+  Widget ball({String? image}){
     return Container(
       height: 60,width: 60.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.0),
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover,),
+        image: DecorationImage(image: AssetImage(image!), fit: BoxFit.cover,),
       ),
     );
   }

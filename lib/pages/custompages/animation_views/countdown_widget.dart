@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:flutter/rendering.dart';
+
 class CountTimerTimer extends StatefulWidget {
-  const CountTimerTimer({Key key}) : super(key: key);
+  const CountTimerTimer({Key? key}) : super(key: key);
 
   @override
   _CountTimerTimerState createState() => _CountTimerTimerState();
@@ -10,13 +12,15 @@ class CountTimerTimer extends StatefulWidget {
 
 class _CountTimerTimerState extends State<CountTimerTimer> with TickerProviderStateMixin{
 
-  AnimationController controller;
+  // AnimationController controller;
+  late AnimationController controller;
 
 
   String get timerString {
-    Duration duration = controller.duration * controller.value;
+    Duration duration = controller.duration! * controller.value;
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
+
 
   @override
   void initState() {
@@ -25,10 +29,13 @@ class _CountTimerTimerState extends State<CountTimerTimer> with TickerProviderSt
       vsync: this,
       duration: Duration(seconds: 5),
     );
+
+
   }
 
   @override
   Widget build(BuildContext context) {
+
     ThemeData themeData = Theme.of(context);
     return Scaffold(
       backgroundColor: Colors.white10,
@@ -122,14 +129,19 @@ class _CountTimerTimerState extends State<CountTimerTimer> with TickerProviderSt
           }),
     );
   }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
+  }
 }
 
 class CustomTimerPainter extends CustomPainter {
 
   CustomTimerPainter({
-    this.animation,
-    this.backgroundColor,
-    this.color,
+    required this.animation,
+    required this.backgroundColor,
+    required this.color,
   }) : super(repaint: animation);
 
   final Animation<double> animation;

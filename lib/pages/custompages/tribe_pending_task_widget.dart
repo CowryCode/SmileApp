@@ -8,7 +8,7 @@ import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
 
 class TribePendingTaskWidget extends StatefulWidget {
   final LeaderBoardModel leader;
-  const TribePendingTaskWidget({Key key, this.leader}) : super(key: key);
+  const TribePendingTaskWidget({Key? key, required this.leader}) : super(key: key);
 
   @override
   _TribePendingTaskWidgetState createState() => _TribePendingTaskWidgetState();

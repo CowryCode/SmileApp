@@ -118,7 +118,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
                       decoration: InputDecoration(
                         labelText: 'Select Service of Interest',
                         labelStyle: Theme.of(context).textTheme.subtitle2,
-                      ),
+                      ), options: [],
                      // options: [
                       //   FormBuilderFieldOption(
                       //       value: 'Dibia Igbo', child: Text('Dibia Igbo')),
@@ -137,7 +137,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
                       decoration: InputDecoration(
                         labelText: 'Select alert option',
                         labelStyle: Theme.of(context).textTheme.subtitle2,
-                      ),
+                      ), options: [],
                       // options: [
                       //   FormBuilderFieldOption(
                       //       value: 'Test', child: Text('Service Notification')),
@@ -183,39 +183,31 @@ class _CompleteProfileState extends State<CompleteProfile> {
                           labelStyle: Theme.of(context).textTheme.subtitle2,
                         ),
                         ),
-                        FormBuilderCheckbox(
-                        name: 'accept_terms',
-                        initialValue: false,
-                        onChanged: _onChanged,
-                        title: RichText(
-                        text: TextSpan(
-                        children: [
-                        TextSpan(
-                        text: 'I have read and agree to the ',
-                        style: TextStyle(color: Colors.black),
-                        ),
-                        TextSpan(
-                        text: 'Terms and Conditions',
-                        style: TextStyle(color: Colors.blue),
-                        ),
-                       ],
-                      ),
-                     ),
-                      validator: FormBuilderValidators.equal(
-                        context,
-                        errorText:
-                        'You must accept terms and conditions to continue',
-                      ),
-                    ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     _formKey.currentState.validate();
-                    //     print(_formKey.currentState.value['username']);
-                    //     print(_formKey.currentState.value['name']);
-                    //     print(_formKey.currentState.value['email']);
-                    //   },
-                    //   child: const Text('Save'),
+                    //     FormBuilderCheckbox(
+                    //     name: 'accept_terms',
+                    //     initialValue: false,
+                    //     onChanged: _onChanged,
+                    //     title: RichText(
+                    //     text: TextSpan(
+                    //     children: [
+                    //     TextSpan(
+                    //     text: 'I have read and agree to the ',
+                    //     style: TextStyle(color: Colors.black),
+                    //     ),
+                    //     TextSpan(
+                    //     text: 'Terms and Conditions',
+                    //     style: TextStyle(color: Colors.blue),
+                    //     ),
+                    //    ],
+                    //   ),
+                    //  ),
+                    //   validator: FormBuilderValidators.equal(
+                    //     context,
+                    //     errorText:
+                    //     'You must accept terms and conditions to continue',
+                    //   ),
                     // ),
+
                     Row(
                       children: <Widget>[
                         Expanded(
@@ -226,9 +218,9 @@ class _CompleteProfileState extends State<CompleteProfile> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              _formKey.currentState.save();
-                              if (_formKey.currentState.validate()) {
-                                print(_formKey.currentState.value);
+                              _formKey.currentState!.save();
+                              if (_formKey.currentState!.validate()) {
+                                print(_formKey.currentState!.value);
                               } else {
                                 print("validation failed");
                               }
@@ -244,7 +236,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              _formKey.currentState.reset();
+                              _formKey.currentState!.reset();
                             },
                           ),
                         ),
@@ -259,7 +251,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
           // END OF MY EDITH
   }
 
-  FormBuilderTextField getTextField(BuildContext context, { @required String filedName, @required String fieldLabel, @required Icon prefixIcon, FormFieldValidator<String> fieldValidator}){
+  FormBuilderTextField getTextField(BuildContext context, { required String filedName, required String fieldLabel, required Icon prefixIcon, required FormFieldValidator<String> fieldValidator}){
     return FormBuilderTextField(
       name: filedName,
       obscureText: false, // For Passwords

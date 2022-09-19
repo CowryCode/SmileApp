@@ -7,12 +7,12 @@ class Service {
   String description;
   String code;
   bool isSubscribed;
-  Service.init();
+  // Service.init();
   Service(this.titel,this.description,this.code, this.isSubscribed);
 }
 
 class ServicesList{
-  List<Service> _offersList;
+  List<Service>? _offersList;
   ServicesList(){
     this._offersList =[
       new Service('Limited Offer Only @99', 'Express doctor consultation service \n get a doctor anytime irrespective of queue', "PREMIUM", true),
@@ -21,5 +21,5 @@ class ServicesList{
 
     ];
   }
-  List<Service> get service => _offersList;
+  List<Service>? get service => _offersList;
 }

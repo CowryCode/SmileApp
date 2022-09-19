@@ -7,8 +7,8 @@ class SGMessage{
   bool showStartCountDown;
   double smileProbability;
 
-  SGMessage({this.content,
-    this.updated,
+  SGMessage({required this.content,
+    required this.updated,
     this.tokenIndex = 0,
     this.iscompleted = false,
     this.showStartCountDown = true,

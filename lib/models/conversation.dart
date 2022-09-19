@@ -2,21 +2,21 @@ import 'package:SmileApp/models/chat.dart';
 
 
 class Conversation{
- String image;
- String name;
- List<Chat> chats;
- Conversation.advanced(this.image,this.name,this.chats);
- Conversation.basic(this.image,this.name);
+ String? image;
+ String? name;
+ List<Chat>? chats;
+ Conversation.advanced({this.image,this.name,this.chats});
+ Conversation.basic({this.image,this.name});
 
 }
 class ConversationList{
-  List<Conversation> _conversationList;
+  List<Conversation>? _conversationList;
 
   ConversationList(){
     this._conversationList =[
-      new Conversation.advanced("images/asset-1.png",'Dr.Alina james',new Chat.init().getChat(),),
+      new Conversation.advanced(image: "images/asset-1.png",name: 'Dr.Alina james',chats: new Chat.init().getChat(),),
     ];
   }
-  List<Conversation> get conversation => _conversationList;
+  List<Conversation>? get conversation => _conversationList;
 
 }

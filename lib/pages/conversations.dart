@@ -9,7 +9,8 @@ class Conversation extends StatefulWidget {
 }
 
 class _ConversationState extends State<Conversation> {
-  model.ConversationList conversationList;
+  // model.ConversationList conversationList;
+  late model.ConversationList conversationList;
   @override
   void initState() {
     this.conversationList = new model.ConversationList();
@@ -47,7 +48,7 @@ class _ConversationState extends State<Conversation> {
                               ),
                             ),
                           ],
-                        ),                 
+                        ),
                       ],
                     ),
                   ),
@@ -59,23 +60,23 @@ class _ConversationState extends State<Conversation> {
             ),
             Container(
               padding:EdgeInsets.only(right: 12.0,left: 12.0,bottom: 12.0),
-              decoration: BoxDecoration(            
+              decoration: BoxDecoration(
                color: Colors.transparent,
               ),
               child: ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 shrinkWrap: true,
                 primary: false,
-                itemCount: conversationList.conversation.length,
+                itemCount: conversationList.conversation!.length,
                 separatorBuilder: (context,index){
                   return SizedBox(height: 7,);
                 },
                 itemBuilder: (context,index){
                   return ConversationItemWidget(
-                    conversation: conversationList.conversation.elementAt(index),
+                    conversation: conversationList.conversation!.elementAt(index),
                   );
                 },
-              ),                
+              ),
             ),
           ],
         ),

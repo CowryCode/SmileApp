@@ -59,36 +59,34 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SignUp());
       case '/phone':
         return MaterialPageRoute(builder: (_) => PhoneLogin());
-      case '/verification':
-        return MaterialPageRoute(builder: (_) => VerificationNumber(data: args));
-      case '/createAcount':
-        return MaterialPageRoute(builder: (_) => CreateAcount());  
-      // case '/home':
-      //   return MaterialPageRoute(builder: (_) => TabsWidget(acountInfos: args,));
-      case '/doctors':
-        return MaterialPageRoute(builder: (_) => DoctorsList());  
-      case '/doctorProfil':
-        return MaterialPageRoute(builder: (_) => DoctorAcount());
-      case '/firstDoctorBook':
-        return MaterialPageRoute(builder: (_) => DoctorBookFirstStep());
-      case '/secondeDoctorBook':
-        return MaterialPageRoute(builder: (_) => DoctorBookSecondeStep());
-      case '/offers':
-        return MaterialPageRoute(builder: (_) => OffersList());
-      case '/bookTest':
-        return MaterialPageRoute(builder: (_) => BookTestsOnline());
-      case '/secondeBookTest':
-        return MaterialPageRoute(builder: (_) => BookTestsOnlineSecondeStep());
-      case '/thirdBookTest':
-        return MaterialPageRoute(builder: (_) => BookTestsOnlineThirdStep());
-      case "/fourthBookTest":
-        return MaterialPageRoute(builder: (_) => BookTestsOnlineFourthStep());
-      case '/medecines':
-        return MaterialPageRoute(builder: (_) => Medecines());
-      case '/medecinesSeconde':
-        return MaterialPageRoute(builder: (_) => MedecinesSlected());
-      case '/appointment':
-        return MaterialPageRoute(builder: (_) => AppointmentsList());
+      // case '/verification':
+      //   return MaterialPageRoute(builder: (_) => VerificationNumber(data: args));
+      // case '/createAcount':
+      //   return MaterialPageRoute(builder: (_) => CreateAcount());
+      // case '/doctors':
+      //   return MaterialPageRoute(builder: (_) => DoctorsList());
+      // case '/doctorProfil':
+      //   return MaterialPageRoute(builder: (_) => DoctorAcount());
+      // case '/firstDoctorBook':
+      //   return MaterialPageRoute(builder: (_) => DoctorBookFirstStep());
+      // case '/secondeDoctorBook':
+      //   return MaterialPageRoute(builder: (_) => DoctorBookSecondeStep());
+      // case '/offers':
+      //   return MaterialPageRoute(builder: (_) => OffersList());
+      // case '/bookTest':
+      //   return MaterialPageRoute(builder: (_) => BookTestsOnline());
+      // case '/secondeBookTest':
+      //   return MaterialPageRoute(builder: (_) => BookTestsOnlineSecondeStep());
+      // case '/thirdBookTest':
+      //   return MaterialPageRoute(builder: (_) => BookTestsOnlineThirdStep());
+      // case "/fourthBookTest":
+      //   return MaterialPageRoute(builder: (_) => BookTestsOnlineFourthStep());
+      // case '/medecines':
+      //   return MaterialPageRoute(builder: (_) => Medecines());
+      // case '/medecinesSeconde':
+      //   return MaterialPageRoute(builder: (_) => MedecinesSlected());
+      // case '/appointment':
+      //   return MaterialPageRoute(builder: (_) => AppointmentsList());
       case '/health':
         return MaterialPageRoute(builder: (_) => HealthTips());
 
@@ -111,7 +109,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FaceDetectorView());
        // return MaterialPageRoute(builder: (_) => SmileHome());
       case '/smilegramgift':
-        return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(data: args,));
+        return MaterialPageRoute(builder: (_) => FaceDetectorGiftView());
+       // return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(data: args,));
       case '/leaderboard':
         return MaterialPageRoute(builder: (_) => LeadderBoard());
       case '/tribemessages':
@@ -125,25 +124,25 @@ class RouteGenerator {
 
 
        // PATIENT
-      case '/voicecall' :
-        return MaterialPageRoute(builder: (_) => VioceCallWidget());
-      case '/hospitals' :
-        return MaterialPageRoute(builder: (_) => HospitalsList());
-      case '/hospitaldetail' :
-        return MaterialPageRoute(builder: (_) => HospitalDetail());
-      case '/services':
-        return MaterialPageRoute(builder: (_) => ServicesList());
+      // case '/voicecall' :
+      //   return MaterialPageRoute(builder: (_) => VioceCallWidget());
+      // case '/hospitals' :
+      //   return MaterialPageRoute(builder: (_) => HospitalsList());
+      // case '/hospitaldetail' :
+      //   return MaterialPageRoute(builder: (_) => HospitalDetail());
+      // case '/services':
+      //   return MaterialPageRoute(builder: (_) => ServicesList());
       case '/completeprofile':
         return MaterialPageRoute(builder: (_) => CompleteProfile());
         // PROVIDER
-      case '/providerhome':
-        return MaterialPageRoute(builder: (_) =>  ProviderTabsWidget(acountInfos: args,));
-      case '/mypatients':
-        return MaterialPageRoute(builder: (_) =>  MyPatientsList());
-      case '/patientencounterprofile':
-        return MaterialPageRoute(builder: (_) =>  PatientEncounterProfile());
-      case '/patientqueuelist':
-        return MaterialPageRoute(builder: (_) => PatientQueueList());
+      // case '/providerhome':
+      //   return MaterialPageRoute(builder: (_) =>  ProviderTabsWidget(acountInfos: args,));
+      // case '/mypatients':
+      //   return MaterialPageRoute(builder: (_) =>  MyPatientsList());
+      // case '/patientencounterprofile':
+      //   return MaterialPageRoute(builder: (_) =>  PatientEncounterProfile());
+      // case '/patientqueuelist':
+      //   return MaterialPageRoute(builder: (_) => PatientQueueList());
     // END OF MY CUSTOME ROUTE
 
       default:

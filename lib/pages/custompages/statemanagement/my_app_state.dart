@@ -5,5 +5,5 @@ import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel
 class MyAppState{
   SGMessage sg_message = SGMessage(content: "", updated: false);
   LuckPotTimerstatemodel luckPotTimerstatemodel = LuckPotTimerstatemodel(activate: false);
-  MyAppState({this.sg_message, this.luckPotTimerstatemodel});
+  MyAppState({required this.sg_message, required this.luckPotTimerstatemodel});
 }

@@ -8,7 +8,7 @@ class UserAcountWidget extends StatefulWidget {
 
  // final List<String> acountInfos;
 
-  const UserAcountWidget({Key key}) : super(key: key);
+  const UserAcountWidget({Key? key}) : super(key: key);
   @override
   _UserAcountWidgetState createState() => _UserAcountWidgetState();
 }

@@ -4,7 +4,7 @@ import 'package:SmileApp/models/mymodels/patientmodels/service.dart' as model;
 class ServicesCardWidget extends StatefulWidget {
 
   final model.Service service ;
-  const ServicesCardWidget({Key key, this.service}) : super(key: key);
+  const ServicesCardWidget({Key? key, required this.service}) : super(key: key);
   @override
   _ServicesCardWidgetState createState() => _ServicesCardWidgetState();
 }

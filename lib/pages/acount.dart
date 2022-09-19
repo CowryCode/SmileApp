@@ -4,9 +4,9 @@ import 'package:SmileApp/models/user.dart';
 
 class AcountWidget extends StatefulWidget {
 
-  final List<String> acountInfos;
+  final List<String>? acountInfos;
 
-  const AcountWidget({Key key, this.acountInfos}) : super(key: key);
+  const AcountWidget({Key? key, this.acountInfos}) : super(key: key);
   @override
   _AcountWidgetState createState() => _AcountWidgetState();
 }

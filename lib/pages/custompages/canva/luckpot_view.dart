@@ -12,7 +12,7 @@ import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 
 class LuckPot extends StatefulWidget {
 
-  const LuckPot({Key key}) : super(key: key);
+  const LuckPot({Key? key}) : super(key: key);
   @override
   _LuckPotState createState() => _LuckPotState();
 }
@@ -204,7 +204,7 @@ class _LuckPotState extends State<LuckPot> {
             }));
   }
 
-  Widget giftAlert({@required int amountWon}){
+  Widget giftAlert({required int amountWon}){
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -261,7 +261,7 @@ class _LuckPotState extends State<LuckPot> {
     );
   }
 
-  showAlertDialog({@required BuildContext context, @required String title, @required String message, @required int amount}) {
+  showAlertDialog({required BuildContext context, required String title, required String message, required int amount}) {
 
 
     // set up the button

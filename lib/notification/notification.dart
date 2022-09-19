@@ -48,14 +48,14 @@ class FCM  {
             print("THE MESSAGE : ${message.toString()}");
             if (message.notification != null) {
               print(message.notification.toString());
-              if (message.notification.title != null) {
-                tittle = message.notification.title;
+              if (message.notification!.title != null) {
+                tittle = message.notification!.title!;
                 print("THE TITLE: ${message.toString()}");
               } else {
                 tittle = "message.notification.title is null";
               }
-              if (message.notification.body != null) {
-                msg = message.notification.body;
+              if (message.notification!.body != null) {
+                msg = message.notification!.body!;
               } else {
                 msg = "message.notification.body is null";
               }
@@ -70,8 +70,10 @@ class FCM  {
           }
           print("The message is ${msg}");
           print(" The title is ${tittle}");
-          titleCtlr.sink.add(message.notification.title);
-          bodyCtlr.sink.add(message.notification.body);
+          String notificationTitle = message.notification!.title?? "No Title";
+          String notificationBody = message.notification!.body?? "No Body";
+          titleCtlr.sink.add(notificationTitle);
+          bodyCtlr.sink.add(notificationBody);
         },
       );
     // With this token you can test it easily on your phone

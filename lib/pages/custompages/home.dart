@@ -10,10 +10,10 @@ import 'package:SmileApp/pages/custompages/canva/gift_view.dart';
 import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
 
 class Home extends StatefulWidget {
-   final String value;
+  final String? value;
   // const Home( {Key key, this.value}) : super(key: key);
   final bool checkEmotion;
-  const Home( {Key key, this.value, @required this.checkEmotion}) : super(key: key);
+  const Home( {Key? key,  this.value, required this.checkEmotion}) : super(key: key);
  
   @override
   _HomeState createState() => _HomeState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:SmileApp/models/mymodels/providermodels/patient.dart' as model;
 class MyPatientsCardWidget extends StatefulWidget {
   final model.Patient patients;
-  const MyPatientsCardWidget({Key key, this.patients}) : super(key: key);
+  const MyPatientsCardWidget({Key? key, required this.patients}) : super(key: key);
 
   @override
   _MyPatientsCardWidgetState createState() => _MyPatientsCardWidgetState();

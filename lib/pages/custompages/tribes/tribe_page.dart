@@ -13,7 +13,8 @@ class TribePage extends StatefulWidget {
 
 class _TribePageState extends State<TribePage> {
 
- List<LeaderBoardModel> _leaderBoardModelLIST;
+ //List<LeaderBoardModel> _leaderBoardModelLIST;
+ List<LeaderBoardModel>? _leaderBoardModelLIST;
   @override
   void initState() {
     //this.doctorsList = new model.DoctorsList();
@@ -87,10 +88,10 @@ class _TribePageState extends State<TribePage> {
              //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
              Flexible(
                child: ListView.builder(
-                itemCount: _leaderBoardModelLIST.length,
+                itemCount: _leaderBoardModelLIST!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return TribePageWidget(
-                    leader: _leaderBoardModelLIST.elementAt(index), );
+                    leader: _leaderBoardModelLIST!.elementAt(index), );
                 }),
              ),
 

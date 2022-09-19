@@ -24,8 +24,10 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   );
   bool _canProcess = true;
   bool _isBusy = false;
-  CustomPaint _customPaint;
-  String _text;
+  // CustomPaint _customPaint;
+  // String _text;
+  CustomPaint? _customPaint;
+  String? _text;
 
   // Start
   int _count = 0; // My Code
@@ -33,14 +35,16 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   String _fulltext = "I am a living testimony testimony that God is good"; // My Code
   // int _tokenIndex = 0; // My Code
   //var _tokenArray ;
-  List<String> _tokenArray ;
-  int _tokenArrayLength;
+  // List<String> _tokenArray ;
+  // int _tokenArrayLength;
+  List<String>? _tokenArray ;
+  int? _tokenArrayLength;
 
   @override
   void initState() {
     super.initState();
     _tokenArray = _fulltext.split(" ");
-    _tokenArrayLength = _tokenArray.length;
+    _tokenArrayLength = _tokenArray!.length;
   }
   //  End
 
@@ -55,8 +59,8 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   Widget build(BuildContext context) {
     return CameraView(
       title: 'Face & SMIL Detector',
-      customPaint: _customPaint,
-      text: _text,
+      customPaint: _customPaint!,
+      text: _text!,
       onImage: (inputImage) {
         processImage(inputImage);
       },
@@ -76,18 +80,18 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
         inputImage.inputImageData?.imageRotation != null) {
       final painter = FaceDetectorPainter(
           faces,
-          inputImage.inputImageData.size,
-          inputImage.inputImageData.imageRotation);
+          inputImage.inputImageData!.size,
+          inputImage.inputImageData!.imageRotation);
       _customPaint = CustomPaint(painter: painter);
       // MY CODE
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
         // State Update
         SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
-        double prob = face.smilingProbability;
+        double? prob = face.smilingProbability;
       //  if(_tokenIndex < _tokenArrayLength && prob > 0.7){
-        if(sgMessage.tokenIndex < _tokenArrayLength && prob > 0.7){
-          _msg = sgMessage.content + " " + _tokenArray[sgMessage.tokenIndex];
+        if(sgMessage.tokenIndex < _tokenArrayLength! && prob! > 0.7){
+          _msg = sgMessage.content + " " + _tokenArray![sgMessage.tokenIndex];
           int updatedTokenIndex = sgMessage.tokenIndex + 1;
           SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex);
           StoreProvider.of<MyAppState>(context).dispatch(

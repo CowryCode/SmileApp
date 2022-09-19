@@ -11,9 +11,10 @@ class ChatMessageListItem extends StatelessWidget {
   final User currentUser = new User.init().getCurrentUser();
   final Doctor currentDoctor = new Doctor.init().getCurrentDoctor();
 
-  final Animation animation;
+  //final Animation animation;
+  final Animation<double> animation;
 
-ChatMessageListItem({this.chat, this.animation});
+ChatMessageListItem({required this.chat, required this.animation});
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +44,10 @@ ChatMessageListItem({this.chat, this.animation});
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                 new Text(this.chat.user.name, style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).accentColor,fontWeight: FontWeight.bold),),
+                 new Text(this.chat.user!.name!, style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).accentColor,fontWeight: FontWeight.bold),),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
-                    child: new Text(chat.text,style: TextStyle(fontFamily: 'Poppins',),),
+                    child: new Text(chat.text!,style: TextStyle(fontFamily: 'Poppins',),),
                   ),
                 ],
               ),
@@ -57,7 +58,7 @@ ChatMessageListItem({this.chat, this.animation});
                 new Container(
                     margin: const EdgeInsets.only(left: 8.0),
                     child: new CircleAvatar(
-                      backgroundImage: AssetImage(this.chat.user.avatar),
+                      backgroundImage: AssetImage(this.chat.user!.avatar!),
                     )),
               ],
             ),
@@ -86,7 +87,7 @@ ChatMessageListItem({this.chat, this.animation});
                 new Container(
                     margin: const EdgeInsets.only(right: 8.0),
                     child: new CircleAvatar(
-                      backgroundImage: AssetImage(currentDoctor.avatar),
+                      backgroundImage: AssetImage(currentDoctor.avatar!),
                     ),
                   )
               ],
@@ -99,7 +100,7 @@ ChatMessageListItem({this.chat, this.animation});
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(
-                      chat.text,
+                      chat.text!,
                       style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).primaryColor),
                     ),
                   ),

@@ -9,7 +9,7 @@ class MyDoctorsList extends StatefulWidget {
 }
 
 class _MyDoctorsListState extends State<MyDoctorsList> {
-  model.DoctorsList doctorsList;
+  late model.DoctorsList doctorsList;
   @override
   void initState() {
     this.doctorsList = new model.DoctorsList();
@@ -52,7 +52,7 @@ class _MyDoctorsListState extends State<MyDoctorsList> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(            
+              decoration: BoxDecoration(
                color: Colors.transparent,
               ),
               child: ListView.separated(
@@ -64,15 +64,15 @@ class _MyDoctorsListState extends State<MyDoctorsList> {
                 },
                 itemBuilder: (context,index){
                   return MyDoctorsCardWidget(
-                    doctors: doctorsList.doctors.elementAt(index),
+                    doctors: doctorsList.doctors!.elementAt(index),
                   );
                 },
               ),
             ),
           ],
-        ),      
+        ),
       ),
     );
   }
-  
+
 }

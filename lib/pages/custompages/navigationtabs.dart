@@ -11,7 +11,7 @@ class NavigateTabsWidget extends StatefulWidget {
  // final String value;
   // const NavigateTabsWidget({Key key}) : super(key: key);
   final bool showEmotionalert;
-  const NavigateTabsWidget({Key key, this.showEmotionalert}) : super(key: key);
+  const NavigateTabsWidget({Key? key, required this.showEmotionalert}) : super(key: key);
 
   
   @override
@@ -21,7 +21,8 @@ class NavigateTabsWidget extends StatefulWidget {
 }
 
 class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  // AnimationController _controller;
+  AnimationController? _controller;
   int _page = 4;
   String currentTitle = 'Home';
   Widget _currentPage (int page){
@@ -49,7 +50,7 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     super.dispose();
   }
 

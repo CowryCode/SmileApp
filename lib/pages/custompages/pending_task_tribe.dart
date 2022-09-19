@@ -19,7 +19,7 @@ class TribePendingTaskList extends StatefulWidget {
 
 class _TribePendingTaskListState extends State<TribePendingTaskList> {
 
- List<LeaderBoardModel> _leaderBoardModelLIST;
+ List<LeaderBoardModel>? _leaderBoardModelLIST;
   @override
   void initState() {
     //this.doctorsList = new model.DoctorsList();
@@ -93,10 +93,10 @@ class _TribePendingTaskListState extends State<TribePendingTaskList> {
              //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
              Flexible(
                child: ListView.builder(
-                itemCount: _leaderBoardModelLIST.length,
+                itemCount: _leaderBoardModelLIST!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return TribePendingTaskWidget(
-                    leader: _leaderBoardModelLIST.elementAt(index), );
+                    leader: _leaderBoardModelLIST!.elementAt(index), );
                 }),
              ),
 

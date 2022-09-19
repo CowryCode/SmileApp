@@ -44,7 +44,7 @@ class _ChatWidgetState extends State<ChatWidget> {
         ),
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          _currentDoctor.name,
+          _currentDoctor.name!,
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -61,9 +61,9 @@ class _ChatWidgetState extends State<ChatWidget> {
                 key: _myListKey,
                 reverse: true,
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                initialItemCount: _conversationList.conversation[0].chats.length,
+                initialItemCount: _conversationList.conversation![0].chats!.length,
                 itemBuilder: (context, index, Animation<double> animation) {
-                  Chat chat = _conversationList.conversation[0].chats[index];
+                  Chat chat = _conversationList.conversation![0].chats![index];
                   return ChatMessageListItem(
                     chat: chat,
                     animation: animation,
@@ -121,9 +121,9 @@ class _ChatWidgetState extends State<ChatWidget> {
                       String messageType = random ? "Sent" : "Recieved";
 
                       setState(() {
-                        _conversationList.conversation[0].chats
+                        _conversationList.conversation![0].chats!
                             .insert(0, new Chat(myController.text,'21min ago', _currentUser, messageType));
-                        _myListKey.currentState.insertItem(0);
+                        _myListKey.currentState!.insertItem(0);
 
                       });
                       Timer(Duration(milliseconds: 100), () {

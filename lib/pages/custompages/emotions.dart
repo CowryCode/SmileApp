@@ -22,7 +22,7 @@ class Emotions extends StatefulWidget {
 class _EmotionsState extends State<Emotions> {
   User currentUser = new User.init().getCurrentUser();
 
-  bool isClicked;
+  bool? isClicked;
   bool firstClicked = false;
   bool Clicked0 = false;
   bool Clicked1 = false;
@@ -32,13 +32,13 @@ class _EmotionsState extends State<Emotions> {
   bool Clicked5 = false;
   bool Clicked6 = false;
 
-  Color color0;
-  Color color1;
-  Color color2;
-  Color color3;
-  Color color4;
-  Color color5;
-  Color color6;
+  Color? color0;
+  Color? color1;
+  Color? color2;
+  Color? color3;
+  Color? color4;
+  Color? color5;
+  Color? color6;
 
   @override
   initState() {
@@ -563,7 +563,7 @@ class _EmotionsState extends State<Emotions> {
   }
 
   Widget getEomtionsWidget(String feeling, IconData iconData, int buttonID, bool isclicked) {
-    Color newColor;
+    Color? newColor;
     switch(buttonID){
       case 0:
         newColor = Colors.yellow;

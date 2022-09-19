@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
   SearchBarWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class SearchBarWidget extends StatelessWidget {
         children: <Widget>[
           TextField(
             onTap: (){
-              
+
             },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(12),

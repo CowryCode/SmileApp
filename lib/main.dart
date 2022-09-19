@@ -85,14 +85,14 @@ Future init() async{
           messagingSenderId: MessagingSenderID,
           projectId: ProjectID
       )).then((value) => {
-       FirebaseMessaging
-           .instance
-           .getInitialMessage()
-           .then((RemoteMessage message) {
-             if(message != null){
-               // Do Nothing
-             }
-       }),
+       // FirebaseMessaging
+       //     .instance
+       //     .getInitialMessage()
+       //     .then((RemoteMessage message) {
+       //   if (message != null) {
+       //     // Do Nothing
+       //   }
+       // }),
     });
   }else{
     await Firebase.initializeApp();

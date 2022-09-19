@@ -8,7 +8,7 @@ import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
 
 class TribeLeaderCardWidget extends StatefulWidget {
   final LeaderBoardModel leader;
-  const TribeLeaderCardWidget({Key key, this.leader}) : super(key: key);
+  const TribeLeaderCardWidget({Key? key, required this.leader}) : super(key: key);
 
   @override
   _TribeLeaderCardWidgetState createState() => _TribeLeaderCardWidgetState();
