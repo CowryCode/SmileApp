@@ -26,7 +26,8 @@ class CameraViewGift extends StatefulWidget {
   CameraViewGift(
       {Key? key,
       required this.title,
-      required this.customPaint,
+        //TODO: COMMENTED OUT TODAY 20-09-2022
+     // required this.customPaint,
       required this.text,
       required this.onImage,
       this.onScreenModeChanged,
@@ -34,7 +35,8 @@ class CameraViewGift extends StatefulWidget {
       : super(key: key);
 
   final String title;
-  final CustomPaint customPaint;
+  //TODO: COMMENTED OUT TODAY 20-09-2022
+  //final CustomPaint customPaint;
   final String text;
   final Function(InputImage inputImage) onImage;
   // final Function(ScreenMode mode) onScreenModeChanged;
@@ -82,8 +84,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   final Duration timerTastoPremuto = Duration(seconds: 20);
 
   int progressBarvalue = 20;
-
-
 
   @override
   void initState() {
@@ -505,7 +505,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   : CameraPreview(_controller!),
             ),
           ),
-          if (widget.customPaint != null) widget.customPaint,
+          //TODO: COMMENTED OUT TODAY 20-09-2022
+          //if (widget.customPaint != null) widget.customPaint,
           Positioned(
             bottom: 100,
             left: 50,
@@ -540,7 +541,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 fit: StackFit.expand,
                 children: <Widget>[
                   Image.file(_image!),
-                  if (widget.customPaint != null) widget.customPaint,
+                  //TODO: COMMENTED OUT TODAY 20-09-2022
+                  //if (widget.customPaint != null) widget.customPaint,
                 ],
               ),
             )

@@ -1,4 +1,5 @@
 import 'package:SmileApp/config/custom_design.dart';
+import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
@@ -96,7 +97,7 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                                     // StoreProvider.of<MyAppState>(context).dispatch(
                                     //     UpdateSGmessageAction(sgMSG)
                                     // );
-                                    Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: ['${widget.leader.name}', true]);
+                                    Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: GiftVariableObject.init().getGiftVariable());
                                   },
                                   child: const Text('Continue'),
                                 ),

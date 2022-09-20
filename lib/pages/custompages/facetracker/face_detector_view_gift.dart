@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,11 @@ import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 
 class FaceDetectorGiftView extends StatefulWidget {
 
- // final String msg;
- // final bool readmessage;
-  final List<Object>? data;
 
-  FaceDetectorGiftView({Key? key, this.data});
+  //final List<Object>? data;
+  final GiftVariableObject giftVariableObject;
+
+  FaceDetectorGiftView({Key? key,  required this.giftVariableObject});
 
   @override
   _FaceDetectorGiftViewState createState() => _FaceDetectorGiftViewState();
@@ -36,8 +37,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   bool _isBusy = false;
   // CustomPaint _customPaint;
   // String _text;
-  CustomPaint? _customPaint;
-  String? _text;
+  //TODO: COMMENTED OUT TODAY 20-09-2022
+  //CustomPaint customPaint;
+  String _text = " i AM TESTING";
 
 
   // Start
@@ -58,8 +60,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     // readmessage =  widget.data![1];
     // _tokenArray = _fulltext.split(" ");
     // _tokenArrayLength = _tokenArray.length;
-    _fulltext = widget.data![0] as String;
-    readmessage =  widget.data![1] as bool;
+    _fulltext = widget.giftVariableObject.fulltext;
+    readmessage =  widget.giftVariableObject.readmessage!;
     _tokenArray = _fulltext!.split(" ");
     _tokenArrayLength = _tokenArray!.length;
   }
@@ -77,7 +79,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
 
     return CameraViewGift(
       title: readmessage? 'Smile and Hold' : 'Smile for Gift',
-      customPaint: _customPaint!,
+      //TODO: COMMENTED OUT TODAY 20-09-2022
+     // customPaint: customPaint,
       text: _text!,
       onImage: (inputImage) {
         processImage(inputImage);
@@ -102,7 +105,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
           faces,
           inputImage.inputImageData!.size,
           inputImage.inputImageData!.imageRotation);
-      _customPaint = CustomPaint(painter: painter);
+      //TODO: COMMENTED OUT TODAY 20-09-2022
+      //customPaint = CustomPaint(painter: painter);
       // MY CODE
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
@@ -178,7 +182,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
       }
       _text = text;
       // TODO: set _customPaint to draw boundingRect on top of image
-      _customPaint = null;
+      //TODO: COMMENTED OUT TODAY 20-09-2022
+     // customPaint = null;
     }
     _isBusy = false;
     if (mounted) {

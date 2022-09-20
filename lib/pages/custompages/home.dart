@@ -1,5 +1,6 @@
 
 import 'package:SmileApp/config/custom_design.dart';
+import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,7 @@ class _HomeState extends State<Home> {
                     TextButton(
                       onPressed: (){
                       //  Navigator.of(context).pushNamed('/smilegram');
-                        Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: ['No message', false]);
+                        Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(fulltext: "", readmessage: false));
                        },
                       child: const Text('Continue'),
                     ),

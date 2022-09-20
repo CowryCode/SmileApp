@@ -1,3 +1,4 @@
+import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/pages/appointment.dart';
@@ -109,8 +110,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FaceDetectorView());
        // return MaterialPageRoute(builder: (_) => SmileHome());
       case '/smilegramgift':
-        return MaterialPageRoute(builder: (_) => FaceDetectorGiftView());
-       // return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(data: args,));
+       // return MaterialPageRoute(builder: (_) => FaceDetectorGiftView());
+        return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(giftVariableObject: args as GiftVariableObject,));
       case '/leaderboard':
         return MaterialPageRoute(builder: (_) => LeadderBoard());
       case '/tribemessages':
