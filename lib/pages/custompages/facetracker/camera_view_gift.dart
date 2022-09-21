@@ -6,6 +6,7 @@ import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -84,6 +85,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   final Duration timerTastoPremuto = Duration(seconds: 20);
 
   int progressBarvalue = 20;
+  bool smilestartCountdown = true;
 
   @override
   void initState() {
@@ -155,6 +157,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown
       ]);
+
+      setState(() {
+        smilestartCountdown = true;
+      });
     }catch(e){
       //
     }
@@ -454,7 +460,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }else{
                 return SizedBox(height: 5,);
               }
-            }())
+            }()),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
@@ -759,51 +768,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               ],
             ),
           ),
-          ((){
-            SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
-            if(sgMessage.showStartCountDown == true){
-              return Center(
-                child:  Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget> [
-                    // Count Down Widget
-                  Text("Smile Detection starts in :",style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                  fontSize: 18.0,
-                   ),
-                 ),
-                    SizedBox(height: 3,),
-                    Center(
-                      child: AnimatedTextKit(
-                        repeatForever: false,
-                        totalRepeatCount: 1,
-                        animatedTexts: [
-                          scaleValue(val: '5'),
-                          scaleValue(val: '4'),
-                          scaleValue(val: '3'),
-                          scaleValue(val: '2'),
-                          scaleValue(val: '1'),
-                        ],
-                        onFinished: (){
-                          SGMessage sgMSG = SGMessage(
-                            content: "",
-                            updated: true,
-                            tokenIndex: 0,
-                            iscompleted: false,
-                            showStartCountDown: false,
-                          );
-                          StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                        },
-                      ),
-                    ),
-                ],
-                ),
-              );
-            }else {
-              return SizedBox(height: 1,);
-            }
-          }()),
+          Center(child: countdownTimer()),
          // LuckPot(),
          // _giftMatrix()
         ],
@@ -821,45 +786,45 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ));
   }
 
-  Widget _giftMatrix(){
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.5,
-      // child: LuckMatrics(),
-      child:  Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          progressBarvalue != 0?  SizedBox(
-            height: 30,
-            child:AnimatedTextKit(
-                repeatForever: true,
-                animatedTexts: [
-                  ScaleAnimatedText('Remaining $progressBarvalue! Smiling Probability :  ',
-                      scalingFactor: 0.2,
-                      textStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                         // color: Theme.of(context).primaryColor,
-                          color: Colors.red,
-                          fontSize: 20
-                      )),
-                ],
-              ),
-          ) : SizedBox(
-            height: 30,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Text(
-              'Click on your opened gift !',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: 20,
-              ),),
-          ),
-         // _LuckMatrics()
-        ],
-      ),
-    );
-  }
+  // Widget _giftMatrix(){
+  //   return Container(
+  //     width: MediaQuery.of(context).size.width,
+  //     height: MediaQuery.of(context).size.height * 0.5,
+  //     // child: LuckMatrics(),
+  //     child:  Column(
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         progressBarvalue != 0?  SizedBox(
+  //           height: 30,
+  //           child:AnimatedTextKit(
+  //               repeatForever: true,
+  //               animatedTexts: [
+  //                 ScaleAnimatedText('Remaining $progressBarvalue! Smiling Probability :  ',
+  //                     scalingFactor: 0.2,
+  //                     textStyle: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                        // color: Theme.of(context).primaryColor,
+  //                         color: Colors.red,
+  //                         fontSize: 20
+  //                     )),
+  //               ],
+  //             ),
+  //         ) : SizedBox(
+  //           height: 30,
+  //           width: MediaQuery.of(context).size.width * 0.8,
+  //           child: Text(
+  //             'Click on your opened gift !',
+  //             style: TextStyle(
+  //               fontWeight: FontWeight.bold,
+  //               color: Theme.of(context).colorScheme.secondary,
+  //               fontSize: 20,
+  //             ),),
+  //         ),
+  //        // _LuckMatrics()
+  //       ],
+  //     ),
+  //   );
+  // }
 
   //TODO: THE SIZE OF POINT GAINED IS (Probability of Smile * duration of smile)
   // Widget _LuckMatrics() {
@@ -990,26 +955,26 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
 
-  void _randomize(){
-    int _start = timerTastoPremuto.inMilliseconds;
-    Random random = new Random();
-    const oneDecimal = const Duration(seconds: 1);
-    Timer _timer = new Timer.periodic(
-        oneDecimal,
-            (Timer timer) =>
-            setState(() {
-              _value = random.nextInt(23);
-              print('Timer is : $_start  Index Value is $_value');
-              if (_start < 1000) {
-                _activated = true;
-                _activation_index = _value;
-                timer.cancel();
-              } else {
-                _start = _start - 1000;
-                progressBarvalue = progressBarvalue - 1;
-              }
-            }));
-  }
+  // void _randomize(){
+  //   int _start = timerTastoPremuto.inMilliseconds;
+  //   Random random = new Random();
+  //   const oneDecimal = const Duration(seconds: 1);
+  //   Timer _timer = new Timer.periodic(
+  //       oneDecimal,
+  //           (Timer timer) =>
+  //           setState(() {
+  //             _value = random.nextInt(23);
+  //             print('Timer is : $_start  Index Value is $_value');
+  //             if (_start < 1000) {
+  //               _activated = true;
+  //               _activation_index = _value;
+  //               timer.cancel();
+  //             } else {
+  //               _start = _start - 1000;
+  //               progressBarvalue = progressBarvalue - 1;
+  //             }
+  //           }));
+  // }
 
 
   _createAlertDialog(BuildContext context){
@@ -1078,5 +1043,48 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ],
           );
         });
+  }
+
+  Widget countdownTimer(){
+    return Visibility(
+      visible: smilestartCountdown,
+      child: CircularCountDownTimer(
+        duration: 10,
+        initialDuration: 0,
+        controller: CountDownController(),
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.height / 2,
+        ringColor: Colors.grey[300]!,
+        ringGradient: null,
+       // fillColor: Colors.purpleAccent[100]!,
+        fillColor: Colors.green[300]!,
+        fillGradient: null,
+       // backgroundColor: Colors.purple[500],
+        backgroundColor: Colors.green[700],
+        backgroundGradient: null,
+        strokeWidth: 20.0,
+        strokeCap: StrokeCap.round,
+        textStyle: TextStyle(
+            fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
+        textFormat: CountdownTextFormat.S,
+        isReverse: false,
+        isReverseAnimation: false,
+        isTimerTextShown: true,
+       // autoStart: true,
+        autoStart: smilestartCountdown,
+        onStart: () {
+          debugPrint('Countdown Started');
+        },
+        onComplete: () {
+          debugPrint('Countdown Ended');
+          setState(() {
+            smilestartCountdown = false;
+          });
+        },
+        onChange: (String timeStamp) {
+          debugPrint('Countdown Changed $timeStamp');
+        },
+      ),
+    );
   }
 }

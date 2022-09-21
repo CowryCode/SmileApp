@@ -41,7 +41,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   //CustomPaint customPaint;
   String _text = " i AM TESTING";
 
-
   // Start
   int _count = 0; // My Code
   String _msg = ""; // My Code
