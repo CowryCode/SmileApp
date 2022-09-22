@@ -302,150 +302,22 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               height: 20,
             ),
             ((){
-              if(widget.readmessage){
+              if(widget.readmessage && smilestartCountdown == false){
                 if(currentMessagestate.iscompleted){
                   _createAlertDialog(context);
                 }
-               return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  transitionBuilder: (Widget child, Animation<double> animation) {
-                    return ScaleTransition(scale: animation, child: child);
-                  },
-                  child: Text(
-                    currentMessagestate.content,
-                    key: ValueKey<int>(_count),
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                );
-              }else{
                 return SizedBox(height: 5,);
-              }
-            }()),
-            ((){
-              if(!widget.readmessage){
-                  return SizedBox(
-                    height: 60,
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.9,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                     children: <Widget> [
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.start,
-                         children: [
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: <Widget> [
-                               Text(
-                                 'Target Point: ',
-                                 textAlign: TextAlign.center,
-                                 overflow: TextOverflow.ellipsis,
-                                 style: const TextStyle(
-                                   fontWeight: FontWeight.bold,
-                                   color: Colors.black45,
-                                   fontFamily: 'Poppins',
-                                   fontSize: 14.0,
-                                 ),
-                               ),
-                               SizedBox(width: 3,),
-                               Text(
-                                 // '$highestpoint',
-                                 (highestpoint > currentMessagestate.tokenIndex) ? '$highestpoint' : '${currentMessagestate.tokenIndex}',
-                                 textAlign: TextAlign.center,
-                                 overflow: TextOverflow.ellipsis,
-                                 style: const TextStyle(
-                                   fontWeight: FontWeight.bold,
-                                   color: Colors.red,
-                                   fontSize: 14.0,
-                                 ),
-                               ),
-                             ],
-                           ),
-                           SizedBox(width: 20,),
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: <Widget> [
-                               Text(
-                                 'Your point(s) : ',
-                                 textAlign: TextAlign.center,
-                                 overflow: TextOverflow.ellipsis,
-                                 style: const TextStyle(
-                                   fontWeight: FontWeight.bold,
-                                   color: Colors.black45,
-                                   fontFamily: 'Poppins',
-                                   fontSize: 14.0,
-                                 ),
-                               ),
-                               SizedBox(width: 3,),
-                               AnimatedTextKit(
-                                 repeatForever: true,
-                                 animatedTexts: [
-                                   ScaleAnimatedText('${currentMessagestate.tokenIndex}',
-                                       scalingFactor: 0.2,
-                                       textStyle: TextStyle(
-                                         fontWeight: FontWeight.bold,
-                                         color: Colors.red,
-                                         fontSize: 16.0,
-                                       )),
-                                   ScaleAnimatedText('${currentMessagestate.tokenIndex}',
-                                       scalingFactor: 0.2,
-                                       textStyle: TextStyle(
-                                         fontWeight: FontWeight.bold,
-                                         color: Colors.red,
-                                         fontSize: 16.0,
-                                       ))
-                                   // RotateAnimatedText(
-                                   //     "${currentMessagestate.tokenIndex}",
-                                   //     textStyle: TextStyle(
-                                   //       fontWeight: FontWeight.bold,
-                                   //       color: Colors.red,
-                                   //       fontSize: 14.0,
-                                   //     )
-                                   // ),
-                                 ],
-                               ),
-                             ],
-                           ),
-                         ],
-                       ),
-                       SizedBox(height: 2,),
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.start,
-                         children: [
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: <Widget> [
-                               Text(
-                                 'Smile rating is : ',
-                                 textAlign: TextAlign.center,
-                                 overflow: TextOverflow.ellipsis,
-                                 style: const TextStyle(
-                                   fontWeight: FontWeight.bold,
-                                   color: Colors.black45,
-                                   fontFamily: 'Poppins',
-                                   fontSize: 14.0,
-                                 ),
-                               ),
-                               SizedBox(width: 3,),
-                               Text(
-                                 (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
-                                 textAlign: TextAlign.center,
-                                 overflow: TextOverflow.ellipsis,
-                                 style: const TextStyle(
-                                   fontWeight: FontWeight.bold,
-                                   color: Colors.red,
-                                   fontSize: 14.0,
-                                 ),
-                               ),
-                             ],
-                           ),
-                         ],
-                       ),
-                     ],
-                    ),
-                  );
+               // return AnimatedSwitcher(
+               //    duration: const Duration(milliseconds: 500),
+               //    transitionBuilder: (Widget child, Animation<double> animation) {
+               //      return ScaleTransition(scale: animation, child: child);
+               //    },
+               //    child: Text(
+               //      currentMessagestate.content,
+               //      key: ValueKey<int>(_count),
+               //      style: Theme.of(context).textTheme.headline4,
+               //    ),
+               //  );
               }else{
                 return SizedBox(height: 5,);
               }
@@ -458,8 +330,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 }else{
                   return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
                 }
-                int remaining = highestpoint - currentMessagestate.tokenIndex;
-                return _cameraDisplay(pointsleft: remaining);
               }else {
                 int remaining = highestpoint - currentMessagestate.tokenIndex;
                  return _cameraDisplay(pointsleft: remaining);
@@ -777,9 +647,15 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // end of added by me
 
     return Container(
-      color: Theme.of(context).colorScheme.secondary,
-      height: MediaQuery.of(context).size.height * 0.5,
+      //color: Theme.of(context).colorScheme.secondary,
+      height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
@@ -811,8 +687,15 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ),
           Center(child: countdownTimer()),
           ((){
-            if(smilestartCountdown == false){
-              return glassmorphicUI();
+            if(smilestartCountdown == false && !widget.readmessage){
+              return glassmorphicSmileGram();
+            }else{
+              return SizedBox(height: 3.0,);
+            }
+          }()),
+          ((){
+            if(smilestartCountdown == false && widget.readmessage){
+              return glassmorphicReadMessage();
             }else{
               return SizedBox(height: 3.0,);
             }
@@ -833,138 +716,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           fontSize: 35.0,
         ));
   }
-
-  // Widget _giftMatrix(){
-  //   return Container(
-  //     width: MediaQuery.of(context).size.width,
-  //     height: MediaQuery.of(context).size.height * 0.5,
-  //     // child: LuckMatrics(),
-  //     child:  Column(
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         progressBarvalue != 0?  SizedBox(
-  //           height: 30,
-  //           child:AnimatedTextKit(
-  //               repeatForever: true,
-  //               animatedTexts: [
-  //                 ScaleAnimatedText('Remaining $progressBarvalue! Smiling Probability :  ',
-  //                     scalingFactor: 0.2,
-  //                     textStyle: TextStyle(
-  //                         fontWeight: FontWeight.bold,
-  //                        // color: Theme.of(context).primaryColor,
-  //                         color: Colors.red,
-  //                         fontSize: 20
-  //                     )),
-  //               ],
-  //             ),
-  //         ) : SizedBox(
-  //           height: 30,
-  //           width: MediaQuery.of(context).size.width * 0.8,
-  //           child: Text(
-  //             'Click on your opened gift !',
-  //             style: TextStyle(
-  //               fontWeight: FontWeight.bold,
-  //               color: Theme.of(context).colorScheme.secondary,
-  //               fontSize: 20,
-  //             ),),
-  //         ),
-  //        // _LuckMatrics()
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  //TODO: THE SIZE OF POINT GAINED IS (Probability of Smile * duration of smile)
-  // Widget _LuckMatrics() {
-  //   return Wrap(
-  //     children: List<Widget>.generate(
-  //       20,
-  //           (int index) {
-  //         return _activation_index == index && _activated == true
-  //             ?
-  //         ChoiceChip(
-  //           key: Key('$index'),
-  //           selectedColor: Theme.of(context).primaryColor,
-  //           avatar: Image.asset("images/custom/giftopen1.png"),
-  //           elevation: 6.0,
-  //           backgroundColor: Theme.of(context).primaryColor,
-  //           padding: const EdgeInsets.only(left: 10, right: 10),
-  //           label: Text('open', style: TextStyle(color: Colors.red),),
-  //           selected: _value == index,
-  //           onSelected: (bool selected) {
-  //             setState(() {
-  //               _value = selected ? index : _value;
-  //               print("Selected Value is $_value");
-  //               showAlertDialog(context: context,title: "Total points: 67", message: "Message", amount: index);
-  //             });
-  //           },
-  //         )
-  //             : ChoiceChip(
-  //           key: Key('$index'),
-  //           avatar: Image.asset("images/custom/gift.png"),
-  //           elevation: 6.0,
-  //           backgroundColor: Theme.of(context).primaryColor,
-  //           padding: const EdgeInsets.only(left: 10, right: 10),
-  //           label: Text('  ?', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
-  //           selected: _value == index,
-  //           onSelected: (bool selected) {
-  //             setState(() {
-  //               //  _value = selected ? index : null;
-  //               _value = selected ? index : _value;
-  //               _activated = true;
-  //               print("Selected Value if $_value");
-  //
-  //             });
-  //           },
-  //         );
-  //       },
-  //     ).toList(),
-  //   );
-  // }
-
-  // showAlertDialog({@required BuildContext context, @required String title, @required String message, @required int amount}) {
-  //   Widget okButton = TextButton(
-  //     child: Text("Try Again 1"),
-  //     onPressed: () {
-  //       // KICK START SMILING
-  //       setState(() {
-  //         _activation_index = -1;
-  //       });
-  //       Navigator.of(context).pop();
-  //       _randomize();
-  //     },
-  //   );
-  //
-  //   Widget cancelButton = TextButton(
-  //     child: Text("Cancel"),
-  //     onPressed: () {
-  //       setState(() {
-  //         _activation_index = -1;
-  //         progressBarvalue += 2;
-  //       });
-  //       Navigator.of(context).popAndPushNamed("/");
-  //       // randomize();
-  //     },
-  //   );
-  //
-  //   // set up the AlertDialog
-  //   AlertDialog alert = AlertDialog(
-  //     // title: Text("My title"),
-  //     title: Text(title),
-  //     // content: Text(message),
-  //     content:  giftAlert(amountWon: amount),
-  //     actions: [
-  //       cancelButton,
-  //       okButton,
-  //     ],
-  //   );
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return alert;
-  //     },
-  //   );
-  // }
 
   Widget giftAlert({required String message, required int amountWon}){
 
@@ -1138,11 +889,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
 
   // GLASSMORPHIC UI
-Widget glassmorphicUI(){
-    return  Center(
+Widget glassmorphicSmileGram(){
+    return  StoreConnector<MyAppState, SGMessage>(
+        converter: (store) => store.state.sg_message,
+        builder: (context, SGMessage currentMessagestate) => Center(
           child: GlassmorphicContainer(
-            width: 350,
-            height: 350,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             borderRadius: 20,
             blur: 20,
             alignment: Alignment.bottomCenter,
@@ -1167,133 +920,121 @@ Widget glassmorphicUI(){
               ],
             ),
             child: Center(
-                child: weatherMap()
-                //child: smilegramDetector()
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children:<Widget> [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(width: 3,),
+                            Text(
+                              'Smile rating is : ',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black45,
+                                fontFamily: 'Poppins',
+                                fontSize: 14.0,
+                              ),
+                            ),
+                             SizedBox(width: 3,),
+                            Text(
+                              (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 40,
+                          child: AnimatedTextKit(
+                            repeatForever: true,
+                            animatedTexts: [
+                              ScaleAnimatedText('110',
+                                scalingFactor: 0.2,
+                                textStyle: TextStyle(
+                                    fontSize: 33.0,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      ],
+                    ),
+                    weatherMap(),
+                  ],
+
+                )
+                //child: _smilegramDetector()
             ),
           ),
-    );
-}
-
-Widget smilegramDetector(){
-    return StoreConnector<MyAppState, SGMessage>(
-        converter: (store) => store.state.sg_message,
-        builder: (context, SGMessage currentMessagestate) => SizedBox(
-      height: 60,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.9,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget> [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget> [
-                  Text(
-                    'Target Point: ',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black45,
-                      fontFamily: 'Poppins',
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  SizedBox(width: 3,),
-                  Text(
-                    // '$highestpoint',
-                    (highestpoint > currentMessagestate.tokenIndex) ? '$highestpoint' : '${currentMessagestate.tokenIndex}',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(width: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget> [
-                  Text(
-                    'Your point(s) : ',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black45,
-                      fontFamily: 'Poppins',
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  SizedBox(width: 3,),
-                  AnimatedTextKit(
-                    repeatForever: true,
-                    animatedTexts: [
-                      ScaleAnimatedText('${currentMessagestate.tokenIndex}',
-                          scalingFactor: 0.2,
-                          textStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                            fontSize: 16.0,
-                          )),
-                      ScaleAnimatedText('${currentMessagestate.tokenIndex}',
-                          scalingFactor: 0.2,
-                          textStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                            fontSize: 16.0,
-                          ))
-
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 2,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget> [
-                  Text(
-                    'Smile rating is : ',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black45,
-                      fontFamily: 'Poppins',
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  SizedBox(width: 3,),
-                  Text(
-                    (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
     ));
 }
+
+Widget glassmorphicReadMessage(){
+    return  StoreConnector<MyAppState, SGMessage>(
+        converter: (store) => store.state.sg_message,
+        builder: (context, SGMessage currentMessagestate) => Center(
+          child: GlassmorphicContainer(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            borderRadius: 20,
+            blur: 20,
+            alignment: Alignment.bottomCenter,
+            border: 2,
+            linearGradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFFffffff).withOpacity(0.1),
+                  Color(0xFFFFFFFF).withOpacity(0.05),
+                ],
+                stops: [
+                  0.1,
+                  1,
+                ]),
+            borderGradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFFffffff).withOpacity(0.5),
+                Color((0xFFFFFFFF)).withOpacity(0.5),
+              ],
+            ),
+            child: Center(
+                child:  AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    return ScaleTransition(scale: animation, child: child);
+                  },
+                  child: Text(
+                    //currentMessagestate.content,
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, "
+                        "when an unknown printer took a galley of type and scrambled it to make a type"
+                        " specimen book. It has survived not only five centuries, but also the leap into electronic"
+                        " typesetting, remaining essentially unchanged. It was popularised in the 1960s with the "
+                        "release of Letraset sheets containing Lorem Ipsum passages, and more recently with "
+                        "desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    key: ValueKey<int>(_count),
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                ),
+            ),
+          ),
+        ));
+  }
 
 Widget weatherMap(){
     return Padding(
