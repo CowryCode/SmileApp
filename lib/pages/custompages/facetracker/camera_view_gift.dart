@@ -18,6 +18,7 @@ import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:flutter/services.dart';
+import 'package:syncfusion_flutter_maps/maps.dart';
 import '../../../main.dart';
 
 enum ScreenMode { liveFeed, gallery }
@@ -92,6 +93,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   int progressBarvalue = 20;
   bool smilestartCountdown = true;
 
+
+  // VARIABLES FOR THE MAP
+  late List<Model> data;
+  late MapShapeSource sublayerDataSource;
+  late MapShapeSource shapeDataSource;
+
+
   @override
   void initState() {
     super.initState();
@@ -124,6 +132,40 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown
       ]);
+
+
+      // SET DATA FOR MAP
+      data = <Model>[
+        Model('Algeria', "Low"),
+        Model('Nigeria', "High"),
+        Model('Libya', "Low"),
+        Model('Azerbaijan', "Low"),
+        Model('Burkina Faso', "Low"),
+        Model('Afghanistan', "Low"),
+      ];
+
+      shapeDataSource = MapShapeSource.asset(
+        "assets/world_map.json",
+        shapeDataField: 'continent',
+      );
+
+      sublayerDataSource = MapShapeSource.asset(
+       // "assets/africa.json",
+        "assets/world_map.json",
+       // shapeDataField: "name",
+        shapeDataField: "admin",
+        dataCount: data.length,
+        primaryValueMapper: (int index) {
+          return data[index].state;
+        },
+        shapeColorValueMapper: (int index) {
+          return data[index].storage;
+        },
+        shapeColorMappers: [
+          MapColorMapper(value: "Low", color: Colors.red),
+          MapColorMapper(value: "High", color: Colors.green)
+        ],
+      );
     }catch(e){
 
     }
@@ -1125,7 +1167,8 @@ Widget glassmorphicUI(){
               ],
             ),
             child: Center(
-                child: smilegramDetector()
+                child: weatherMap()
+                //child: smilegramDetector()
             ),
           ),
     );
@@ -1252,5 +1295,30 @@ Widget smilegramDetector(){
     ));
 }
 
+Widget weatherMap(){
+    return Padding(
+      padding: EdgeInsets.only(left: 15, right: 15),
+      child: SfMaps(
+        layers: <MapShapeLayer>[
+          MapShapeLayer(
+            source: shapeDataSource,
+            sublayers: [
+              MapShapeSublayer(
+                source: sublayerDataSource,
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+}
+
+}
+
+class Model {
+  const Model(this.state, this.storage);
+
+  final String state;
+  final String storage;
 }
 

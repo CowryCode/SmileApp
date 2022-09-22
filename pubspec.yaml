@@ -82,6 +82,7 @@ flutter:
     - images/custom/gift.png
     - images/custom/giftopen.png
     - images/custom/giftopen1.png
+    - assets/world_map.json
     - images/image-home.jpeg
     - images/facebook-fill.png
     - images/google-fill.png
