@@ -10,6 +10,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
@@ -22,6 +23,8 @@ import '../../../main.dart';
 enum ScreenMode { liveFeed, gallery }
 
 enum Actions { Increment }
+
+late String likes, gotpoints, popularity, totalPoints, details, pac, date;
 
 class CameraViewGift extends StatefulWidget {
   CameraViewGift(
@@ -83,6 +86,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   bool _activated = false;
   int _activation_index = -1;
   final Duration timerTastoPremuto = Duration(seconds: 20);
+  //Todo: Add real value
+  int highestpoint = 20;
 
   int progressBarvalue = 20;
   bool smilestartCountdown = true;
@@ -238,9 +243,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //   return body;
   // }
   Widget _body() {
-    //Todo: Add real value 
-    int highestpoint = 20;
-
     Widget body;
     if (_mode == ScreenMode.liveFeed) {
       body = _liveFeedBody();
@@ -461,9 +463,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return SizedBox(height: 5,);
               }
             }()),
-            SizedBox(
-              height: 20,
-            ),
           ],
         ),
       ),
@@ -769,6 +768,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ),
           ),
           Center(child: countdownTimer()),
+          ((){
+            if(smilestartCountdown == false){
+              return glassmorphicUI();
+            }else{
+              return SizedBox(height: 3.0,);
+            }
+          }()),
          // LuckPot(),
          // _giftMatrix()
         ],
@@ -1087,4 +1093,164 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       ),
     );
   }
+
+
+  // GLASSMORPHIC UI
+Widget glassmorphicUI(){
+    return  Center(
+          child: GlassmorphicContainer(
+            width: 350,
+            height: 350,
+            borderRadius: 20,
+            blur: 20,
+            alignment: Alignment.bottomCenter,
+            border: 2,
+            linearGradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFFffffff).withOpacity(0.1),
+                  Color(0xFFFFFFFF).withOpacity(0.05),
+                ],
+                stops: [
+                  0.1,
+                  1,
+                ]),
+            borderGradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFFffffff).withOpacity(0.5),
+                Color((0xFFFFFFFF)).withOpacity(0.5),
+              ],
+            ),
+            child: Center(
+                child: smilegramDetector()
+            ),
+          ),
+    );
 }
+
+Widget smilegramDetector(){
+    return StoreConnector<MyAppState, SGMessage>(
+        converter: (store) => store.state.sg_message,
+        builder: (context, SGMessage currentMessagestate) => SizedBox(
+      height: 60,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * 0.9,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget> [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget> [
+                  Text(
+                    'Target Point: ',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                      fontFamily: 'Poppins',
+                      fontSize: 14.0,
+                    ),
+                  ),
+                  SizedBox(width: 3,),
+                  Text(
+                    // '$highestpoint',
+                    (highestpoint > currentMessagestate.tokenIndex) ? '$highestpoint' : '${currentMessagestate.tokenIndex}',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(width: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget> [
+                  Text(
+                    'Your point(s) : ',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                      fontFamily: 'Poppins',
+                      fontSize: 14.0,
+                    ),
+                  ),
+                  SizedBox(width: 3,),
+                  AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      ScaleAnimatedText('${currentMessagestate.tokenIndex}',
+                          scalingFactor: 0.2,
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                            fontSize: 16.0,
+                          )),
+                      ScaleAnimatedText('${currentMessagestate.tokenIndex}',
+                          scalingFactor: 0.2,
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                            fontSize: 16.0,
+                          ))
+
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 2,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget> [
+                  Text(
+                    'Smile rating is : ',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                      fontFamily: 'Poppins',
+                      fontSize: 14.0,
+                    ),
+                  ),
+                  SizedBox(width: 3,),
+                  Text(
+                    (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    ));
+}
+
+}
+

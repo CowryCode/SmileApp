@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.0.6
   circular_countdown_timer: ^0.2.2
   glassmorphism: ^3.0.0
+  syncfusion_flutter_maps: ^20.2.50
   # State management with flutter Redux
   flutter_redux: ^0.10.0
   # Animated Text
