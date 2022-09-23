@@ -29,8 +29,7 @@ class _HomeState extends State<Home> {
     print("The show dialogue status is : ${widget.checkEmotion}");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if(widget.checkEmotion == true){
-       // _createAlertDialog(context);
-        // show the dialog
+        // show Rating dialog
         showDialog(
           context: context,
           barrierDismissible: true, // set to false if you want to force a rating
@@ -381,76 +380,9 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _createAlertDialog(BuildContext context){
-    final ThemeData themeData = Theme.of(context);
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context){
-          return AlertDialog(
-            title: Text("Emotion Track", style: TextStyle(color: Colors.black45),),
-            content: Text('Rate how happy you are ',
-              style: TextStyle(color: Colors.black45),
-            ),
-            actions: [
-              Column(
-                children: <Widget> [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children:  [
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Sad',
-                        onPressed: () {
-                          print("Clicked on 1");
-                          Navigator.of(context).pop();
-                        },
-
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Not Happy',
-                        onPressed: () {
-                          print("Clicked on 2");
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Neutral',
-                        onPressed: () {
-                          print("Clicked on 3");
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Happy',
-                        onPressed: () {
-                          print("Clicked on 4");
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Very Happy',
-                        onPressed: () {
-                          print("Clicked on 5");
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              )
-
-            ],
-          );
-        });
-  }
-
   final _dialog = RatingDialog(
-    initialRating: 1.0,
+    showCloseButton: false,
+    initialRating: 0.0,
     // your app's name?
     title: Text(
       'Rate Your Mood',
@@ -467,13 +399,18 @@ class _HomeState extends State<Home> {
       style: const TextStyle(fontSize: 15),
     ),
     // your app's logo?
-    image: const FlutterLogo(size: 100),
+    //image: const FlutterLogo(size: 100),
+    image: Image.asset("assets/logo1.jpeg",width: 100, height: 100,),
     submitButtonText: 'Submit',
     commentHint: 'Set your custom comment hint',
     onCancelled: () => print('cancelled'),
     onSubmitted: (response) {
       print('rating: ${response.rating}, comment: ${response.comment}');
-
     },
+    submitButtonTextStyle: const TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 17,
+      color: Colors.green
+    ),
   );
 }

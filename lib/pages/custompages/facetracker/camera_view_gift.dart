@@ -18,6 +18,7 @@ import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:flutter/services.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import '../../../main.dart';
 
@@ -36,7 +37,8 @@ class CameraViewGift extends StatefulWidget {
       required this.text,
       required this.onImage,
       this.onScreenModeChanged,
-      this.initialDirection = CameraLensDirection.back, this.readmessage = false})
+      this.initialDirection = CameraLensDirection.back,
+        this.readmessage = false})
       : super(key: key);
 
   final String title;
@@ -304,7 +306,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ((){
               if(widget.readmessage && smilestartCountdown == false){
                 if(currentMessagestate.iscompleted){
-                  _createAlertDialog(context);
+                 // _createAlertDialog(context);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: true, // set to false if you want to force a rating
+                   // builder: (context) => _dialog,
+                    builder: (context) => showRatingAlert(context),
+                  );
                 }
                 return SizedBox(height: 5,);
                // return AnimatedSwitcher(
@@ -340,7 +348,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               height: 20,
             ),
             ((){
-              if(!widget.readmessage){
+              if(!widget.readmessage && smilestartCountdown == false){
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -365,7 +373,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
                       child: const Text('Done',),
                       onPressed: () {
-                        _createAlertDialog(context);
+                       // _createAlertDialog(context);
+                        showDialog(
+                          context: context,
+                          barrierDismissible: true, // set to false if you want to force a rating
+                          //builder: (context) => _dialog,
+                          builder: (context) => showRatingAlert(context),
+                        );
                         _stopLiveFeed();
                       },
                     ),
@@ -765,7 +779,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-
   // void _randomize(){
   //   int _start = timerTastoPremuto.inMilliseconds;
   //   Random random = new Random();
@@ -786,75 +799,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //             }
   //           }));
   // }
-
-
-  _createAlertDialog(BuildContext context){
-    final ThemeData themeData = Theme.of(context);
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context){
-          return AlertDialog(
-            title: Text("Emotion Track", style: TextStyle(color: Colors.black45),),
-            content: Text('Rate how happy you are ',
-              style: TextStyle(color: Colors.black45),
-            ),
-            actions: [
-              Column(
-                children: <Widget> [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children:  [
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Sad',
-                        onPressed: () {
-                          print("Clicked on 1");
-                          Navigator.of(context).popAndPushNamed('/home');
-                        },
-
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Not Happy',
-                        onPressed: () {
-                          print("Clicked on 2");
-                          Navigator.of(context).popAndPushNamed('/home');
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Neutral',
-                        onPressed: () {
-                          print("Clicked on 3");
-                          Navigator.of(context).popAndPushNamed('/home');
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Happy',
-                        onPressed: () {
-                          print("Clicked on 4");
-                          Navigator.of(context).popAndPushNamed('/home');
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.star, color: Colors.black12,),
-                        tooltip: 'Very Happy',
-                        onPressed: () {
-                          print("Clicked on 5");
-                          Navigator.of(context).popAndPushNamed('/home');
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              )
-
-            ],
-          );
-        });
-  }
 
   Widget countdownTimer(){
     return Visibility(
@@ -1064,6 +1008,44 @@ Widget weatherMap(){
         ],
       ),
     );
+}
+
+
+  RatingDialog showRatingAlert(BuildContext context){
+  return RatingDialog(
+    showCloseButton: false,
+    initialRating: 0.0,
+    // your app's name?
+    title: Text(
+      'Rate Your Mood',
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    // encourage your user to leave a high rating?
+    message: Text(
+      'How happy do you feel now?',
+      textAlign: TextAlign.center,
+      style: const TextStyle(fontSize: 15),
+    ),
+    // your app's logo?
+    //image: const FlutterLogo(size: 100),
+    image: Image.asset("assets/logo1.jpeg",width: 100, height: 100,),
+    submitButtonText: 'Submit',
+    commentHint: 'Set your custom comment hint',
+    onCancelled: () => print('cancelled'),
+    onSubmitted: (response) {
+      Navigator.of(context).popAndPushNamed('/home',);
+      print('rating: ${response.rating}, comment: ${response.comment}');
+    },
+    submitButtonTextStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 17,
+        color: Colors.green
+    ),
+  );
 }
 
 }

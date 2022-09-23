@@ -54,6 +54,13 @@ dependencies:
   firebase_core: ^1.10.0
   # firebase_messaging: ^13.0.1
   firebase_messaging: ^11.2.5
+  # Setup Icon
+  flutter_launcher_icons: "^0.10.0"
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo1.jpeg"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +91,7 @@ flutter:
     - images/custom/giftopen.png
     - images/custom/giftopen1.png
     - assets/world_map.json
+    - assets/logo1.jpeg
     - images/image-home.jpeg
     - images/facebook-fill.png
     - images/google-fill.png
