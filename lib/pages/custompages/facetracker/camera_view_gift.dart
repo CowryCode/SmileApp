@@ -617,13 +617,16 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     if(_controller != null){
       if(_controller?.value != null){
         if(_controller?.value.isInitialized == false){
-          return Container();
+          // return Container();
+          return SizedBox(height: MediaQuery.of(context).size.height * 0.6,);
         }
       }else{
-        return Container();
+       // return Container();
+        return SizedBox(height: MediaQuery.of(context).size.height * 0.6,);
       }
     }else{
-      return Container();
+     // return Container();
+      return SizedBox(height: MediaQuery.of(context).size.height * 0.6,);
     }
     // Old working code
     // if (_controller?.value.isInitialized == false) {
@@ -645,7 +648,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
    // final height = MediaQuery.of(context).size.height;
    // final width = MediaQuery.of(context).size.width;
     // end of added by me
-
     return Container(
       //color: Theme.of(context).colorScheme.secondary,
       height: MediaQuery.of(context).size.height * 0.6,
@@ -659,16 +661,26 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
-          Transform.scale(
+          (_controller != null)? Transform.scale(
             scale: 1,
             child: Center(
               child: _changingCameraLens
                   ? Center(
-                      child: const Text('Changing camera lens'),
-                    )
+                child: const Text('Changing camera lens'),
+              )
                   : CameraPreview(_controller!),
             ),
-          ),
+          ) : SizedBox(height: MediaQuery.of(context).size.height * 0.6),
+          // Transform.scale(
+          //   scale: 1,
+          //   child: Center(
+          //     child: _changingCameraLens
+          //         ? Center(
+          //             child: const Text('Changing camera lens'),
+          //           )
+          //         : CameraPreview(_controller!),
+          //   ),
+          // ),
           Center(
             child: AnimatedTextKit(
               repeatForever: true,

@@ -9,6 +9,7 @@ import 'package:SmileApp/apis/Variables.dart';
 import 'package:SmileApp/pages/custompages/animation_views/luckmatrix_countdown.dart';
 import 'package:SmileApp/pages/custompages/canva/gift_view.dart';
 import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 
 class Home extends StatefulWidget {
   final String? value;
@@ -28,7 +29,13 @@ class _HomeState extends State<Home> {
     print("The show dialogue status is : ${widget.checkEmotion}");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if(widget.checkEmotion == true){
-        _createAlertDialog(context);
+       // _createAlertDialog(context);
+        // show the dialog
+        showDialog(
+          context: context,
+          barrierDismissible: true, // set to false if you want to force a rating
+          builder: (context) => _dialog,
+        );
       }
     });
   }
@@ -374,7 +381,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-
   _createAlertDialog(BuildContext context){
     final ThemeData themeData = Theme.of(context);
     return showDialog(
@@ -442,4 +448,32 @@ class _HomeState extends State<Home> {
           );
         });
   }
+
+  final _dialog = RatingDialog(
+    initialRating: 1.0,
+    // your app's name?
+    title: Text(
+      'Rate Your Mood',
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    // encourage your user to leave a high rating?
+    message: Text(
+      'How happy do you feel now?',
+      textAlign: TextAlign.center,
+      style: const TextStyle(fontSize: 15),
+    ),
+    // your app's logo?
+    image: const FlutterLogo(size: 100),
+    submitButtonText: 'Submit',
+    commentHint: 'Set your custom comment hint',
+    onCancelled: () => print('cancelled'),
+    onSubmitted: (response) {
+      print('rating: ${response.rating}, comment: ${response.comment}');
+
+    },
+  );
 }
