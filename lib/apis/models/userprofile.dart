@@ -1,9 +1,9 @@
 class UserProfile {
   int? id;
   String? name;
-  Null? phonenumber;
+  String? phonenumber;
   bool? isconsented;
-  int? smilegrampoint;
+  double? smilegrampoint;
   String? deviceId;
 
   UserProfile(

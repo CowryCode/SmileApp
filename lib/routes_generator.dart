@@ -1,4 +1,5 @@
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/smilegramLogin.dart';
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/pages/appointment.dart';
@@ -96,6 +97,8 @@ class RouteGenerator {
         // MY CUSTOM ROUTE START
     // SMILE APP
       case '/' :
+        return MaterialPageRoute(builder: (_) => SmilegramLogin());
+      case '/home_with_alert' :
       //  return MaterialPageRoute(builder: (_) => Home());
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: true,));
       case '/home' :

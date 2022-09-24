@@ -939,57 +939,55 @@ Widget glassmorphicSmileGram(){
 }
 
 Widget glassmorphicReadMessage(){
-    return  StoreConnector<MyAppState, SGMessage>(
-        converter: (store) => store.state.sg_message,
-        builder: (context, SGMessage currentMessagestate) => Center(
-          child: GlassmorphicContainer(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            borderRadius: 20,
-            blur: 20,
-            alignment: Alignment.bottomCenter,
-            border: 2,
-            linearGradient: LinearGradient(
+    return  SingleChildScrollView(
+      child: StoreConnector<MyAppState, SGMessage>(
+          converter: (store) => store.state.sg_message,
+          builder: (context, SGMessage currentMessagestate) => Center(
+            child: GlassmorphicContainer(
+              width: MediaQuery.of(context).size.width * 0.93,
+              height: MediaQuery.of(context).size.height,
+              borderRadius: 20,
+              blur: 20,
+              alignment: Alignment.bottomCenter,
+              border: 2,
+              linearGradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFFffffff).withOpacity(0.1),
+                    Color(0xFFFFFFFF).withOpacity(0.05),
+                  ],
+                  stops: [
+                    0.1,
+                    1,
+                  ]),
+              borderGradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFFffffff).withOpacity(0.1),
-                  Color(0xFFFFFFFF).withOpacity(0.05),
+                  Color(0xFFffffff).withOpacity(0.5),
+                  Color((0xFFFFFFFF)).withOpacity(0.5),
                 ],
-                stops: [
-                  0.1,
-                  1,
-                ]),
-            borderGradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFFffffff).withOpacity(0.5),
-                Color((0xFFFFFFFF)).withOpacity(0.5),
-              ],
-            ),
-            child: Center(
-                child:  AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  transitionBuilder: (Widget child, Animation<double> animation) {
-                    return ScaleTransition(scale: animation, child: child);
-                  },
-                  child: Text(
-                    //currentMessagestate.content,
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, "
-                        "when an unknown printer took a galley of type and scrambled it to make a type"
-                        " specimen book. It has survived not only five centuries, but also the leap into electronic"
-                        " typesetting, remaining essentially unchanged. It was popularised in the 1960s with the "
-                        "release of Letraset sheets containing Lorem Ipsum passages, and more recently with "
-                        "desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    key: ValueKey<int>(_count),
-                    style: Theme.of(context).textTheme.subtitle2,
-                  ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: Center(
+                    child:  AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 500),
+                      transitionBuilder: (Widget child, Animation<double> animation) {
+                        return ScaleTransition(scale: animation, child: child);
+                      },
+                      child: Text(
+                        currentMessagestate.content,
+                        key: ValueKey<int>(_count),
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                    ),
                 ),
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 
 Widget weatherMap(){

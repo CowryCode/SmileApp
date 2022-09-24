@@ -89,7 +89,7 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                                   onPressed: (){
                                     Navigator.of(context).pop();
                                   },
-                                  child: const Text('Cancel'),
+                                  child: const Text('Cancel', ),
                                 ),
                                 TextButton(
                                   onPressed: (){
@@ -97,7 +97,9 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                                     // StoreProvider.of<MyAppState>(context).dispatch(
                                     //     UpdateSGmessageAction(sgMSG)
                                     // );
-                                    Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: GiftVariableObject.init().getGiftVariable());
+                                    GiftVariableObject giftobject = GiftVariableObject(fulltext: "${widget.leader.name}", readmessage: true);
+                                   // Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: GiftVariableObject.init().getGiftVariable());
+                                    Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
                                   },
                                   child: const Text('Continue'),
                                 ),

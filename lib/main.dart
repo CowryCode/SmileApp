@@ -119,6 +119,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Thesis App',
         initialRoute: '/',
+       // initialRoute: '/smilegramlogin',
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         darkTheme: ThemeData(

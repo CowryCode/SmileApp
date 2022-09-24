@@ -49,7 +49,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   List<String>? _tokenArray ;
   int? _tokenArrayLength;
 
-  bool readmessage = false;
+  bool readmessage_ = false;
 
   String? _fulltext;
   @override
@@ -60,7 +60,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     // _tokenArray = _fulltext.split(" ");
     // _tokenArrayLength = _tokenArray.length;
     _fulltext = widget.giftVariableObject.fulltext;
-    readmessage =  widget.giftVariableObject.readmessage!;
+    // readmessage =  widget.giftVariableObject.readmessage!;
     _tokenArray = _fulltext!.split(" ");
     _tokenArrayLength = _tokenArray!.length;
   }
@@ -75,9 +75,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
 
   @override
   Widget build(BuildContext context) {
-
     return CameraViewGift(
-      title: readmessage? 'Smile and Hold' : 'Smile for Gift',
+     // title: readmessage? 'Smile and Hold' : 'Smile for Gift',
+      title: widget.giftVariableObject.readmessage!? 'Smile and Hold' : 'Smile for Gift',
       //TODO: COMMENTED OUT TODAY 20-09-2022
      // customPaint: customPaint,
       text: _text!,
@@ -85,7 +85,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         processImage(inputImage);
       },
       initialDirection: CameraLensDirection.front,
-      readmessage: readmessage,
+      readmessage: widget.giftVariableObject.readmessage!,
+     // readmessage: readmessage,
     );
   }
 
@@ -116,7 +117,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             .sg_message;
         double? prob = face.smilingProbability;
         if(sgMessage.showStartCountDown == false){
-        if (readmessage) {
+       // if (readmessage) {
+        if (widget.giftVariableObject.readmessage!) {
           if(sgMessage.tokenIndex < _tokenArrayLength! ){
             if (prob! > 0.5) {
               _msg = sgMessage.content + " " + _tokenArray![sgMessage.tokenIndex];

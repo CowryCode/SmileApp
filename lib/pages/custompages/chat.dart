@@ -36,7 +36,7 @@ class _ChatWidgetState extends State<ChatWidget> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
           onPressed: () {
-            Navigator.of(context).popAndPushNamed('/');
+            Navigator.of(context).popAndPushNamed('/home');
           },
         ),
         shape: RoundedRectangleBorder(
