@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:SmileApp/pages/custompages/facetracker/facialwidgets/countdowntimer.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -90,7 +91,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   int highestpoint = 20;
 
   int progressBarvalue = 20;
-  bool smilestartCountdown = false;
+ // bool smilestartCountdown = false;
 
 
   // VARIABLES FOR THE MAP
@@ -207,9 +208,14 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         DeviceOrientation.portraitDown
       ]);
 
-      setState(() {
-        smilestartCountdown = true;
-      });
+      SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+      sgMessage.setShowCountdown(countDownVisibility: false);
+      StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
+
+      // setState(() {
+      //   smilestartCountdown = true;
+      // });
+
     }catch(e){
       //
     }
@@ -294,10 +300,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     //   body = _galleryBody();
     // }
 
-    return StoreConnector<MyAppState, SGMessage>(
-      converter: (store) => store.state.sg_message,
-      builder: (context, SGMessage currentMessagestate) =>
-          SingleChildScrollView(
+    return SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
@@ -305,84 +308,157 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               height: 20,
             ),
             ((){
-              if(widget.readmessage && smilestartCountdown == false){
-                if(currentMessagestate.iscompleted){
-                 // _createAlertDialog(context);
-                  showDialog(
-                    context: context,
-                    barrierDismissible: true, // set to false if you want to force a rating
-                   // builder: (context) => _dialog,
-                    builder: (context) => showRatingAlert(context),
-                  );
-                }
-                return SizedBox(height: 5,);
-              }else{
-                return SizedBox(height: 5,);
-              }
-            }()),
-            ((){
-
-              if(currentMessagestate.iscompleted){
-                _stopLiveFeed();
-                if(highestpoint > currentMessagestate.tokenIndex){
-                  return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+              return StoreConnector<MyAppState, SGMessage>(
+              converter: (store) => store.state.sg_message,
+              builder: (context, SGMessage currentMessagestate) => ((){
+                if(widget.readmessage && currentMessagestate.showStartCountDown == false){
+                  if(currentMessagestate.iscompleted){
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true, // set to false if you want to force a rating
+                      builder: (context) => showRatingAlert(context),
+                    );
+                  }
+                  return SizedBox(height: 5,);
                 }else{
-                  return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+                  return SizedBox(height: 5,);
                 }
-              }else {
-                int remaining = highestpoint - currentMessagestate.tokenIndex;
-                 return _cameraDisplay(pointsleft: remaining);
-              }
+              }()));
             }()),
-           // _cameraDisplay(),
+            // ((){
+            //   if(widget.readmessage && currentMessagestate.showStartCountDown == false){
+            //     if(currentMessagestate.iscompleted){
+            //       showDialog(
+            //         context: context,
+            //         barrierDismissible: true, // set to false if you want to force a rating
+            //         builder: (context) => showRatingAlert(context),
+            //       );
+            //     }
+            //     return SizedBox(height: 5,);
+            //   }else{
+            //     return SizedBox(height: 5,);
+            //   }
+            // }()),
+            ((){
+              return StoreConnector<MyAppState, SGMessage>(
+                  converter: (store) => store.state.sg_message,
+                  builder: (context, SGMessage currentMessagestate) => ((){
+                    if(currentMessagestate.iscompleted){
+                      _stopLiveFeed();
+                      if(highestpoint > currentMessagestate.tokenIndex){
+                        return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+                      }else{
+                        return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+                      }
+                    }else {
+                      int remaining = highestpoint - currentMessagestate.tokenIndex;
+                      return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
+                    }
+                  }()));
+
+              // if(currentMessagestate.iscompleted){
+              //   _stopLiveFeed();
+              //   if(highestpoint > currentMessagestate.tokenIndex){
+              //     return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+              //   }else{
+              //     return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+              //   }
+              // }else {
+              //   int remaining = highestpoint - currentMessagestate.tokenIndex;
+              //    return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
+              // }
+            }()),
             SizedBox(
               height: 20,
             ),
             ((){
-              if(!widget.readmessage && smilestartCountdown == false){
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                      child: const Text('Refresh',),
-                      onPressed: () {
-                        refreshCamera(); // Refresh
-                        SGMessage sgMSG = SGMessage(
-                          content: "",
-                          updated: true,
-                          tokenIndex: 0,
-                          iscompleted: false,
-                          showStartCountDown: true,
-                        );
-                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                        _count += 1;
-                      },
-                    ),
-                    SizedBox(width: 3,),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                      child: const Text('Done',),
-                      onPressed: () {
-                       // _createAlertDialog(context);
-                        showDialog(
-                          context: context,
-                          barrierDismissible: true, // set to false if you want to force a rating
-                          //builder: (context) => _dialog,
-                          builder: (context) => showRatingAlert(context),
-                        );
-                        _stopLiveFeed();
-                      },
-                    ),
-                  ],
-                );
-              }else{
-                return SizedBox(height: 5,);
-              }
+              return StoreConnector<MyAppState, SGMessage>(
+                  converter: (store) => store.state.sg_message,
+                  builder: (context, SGMessage currentMessagestate) => ((){
+                    if(!widget.readmessage && currentMessagestate.showStartCountDown == false){
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+                            child: const Text('Refresh',),
+                            onPressed: () {
+                              refreshCamera(); // Refresh
+                              SGMessage sgMSG = SGMessage(
+                                content: "",
+                                updated: true,
+                                tokenIndex: 0,
+                                iscompleted: false,
+                                showStartCountDown: true,
+                              );
+                              StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                              _count += 1;
+                            },
+                          ),
+                          SizedBox(width: 3,),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+                            child: const Text('Done',),
+                            onPressed: () {
+                              // _createAlertDialog(context);
+                              showDialog(
+                                context: context,
+                                barrierDismissible: true, // set to false if you want to force a rating
+                                //builder: (context) => _dialog,
+                                builder: (context) => showRatingAlert(context),
+                              );
+                              _stopLiveFeed();
+                            },
+                          ),
+                        ],
+                      );
+                    }else{
+                      return SizedBox(height: 5,);
+                    }
+                  }()));
+              // if(!widget.readmessage && currentMessagestate.showStartCountDown == false){
+              //   return Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       ElevatedButton(
+              //         style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+              //         child: const Text('Refresh',),
+              //         onPressed: () {
+              //           refreshCamera(); // Refresh
+              //           SGMessage sgMSG = SGMessage(
+              //             content: "",
+              //             updated: true,
+              //             tokenIndex: 0,
+              //             iscompleted: false,
+              //             showStartCountDown: true,
+              //           );
+              //           StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+              //           _count += 1;
+              //         },
+              //       ),
+              //       SizedBox(width: 3,),
+              //       ElevatedButton(
+              //         style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+              //         child: const Text('Done',),
+              //         onPressed: () {
+              //          // _createAlertDialog(context);
+              //           showDialog(
+              //             context: context,
+              //             barrierDismissible: true, // set to false if you want to force a rating
+              //             //builder: (context) => _dialog,
+              //             builder: (context) => showRatingAlert(context),
+              //           );
+              //           _stopLiveFeed();
+              //         },
+              //       ),
+              //     ],
+              //   );
+              // }else{
+              //   return SizedBox(height: 5,);
+              // }
             }()),
           ],
         ),
-      ),
     );
    // return body;
   }
@@ -618,7 +694,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   // MY CODE
-  Widget _cameraDisplay({required int pointsleft,}) {
+  Widget _cameraDisplay({required int pointsleft, required bool smilestartCountdown}) {
 
     if(_controller != null){
       if(_controller?.value != null){
@@ -686,34 +762,19 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           //         : CameraPreview(_controller!),
           //   ),
           // ),
-          Center(
-            child: AnimatedTextKit(
-              repeatForever: true,
-              animatedTexts: [
-                ScaleAnimatedText(
-                    (pointsleft < 0) ? 'Congratulations ! \n New smile champion' : '',
-                    scalingFactor: 0.2,
-                    textAlign: TextAlign.center,
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red,
-                        fontSize: 16
-                    )),
-              ],
-            ),
-          ),
           //Center(child: _countdownTimer()), // THIS IS THE COUNTDOWN Original implementation
           ((){
             if(smilestartCountdown == true){
               return Center(child: CountdownTimer());
-             // return Center(child: _countdownTimer());
+             //return Center(child: _countdownTimer());
             }else{
               return SizedBox(height: 3.0,);
             }
           }()),
           ((){
             if(smilestartCountdown == false && !widget.readmessage ){
-              return glassmorphicSmileGram();
+             // return glassmorphicSmileGram();
+              return GlassmorphicSmilegramDisplay();
             }else{
               return SizedBox(height: 3.0,);
             }
@@ -799,50 +860,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //           }));
   // }
 
-  Widget _countdownTimer_old(){
-    return Visibility(
-      visible: smilestartCountdown,
-      child: CircularCountDownTimer(
-        duration: 10,
-        initialDuration: 0,
-        controller: CountDownController(),
-        width: MediaQuery.of(context).size.width / 2,
-        height: MediaQuery.of(context).size.height / 2,
-        ringColor: Colors.grey[300]!,
-        ringGradient: null,
-        fillColor: Colors.green[300]!,
-        fillGradient: null,
-        backgroundColor: Colors.green[700],
-        backgroundGradient: null,
-        strokeWidth: 20.0,
-        strokeCap: StrokeCap.round,
-        textStyle: TextStyle(
-            fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
-        textFormat: CountdownTextFormat.S,
-        isReverse: false,
-        isReverseAnimation: false,
-        isTimerTextShown: true,
-       // autoStart: true,
-        autoStart: smilestartCountdown,
-        onStart: () {
-          debugPrint('Countdown Started');
-        },
-        onComplete: () {
-          debugPrint('Countdown Ended');
-          setState(() {
-            smilestartCountdown = false;
-          });
-        },
-        onChange: (String timeStamp) {
-          debugPrint('Countdown Changed $timeStamp');
-        },
-      ),
-    );
-  }
 
 
   // GLASSMORPHIC UI
-Widget glassmorphicSmileGram(){
+Widget glassmorphicSmileGram_old(){
     return  StoreConnector<MyAppState, SGMessage>(
         converter: (store) => store.state.sg_message,
         builder: (context, SGMessage currentMessagestate) => Center(

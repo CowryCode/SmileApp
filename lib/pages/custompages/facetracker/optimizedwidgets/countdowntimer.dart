@@ -19,9 +19,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
     //return Container();
     return StoreConnector<MyAppState, SGMessage>(
     converter: (store) => store.state.sg_message,
-    builder: (context, SGMessage currentMessagestate) => Visibility(
-        visible: currentMessagestate.showStartCountDown,
-        child: CircularCountDownTimer(
+    builder: (context, SGMessage currentMessagestate) => CircularCountDownTimer(
           duration: 10,
           initialDuration: 0,
           controller: CountDownController(),
@@ -58,7 +56,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
             //debugPrint('Countdown Changed $timeStamp');
           },
         ),
-      ));
+      );
     }
 }
 
