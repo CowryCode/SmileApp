@@ -29,7 +29,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
       //enableContours: true, // Original code
-      enableContours: true,
+      enableContours: false,
       enableClassification: true,
     ),
   );

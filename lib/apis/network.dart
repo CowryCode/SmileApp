@@ -6,8 +6,6 @@ import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:redux/redux.dart';
-
 class ApiAccess {
 
   Future<UserProfile?> createprofile({required UserProfile profile}) async {
@@ -43,25 +41,32 @@ class ApiAccess {
   }
 
 
-  Future<UserProfile> loginWithPhoneNumber({required String phonenumber}) async {
-    // String? token;
-    // Future<String?> tk = Localstorage().getString(key_login_token);
-    // await tk.then((value) => {token = value!});
-
+  Future<UserProfile> loginWithPhoneNumber({String? phonenumber}) async {
     try {
+    String? token;
+
+    if(phonenumber == null){
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
+    }else{
+      token = phonenumber;
+    }
+
       final response = await http.get(Uri.parse(getProfile_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
           'Origin': '$MobileURL',
-          'Authorization': 'Bearer $phonenumber'
+          'Authorization': 'Bearer $token'
         },
       );
 
       if (response.statusCode == 200) {
         UserProfile userProfile = UserProfile.fromJson(jsonDecode(response.body));
-        Localstorage().saveString(key_login_token, phonenumber);
-        print(userProfile.toJson());
+        if(phonenumber != null){
+          Localstorage().saveString(key_login_token, phonenumber);
+        }
+        print('USES PROFILE ${userProfile.toJson()}');
         return userProfile;
       } else {
         throw Exception("Could not pull user record, status code ${response.statusCode} ");

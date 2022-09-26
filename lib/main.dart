@@ -9,21 +9,12 @@ import 'package:SmileApp/pages/custompages/statemanagement/sg_message_reducer.da
 import 'package:SmileApp/routes_generator.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:SmileApp/config/app_config.dart' as config;
-import 'package:SmileApp/pages/custompages/redux/app_state.dart';
-import 'package:SmileApp/pages/custompages/redux/models/drink.dart';
-import 'package:SmileApp/pages/custompages/redux/reducer.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/sg_message_reducer.dart';
-import 'package:SmileApp/routes_generator.dart';
 
 import 'package:redux/redux.dart';
 
@@ -118,8 +109,8 @@ class MyApp extends StatelessWidget {
       store: _store,
       child: MaterialApp(
         title: 'Thesis App',
-        initialRoute: '/',
-       // initialRoute: '/smilegramlogin',
+        //initialRoute: '/',
+        initialRoute: '/home_with_alert',
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         darkTheme: ThemeData(

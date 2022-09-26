@@ -1,5 +1,10 @@
 
+import 'dart:async';
+import 'package:SmileApp/apis/diskstorage.dart';
+import 'package:SmileApp/apis/models/globemodel.dart';
+import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/models/user.dart';
@@ -8,6 +13,9 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
 class SmilegramLogin extends StatefulWidget {
+
+  SmilegramLogin();
+
   @override
   _SmilegramLoginState createState() => _SmilegramLoginState();
 }
@@ -17,13 +25,23 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
   final  _formKey = GlobalKey<FormBuilderState>();
   final _emailFieldKey = GlobalKey<FormBuilderFieldState>();
 
+  bool justloggedin = false;
+  bool loginstatus = false;
+  late Future<UserProfile> userprofile;
+
   User currentUser = new User.init().getCurrentUser();
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         body: SingleChildScrollView(
-
          child: Column(
           mainAxisAlignment:MainAxisAlignment.spaceBetween,
           children: [
@@ -56,7 +74,7 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Poppins'
                   ),
-                  
+
                 ),
               ),
             ),
@@ -104,8 +122,17 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
                   ),
                   onPressed: () async {
                    String phonenumber =  _formKey.currentState?.fields["email"]!.value;
-                   ApiAccess().loginWithPhoneNumber(phonenumber: phonenumber);
-                   print("THE EMAIL : ${phonenumber}");
+                   setState(() {
+                     justloggedin = true;
+                   });
+                   userprofile = ApiAccess().loginWithPhoneNumber(phonenumber: phonenumber);
+                   userprofile.then((value) => {
+                     if(value != null){
+                       Localstorage().saveBoolean(key_login_status, true),
+                       print("THE EMAIL : ${phonenumber}"),
+                       Navigator.of(context).pushNamed('/home_with_alert')
+                     }
+                   });
                   },
                 ),
               ],

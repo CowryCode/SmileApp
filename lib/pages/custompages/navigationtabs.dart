@@ -50,7 +50,7 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
 
   @override
   void dispose() {
-    _controller!.dispose();
+   // _controller!.dispose();
     super.dispose();
   }
 

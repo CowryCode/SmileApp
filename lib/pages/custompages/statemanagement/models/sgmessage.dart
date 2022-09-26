@@ -14,4 +14,8 @@ class SGMessage{
     this.showStartCountDown = true,
     this.smileProbability = 0,
   });
+
+  void setShowCountdown({required bool countDownVisibility}){
+    this.showStartCountDown = countDownVisibility;
+  }
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:SmileApp/pages/custompages/facetracker/facialwidgets/countdowntimer.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -90,7 +89,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   int highestpoint = 20;
 
   int progressBarvalue = 20;
-  bool smilestartCountdown = false;
+  bool smilestartCountdown = true;
 
 
   // VARIABLES FOR THE MAP
@@ -286,13 +285,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //   return body;
   // }
   Widget _body() {
-    // Commnented Out today 29-09-2022
-    // Widget body;
-    // if (_mode == ScreenMode.liveFeed) {
-    //   body = _liveFeedBody();
-    // } else {
-    //   body = _galleryBody();
-    // }
+
+    Widget body;
+    if (_mode == ScreenMode.liveFeed) {
+      body = _liveFeedBody();
+    } else {
+      body = _galleryBody();
+    }
 
     return StoreConnector<MyAppState, SGMessage>(
       converter: (store) => store.state.sg_message,
@@ -305,6 +304,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               height: 20,
             ),
             ((){
+              print("******************** Conditions 1 ***************");
+              print("Read Msg Flag ${widget.readmessage}");
+              print("Countdown Flag $smilestartCountdown");
               if(widget.readmessage && smilestartCountdown == false){
                 if(currentMessagestate.iscompleted){
                  // _createAlertDialog(context);
@@ -316,12 +318,24 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   );
                 }
                 return SizedBox(height: 5,);
+               // return AnimatedSwitcher(
+               //    duration: const Duration(milliseconds: 500),
+               //    transitionBuilder: (Widget child, Animation<double> animation) {
+               //      return ScaleTransition(scale: animation, child: child);
+               //    },
+               //    child: Text(
+               //      currentMessagestate.content,
+               //      key: ValueKey<int>(_count),
+               //      style: Theme.of(context).textTheme.headline4,
+               //    ),
+               //  );
               }else{
                 return SizedBox(height: 5,);
               }
             }()),
             ((){
-
+              print("******************** Conditions 2 ***************");
+              print("Msg Complete Flag ${currentMessagestate.iscompleted}");
               if(currentMessagestate.iscompleted){
                 _stopLiveFeed();
                 if(highestpoint > currentMessagestate.tokenIndex){
@@ -339,6 +353,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               height: 20,
             ),
             ((){
+              print("******************** Conditions 3 ***************");
+              print("Read Msg Flag ${widget.readmessage}");
+              print("Countdown Flag $smilestartCountdown");
               if(!widget.readmessage && smilestartCountdown == false){
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -384,7 +401,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ),
       ),
     );
-   // return body;
+    return body;
   }
 
   Widget _liveFeedBody() {
@@ -619,7 +636,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   // MY CODE
   Widget _cameraDisplay({required int pointsleft,}) {
-
+    print("******************** Conditions 2A ***************");
+    print("Controller Available ? ${_controller != null}");
+    print("Smile Countdown Activated? $smilestartCountdown");
     if(_controller != null){
       if(_controller?.value != null){
         if(_controller?.value.isInitialized == false){
@@ -638,6 +657,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // if (_controller?.value.isInitialized == false) {
     //   return Container();
     // }
+
 
     final size = MediaQuery.of(context).size;
     // calculate scale depending on screen and camera ratios
@@ -705,8 +725,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           //Center(child: _countdownTimer()), // THIS IS THE COUNTDOWN Original implementation
           ((){
             if(smilestartCountdown == true){
-              return Center(child: CountdownTimer());
-             // return Center(child: _countdownTimer());
+              return Center(child: _countdownTimer());
             }else{
               return SizedBox(height: 3.0,);
             }
@@ -799,7 +818,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //           }));
   // }
 
-  Widget _countdownTimer_old(){
+  Widget _countdownTimer(){
     return Visibility(
       visible: smilestartCountdown,
       child: CircularCountDownTimer(
@@ -810,8 +829,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         height: MediaQuery.of(context).size.height / 2,
         ringColor: Colors.grey[300]!,
         ringGradient: null,
+       // fillColor: Colors.purpleAccent[100]!,
         fillColor: Colors.green[300]!,
         fillGradient: null,
+       // backgroundColor: Colors.purple[500],
         backgroundColor: Colors.green[700],
         backgroundGradient: null,
         strokeWidth: 20.0,
