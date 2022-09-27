@@ -128,18 +128,6 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
                           SizedBox(
                             height: 40,
                             child: SmileDurationCounter(),
-                            // child: AnimatedTextKit(
-                            //   repeatForever: true,
-                            //   animatedTexts: [
-                            //     ScaleAnimatedText('110',
-                            //       scalingFactor: 0.2,
-                            //       textStyle: TextStyle(
-                            //           fontSize: 33.0,
-                            //           color: Colors.green,
-                            //           fontWeight: FontWeight.bold),
-                            //     ),
-                            //   ],
-                            // ),
                           ),
 
                         ],

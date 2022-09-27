@@ -32,7 +32,7 @@ class CameraViewGift extends StatefulWidget {
       required this.title,
         //TODO: COMMENTED OUT TODAY 20-09-2022
      // required this.customPaint,
-      required this.text,
+     // required this.text,
       required this.onImage,
       this.onScreenModeChanged,
       this.initialDirection = CameraLensDirection.back,
@@ -42,7 +42,7 @@ class CameraViewGift extends StatefulWidget {
   final String title;
   //TODO: COMMENTED OUT TODAY 20-09-2022
   //final CustomPaint customPaint;
-  final String text;
+ // final String text;
   final Function(InputImage inputImage) onImage;
   // final Function(ScreenMode mode) onScreenModeChanged;
   Function(ScreenMode mode)? onScreenModeChanged;
@@ -139,35 +139,35 @@ class _CameraViewGiftState extends State<CameraViewGift> {
      // GobeModel  gm = GobeModel();
       // data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3")!;
       // print("Loaded Data : ${data}");
-      data = <Model>[
-        Model('Algeria', "Low"),
-        Model('Nigeria', "High"),
-        Model('Libya', "Low"),
-        Model('Azerbaijan', "Low"),
-        Model('Burkina Faso', "Low"),
-        Model('Afghanistan', "Low"),
-      ];
+      // data = <Model>[
+      //   Model('Algeria', "Low"),
+      //   Model('Nigeria', "High"),
+      //   Model('Libya', "Low"),
+      //   Model('Azerbaijan', "Low"),
+      //   Model('Burkina Faso', "Low"),
+      //   Model('Afghanistan', "Low"),
+      // ];
 
-      shapeDataSource = MapShapeSource.asset(
-        "assets/world_map.json",
-        shapeDataField: 'continent',
-      );
-
-      sublayerDataSource = MapShapeSource.asset(
-        "assets/world_map.json",
-        shapeDataField: "admin",
-        dataCount: data.length,
-        primaryValueMapper: (int index) {
-          return data[index].state;
-        },
-        shapeColorValueMapper: (int index) {
-          return data[index].storage;
-        },
-        shapeColorMappers: [
-          MapColorMapper(value: "Low", color: Colors.red),
-          MapColorMapper(value: "High", color: Colors.green)
-        ],
-      );
+      // shapeDataSource = MapShapeSource.asset(
+      //   "assets/world_map.json",
+      //   shapeDataField: 'continent',
+      // );
+      //
+      // sublayerDataSource = MapShapeSource.asset(
+      //   "assets/world_map.json",
+      //   shapeDataField: "admin",
+      //   dataCount: data.length,
+      //   primaryValueMapper: (int index) {
+      //     return data[index].state;
+      //   },
+      //   shapeColorValueMapper: (int index) {
+      //     return data[index].storage;
+      //   },
+      //   shapeColorMappers: [
+      //     MapColorMapper(value: "Low", color: Colors.red),
+      //     MapColorMapper(value: "High", color: Colors.green)
+      //   ],
+      // );
 
     }catch(e){
       print("Error : ${e.toString()}");
@@ -300,7 +300,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     //   body = _galleryBody();
     // }
 
-    return SingleChildScrollView(
+    return StoreConnector<MyAppState, SGMessage>(
+    converter: (store) => store.state.sg_message,
+    builder: (context, SGMessage currentMessagestate) =>  SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
@@ -308,158 +310,80 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               height: 20,
             ),
             ((){
-              return StoreConnector<MyAppState, SGMessage>(
-              converter: (store) => store.state.sg_message,
-              builder: (context, SGMessage currentMessagestate) => ((){
-                if(widget.readmessage && currentMessagestate.showStartCountDown == false){
-                  if(currentMessagestate.iscompleted){
-                    showDialog(
-                      context: context,
-                      barrierDismissible: true, // set to false if you want to force a rating
-                      builder: (context) => showRatingAlert(context),
-                    );
-                  }
-                  return SizedBox(height: 5,);
-                }else{
-                  return SizedBox(height: 5,);
+              if(widget.readmessage && currentMessagestate.showStartCountDown == false){
+                if(currentMessagestate.iscompleted){
+                  showDialog(
+                    context: context,
+                    barrierDismissible: true, // set to false if you want to force a rating
+                    builder: (context) => showRatingAlert(context),
+                  );
                 }
-              }()));
+                return SizedBox(height: 5,);
+              }else{
+                return SizedBox(height: 5,);
+              }
             }()),
-            // ((){
-            //   if(widget.readmessage && currentMessagestate.showStartCountDown == false){
-            //     if(currentMessagestate.iscompleted){
-            //       showDialog(
-            //         context: context,
-            //         barrierDismissible: true, // set to false if you want to force a rating
-            //         builder: (context) => showRatingAlert(context),
-            //       );
-            //     }
-            //     return SizedBox(height: 5,);
-            //   }else{
-            //     return SizedBox(height: 5,);
-            //   }
-            // }()),
             ((){
-              return StoreConnector<MyAppState, SGMessage>(
-                  converter: (store) => store.state.sg_message,
-                  builder: (context, SGMessage currentMessagestate) => ((){
-                    if(currentMessagestate.iscompleted){
-                      _stopLiveFeed();
-                      if(highestpoint > currentMessagestate.tokenIndex){
-                        return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
-                      }else{
-                        return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
-                      }
-                    }else {
-                      int remaining = highestpoint - currentMessagestate.tokenIndex;
-                      return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
-                    }
-                  }()));
-
-              // if(currentMessagestate.iscompleted){
-              //   _stopLiveFeed();
-              //   if(highestpoint > currentMessagestate.tokenIndex){
-              //     return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
-              //   }else{
-              //     return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
-              //   }
-              // }else {
-              //   int remaining = highestpoint - currentMessagestate.tokenIndex;
-              //    return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
-              // }
+              if(currentMessagestate.iscompleted){
+                _stopLiveFeed();
+                if(highestpoint > currentMessagestate.tokenIndex){
+                  return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+                }else{
+                  return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+                }
+              }else {
+                int remaining = highestpoint - currentMessagestate.tokenIndex;
+                 return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
+              }
             }()),
             SizedBox(
               height: 20,
             ),
             ((){
-              return StoreConnector<MyAppState, SGMessage>(
-                  converter: (store) => store.state.sg_message,
-                  builder: (context, SGMessage currentMessagestate) => ((){
-                    if(!widget.readmessage && currentMessagestate.showStartCountDown == false){
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                            child: const Text('Refresh',),
-                            onPressed: () {
-                              refreshCamera(); // Refresh
-                              SGMessage sgMSG = SGMessage(
-                                content: "",
-                                updated: true,
-                                tokenIndex: 0,
-                                iscompleted: false,
-                                showStartCountDown: true,
-                              );
-                              StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                              _count += 1;
-                            },
-                          ),
-                          SizedBox(width: 3,),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                            child: const Text('Done',),
-                            onPressed: () {
-                              // _createAlertDialog(context);
-                              showDialog(
-                                context: context,
-                                barrierDismissible: true, // set to false if you want to force a rating
-                                //builder: (context) => _dialog,
-                                builder: (context) => showRatingAlert(context),
-                              );
-                              _stopLiveFeed();
-                            },
-                          ),
-                        ],
-                      );
-                    }else{
-                      return SizedBox(height: 5,);
-                    }
-                  }()));
-              // if(!widget.readmessage && currentMessagestate.showStartCountDown == false){
-              //   return Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       ElevatedButton(
-              //         style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-              //         child: const Text('Refresh',),
-              //         onPressed: () {
-              //           refreshCamera(); // Refresh
-              //           SGMessage sgMSG = SGMessage(
-              //             content: "",
-              //             updated: true,
-              //             tokenIndex: 0,
-              //             iscompleted: false,
-              //             showStartCountDown: true,
-              //           );
-              //           StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-              //           _count += 1;
-              //         },
-              //       ),
-              //       SizedBox(width: 3,),
-              //       ElevatedButton(
-              //         style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-              //         child: const Text('Done',),
-              //         onPressed: () {
-              //          // _createAlertDialog(context);
-              //           showDialog(
-              //             context: context,
-              //             barrierDismissible: true, // set to false if you want to force a rating
-              //             //builder: (context) => _dialog,
-              //             builder: (context) => showRatingAlert(context),
-              //           );
-              //           _stopLiveFeed();
-              //         },
-              //       ),
-              //     ],
-              //   );
-              // }else{
-              //   return SizedBox(height: 5,);
-              // }
+              if(!widget.readmessage && currentMessagestate.showStartCountDown == false){
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+                      child: const Text('Refresh',),
+                      onPressed: () {
+                        refreshCamera(); // Refresh
+                        SGMessage sgMSG = SGMessage(
+                          content: "",
+                          updated: true,
+                          tokenIndex: 0,
+                          iscompleted: false,
+                          showStartCountDown: true,
+                        );
+                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                        _count += 1;
+                      },
+                    ),
+                    SizedBox(width: 3,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+                      child: const Text('Done',),
+                      onPressed: () {
+                       // _createAlertDialog(context);
+                        showDialog(
+                          context: context,
+                          barrierDismissible: true, // set to false if you want to force a rating
+                          //builder: (context) => _dialog,
+                          builder: (context) => showRatingAlert(context),
+                        );
+                        _stopLiveFeed();
+                      },
+                    ),
+                  ],
+                );
+              }else{
+                return SizedBox(height: 5,);
+              }
             }()),
           ],
         ),
-    );
+    ));
    // return body;
   }
 
@@ -532,47 +456,47 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  Widget _galleryBody() {
-    return ListView(shrinkWrap: true, children: [
-      _image != null
-          ? SizedBox(
-              height: 400,
-              width: 400,
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  Image.file(_image!),
-                  //TODO: COMMENTED OUT TODAY 20-09-2022
-                  //if (widget.customPaint != null) widget.customPaint,
-                ],
-              ),
-            )
-          : Icon(
-              Icons.image,
-              size: 200,
-            ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ElevatedButton(
-          child: Text('From Gallery'),
-          onPressed: () => _getImage(ImageSource.gallery),
-        ),
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ElevatedButton(
-          child: Text('Take a picture'),
-          onPressed: () => _getImage(ImageSource.camera),
-        ),
-      ),
-      if (_image != null)
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-              '${_path == null ? '' : 'Image path: $_path'}\n\n${widget.text ?? ''}'),
-        ),
-    ]);
-  }
+  // Widget _galleryBody() {
+  //   return ListView(shrinkWrap: true, children: [
+  //     _image != null
+  //         ? SizedBox(
+  //             height: 400,
+  //             width: 400,
+  //             child: Stack(
+  //               fit: StackFit.expand,
+  //               children: <Widget>[
+  //                 Image.file(_image!),
+  //                 //TODO: COMMENTED OUT TODAY 20-09-2022
+  //                 //if (widget.customPaint != null) widget.customPaint,
+  //               ],
+  //             ),
+  //           )
+  //         : Icon(
+  //             Icons.image,
+  //             size: 200,
+  //           ),
+  //     Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: ElevatedButton(
+  //         child: Text('From Gallery'),
+  //         onPressed: () => _getImage(ImageSource.gallery),
+  //       ),
+  //     ),
+  //     Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: ElevatedButton(
+  //         child: Text('Take a picture'),
+  //         onPressed: () => _getImage(ImageSource.camera),
+  //       ),
+  //     ),
+  //     if (_image != null)
+  //       Padding(
+  //         padding: const EdgeInsets.all(16.0),
+  //         child: Text(
+  //             '${_path == null ? '' : 'Image path: $_path'}\n\n${widget.text ?? ''}'),
+  //       ),
+  //   ]);
+  // }
 
   Future _getImage(ImageSource source) async {
     setState(() {
@@ -860,101 +784,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //           }));
   // }
 
-
-
-  // GLASSMORPHIC UI
-Widget glassmorphicSmileGram_old(){
-    return  StoreConnector<MyAppState, SGMessage>(
-        converter: (store) => store.state.sg_message,
-        builder: (context, SGMessage currentMessagestate) => Center(
-          child: GlassmorphicContainer(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            borderRadius: 20,
-            blur: 20,
-            alignment: Alignment.bottomCenter,
-            border: 2,
-            linearGradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFffffff).withOpacity(0.1),
-                  Color(0xFFFFFFFF).withOpacity(0.05),
-                ],
-                stops: [
-                  0.1,
-                  1,
-                ]),
-            borderGradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFFffffff).withOpacity(0.5),
-                Color((0xFFFFFFFF)).withOpacity(0.5),
-              ],
-            ),
-            child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children:<Widget> [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(width: 3,),
-                            Text(
-                              'Smile rating is : ',
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black45,
-                                fontFamily: 'Poppins',
-                                fontSize: 14.0,
-                              ),
-                            ),
-                             SizedBox(width: 3,),
-                            Text(
-                              (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 40,
-                          child: AnimatedTextKit(
-                            repeatForever: true,
-                            animatedTexts: [
-                              ScaleAnimatedText('110',
-                                scalingFactor: 0.2,
-                                textStyle: TextStyle(
-                                    fontSize: 33.0,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                      ],
-                    ),
-                    weatherMap(),
-                  ],
-
-                )
-                //child: _smilegramDetector()
-            ),
-          ),
-    ));
-}
 
 Widget glassmorphicReadMessage(){
     return  SingleChildScrollView(

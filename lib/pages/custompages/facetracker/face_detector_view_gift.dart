@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -76,11 +77,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   @override
   Widget build(BuildContext context) {
     return CameraViewGift(
-     // title: readmessage? 'Smile and Hold' : 'Smile for Gift',
       title: widget.giftVariableObject.readmessage!? 'Smile and Hold' : 'Smile for Gift',
-      //TODO: COMMENTED OUT TODAY 20-09-2022
      // customPaint: customPaint,
-      text: _text!,
+     // text: _text!,
       onImage: (inputImage) {
         processImage(inputImage);
       },
@@ -88,6 +87,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
       readmessage: widget.giftVariableObject.readmessage!,
      // readmessage: readmessage,
     );
+
   }
 
   Future<void> processImage(InputImage inputImage) async {
@@ -95,17 +95,17 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
-    setState(() {
-      _text = '';
-    });
+    // setState(() {
+    //   _text = '';
+    // });
     final faces = await _faceDetector.processImage(inputImage);
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
-      final painter = FaceDetectorPainter(
-          faces,
-          inputImage.inputImageData!.size,
-          inputImage.inputImageData!.imageRotation);
       //TODO: COMMENTED OUT TODAY 20-09-2022
+      // final painter = FaceDetectorPainter(
+      //     faces,
+      //     inputImage.inputImageData!.size,
+      //     inputImage.inputImageData!.imageRotation);
       //customPaint = CustomPaint(painter: painter);
       // MY CODE
       for (final face in faces) {
@@ -188,7 +188,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     }
     _isBusy = false;
     if (mounted) {
-      setState(() {});
+     // setState(() {});
     }
   }
 
