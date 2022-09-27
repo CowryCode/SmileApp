@@ -1,3 +1,4 @@
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smilecounter.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
@@ -17,46 +18,43 @@ class GlassmorphicSmilegramDisplay extends StatefulWidget {
 
 class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisplay> {
 
-  late List<Model> data;
-  late MapShapeSource sublayerDataSource;
-  late MapShapeSource shapeDataSource;
+  // late List<Model> data;
+  // late MapShapeSource sublayerDataSource;
+  // late MapShapeSource shapeDataSource;
 
 
   @override
   void initState() {
-    // SET DATA FOR MAP
-    // GobeModel  gm = GobeModel();
-    // data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3")!;
-    // print("Loaded Data : ${data}");
-    data = <Model>[
-      Model('Algeria', "Low"),
-      Model('Nigeria', "High"),
-      Model('Libya', "Low"),
-      Model('Azerbaijan', "Low"),
-      Model('Burkina Faso', "Low"),
-      Model('Afghanistan', "Low"),
-    ];
 
-    shapeDataSource = MapShapeSource.asset(
-      "assets/world_map.json",
-      shapeDataField: 'continent',
-    );
-
-    sublayerDataSource = MapShapeSource.asset(
-      "assets/world_map.json",
-      shapeDataField: "admin",
-      dataCount: data.length,
-      primaryValueMapper: (int index) {
-        return data[index].state;
-      },
-      shapeColorValueMapper: (int index) {
-        return data[index].storage;
-      },
-      shapeColorMappers: [
-        MapColorMapper(value: "Low", color: Colors.red),
-        MapColorMapper(value: "High", color: Colors.green)
-      ],
-    );
+    // data = <Model>[
+    //   Model('Algeria', "Low"),
+    //   Model('Nigeria', "High"),
+    //   Model('Libya', "Low"),
+    //   Model('Azerbaijan', "Low"),
+    //   Model('Burkina Faso', "Low"),
+    //   Model('Afghanistan', "Low"),
+    // ];
+    //
+    // shapeDataSource = MapShapeSource.asset(
+    //   "assets/world_map.json",
+    //   shapeDataField: 'continent',
+    // );
+    //
+    // sublayerDataSource = MapShapeSource.asset(
+    //   "assets/world_map.json",
+    //   shapeDataField: "admin",
+    //   dataCount: data.length,
+    //   primaryValueMapper: (int index) {
+    //     return data[index].state;
+    //   },
+    //   shapeColorValueMapper: (int index) {
+    //     return data[index].storage;
+    //   },
+    //   shapeColorMappers: [
+    //     MapColorMapper(value: "Low", color: Colors.red),
+    //     MapColorMapper(value: "High", color: Colors.green)
+    //   ],
+    // );
   }
 
   @override
@@ -132,7 +130,8 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
 
                         ],
                       ),
-                      weatherMap(),
+                      // weatherMap(),
+                      HappinessMap()
                     ],
 
                   )
@@ -143,28 +142,28 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
     }
 
 
-  Widget weatherMap(){
-    return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15),
-      child: SfMaps(
-        layers: <MapShapeLayer>[
-          MapShapeLayer(
-            source: shapeDataSource,
-            sublayers: [
-              MapShapeSublayer(
-                source: sublayerDataSource,
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget weatherMap(){
+  //   return Padding(
+  //     padding: EdgeInsets.only(left: 15, right: 15),
+  //     child: SfMaps(
+  //       layers: <MapShapeLayer>[
+  //         MapShapeLayer(
+  //           source: shapeDataSource,
+  //           sublayers: [
+  //             MapShapeSublayer(
+  //               source: sublayerDataSource,
+  //             )
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
 
-class Model {
-  const Model(this.state, this.storage);
-
-  final String state;
-  final String storage;
-}
+// class Model {
+//   const Model(this.state, this.storage);
+//
+//   final String state;
+//   final String storage;
+// }

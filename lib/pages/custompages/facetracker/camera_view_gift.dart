@@ -860,6 +860,7 @@ Widget weatherMap(){
   return RatingDialog(
     showCloseButton: false,
     initialRating: 0.0,
+    starSize: 30.0,
     // your app's name?
     title: Text(
       'Rate Your Mood',

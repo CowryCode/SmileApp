@@ -1,6 +1,6 @@
-class Model1{
-  String country;
-  String status;
+class Model{
+  const Model({required this.state, required this.storage});
 
-  Model1({required this.country, required this.status});
+  final String state;
+  final String storage;
 }
