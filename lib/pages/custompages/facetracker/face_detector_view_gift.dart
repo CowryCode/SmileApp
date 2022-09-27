@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:SmileApp/apis/models/countrymodel.dart';
+import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
@@ -12,6 +14,7 @@ import 'package:SmileApp/pages/custompages/facetracker/face_detector_painter.dar
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:syncfusion_flutter_maps/maps.dart';
 
 class FaceDetectorGiftView extends StatefulWidget {
 
@@ -43,7 +46,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   String _text = " i AM TESTING";
 
   // Start
-  int _count = 0; // My Code
+  //int _count = 0; // My Code
   String _msg = ""; // My Code
   // List<String> _tokenArray ;
   // int _tokenArrayLength;
@@ -51,7 +54,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   int? _tokenArrayLength;
 
   bool readmessage_ = false;
-
   String? _fulltext;
   @override
   void initState() {
@@ -117,7 +119,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             .sg_message;
         double? prob = face.smilingProbability;
         if(sgMessage.showStartCountDown == false){
-       // if (readmessage) {
         if (widget.giftVariableObject.readmessage!) {
           if(sgMessage.tokenIndex < _tokenArrayLength! ){
             if (prob! > 0.5) {
@@ -128,7 +129,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               StoreProvider.of<MyAppState>(context).dispatch(
                   UpdateSGmessageAction(sgMSG)
               );
-              _count += 1;
+              //_count += 1;
             }
           }else{
             _msg = sgMessage.content;
@@ -143,22 +144,70 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             StoreProvider.of<MyAppState>(context).dispatch(
                 UpdateSGmessageAction(sgMSG)
             );
-            _count += 1;
+            //_count += 1;
           }
         } else {
           double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
           if (prob > 0.5) {
             int updatedTokenIndex = sgMessage.tokenIndex + 1;
-            SGMessage sgMSG = SGMessage(
-                content: _msg,
-                updated: true,
-                tokenIndex: updatedTokenIndex,
-                iscompleted: false,
-              showStartCountDown: false,
-              smileProbability: roundedProb * 100, // converting 0.9 to 90
-            );
-            StoreProvider.of<MyAppState>(context).dispatch(
-                UpdateSGmessageAction(sgMSG));
+            if(updatedTokenIndex >= 12){
+              String countryIDstring = sgMessage.userCountriesIndexString?? "0";
+              List<int>? indicesCount = sgMessage.globeModel.splitString(countriesIndexString: countryIDstring);
+              if((indicesCount!.length) < sgMessage.globeModel.modelsDictionary().length){
+                List<Model>? data = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
+                String updatedIDs =  countryIDstring + ",${data!.length}";
+                MapShapeSource sublayerDataSource = MapShapeSource.asset(
+                  "assets/world_map.json",
+                  shapeDataField: "admin",
+                  dataCount: data!.length,
+                  primaryValueMapper: (int index) {
+                    return data![index].state;
+                  },
+                  shapeColorValueMapper: (int index) {
+                    return data![index].storage;
+                  },
+                  shapeColorMappers: [
+                    MapColorMapper(value: "Low", color: Colors.red),
+                    MapColorMapper(value: "High", color: Colors.green)
+                  ],
+                );
+
+                updatedTokenIndex = 0;
+                SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
+                  iscompleted: false, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
+                );
+                sgMSG.setCountryID(countriesID: updatedIDs);
+                sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+                sgMSG.setTokenindex(indexcount: updatedTokenIndex);
+                StoreProvider.of<MyAppState>(context).dispatch(
+                    UpdateSGmessageAction(sgMSG));
+              }else{
+                // Reinitialize Map
+                updatedTokenIndex = 0;
+                List<Model>? data = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: "0");
+                MapShapeSource sublayerDataSource = MapShapeSource.asset(
+                  "assets/world_map.json", shapeDataField: "admin", dataCount: data!.length,
+                  primaryValueMapper: (int index) {
+                    return data![index].state;
+                  },
+                  shapeColorValueMapper: (int index) {
+                    return data![index].storage;
+                  },
+                  shapeColorMappers: [
+                    MapColorMapper(value: "Low", color: Colors.red),
+                    MapColorMapper(value: "High", color: Colors.green)
+                  ],
+                );
+                SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
+                  iscompleted: true, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
+                );
+                sgMSG.setCountryID(countriesID: "0");
+                sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+                sgMSG.setTokenindex(indexcount: updatedTokenIndex);
+                StoreProvider.of<MyAppState>(context).dispatch(
+                    UpdateSGmessageAction(sgMSG));
+              }
+            }
           } else {
             SGMessage sgMSG = SGMessage(
                 content: _msg,

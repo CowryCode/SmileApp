@@ -1,7 +1,10 @@
-import 'package:SmileApp/apis/models/countrymodel.dart' as  CD;
+import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class HappinessMap extends StatefulWidget {
@@ -13,17 +16,16 @@ class HappinessMap extends StatefulWidget {
 
 class _HappinessMapState extends State<HappinessMap> {
 
-  late List<CD.Model> data;
+  late List<Model> data;
   //late List<Dummy.Model> data1;
-  late MapShapeSource sublayerDataSource;
+ // late MapShapeSource sublayerDataSource;
   late MapShapeSource shapeDataSource;
 
   @override
   void initState() {
     // SET DATA FOR MAP
-    GobeModel  gm = GobeModel();
-    data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3,5,6,7,8,9,10,15,18,23,77,90,100,120")!;
-    print("Loaded Data : ${data.toString()}");
+    // GobeModel  gm = GobeModel();
+    // data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17")!;
     // data1 = <Dummy.Model>[
     //   Dummy.Model('Algeria', "Low"),
     //   Dummy.Model('Nigeria', "High"),
@@ -32,53 +34,64 @@ class _HappinessMapState extends State<HappinessMap> {
     //   Dummy.Model('Burkina Faso', "Low"),
     //   Dummy.Model('Afghanistan', "Low"),
     // ];
-    // print("Dummy Data ${data1.toString()}");
 
     shapeDataSource = MapShapeSource.asset(
       "assets/world_map.json",
       shapeDataField: 'continent',
     );
-
-    sublayerDataSource = MapShapeSource.asset(
-      "assets/world_map.json",
-      shapeDataField: "admin",
-      dataCount: data.length,
-      primaryValueMapper: (int index) {
-        return data[index].state;
-      },
-      shapeColorValueMapper: (int index) {
-        return data[index].storage;
-      },
-      shapeColorMappers: [
-        MapColorMapper(value: "Low", color: Colors.red),
-        MapColorMapper(value: "High", color: Colors.green)
-      ],
-    );
-
-
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) async{
     //
-    // });
+    // sublayerDataSource = MapShapeSource.asset(
+    //   "assets/world_map.json",
+    //   shapeDataField: "admin",
+    //   dataCount: data.length,
+    //   primaryValueMapper: (int index) {
+    //     return data[index].state;
+    //   },
+    //   shapeColorValueMapper: (int index) {
+    //     return data[index].storage;
+    //   },
+    //   shapeColorMappers: [
+    //     MapColorMapper(value: "Low", color: Colors.red),
+    //     MapColorMapper(value: "High", color: Colors.green)
+    //   ],
+    // );
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
-      child: SfMaps(
+      child:  StoreConnector<MyAppState, SGMessage>(
+      converter: (store) => store.state.sg_message,
+    builder: (context, SGMessage currentMessagestate) =>
+       SfMaps(
         layers: <MapShapeLayer>[
           MapShapeLayer(
             source: shapeDataSource,
             sublayers: [
               MapShapeSublayer(
-                source: sublayerDataSource,
+               // source: sublayerDataSource,
+                source: currentMessagestate.sublayerDataSource!,
               )
             ],
           ),
         ],
       ),
-    );
+
+      //   SfMaps(
+      //   layers: <MapShapeLayer>[
+      //     MapShapeLayer(
+      //       source: shapeDataSource,
+      //       sublayers: [
+      //         MapShapeSublayer(
+      //           source: sublayerDataSource,
+      //         )
+      //       ],
+      //     ),
+      //   ],
+      // ),
+    ));
   }
 
 

@@ -1,9 +1,13 @@
 
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/apis/Variables.dart';
 import 'package:SmileApp/pages/custompages/animation_views/luckmatrix_countdown.dart';
@@ -109,7 +113,10 @@ class _HomeState extends State<Home> {
                     ),
                     TextButton(
                       onPressed: (){
-                      //  Navigator.of(context).pushNamed('/smilegram');
+                        SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
+                        sgMSG.setTokenindex(indexcount: 0);
+                        sgMSG.setCompleted(completed: false);
+                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                         Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(fulltext: "", readmessage: false));
                        },
                       child: const Text('Continue'),

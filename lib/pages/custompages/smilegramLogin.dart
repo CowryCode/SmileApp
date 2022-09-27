@@ -1,16 +1,22 @@
 
 import 'dart:async';
 import 'package:SmileApp/apis/diskstorage.dart';
+import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/models/user.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+import 'package:syncfusion_flutter_maps/maps.dart';
 
 class SmilegramLogin extends StatefulWidget {
 
@@ -31,10 +37,49 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
 
   User currentUser = new User.init().getCurrentUser();
 
+  List<Model>? data;
 
   @override
   void initState() {
     super.initState();
+
+    GlobeModel  gm = GlobeModel();
+    data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17")!;
+    // INITIALIZE WHEN DATA IS NULL
+    if(data == null){
+      data = <Model>[
+        Model(state: 'Algeria', storage: "Low"), // Used to initialize Map
+      ];
+    }
+    print("Raw Data Source : $data");
+    //Map Data
+    MapShapeSource sublayerDataSource = MapShapeSource.asset(
+      "assets/world_map.json",
+      shapeDataField: "admin",
+      dataCount: data!.length,
+      primaryValueMapper: (int index) {
+        return data![index].state;
+      },
+      shapeColorValueMapper: (int index) {
+        return data![index].storage;
+      },
+      shapeColorMappers: [
+        MapColorMapper(value: "Low", color: Colors.red),
+        MapColorMapper(value: "High", color: Colors.green)
+      ],
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
+      sgMSG.setTokenindex(indexcount: 0);
+      sgMSG.setCountryID(countriesID: "0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17");
+      sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+
+      print("DATA SET : ${sgMSG.sublayerDataSource}");
+      StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+      Navigator.of(context).pushNamed('/home_with_alert');
+    });
+
   }
 
   @override

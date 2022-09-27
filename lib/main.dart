@@ -17,6 +17,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:SmileApp/config/app_config.dart' as config;
 
 import 'package:redux/redux.dart';
+import 'package:syncfusion_flutter_maps/maps.dart';
+
+import 'apis/models/countrymodel.dart';
 
 
 // void main() => runApp(MyApp()); // Original Code
@@ -94,6 +97,7 @@ Future init() async{
 }
 
 class MyApp extends StatelessWidget {
+
   final Store<MyAppState> _store = Store<MyAppState>(
       updateSGmessageReducer,
       initialState: MyAppState(
@@ -101,6 +105,7 @@ class MyApp extends StatelessWidget {
         luckPotTimerstatemodel: LuckPotTimerstatemodel(activate: false)
       )
   );
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
@@ -108,9 +113,9 @@ class MyApp extends StatelessWidget {
     return StoreProvider<MyAppState>(
       store: _store,
       child: MaterialApp(
-        title: 'Thesis App',
-        //initialRoute: '/',
-        initialRoute: '/home_with_alert',
+        title: 'Smile App',
+        initialRoute: '/',
+        //initialRoute: '/home_with_alert',
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         darkTheme: ThemeData(

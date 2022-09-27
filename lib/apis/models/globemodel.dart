@@ -1,26 +1,18 @@
 import 'package:SmileApp/apis/models/countrymodel.dart';
 
-class GobeModel {
+class GlobeModel {
   String userCountriesIndexString = "0";
   String? nextCountry;
   List<Model>? countriesmodel;
+  List<int>? indices;
 
-  // GobeModel(){
-  //   List<int>? indes = splitString(countriesIndexString: userCountriesIndexString);
-  //
-  // }
 
 
   List<int>? splitString({required String countriesIndexString}){
     try{
       if(countriesIndexString.isNotEmpty){
-        print("*********************************************");
-        print("Index String $countriesIndexString");
-        print("String is empty ${countriesIndexString.isEmpty}");
         List<String> countries = countriesIndexString.split(",");
-        print("Splitted String $countries");
         List<int> countriesIndices = countries.map(int.parse).toList();
-        print("Splitted Int $countriesIndices");
         return countriesIndices;
       }else{
         return null;
@@ -38,6 +30,13 @@ class GobeModel {
         indices.forEach((element) {
          list.add(modelsDictionary().elementAt(element));
         });
+
+        int nextElement = indices.last + 1;
+        if(nextElement < modelsDictionary().length){
+          Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(nextElement).state, storage: "Low");
+          list.add(nextCountryTopaint);
+        }
+
         return list;
       }else{
         return null;
@@ -50,6 +49,7 @@ class GobeModel {
 
   List<Model>? getProcessedcountries({required String userCountriesIndexString}){
     List<int>? indes = splitString(countriesIndexString: userCountriesIndexString);
+    this.indices = indes;
     if(indes != null){
       this.countriesmodel = loadModels(indices: splitString(countriesIndexString: userCountriesIndexString)!);
     }

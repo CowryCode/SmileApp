@@ -10,7 +10,7 @@
           -->
     <application
         android:name="${applicationName}"
-        android:label="medico"
+        android:label="SmileApp"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

@@ -95,7 +95,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
 
   // VARIABLES FOR THE MAP
-  late List<Model> data;
+  // late List<Model> data;
   late MapShapeSource sublayerDataSource;
   late MapShapeSource shapeDataSource;
 
@@ -372,7 +372,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                           //builder: (context) => _dialog,
                           builder: (context) => showRatingAlert(context),
                         );
-                        _stopLiveFeed();
+                       // _stopLiveFeed();
                       },
                     ),
                   ],
@@ -896,10 +896,10 @@ Widget weatherMap(){
 
 }
 
-class Model {
-  const Model(this.state, this.storage);
-
-  final String state;
-  final String storage;
-}
+// class Model {
+//   const Model(this.state, this.storage);
+//
+//   final String state;
+//   final String storage;
+// }
 
