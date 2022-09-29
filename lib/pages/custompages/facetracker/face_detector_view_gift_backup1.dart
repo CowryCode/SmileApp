@@ -176,7 +176,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
                   iscompleted: false, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
                 );
-                sgMSG.setCountryID(countriesID: updatedIDs);
+                sgMSG.setCountriesID(countriesID: updatedIDs);
                 sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
                 sgMSG.setTokenindex(indexcount: updatedTokenIndex);
                 StoreProvider.of<MyAppState>(context).dispatch(
@@ -201,7 +201,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
                   iscompleted: true, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
                 );
-                sgMSG.setCountryID(countriesID: "0");
+                sgMSG.setCountriesID(countriesID: "0");
                 sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
                 sgMSG.setTokenindex(indexcount: updatedTokenIndex);
                 StoreProvider.of<MyAppState>(context).dispatch(

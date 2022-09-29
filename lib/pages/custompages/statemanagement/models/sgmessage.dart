@@ -21,7 +21,7 @@ class SGMessage{
     this.showStartCountDown = true,
     this.smileProbability = 0,
     this.sublayerDataSource,
-    this.userCountriesIndexString
+    this.userCountriesIndexString = "0"
   });
 
   void setShowCountdown({required bool countDownVisibility}){
@@ -35,7 +35,7 @@ class SGMessage{
     this.sublayerDataSource = subelayerdata;
   }
 
-  void setCountryID({required String countriesID}){
+  void setCountriesID({required String countriesID}){
     this.userCountriesIndexString = countriesID;
   }
 

@@ -1,6 +1,6 @@
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smilecounter.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -127,9 +127,14 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
                           ),
                            SizedBox(
                              height: 40,
+                             child: Text("${currentMessagestate.tokenIndex}",
+                               style: const TextStyle(
+                                   fontSize: 33.0,
+                                   color: Colors.green,
+                                   fontWeight: FontWeight.bold),
+                             ),
                              //child: SmileDurationCounter(),
                            ),
-
                         ],
                       ),
                       HappinessMap()

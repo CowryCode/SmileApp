@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smilecounter.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';

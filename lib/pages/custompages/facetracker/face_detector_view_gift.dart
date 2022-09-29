@@ -150,67 +150,74 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
           double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
           if (prob > 0.5) {
             int updatedTokenIndex = sgMessage.tokenIndex + 1;
+            print("INDEX : ${updatedTokenIndex}");
+            print("INDEX STRING : ${sgMessage.userCountriesIndexString}");
             if(updatedTokenIndex >= 12){
               String countryIDstring = sgMessage.userCountriesIndexString?? "0";
               List<int>? indicesCount = sgMessage.globeModel.splitString(countriesIndexString: countryIDstring);
               if((indicesCount!.length) < sgMessage.globeModel.modelsDictionary().length){
                 List<Model>? data = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
                 String updatedIDs =  countryIDstring + ",${data!.length}";
-                MapShapeSource sublayerDataSource = MapShapeSource.asset(
-                  "assets/world_map.json",
-                  shapeDataField: "admin",
-                  dataCount: data!.length,
-                  primaryValueMapper: (int index) {
-                    return data![index].state;
-                  },
-                  shapeColorValueMapper: (int index) {
-                    return data![index].storage;
-                  },
-                  shapeColorMappers: [
-                    MapColorMapper(value: "Low", color: Colors.red),
-                    MapColorMapper(value: "High", color: Colors.green)
-                  ],
-                );
-
+                // MapShapeSource sublayerDataSource = MapShapeSource.asset(
+                //   "assets/world_map.json",
+                //   shapeDataField: "admin",
+                //   dataCount: data!.length,
+                //   primaryValueMapper: (int index) {
+                //     return data![index].state;
+                //   },
+                //   shapeColorValueMapper: (int index) {
+                //     return data![index].storage;
+                //   },
+                //   shapeColorMappers: [
+                //     MapColorMapper(value: "Low", color: Colors.red),
+                //     MapColorMapper(value: "High", color: Colors.green)
+                //   ],
+                // );
                 updatedTokenIndex = 0;
                 SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
                   iscompleted: false, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
                 );
-                sgMSG.setCountryID(countriesID: updatedIDs);
-                sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+                sgMSG.setCountriesID(countriesID: updatedIDs);
                 sgMSG.setTokenindex(indexcount: updatedTokenIndex);
-                StoreProvider.of<MyAppState>(context).dispatch(
-                    UpdateSGmessageAction(sgMSG));
+               // sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+               // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                _refreshMap(sgMessage: sgMSG, data: data);
               }else{
                 // Reinitialize Map
                 updatedTokenIndex = 0;
                 List<Model>? data = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: "0");
-                MapShapeSource sublayerDataSource = MapShapeSource.asset(
-                  "assets/world_map.json", shapeDataField: "admin", dataCount: data!.length,
-                  primaryValueMapper: (int index) {
-                    return data![index].state;
-                  },
-                  shapeColorValueMapper: (int index) {
-                    return data![index].storage;
-                  },
-                  shapeColorMappers: [
-                    MapColorMapper(value: "Low", color: Colors.red),
-                    MapColorMapper(value: "High", color: Colors.green)
-                  ],
-                );
+                // MapShapeSource sublayerDataSource = MapShapeSource.asset(
+                //   "assets/world_map.json", shapeDataField: "admin", dataCount: data!.length,
+                //   primaryValueMapper: (int index) {
+                //     return data![index].state;
+                //   },
+                //   shapeColorValueMapper: (int index) {
+                //     return data![index].storage;
+                //   },
+                //   shapeColorMappers: [
+                //     MapColorMapper(value: "Low", color: Colors.red),
+                //     MapColorMapper(value: "High", color: Colors.green)
+                //   ],
+                // );
                 SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
                   iscompleted: true, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
                 );
-                sgMSG.setCountryID(countriesID: "0");
-                sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+                sgMSG.setCountriesID(countriesID: "0");
                 sgMSG.setTokenindex(indexcount: updatedTokenIndex);
-                StoreProvider.of<MyAppState>(context).dispatch(
-                    UpdateSGmessageAction(sgMSG));
+                // sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+                // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                _refreshMap(sgMessage: sgMSG, data: data!);
               }
+            }else{
+              sgMessage.setTokenindex(indexcount: updatedTokenIndex);
+              List<Model>? data = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: "${sgMessage.userCountriesIndexString}");
+              // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
+              _refreshMap(sgMessage: sgMessage, data: data!);
             }
           } else {
             SGMessage sgmsg = StoreProvider.of<MyAppState>(context).state.sg_message;
-            SGMessage sgMSG = SGMessage(
+            List<Model>? modeldata = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: "${sgmsg.userCountriesIndexString}");
+            SGMessage updatedSGmessage = SGMessage(
                 content: _msg,
                 updated: true,
                 tokenIndex: sgMessage.tokenIndex,
@@ -218,8 +225,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               smileProbability: roundedProb * 100,
               sublayerDataSource: sgmsg.sublayerDataSource
             );
-            StoreProvider.of<MyAppState>(context).dispatch(
-                UpdateSGmessageAction(sgMSG));
+            // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(updatedSGmessage));
+            _refreshMap(sgMessage: updatedSGmessage, data: modeldata!);
           }
         }
         // End State Update
@@ -240,6 +247,24 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (mounted) {
      // setState(() {});
     }
+  }
+
+  void _refreshMap({required SGMessage sgMessage, required List<Model> data}){
+    MapShapeSource sublayerDataSource = MapShapeSource.asset(
+      "assets/world_map.json", shapeDataField: "admin", dataCount: data.length,
+      primaryValueMapper: (int index) {
+        return data[index].state;
+      },
+      shapeColorValueMapper: (int index) {
+        return data[index].storage;
+      },
+      shapeColorMappers: [
+        MapColorMapper(value: "Low", color: Colors.red),
+        MapColorMapper(value: "High", color: Colors.green)
+      ],
+    );
+    sgMessage.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+    StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
   }
 
   double changeDecimalplaces({required double value, required int decimalplaces}){

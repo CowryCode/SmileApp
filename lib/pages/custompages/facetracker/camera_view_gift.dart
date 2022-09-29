@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smilecounter.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -320,17 +320,25 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return SizedBox(height: 5,);
               }
             }()),
+            // ((){
+            //   if(currentMessagestate.iscompleted){
+            //     _stopLiveFeed();
+            //     if(highestpoint > currentMessagestate.tokenIndex){
+            //       return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+            //     }else{
+            //       return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+            //     }
+            //   }else {
+            //     int remaining = highestpoint - currentMessagestate.tokenIndex;
+            //      return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
+            //   }
+            // }()),
             ((){
               if(currentMessagestate.iscompleted){
                 _stopLiveFeed();
-                if(highestpoint > currentMessagestate.tokenIndex){
-                  return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
-                }else{
-                  return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
-                }
+                return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
               }else {
-                int remaining = highestpoint - currentMessagestate.tokenIndex;
-                 return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
+                return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
               }
             }()),
             SizedBox(
@@ -615,7 +623,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   // MY CODE
-  Widget _cameraDisplay({required int pointsleft, required bool smilestartCountdown}) {
+  Widget _cameraDisplay({required bool smilestartCountdown}) {
 
     if(_controller != null){
       if(_controller?.value != null){
