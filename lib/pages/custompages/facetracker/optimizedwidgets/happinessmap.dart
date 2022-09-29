@@ -39,6 +39,7 @@ class _HappinessMapState extends State<HappinessMap> {
       "assets/world_map.json",
       shapeDataField: 'continent',
     );
+
     //
     // sublayerDataSource = MapShapeSource.asset(
     //   "assets/world_map.json",
@@ -60,6 +61,7 @@ class _HappinessMapState extends State<HappinessMap> {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
       child:  StoreConnector<MyAppState, SGMessage>(

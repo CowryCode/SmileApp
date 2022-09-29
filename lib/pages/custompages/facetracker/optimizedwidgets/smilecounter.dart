@@ -17,7 +17,7 @@ class _SmileDurationCounterState extends State<SmileDurationCounter> {
       animatedTexts: [
         ScaleAnimatedText('110',
           scalingFactor: 0.2,
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
               fontSize: 33.0,
               color: Colors.green,
               fontWeight: FontWeight.bold),

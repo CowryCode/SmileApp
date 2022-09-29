@@ -4,15 +4,11 @@ import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/apis/Variables.dart';
-import 'package:SmileApp/pages/custompages/animation_views/luckmatrix_countdown.dart';
-import 'package:SmileApp/pages/custompages/canva/gift_view.dart';
-import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 class Home extends StatefulWidget {
@@ -116,6 +112,7 @@ class _HomeState extends State<Home> {
                         SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
                         sgMSG.setTokenindex(indexcount: 0);
                         sgMSG.setCompleted(completed: false);
+                        print("Current Map State : ${sgMSG.sublayerDataSource}");
                         StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                         Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(fulltext: "", readmessage: false));
                        },
@@ -390,6 +387,7 @@ class _HomeState extends State<Home> {
   RatingDialog _showRatingAlert(BuildContext context){
     return RatingDialog(
       showCloseButton: false,
+      starSize: 30.0,
       initialRating: 0.0,
       // your app's name?
       title: Text(

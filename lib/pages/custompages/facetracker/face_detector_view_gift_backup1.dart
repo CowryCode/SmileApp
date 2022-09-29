@@ -209,14 +209,12 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               }
             }
           } else {
-            SGMessage sgmsg = StoreProvider.of<MyAppState>(context).state.sg_message;
             SGMessage sgMSG = SGMessage(
                 content: _msg,
                 updated: true,
                 tokenIndex: sgMessage.tokenIndex,
                 iscompleted: true,
               smileProbability: roundedProb * 100,
-              sublayerDataSource: sgmsg.sublayerDataSource
             );
             StoreProvider.of<MyAppState>(context).dispatch(
                 UpdateSGmessageAction(sgMSG));

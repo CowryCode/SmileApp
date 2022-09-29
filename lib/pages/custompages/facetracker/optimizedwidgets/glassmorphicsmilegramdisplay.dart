@@ -1,3 +1,4 @@
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smilecounter.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class GlassmorphicSmilegramDisplay extends StatefulWidget {
@@ -123,14 +125,13 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 40,
-                            child: SmileDurationCounter(),
-                          ),
+                           SizedBox(
+                             height: 40,
+                             //child: SmileDurationCounter(),
+                           ),
 
                         ],
                       ),
-                      // weatherMap(),
                       HappinessMap()
                     ],
 
@@ -141,24 +142,6 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
           ));
     }
 
-
-  // Widget weatherMap(){
-  //   return Padding(
-  //     padding: EdgeInsets.only(left: 15, right: 15),
-  //     child: SfMaps(
-  //       layers: <MapShapeLayer>[
-  //         MapShapeLayer(
-  //           source: shapeDataSource,
-  //           sublayers: [
-  //             MapShapeSublayer(
-  //               source: sublayerDataSource,
-  //             )
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }
 
 // class Model {
