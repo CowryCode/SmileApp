@@ -324,26 +324,16 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             //   if(currentMessagestate.iscompleted){
             //     _stopLiveFeed();
             //     if(highestpoint > currentMessagestate.tokenIndex){
-            //       return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+            //       return _giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
             //     }else{
-            //       return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+            //       return _giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
             //     }
             //   }else {
-            //     int remaining = highestpoint - currentMessagestate.tokenIndex;
-            //      return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
+            //      return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
             //   }
             // }()),
-            ((){
-              if(currentMessagestate.iscompleted){
-                _stopLiveFeed();
-                return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
-              }else {
-                return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
-              }
-            }()),
-            SizedBox(
-              height: 20,
-            ),
+            _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown),
+            SizedBox(height: 20,),
             ((){
               if(!widget.readmessage && currentMessagestate.showStartCountDown == false){
                 return Row(
@@ -354,14 +344,14 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       child: const Text('Refresh',),
                       onPressed: () {
                         refreshCamera(); // Refresh
-                        // SGMessage sgMSG = SGMessage(
-                        //   content: "",
-                        //   updated: true,
-                        //   tokenIndex: 0,
-                        //   iscompleted: false,
-                        //   showStartCountDown: true,
-                        // );
-                        // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                        SGMessage sgMSG = SGMessage(
+                          content: "",
+                          updated: true,
+                          tokenIndex: 0,
+                          iscompleted: false,
+                          showStartCountDown: true,
+                        );
+                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                         _count += 1;
                       },
                     ),
@@ -370,11 +360,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
                       child: const Text('Done',),
                       onPressed: () {
-                       // _createAlertDialog(context);
                         showDialog(
                           context: context,
                           barrierDismissible: true, // set to false if you want to force a rating
-                          //builder: (context) => _dialog,
                           builder: (context) => showRatingAlert(context),
                         );
                        // _stopLiveFeed();
@@ -720,7 +708,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ));
   }
 
-  Widget giftAlert({required String message, required int amountWon}){
+  Widget _giftAlert({required String message, required int amountWon}){
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,

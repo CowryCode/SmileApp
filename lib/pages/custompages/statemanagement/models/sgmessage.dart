@@ -12,11 +12,11 @@ class SGMessage{
 
   String? userCountriesIndexString; //"0,1.2,3,4,"
   MapShapeSource? sublayerDataSource;
-  GlobeModel globeModel = GlobeModel();
+  //GlobeModel globeModel = GlobeModel();
 
   SGMessage({required this.content,
     required this.updated,
-    this.tokenIndex = 0,
+    this.tokenIndex = 5,
     this.iscompleted = false,
     this.showStartCountDown = true,
     this.smileProbability = 0,

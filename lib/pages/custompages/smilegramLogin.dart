@@ -44,7 +44,7 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
     super.initState();
 
     GlobeModel  gm = GlobeModel();
-    data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17")!;
+    data = gm.getProcessedcountries(userCountriesIndexString: "0")!;
     // INITIALIZE WHEN DATA IS NULL
     if(data == null){
       data = <Model>[
@@ -71,8 +71,8 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
 
     WidgetsBinding.instance.addPostFrameCallback((_){
       SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
-      sgMSG.setTokenindex(indexcount: 0);
-      sgMSG.setCountriesID(countriesID: "0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17");
+      sgMSG.setTokenindex(indexcount: 5);
+      sgMSG.setCountriesID(countriesID: "0");
       sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
       print("DATA SET : ${sgMSG.sublayerDataSource}");
       StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));

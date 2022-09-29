@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
@@ -14,9 +16,25 @@ class CountdownTimer extends StatefulWidget {
 }
 
 class _CountdownTimerState extends State<CountdownTimer> {
+
+  int countValue = 5;
+
+
+  @override
+  void initState() {
+   // _randomize();
+  }
+
   @override
   Widget build(BuildContext context) {
-    //return Container();
+    // return Container(
+    //   child: Text("${countValue}",
+    //     style: const TextStyle(
+    //         fontSize: 33.0,
+    //         color: Colors.green,
+    //         fontWeight: FontWeight.bold),
+    //   ),
+    // );
     return StoreConnector<MyAppState, SGMessage>(
     converter: (store) => store.state.sg_message,
     builder: (context, SGMessage currentMessagestate) => CircularCountDownTimer(
@@ -35,6 +53,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
           backgroundGradient: null,
           strokeWidth: 20.0,
           strokeCap: StrokeCap.round,
+         // textStyle: const TextStyle(
           textStyle: TextStyle(
               fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
           textFormat: CountdownTextFormat.S,
@@ -58,5 +77,22 @@ class _CountdownTimerState extends State<CountdownTimer> {
         ),
       );
     }
+
+void _randomize(){
+  // Timer.periodic(Duration(seconds: 1), (timer){
+  //   if (countValue <= 0) {
+  //     debugPrint('Countdown Ended');
+  //     SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+  //     sgMessage.setShowCountdown(countDownVisibility: false);
+  //     StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
+  //     timer.cancel();
+  //   }else{
+  //     setState(() {
+  //       countValue = countValue - 1;
+  //       debugPrint('Timer Count Value : $countValue');
+  //     });
+  //   }
+  // });
+}
 }
 

@@ -152,9 +152,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             int updatedTokenIndex = sgMessage.tokenIndex + 1;
             if(updatedTokenIndex >= 12){
               String countryIDstring = sgMessage.userCountriesIndexString?? "0";
-              List<int>? indicesCount = sgMessage.globeModel.splitString(countriesIndexString: countryIDstring);
-              if((indicesCount!.length) < sgMessage.globeModel.modelsDictionary().length){
-                List<Model>? data = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
+              List<int>? indicesCount = GlobeModel().splitString(countriesIndexString: countryIDstring);
+              if((indicesCount!.length) < GlobeModel().modelsDictionary().length){
+                List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: countryIDstring);
                 String updatedIDs =  countryIDstring + ",${data!.length}";
                 MapShapeSource sublayerDataSource = MapShapeSource.asset(
                   "assets/world_map.json",
@@ -184,7 +184,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               }else{
                 // Reinitialize Map
                 updatedTokenIndex = 0;
-                List<Model>? data = sgMessage.globeModel.getProcessedcountries(userCountriesIndexString: "0");
+                List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: "0");
                 MapShapeSource sublayerDataSource = MapShapeSource.asset(
                   "assets/world_map.json", shapeDataField: "admin", dataCount: data!.length,
                   primaryValueMapper: (int index) {
