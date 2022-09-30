@@ -3,7 +3,7 @@ import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
-import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift_backup1.dart';
+import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';

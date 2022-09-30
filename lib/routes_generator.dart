@@ -20,14 +20,6 @@ class RouteGenerator {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
     switch(settings.name){
-
-      // case '/phone':
-      //   return MaterialPageRoute(builder: (_) => PhoneLogin());
-      // case '/health':
-      //   return MaterialPageRoute(builder: (_) => HealthTips());
-
-
-
         // MY CUSTOM ROUTE START
     // SMILE APP
       case '/' :

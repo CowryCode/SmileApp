@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
@@ -25,8 +26,8 @@ enum Actions { Increment }
 
 late String likes, gotpoints, popularity, totalPoints, details, pac, date;
 
-class CameraViewGift_Backup extends StatefulWidget {
-  CameraViewGift_Backup (
+class CameraViewGift extends StatefulWidget {
+  CameraViewGift(
       {Key? key,
       required this.title,
         //TODO: COMMENTED OUT TODAY 20-09-2022
@@ -56,7 +57,7 @@ class CameraViewGift_Backup extends StatefulWidget {
 //TODO: Read and Send Smile Pack with a smile
 //TODO: While smiling and all the text have been revealed, the Face of the sender shows (and gets deleted immediately)
 
-class _CameraViewGiftState extends State<CameraViewGift_Backup> {
+class _CameraViewGiftState extends State<CameraViewGift> {
   ScreenMode _mode = ScreenMode.liveFeed;
   // CameraController _controller;
   // File _image;
@@ -65,7 +66,7 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
   CameraController? _controller;
   File? _image;
   String? _path;
-  //ImagePicker? _imagePicker;
+ // ImagePicker? _imagePicker;
   int _cameraIndex = 0;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
@@ -135,39 +136,6 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
         DeviceOrientation.portraitDown
       ]);
 
-      // SET DATA FOR MAP
-     // GobeModel  gm = GobeModel();
-      // data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3")!;
-      // print("Loaded Data : ${data}");
-      // data = <Model>[
-      //   Model('Algeria', "Low"),
-      //   Model('Nigeria', "High"),
-      //   Model('Libya', "Low"),
-      //   Model('Azerbaijan', "Low"),
-      //   Model('Burkina Faso', "Low"),
-      //   Model('Afghanistan', "Low"),
-      // ];
-
-      // shapeDataSource = MapShapeSource.asset(
-      //   "assets/world_map.json",
-      //   shapeDataField: 'continent',
-      // );
-      //
-      // sublayerDataSource = MapShapeSource.asset(
-      //   "assets/world_map.json",
-      //   shapeDataField: "admin",
-      //   dataCount: data.length,
-      //   primaryValueMapper: (int index) {
-      //     return data[index].state;
-      //   },
-      //   shapeColorValueMapper: (int index) {
-      //     return data[index].storage;
-      //   },
-      //   shapeColorMappers: [
-      //     MapColorMapper(value: "Low", color: Colors.red),
-      //     MapColorMapper(value: "High", color: Colors.green)
-      //   ],
-      // );
 
     }catch(e){
       print("Error : ${e.toString()}");
@@ -182,7 +150,7 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
       _tokenArray = _fulltext.split(" ");
       _tokenArrayLength = _tokenArray.length;
 
-      //_imagePicker = ImagePicker();
+     // _imagePicker = ImagePicker();
 
       if (cameras.any(
             (element) =>
@@ -318,25 +286,23 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
                 return SizedBox(height: 5,);
               }
             }()),
-            ((){
-              if(currentMessagestate.iscompleted){
-                _stopLiveFeed();
-                if(highestpoint > currentMessagestate.tokenIndex){
-                  return giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
-                }else{
-                  return giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
-                }
-              }else {
-                int remaining = highestpoint - currentMessagestate.tokenIndex;
-                 return _cameraDisplay(pointsleft: remaining, smilestartCountdown: currentMessagestate.showStartCountDown);
-              }
-            }()),
-            SizedBox(
-              height: 20,
-            ),
-            ((){
-              if(!widget.readmessage && currentMessagestate.showStartCountDown == false){
-                return Row(
+            // ((){
+            //   if(currentMessagestate.iscompleted){
+            //     _stopLiveFeed();
+            //     if(highestpoint > currentMessagestate.tokenIndex){
+            //       return _giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+            //     }else{
+            //       return _giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+            //     }
+            //   }else {
+            //      return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
+            //   }
+            // }()),
+            _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown),
+            SizedBox(height: 20,),
+           // ((){
+              if(!widget.readmessage && currentMessagestate.showStartCountDown == false)
+               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
@@ -344,14 +310,14 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
                       child: const Text('Refresh',),
                       onPressed: () {
                         refreshCamera(); // Refresh
-                        // SGMessage sgMSG = SGMessage(
-                        //   content: "",
-                        //   updated: true,
-                        //   tokenIndex: 0,
-                        //   iscompleted: false,
-                        //   showStartCountDown: true,
-                        // );
-                        // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                        SGMessage sgMSG = SGMessage(
+                          content: "",
+                          updated: true,
+                          tokenIndex: 0,
+                          iscompleted: false,
+                          showStartCountDown: true,
+                        );
+                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                         _count += 1;
                       },
                     ),
@@ -360,22 +326,20 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
                       style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
                       child: const Text('Done',),
                       onPressed: () {
-                       // _createAlertDialog(context);
                         showDialog(
                           context: context,
                           barrierDismissible: true, // set to false if you want to force a rating
-                          //builder: (context) => _dialog,
                           builder: (context) => showRatingAlert(context),
                         );
                        // _stopLiveFeed();
                       },
                     ),
                   ],
-                );
-              }else{
-                return SizedBox(height: 5,);
-              }
-            }()),
+                ),
+              // }else{
+              //   return SizedBox(height: 5,);
+              // }
+          //  }()),
           ],
         ),
     ));
@@ -613,7 +577,7 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
   }
 
   // MY CODE
-  Widget _cameraDisplay({required int pointsleft, required bool smilestartCountdown}) {
+  Widget _cameraDisplay({required bool smilestartCountdown}) {
 
     if(_controller != null){
       if(_controller?.value != null){
@@ -673,18 +637,38 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
             ),
           ) : SizedBox(height: MediaQuery.of(context).size.height * 0.6),
           ((){
-            if(smilestartCountdown == true){
-              return Center(child: CountdownTimer());
-            }else{
-              return SizedBox(height: 3.0,);
-            }
+            // if(smilestartCountdown == true){
+            //   return Center(child: CountdownTimer());
+            // }else{
+            //   return SizedBox(height: 3.0,);
+            // }
+            return ValueListenableBuilder(
+              valueListenable: smileAppValueNotifier.value.showCountDown,
+              builder: (context, value, child) {
+                if(value == true){
+                  return Center(child: CountdownTimer());
+                }else{
+                  return SizedBox(height: 3.0,);
+                }
+              },
+            );
           }()),
           ((){
-            if(smilestartCountdown == false && !widget.readmessage ){
-              return GlassmorphicSmilegramDisplay();
-            }else{
-              return SizedBox(height: 3.0,);
-            }
+            // if(smilestartCountdown == false && !widget.readmessage ){
+            //   return GlassmorphicSmilegramDisplay();
+            // }else{
+            //   return SizedBox(height: 3.0,);
+            // }
+            return ValueListenableBuilder(
+              valueListenable: smileAppValueNotifier.value.showCountDown,
+              builder: (context, value, child) {
+                if(value == false && !widget.readmessage ){
+                  return GlassmorphicSmilegramDisplay();
+                }else{
+                  return SizedBox(height: 3.0,);
+                }
+              },
+            );
           }()),
           ((){
             if(smilestartCountdown == false && widget.readmessage){
@@ -710,7 +694,7 @@ class _CameraViewGiftState extends State<CameraViewGift_Backup> {
         ));
   }
 
-  Widget giftAlert({required String message, required int amountWon}){
+  Widget _giftAlert({required String message, required int amountWon}){
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,

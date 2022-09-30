@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift_backup1.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -13,19 +14,19 @@ import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-class FaceDetectorGiftView extends StatefulWidget {
+class FaceDetectorGiftView_Backup extends StatefulWidget {
 
 
   //final List<Object>? data;
   final GiftVariableObject giftVariableObject;
 
-  FaceDetectorGiftView({Key? key,  required this.giftVariableObject});
+  FaceDetectorGiftView_Backup({Key? key,  required this.giftVariableObject});
 
   @override
   _FaceDetectorGiftViewState createState() => _FaceDetectorGiftViewState();
 }
 
-class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
+class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView_Backup> {
 
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
