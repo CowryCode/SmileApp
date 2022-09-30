@@ -6,13 +6,11 @@ import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmor
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
@@ -67,7 +65,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   CameraController? _controller;
   File? _image;
   String? _path;
-  ImagePicker? _imagePicker;
+  //ImagePicker? _imagePicker;
   int _cameraIndex = 0;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
@@ -109,7 +107,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
       _tokenArrayLength = _tokenArray.length;
 
-      _imagePicker = ImagePicker();
+     // _imagePicker = ImagePicker();
 
       if (cameras.any(
             (element) =>
@@ -184,7 +182,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       _tokenArray = _fulltext.split(" ");
       _tokenArrayLength = _tokenArray.length;
 
-      _imagePicker = ImagePicker();
+      //_imagePicker = ImagePicker();
 
       if (cameras.any(
             (element) =>
@@ -495,17 +493,17 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //   ]);
   // }
 
-  Future _getImage(ImageSource source) async {
-    setState(() {
-      _image = null;
-      _path = null;
-    });
-    final pickedFile = await _imagePicker?.pickImage(source: source);
-    if (pickedFile != null) {
-      _processPickedFile(pickedFile);
-    }
-    setState(() {});
-  }
+  // Future _getImage(ImageSource source) async {
+  //   setState(() {
+  //     _image = null;
+  //     _path = null;
+  //   });
+  //   final pickedFile = await _imagePicker?.pickImage(source: source);
+  //   if (pickedFile != null) {
+  //     _processPickedFile(pickedFile);
+  //   }
+  //   setState(() {});
+  // }
 
   void _switchScreenMode() {
     _image = null;

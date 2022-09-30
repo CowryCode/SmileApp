@@ -1,11 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:SmileApp/models/chat.dart';
-import 'package:SmileApp/models/conversation.dart';
-import 'package:SmileApp/models/doctor.dart';
-import 'package:SmileApp/models/user.dart';
-import 'package:SmileApp/widgets/chatWidget.dart';
+import 'package:SmileApp/models/mymodels/user.dart';
 
 
 class ChatWidget extends StatefulWidget {
@@ -14,9 +10,7 @@ class ChatWidget extends StatefulWidget {
 }
 
 class _ChatWidgetState extends State<ChatWidget> {
-  ConversationList _conversationList = new ConversationList();
   User _currentUser = new User.init().getCurrentUser();
-  Doctor _currentDoctor =new Doctor.init().getCurrentDoctor();
   final _myListKey = GlobalKey<AnimatedListState>();
   final myController = TextEditingController();
 
@@ -44,7 +38,7 @@ class _ChatWidgetState extends State<ChatWidget> {
         ),
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          _currentDoctor.name!,
+          "_currentDoctor.name!",
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -61,13 +55,15 @@ class _ChatWidgetState extends State<ChatWidget> {
                 key: _myListKey,
                 reverse: true,
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                initialItemCount: _conversationList.conversation![0].chats!.length,
+                //initialItemCount: _conversationList.conversation![0].chats!.length,
+                initialItemCount: 1,
                 itemBuilder: (context, index, Animation<double> animation) {
-                  Chat chat = _conversationList.conversation![0].chats![index];
-                  return ChatMessageListItem(
-                    chat: chat,
-                    animation: animation,
-                  );
+                  return SizedBox(child: Text("REDESIGN THEIS "),);
+                  // Chat chat = _conversationList.conversation![0].chats![index];
+                  // // return ChatMessageListItem(
+                  // //   chat: chat,
+                  // //   animation: animation,
+                  // // );
                 },
               ),
             ),
@@ -120,12 +116,12 @@ class _ChatWidgetState extends State<ChatWidget> {
                       bool random = Random().nextBool(); // I used this to simulate chat alternations between two people
                       String messageType = random ? "Sent" : "Recieved";
 
-                      setState(() {
-                        _conversationList.conversation![0].chats!
-                            .insert(0, new Chat(myController.text,'21min ago', _currentUser, messageType));
-                        _myListKey.currentState!.insertItem(0);
-
-                      });
+                      // setState(() {
+                      //   _conversationList.conversation![0].chats!
+                      //       .insert(0, new Chat(myController.text,'21min ago', _currentUser, messageType));
+                      //   _myListKey.currentState!.insertItem(0);
+                      //}
+                      //);
                       Timer(Duration(milliseconds: 100), () {
                         myController.clear();
                       });

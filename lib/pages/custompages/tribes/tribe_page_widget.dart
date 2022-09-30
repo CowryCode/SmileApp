@@ -6,7 +6,6 @@ import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:SmileApp/models/doctor.dart' as model;
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
 
 

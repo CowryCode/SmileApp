@@ -3,12 +3,12 @@ import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift_backup1.dart';
 import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
@@ -98,11 +98,11 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
 
-     // for (final face in faces) {
-        print(" SMILE Probability is :  ${faces.first.smilingProbability}");
+      for (final face in faces) {
+        print(" SMILE Probability is :  ${face.smilingProbability}");
         SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
        // double? prob = face.smilingProbability;
-        double? prob = faces.first.smilingProbability;
+        double? prob = face.smilingProbability;
         //if(sgMessage.showStartCountDown == false){
         if(smileAppValueNotifier.value.showCountDown.value == false){
           if (widget.giftVariableObject.readmessage!) {
@@ -221,7 +221,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             }
           }
         }
-     // }
+      }
     } else {
       // String text = 'Faces found: ${faces.length}\n\n';
       // for (final face in faces) {

@@ -1,8 +1,6 @@
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:SmileApp/pages/acount.dart';
-import 'package:SmileApp/pages/conversations.dart' as prefix0;
 import 'package:SmileApp/pages/custompages/home.dart';
 import 'package:SmileApp/pages/custompages/user_profile_widget.dart';
 

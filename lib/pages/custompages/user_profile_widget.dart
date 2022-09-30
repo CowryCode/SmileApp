@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/models/mymodels/user.dart';
 import 'package:SmileApp/pages/custompages/redux/app_state.dart';
 
 class UserAcountWidget extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:SmileApp/pages/custompages/tribes/tribe_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
-import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/models/mymodels/user.dart';
 
 
 class TribePage extends StatefulWidget {

@@ -11,7 +11,7 @@ import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart
 import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:SmileApp/models/user.dart';
+import 'package:SmileApp/models/mymodels/user.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';

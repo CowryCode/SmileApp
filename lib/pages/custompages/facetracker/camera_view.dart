@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
@@ -48,7 +47,7 @@ class _CameraViewState extends State<CameraView> {
   CameraController? _controller;
   File? _image;
   String? _path;
-  ImagePicker? _imagePicker;
+ // ImagePicker? _imagePicker;
   int _cameraIndex = 0;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
@@ -68,7 +67,7 @@ class _CameraViewState extends State<CameraView> {
     _tokenArray = _fulltext.split(" ");
     _tokenArrayLength = _tokenArray.length;
 
-    _imagePicker = ImagePicker();
+   // _imagePicker = ImagePicker();
 
     if (cameras.any(
           (element) =>
@@ -320,20 +319,20 @@ class _CameraViewState extends State<CameraView> {
         Icons.image,
         size: 200,
       ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ElevatedButton(
-          child: Text('From Gallery'),
-          onPressed: () => _getImage(ImageSource.gallery),
-        ),
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ElevatedButton(
-          child: Text('Take a picture'),
-          onPressed: () => _getImage(ImageSource.camera),
-        ),
-      ),
+      // Padding(
+      //   padding: EdgeInsets.symmetric(horizontal: 16),
+      //   child: ElevatedButton(
+      //     child: Text('From Gallery'),
+      //     onPressed: () => _getImage(ImageSource.gallery),
+      //   ),
+      // ),
+      // Padding(
+      //   padding: EdgeInsets.symmetric(horizontal: 16),
+      //   child: ElevatedButton(
+      //     child: Text('Take a picture'),
+      //     onPressed: () => _getImage(ImageSource.camera),
+      //   ),
+      // ),
       if (_image != null)
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -343,17 +342,17 @@ class _CameraViewState extends State<CameraView> {
     ]);
   }
 
-  Future _getImage(ImageSource source) async {
-    setState(() {
-      _image = null;
-      _path = null;
-    });
-    final pickedFile = await _imagePicker?.pickImage(source: source);
-    if (pickedFile != null) {
-      _processPickedFile(pickedFile);
-    }
-    setState(() {});
-  }
+  // Future _getImage(ImageSource source) async {
+  //   setState(() {
+  //     _image = null;
+  //     _path = null;
+  //   });
+  //   final pickedFile = await _imagePicker?.pickImage(source: source);
+  //   if (pickedFile != null) {
+  //     _processPickedFile(pickedFile);
+  //   }
+  //   setState(() {});
+  // }
 
   void _switchScreenMode() {
     _image = null;

@@ -37,12 +37,12 @@ dependencies:
   intl: ^0.17.0
   # Smile Detection
   google_mlkit_face_detection: ^0.4.0
-  image_picker: ^0.8.5+3
+  #image_picker: ^0.8.5+3
   camera: ^0.10.0
   camera_android: ^0.10.0
   camera_avfoundation: ^0.9.8+2
   shared_preferences: ^2.0.6
-  circular_countdown_timer: ^0.2.2
+  #circular_countdown_timer: ^0.2.2
   glassmorphism: ^3.0.0
   syncfusion_flutter_maps: ^20.2.50
   rating_dialog: ^2.0.4
@@ -92,38 +92,15 @@ flutter:
     - images/custom/giftopen1.png
     - assets/world_map.json
     - assets/logo1.jpeg
-    - images/image-home.jpeg
     - images/facebook-fill.png
     - images/google-fill.png
     - images/cellphone-line.png
     - images/verification.png
-    - images/Image23.png
     - images/f1.png
     - images/f-1.png
-    - images/undraw_alien_science_nonm.png
-    - images/microscope.png
-    - images/pill.png
-    - images/nurse.png
     - images/doctor-productivity.jpg
     - images/13nov_resize.jpg
-    - images/medical-lab-technician-85654102.jpg
-    - images/asset-1.png
-    - images/asset-1a.jpeg
-    - images/asset-2.png
-    - images/asset-2a.jpeg
-    - images/asset-3.png
-    - images/asset-3a.jpeg
-    - images/asset-4.png
-    - images/asset-4a.jpeg
-    - images/asset-5.png
-    - images/asset-5a.jpeg
-    - images/asset-6.png
-    - images/asset-6a.jpeg
-    - images/Image 11.png
-    - images/Image 12.png
-    - images/Image 19.png
     - images/index.jpeg
-    - images/imageuser.png
     - images/gps.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
