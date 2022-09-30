@@ -10,3 +10,7 @@ final getProfile_URL = "${baseURL}/smile/get-user";
  final String key_phone_number = "phonenumber";
  final String key_login_token = "token";
  final String key_login_status = "loginstatus";
+
+
+ // NOTIFIER VARIABLES
+final int Smile_Count_Initial = 10;

@@ -1,4 +1,5 @@
 
+import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
@@ -22,8 +23,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  @override
   void initState() {
     super.initState();
     print("The show dialogue status is : ${widget.checkEmotion}");
@@ -109,8 +108,9 @@ class _HomeState extends State<Home> {
                     ),
                     TextButton(
                       onPressed: (){
+                        smileAppValueNotifier.updateShowCountDown(showCoundown: true);
                         SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
-                        sgMSG.setTokenindex(indexcount: 0);
+                        sgMSG.setTokenindex(indexcount: 5);
                         sgMSG.setCompleted(completed: false);
                         print("Current Map State : ${sgMSG.sublayerDataSource}");
                         StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
@@ -316,6 +316,8 @@ class _HomeState extends State<Home> {
       ),
      ),
     );
+
+
   }
   Widget ball(String image,Color color){
     return Container(
@@ -421,5 +423,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
 }

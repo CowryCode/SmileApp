@@ -1,8 +1,9 @@
 
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/counternotifier.dart';
+import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -26,8 +27,6 @@ class FaceDetectorGiftView extends StatefulWidget {
 }
 
 class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
-
-  CounterNotifier counter = CounterNotifier();
 
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
@@ -104,7 +103,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
        // double? prob = face.smilingProbability;
         double? prob = faces.first.smilingProbability;
-        if(sgMessage.showStartCountDown == false){
+        //if(sgMessage.showStartCountDown == false){
+        if(smileAppValueNotifier.value.showCountDown.value == false){
           if (widget.giftVariableObject.readmessage!) {
             if(sgMessage.tokenIndex < _tokenArrayLength! ){
               if (prob! > 0.5) {
@@ -132,12 +132,18 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             }
           } else {
             double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
-            if (prob > 0.5) {
+            if (prob > 0.1) {
               //int updatedTokenIndex = sgMessage.tokenIndex + 1;
               int updatedTokenIndex = sgMessage.tokenIndex;
               print("INDEX : $updatedTokenIndex");
               print("INDEX STRING : ${sgMessage.userCountriesIndexString}");
-              if(updatedTokenIndex <= 0){
+              //counterNotifier.decrement();
+              smileAppValueNotifier.updateSmileDurationCount();
+             // debugPrint("SENT> ${smileAppValueNotifier.getCurrentValue()}");
+              debugPrint("SENT> ${smileAppValueNotifier.value.smileDurationCount.value}");
+              // if(updatedTokenIndex <= 0){
+             // if(counterNotifier.getCurrentValue() <= 0){
+              if(smileAppValueNotifier.value.smileDurationCount.value <= 0){
                 String countryIDstring = sgMessage.userCountriesIndexString?? "0";
                 List<int>? indicesCount = GlobeModel().splitString(countriesIndexString: countryIDstring);
                 if((indicesCount!.length) < GlobeModel().modelsDictionary().length){
@@ -190,8 +196,10 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                   sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
                   StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                 }
+                // counterNotifier.reStartvalue(newValue: Smile_Count_Initial);
+                smileAppValueNotifier.refreshSmileDurationCount();
               }else{
-                counter.decrement(indexCount: updatedTokenIndex);
+
                 // sgMessage.setTokenindex(indexcount: updatedTokenIndex);
                 // List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: "${sgMessage.userCountriesIndexString}");
                 // MapShapeSource sublayerDataSource = MapShapeSource.asset(

@@ -1,5 +1,6 @@
+import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/counternotifier.dart';
+import 'package:SmileApp/pages/custompages/facetracker/notifiers/SmileAppNotifiers.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
 import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
@@ -24,7 +25,7 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
   // late List<Model> data;
   // late MapShapeSource sublayerDataSource;
   // late MapShapeSource shapeDataSource;
-
+  // CounterNotifier counter = CounterNotifier(value: 5);
 
   @override
   void initState() {
@@ -129,8 +130,10 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
                            SizedBox(
                              height: 40,
                              child: ValueListenableBuilder(
-                               valueListenable: CounterNotifier(),
+                              // valueListenable: counterNotifier,
+                               valueListenable: smileAppValueNotifier.value.smileDurationCount,
                                builder: (context, value, child) {
+                                 debugPrint("Received< $value");
                                  return Text("${value.toString()}",
                                    style: const TextStyle(
                                        fontSize: 33.0,

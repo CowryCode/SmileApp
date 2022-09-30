@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
@@ -671,18 +672,38 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ),
           ) : SizedBox(height: MediaQuery.of(context).size.height * 0.6),
           ((){
-            if(smilestartCountdown == true){
-              return Center(child: CountdownTimer());
-            }else{
-              return SizedBox(height: 3.0,);
-            }
+            // if(smilestartCountdown == true){
+            //   return Center(child: CountdownTimer());
+            // }else{
+            //   return SizedBox(height: 3.0,);
+            // }
+            return ValueListenableBuilder(
+              valueListenable: smileAppValueNotifier.value.showCountDown,
+              builder: (context, value, child) {
+                if(value == true){
+                  return Center(child: CountdownTimer());
+                }else{
+                  return SizedBox(height: 3.0,);
+                }
+              },
+            );
           }()),
           ((){
-            if(smilestartCountdown == false && !widget.readmessage ){
-              return GlassmorphicSmilegramDisplay();
-            }else{
-              return SizedBox(height: 3.0,);
-            }
+            // if(smilestartCountdown == false && !widget.readmessage ){
+            //   return GlassmorphicSmilegramDisplay();
+            // }else{
+            //   return SizedBox(height: 3.0,);
+            // }
+            return ValueListenableBuilder(
+              valueListenable: smileAppValueNotifier.value.showCountDown,
+              builder: (context, value, child) {
+                if(value == false && !widget.readmessage ){
+                  return GlassmorphicSmilegramDisplay();
+                }else{
+                  return SizedBox(height: 3.0,);
+                }
+              },
+            );
           }()),
           ((){
             if(smilestartCountdown == false && widget.readmessage){
