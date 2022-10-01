@@ -134,8 +134,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown
       ]);
-
-
     }catch(e){
       print("Error : ${e.toString()}");
     }
@@ -180,7 +178,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
 
     }catch(e){
-      //
+      debugPrint("CAMERA ERROR : ${e.toString()}");
     }
   }
 
@@ -262,46 +260,46 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // } else {
     //   body = _galleryBody();
     // }
-    return StoreConnector<MyAppState, SGMessage>(
-    converter: (store) => store.state.sg_message,
-    builder: (context, SGMessage currentMessagestate) =>  SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            ((){
-              if(widget.readmessage && currentMessagestate.showStartCountDown == false){
-                if(currentMessagestate.iscompleted){
-                  showDialog(
-                    context: context,
-                    barrierDismissible: true, // set to false if you want to force a rating
-                    builder: (context) => showRatingAlert(context),
-                  );
-                }
-                return SizedBox(height: 5,);
-              }else{
-                return SizedBox(height: 5,);
+
+   return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          ValueListenableBuilder(
+            // valueListenable: counterNotifier,
+            valueListenable: smileAppValueNotifier.value.showShowMoodRating,
+            builder: (context, value, child) {
+              if(value == true){
+                showDialog(
+                  context: context,
+                  barrierDismissible: true, // set to false if you want to force a rating
+                  builder: (context) => showRatingAlert(context),
+                );
               }
-            }()),
-            // ((){
-            //   if(currentMessagestate.iscompleted){
-            //     _stopLiveFeed();
-            //     if(highestpoint > currentMessagestate.tokenIndex){
-            //       return _giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
-            //     }else{
-            //       return _giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
-            //     }
-            //   }else {
-            //      return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
-            //   }
-            // }()),
-            _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown),
-            SizedBox(height: 20,),
-           // ((){
-              if(!widget.readmessage && currentMessagestate.showStartCountDown == false)
-               Row(
+              return SizedBox(height: 1,);
+            },
+          ),
+          ValueListenableBuilder(
+            // valueListenable: counterNotifier,
+            valueListenable: smileAppValueNotifier.value.showCountDown,
+            builder: (context, value, child) {
+              if(value == true){
+                return _cameraDisplay(smilestartCountdown: true);
+              }else{
+                return _cameraDisplay(smilestartCountdown: false);
+              }
+            },
+          ),
+          SizedBox(height: 20,),
+          ValueListenableBuilder(
+            // valueListenable: counterNotifier,
+            valueListenable: smileAppValueNotifier.value.showCountDown,
+            builder: (context, value, child) {
+              if(value == false && !widget.readmessage){
+                return  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
@@ -330,18 +328,101 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                           barrierDismissible: true, // set to false if you want to force a rating
                           builder: (context) => showRatingAlert(context),
                         );
-                       // _stopLiveFeed();
                       },
                     ),
                   ],
-                ),
-              // }else{
-              //   return SizedBox(height: 5,);
-              // }
-          //  }()),
-          ],
-        ),
-    ));
+                );
+              }else{
+                return SizedBox(height: 1,);
+              }
+            },
+          ),
+
+        ],
+      ),
+    );
+
+    // return StoreConnector<MyAppState, SGMessage>(
+    // converter: (store) => store.state.sg_message,
+    // builder: (context, SGMessage currentMessagestate) =>
+    //
+    //     SingleChildScrollView(
+    //     scrollDirection: Axis.vertical,
+    //     child: Column(
+    //       children: [
+    //         SizedBox(
+    //           height: 20,
+    //         ),
+    //         ((){
+    //           if(widget.readmessage && currentMessagestate.showStartCountDown == false){
+    //             if(currentMessagestate.iscompleted){
+    //               showDialog(
+    //                 context: context,
+    //                 barrierDismissible: true, // set to false if you want to force a rating
+    //                 builder: (context) => showRatingAlert(context),
+    //               );
+    //             }
+    //             return SizedBox(height: 5,);
+    //           }else{
+    //             return SizedBox(height: 5,);
+    //           }
+    //         }()),
+    //         // ((){
+    //         //   if(currentMessagestate.iscompleted){
+    //         //     _stopLiveFeed();
+    //         //     if(highestpoint > currentMessagestate.tokenIndex){
+    //         //       return _giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
+    //         //     }else{
+    //         //       return _giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
+    //         //     }
+    //         //   }else {
+    //         //      return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
+    //         //   }
+    //         // }()),
+    //         _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown),
+    //         SizedBox(height: 20,),
+    //        // ((){
+    //           if(!widget.readmessage && currentMessagestate.showStartCountDown == false)
+    //            Row(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: [
+    //                 ElevatedButton(
+    //                   style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+    //                   child: const Text('Refresh',),
+    //                   onPressed: () {
+    //                     refreshCamera(); // Refresh
+    //                     SGMessage sgMSG = SGMessage(
+    //                       content: "",
+    //                       updated: true,
+    //                       tokenIndex: 0,
+    //                       iscompleted: false,
+    //                       showStartCountDown: true,
+    //                     );
+    //                     StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+    //                     _count += 1;
+    //                   },
+    //                 ),
+    //                 SizedBox(width: 3,),
+    //                 ElevatedButton(
+    //                   style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
+    //                   child: const Text('Done',),
+    //                   onPressed: () {
+    //                     showDialog(
+    //                       context: context,
+    //                       barrierDismissible: true, // set to false if you want to force a rating
+    //                       builder: (context) => showRatingAlert(context),
+    //                     );
+    //                   },
+    //                 ),
+    //               ],
+    //             ),
+    //           // }else{
+    //           //   return SizedBox(height: 5,);
+    //           // }
+    //       //  }()),
+    //       ],
+    //     ),
+    // ));
    // return body;
   }
 

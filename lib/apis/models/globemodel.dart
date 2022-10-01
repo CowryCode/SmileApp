@@ -234,8 +234,6 @@ class GlobeModel {
       Model(state:   "South Africa", storage: "High"),
       Model(state:   "Zambia", storage: "High"),
       Model(state:   "Zimbabwe", storage: "High"),
-
-
     ];
   }
 

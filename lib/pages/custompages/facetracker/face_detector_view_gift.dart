@@ -1,6 +1,7 @@
 
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
@@ -137,59 +138,65 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               print("INDEX : $updatedTokenIndex");
               print("INDEX STRING : ${sgMessage.userCountriesIndexString}");
               smileAppValueNotifier.updateSmileDurationCount();
-              if(smileAppValueNotifier.value.smileDurationCount.value <= 0){
+              if(updatedTokenIndex <= 0){
                // String countryIDstring = sgMessage.userCountriesIndexString?? "0";
-                String countryIDstring = sgMessage.userCountriesIndexString?? "0";
-                List<int>? indicesCount = GlobeModel().splitString(countriesIndexString: countryIDstring);
-                if((indicesCount!.length) < GlobeModel().modelsDictionary().length){
-                  List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: countryIDstring);
+                String countryIDstring = smileAppValueNotifier.value.countriesIndexString.value;
+               // List<int>? indicesCount = GlobeModel().splitString(countriesIndexString: countryIDstring);
+                List<int>? indicesCount = worldmapModel.splitString(countriesIndexString: countryIDstring);
+               // if((indicesCount!.length) < GlobeModel().modelsDictionary().length){
+                if((indicesCount!.length) < worldmapModel.modelsDictionary().length){
+                //  List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: countryIDstring);
+                  List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
                   String updatedIDs =  countryIDstring + ",${data!.length}";
-                  MapShapeSource sublayerDataSource = MapShapeSource.asset(
-                    "assets/world_map.json",
-                    shapeDataField: "admin",
-                    dataCount: data.length,
-                    primaryValueMapper: (int index) {
-                      return data[index].state;
-                    },
-                    shapeColorValueMapper: (int index) {
-                      return data[index].storage;
-                    },
-                    shapeColorMappers: [
-                      MapColorMapper(value: "Low", color: Colors.red),
-                      MapColorMapper(value: "High", color: Colors.green)
-                    ],
-                  );
-                  updatedTokenIndex = 0;
-                  SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
-                    iscompleted: false, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
-                  );
-                  sgMSG.setCountriesID(countriesID: updatedIDs);
-                  sgMSG.setTokenindex(indexcount: updatedTokenIndex);
-                  sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
-                  StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs);
+                  // MapShapeSource sublayerDataSource = MapShapeSource.asset(
+                  //   "assets/world_map.json",
+                  //   shapeDataField: "admin",
+                  //   dataCount: data.length,
+                  //   primaryValueMapper: (int index) {
+                  //     return data[index].state;
+                  //   },
+                  //   shapeColorValueMapper: (int index) {
+                  //     return data[index].storage;
+                  //   },
+                  //   shapeColorMappers: [
+                  //     MapColorMapper(value: "Low", color: Colors.red),
+                  //     MapColorMapper(value: "High", color: Colors.green)
+                  //   ],
+                  // );
+
+                  //updatedTokenIndex = 0;
+                  // SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
+                  //   iscompleted: false, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
+                  // );
+                  //sgMSG.setCountriesID(countriesID: updatedIDs);
+                  //sgMSG.setTokenindex(indexcount: updatedTokenIndex);
+                  // sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+                  // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                 }else{
-                  updatedTokenIndex = 0;
-                  List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: "0");
-                  MapShapeSource sublayerDataSource = MapShapeSource.asset(
-                    "assets/world_map.json", shapeDataField: "admin", dataCount: data!.length,
-                    primaryValueMapper: (int index) {
-                      return data[index].state;
-                    },
-                    shapeColorValueMapper: (int index) {
-                      return data[index].storage;
-                    },
-                    shapeColorMappers: [
-                      MapColorMapper(value: "Low", color: Colors.red),
-                      MapColorMapper(value: "High", color: Colors.green)
-                    ],
-                  );
-                  SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
-                    iscompleted: true, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
-                  );
-                  sgMSG.setCountriesID(countriesID: "0");
-                  sgMSG.setTokenindex(indexcount: updatedTokenIndex);
-                  sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
-                  StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
+                  // updatedTokenIndex = 0;
+                  // List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: "0");
+                  // MapShapeSource sublayerDataSource = MapShapeSource.asset(
+                  //   "assets/world_map.json", shapeDataField: "admin", dataCount: data!.length,
+                  //   primaryValueMapper: (int index) {
+                  //     return data[index].state;
+                  //   },
+                  //   shapeColorValueMapper: (int index) {
+                  //     return data[index].storage;
+                  //   },
+                  //   shapeColorMappers: [
+                  //     MapColorMapper(value: "Low", color: Colors.red),
+                  //     MapColorMapper(value: "High", color: Colors.green)
+                  //   ],
+                  // );
+                  // SGMessage sgMSG = SGMessage(content: _msg, updated: true, tokenIndex: updatedTokenIndex,
+                  //   iscompleted: true, showStartCountDown: false, smileProbability: roundedProb * 100, // converting 0.9 to 90
+                  // );
+                  // sgMSG.setCountriesID(countriesID: "0");
+                  // sgMSG.setTokenindex(indexcount: updatedTokenIndex);
+                  // sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
+                  // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                 }
                 // counterNotifier.reStartvalue(newValue: Smile_Count_Initial);
                 smileAppValueNotifier.refreshSmileDurationCount();

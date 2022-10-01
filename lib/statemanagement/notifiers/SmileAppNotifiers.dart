@@ -1,17 +1,23 @@
+import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_maps/maps.dart';
 
 class NotifiersSection{
   ValueNotifier<int> smileDurationCount = ValueNotifier<int>(Smile_Count_Initial);
   ValueNotifier<bool> smileDurationCompleted = ValueNotifier<bool>(false);
   ValueNotifier<bool> showCountDown = ValueNotifier<bool>(false);
   ValueNotifier<String> countriesIndexString = ValueNotifier<String>("0");
+  ValueNotifier<bool> showShowMoodRating = ValueNotifier<bool>(false);
+  ValueNotifier<MapShapeSource>? mapdatasource;
 
   NotifiersSection({
     required this.smileDurationCount,
     required this.smileDurationCompleted,
     required this.showCountDown,
-    required this.countriesIndexString
+    required this.countriesIndexString,
+    required this.showShowMoodRating,
+    this.mapdatasource,
   });
 
 }
@@ -37,9 +43,45 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
     notifyListeners();
   }
 
+  void updateShowMoodRating({required bool showMoodrate}){
+    value.showShowMoodRating.value = showMoodrate;
+  }
+
   void updateCountriesIndexString({required String countriesIndex}){
     value.countriesIndexString.value = countriesIndex;
+    updateMapData(countriesIDstring: countriesIndex);
     notifyListeners();
+  }
+
+  void updateMapData({required String countriesIDstring}){
+    try {
+      List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countriesIDstring);
+      if (data == null) {
+        data = <Model>[Model(state: "Country Name", storage: "Low")];
+      }
+      MapShapeSource sublayerDataSource = MapShapeSource.asset(
+        "assets/world_map.json",
+        shapeDataField: "admin",
+        dataCount: data.length,
+        primaryValueMapper: (int index) {
+          return data![index].state;
+        },
+        shapeColorValueMapper: (int index) {
+          return data![index].storage;
+        },
+        shapeColorMappers: [
+          MapColorMapper(value: "Low", color: Colors.red),
+          MapColorMapper(value: "High", color: Colors.green)
+        ],
+      );
+      if(value.mapdatasource == null){
+        value.mapdatasource = ValueNotifier<MapShapeSource>(sublayerDataSource);
+      }else{
+        value.mapdatasource!.value = sublayerDataSource;
+      }
+    }catch(e){
+      // Do Nothing
+    }
   }
 }
 

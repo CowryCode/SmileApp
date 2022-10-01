@@ -1,4 +1,6 @@
 //final baseURL = "http://192.168.4.31:8080";
+import 'package:SmileApp/apis/models/globemodel.dart';
+
 final baseURL = "http://192.168.2.180:8080";
 final MobileURL = "https://com.cowrycode.healthensuite";
 
@@ -14,3 +16,5 @@ final getProfile_URL = "${baseURL}/smile/get-user";
 
  // NOTIFIER VARIABLES
 final int Smile_Count_Initial = 10;
+// WORLD MAP Json
+final GlobeModel worldmapModel = GlobeModel();

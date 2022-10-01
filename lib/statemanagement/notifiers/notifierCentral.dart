@@ -9,5 +9,6 @@ final SmileAppValueNotifier smileAppValueNotifier = SmileAppValueNotifier(
     smileDurationCompleted: ValueNotifier<bool>(false),
     showCountDown: ValueNotifier<bool>(false),
     countriesIndexString: ValueNotifier<String>("0"),
+    showShowMoodRating: ValueNotifier<bool>(false),
   ),
 );
