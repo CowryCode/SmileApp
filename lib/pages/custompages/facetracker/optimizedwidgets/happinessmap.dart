@@ -1,7 +1,7 @@
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';

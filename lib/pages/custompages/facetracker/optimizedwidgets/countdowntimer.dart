@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/SmileAppNotifiers.dart';
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/countdownnotifier.dart';
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
+import 'package:SmileApp/statemanagement/notifiers/countdownnotifier.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';

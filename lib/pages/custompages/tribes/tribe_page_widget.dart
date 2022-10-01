@@ -1,10 +1,6 @@
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
 

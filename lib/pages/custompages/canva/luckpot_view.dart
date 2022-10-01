@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:SmileApp/statemanagement/models/timerdatamodel.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:SmileApp/pages/custompages/animation_views/luckmatrix_countdown.dart';
-import 'package:SmileApp/pages/custompages/redux/app_state.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
 
 class LuckPot extends StatefulWidget {
 

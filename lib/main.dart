@@ -2,10 +2,10 @@
 import 'dart:io';
 
 import 'package:SmileApp/apis/secret.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/sg_message_reducer.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/statemanagement/models/timerdatamodel.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/sg_message_reducer.dart';
 import 'package:SmileApp/routes_generator.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';

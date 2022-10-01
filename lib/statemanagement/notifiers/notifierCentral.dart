@@ -1,5 +1,5 @@
 import 'package:SmileApp/apis/networkUtilities.dart';
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/SmileAppNotifiers.dart';
+import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
 import 'package:flutter/material.dart';
 
 //final SmileAppValueNotifier counterNotifier = SmileAppValueNotifier(value: Smile_Count_Initial);

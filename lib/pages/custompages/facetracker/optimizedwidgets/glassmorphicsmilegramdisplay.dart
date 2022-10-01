@@ -1,17 +1,10 @@
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/SmileAppNotifiers.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:glassmorphism/glassmorphism.dart';
-import 'package:rating_dialog/rating_dialog.dart';
-import 'package:syncfusion_flutter_maps/maps.dart';
 
 class GlassmorphicSmilegramDisplay extends StatefulWidget {
   const GlassmorphicSmilegramDisplay({Key? key}) : super(key: key);

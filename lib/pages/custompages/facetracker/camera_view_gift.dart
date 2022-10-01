@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/actions.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:flutter/services.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';

@@ -1,17 +1,16 @@
 
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
-import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/actions.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class FaceDetectorGiftView extends StatefulWidget {
@@ -76,7 +75,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   @override
   Widget build(BuildContext context) {
     return CameraViewGift(
-      title: widget.giftVariableObject.readmessage!? 'Smile and Hold' : 'Smile for Gift',
+      title: widget.giftVariableObject.readmessage!? 'Smile and Hold' : 'SmileGram',
      // customPaint: customPaint,
      // text: _text!,
       onImage: (inputImage) {
@@ -133,16 +132,13 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
           } else {
             double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
             if (prob > 0.1) {
-              //int updatedTokenIndex = sgMessage.tokenIndex + 1;
-              int updatedTokenIndex = sgMessage.tokenIndex;
+              // int updatedTokenIndex = sgMessage.tokenIndex;
+              int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
               print("INDEX : $updatedTokenIndex");
               print("INDEX STRING : ${sgMessage.userCountriesIndexString}");
-              //counterNotifier.decrement();
               smileAppValueNotifier.updateSmileDurationCount();
-             // debugPrint("SENT> ${smileAppValueNotifier.getCurrentValue()}");
-              // if(updatedTokenIndex <= 0){
-             // if(counterNotifier.getCurrentValue() <= 0){
               if(smileAppValueNotifier.value.smileDurationCount.value <= 0){
+               // String countryIDstring = sgMessage.userCountriesIndexString?? "0";
                 String countryIDstring = sgMessage.userCountriesIndexString?? "0";
                 List<int>? indicesCount = GlobeModel().splitString(countriesIndexString: countryIDstring);
                 if((indicesCount!.length) < GlobeModel().modelsDictionary().length){

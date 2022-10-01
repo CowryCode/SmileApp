@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:SmileApp/pages/custompages/facetracker/face_detector_painter.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/actions.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
 
 import 'camera_view.dart';
 

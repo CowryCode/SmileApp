@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:SmileApp/pages/custompages/canva/luckpot_view.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/actions.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
+import 'package:SmileApp/statemanagement/my_app_state.dart';
 import '../../../main.dart';
 
 enum ScreenMode { liveFeed, gallery }

@@ -1,10 +1,7 @@
 
-import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/actions.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -109,11 +106,11 @@ class _HomeState extends State<Home> {
                     TextButton(
                       onPressed: (){
                         smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-                        SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
-                        sgMSG.setTokenindex(indexcount: 5);
-                        sgMSG.setCompleted(completed: false);
-                        print("Current Map State : ${sgMSG.sublayerDataSource}");
-                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                        // SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
+                        // sgMSG.setTokenindex(indexcount: 5);
+                        // sgMSG.setCompleted(completed: false);
+                        // print("Current Map State : ${sgMSG.sublayerDataSource}");
+                        // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                         Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(fulltext: "", readmessage: false));
                        },
                       child: const Text('Continue'),

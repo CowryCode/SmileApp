@@ -1,7 +1,6 @@
 
-
-import 'package:SmileApp/pages/custompages/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/pages/custompages/statemanagement/models/timerdatamodel.dart';
+import 'package:SmileApp/statemanagement/models/timerdatamodel.dart';
+import 'package:SmileApp/statemanagement/models/sgmessage.dart';
 
 class UpdateSGmessageAction{
   final SGMessage updateSGmessage;
