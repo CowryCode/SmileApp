@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:SmileApp/pages/custompages/facetracker/notifiers/notifierCentral.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
-import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/smiledurationcounter.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
@@ -626,23 +625,33 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         fit: StackFit.loose,
         children: <Widget>[
         //  (_controller != null)? Transform.scale(
-          (_controller != null && smilestartCountdown == false)? Transform.scale(
-            scale: 1,
-            child: Center(
-              child: _changingCameraLens
-                  ? Center(
-                child: const Text('Changing camera lens'),
-              )
-                  : CameraPreview(_controller!),
-            ),
-          ) : SizedBox(height: MediaQuery.of(context).size.height * 0.6),
-          ((){
+        //   (_controller != null && smilestartCountdown == false)? Transform.scale(
+        //     scale: 1,
+        //     child: Center(
+        //       child: _changingCameraLens
+        //           ? Center(
+        //         child: const Text('Changing camera lens'),
+        //       )
+        //           : CameraPreview(_controller!),
+        //     ),
+        //   ) : SizedBox(height: MediaQuery.of(context).size.height * 0.6),
+          ValueListenableBuilder(
+            valueListenable: smileAppValueNotifier.value.showCountDown,
+            builder: (context, value, child) {
+              if(_controller != null && value == false){
+                return Center(child: CameraPreview(_controller!));
+              }else{
+                return  SizedBox(height: MediaQuery.of(context).size.height * 0.6);
+              }
+            },
+          ),
+          // ((){
             // if(smilestartCountdown == true){
             //   return Center(child: CountdownTimer());
             // }else{
             //   return SizedBox(height: 3.0,);
             // }
-            return ValueListenableBuilder(
+            ValueListenableBuilder(
               valueListenable: smileAppValueNotifier.value.showCountDown,
               builder: (context, value, child) {
                 if(value == true){
@@ -651,15 +660,15 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   return SizedBox(height: 3.0,);
                 }
               },
-            );
-          }()),
-          ((){
+            ),
+           // }()),
+           // ((){
             // if(smilestartCountdown == false && !widget.readmessage ){
             //   return GlassmorphicSmilegramDisplay();
             // }else{
             //   return SizedBox(height: 3.0,);
             // }
-            return ValueListenableBuilder(
+            ValueListenableBuilder(
               valueListenable: smileAppValueNotifier.value.showCountDown,
               builder: (context, value, child) {
                 if(value == false && !widget.readmessage ){
@@ -668,15 +677,25 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   return SizedBox(height: 3.0,);
                 }
               },
-            );
-          }()),
-          ((){
-            if(smilestartCountdown == false && widget.readmessage){
-              return glassmorphicReadMessage();
-            }else{
-              return SizedBox(height: 3.0,);
-            }
-          }()),
+            ),
+          //}()),
+          ValueListenableBuilder(
+            valueListenable: smileAppValueNotifier.value.showCountDown,
+            builder: (context, value, child) {
+              if(value == false && widget.readmessage ){
+                return glassmorphicReadMessage();
+              }else{
+                return Text("");
+              }
+            },
+          ),
+          // ((){
+          //   if(smilestartCountdown == false && widget.readmessage){
+          //     return glassmorphicReadMessage();
+          //   }else{
+          //     return SizedBox(height: 3.0,);
+          //   }
+          // }()),
          // LuckPot(),
          // _giftMatrix()
         ],

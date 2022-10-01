@@ -66,102 +66,131 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
     return StoreConnector<MyAppState, SGMessage>(
           converter: (store) => store.state.sg_message,
           builder: (context, SGMessage currentMessagestate) => Center(
-            child: GlassmorphicContainer(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              borderRadius: 20,
-              blur: 20,
-              alignment: Alignment.bottomCenter,
-              border: 2,
-              linearGradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFffffff).withOpacity(0.1),
-                    Color(0xFFFFFFFF).withOpacity(0.05),
-                  ],
-                  stops: [
-                    0.1,
-                    1,
-                  ]),
-              borderGradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFffffff).withOpacity(0.5),
-                  Color((0xFFFFFFFF)).withOpacity(0.5),
-                ],
-              ),
-              child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children:<Widget> [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(width: 3,),
-                              Text(
-                                'Smile rating is : ',
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black45,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 14.0,
-                                ),
-                              ),
-                              SizedBox(width: 3,),
-                              Text(
-                                (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                           SizedBox(
-                             height: 40,
-                             child: ValueListenableBuilder(
-                              // valueListenable: counterNotifier,
-                               valueListenable: smileAppValueNotifier.value.smileDurationCount,
-                               builder: (context, value, child) {
-                                 debugPrint("Received< $value");
-                                 return Text("${value.toString()}",
-                                   style: const TextStyle(
-                                       fontSize: 33.0,
-                                       color: Colors.green,
-                                       fontWeight: FontWeight.bold),
-                                 );
-                               },
-                             )
-                             // child: Text("${currentMessagestate.tokenIndex}",
-                             //   style: const TextStyle(
-                             //       fontSize: 33.0,
-                             //       color: Colors.green,
-                             //       fontWeight: FontWeight.bold),
-                             // ),
-                            // child: SmileDurationCounter(),
-                           ),
-                        ],
-                      ),
-                      HappinessMap()
-                    ],
-
-                  )
-                //child: _smilegramDetector()
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+         children:<Widget> [
+        Align(
+          alignment: Alignment.topRight,
+          child: ValueListenableBuilder(
+            // valueListenable: counterNotifier,
+            valueListenable: smileAppValueNotifier.value.smileDurationCount,
+            builder: (context, value, child) {
+              return Text("${value.toString()}",
+                style: const TextStyle(
+                    fontSize: 33.0,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold),
+              );
+            },
+          ),
+        ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            'Smile rating is : ',
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black45,
+              fontFamily: 'Poppins',
+              fontSize: 14.0,
             ),
-          ));
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child:  HappinessMap()
+        ),
+      ],
+    )));
+          //     Center(
+          //   child: GlassmorphicContainer(
+          //     width: MediaQuery.of(context).size.width,
+          //     height: MediaQuery.of(context).size.height,
+          //     borderRadius: 20,
+          //     blur: 20,
+          //     alignment: Alignment.bottomCenter,
+          //     border: 2,
+          //     linearGradient: LinearGradient(
+          //         begin: Alignment.topLeft,
+          //         end: Alignment.bottomRight,
+          //         colors: [
+          //           Color(0xFFffffff).withOpacity(0.1),
+          //           Color(0xFFFFFFFF).withOpacity(0.05),
+          //         ],
+          //         stops: [
+          //           0.1,
+          //           1,
+          //         ]),
+          //     borderGradient: LinearGradient(
+          //       begin: Alignment.topLeft,
+          //       end: Alignment.bottomRight,
+          //       colors: [
+          //         Color(0xFFffffff).withOpacity(0.5),
+          //         Color((0xFFFFFFFF)).withOpacity(0.5),
+          //       ],
+          //     ),
+          //     child: Center(
+          //         child: Column(
+          //           mainAxisAlignment: MainAxisAlignment.start,
+          //           children:<Widget> [
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: <Widget>[
+          //                 Row(
+          //                   mainAxisAlignment: MainAxisAlignment.start,
+          //                   children: <Widget>[
+          //                     SizedBox(width: 3,),
+          //                     Text(
+          //                       'Smile rating is : ',
+          //                       textAlign: TextAlign.center,
+          //                       overflow: TextOverflow.ellipsis,
+          //                       style: const TextStyle(
+          //                         fontWeight: FontWeight.bold,
+          //                         color: Colors.black45,
+          //                         fontFamily: 'Poppins',
+          //                         fontSize: 14.0,
+          //                       ),
+          //                     ),
+          //                     SizedBox(width: 3,),
+          //                     Text(
+          //                       (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
+          //                       textAlign: TextAlign.center,
+          //                       overflow: TextOverflow.ellipsis,
+          //                       style: const TextStyle(
+          //                         fontWeight: FontWeight.bold,
+          //                         color: Colors.red,
+          //                         fontSize: 12.0,
+          //                       ),
+          //                     ),
+          //                   ],
+          //                 ),
+          //                  SizedBox(
+          //                    height: 40,
+          //                    child: ValueListenableBuilder(
+          //                     // valueListenable: counterNotifier,
+          //                      valueListenable: smileAppValueNotifier.value.smileDurationCount,
+          //                      builder: (context, value, child) {
+          //                        return Text("${value.toString()}",
+          //                          style: const TextStyle(
+          //                              fontSize: 33.0,
+          //                              color: Colors.green,
+          //                              fontWeight: FontWeight.bold),
+          //                        );
+          //                      },
+          //                    ),
+          //                  ),
+          //               ],
+          //             ),
+          //             HappinessMap()
+          //           ],
+          //         )
+          //       //child: _smilegramDetector()
+          //     ),
+          //   ),
+          // ));
     }
-
 }
 
 // class Model {

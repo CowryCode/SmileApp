@@ -140,7 +140,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               //counterNotifier.decrement();
               smileAppValueNotifier.updateSmileDurationCount();
              // debugPrint("SENT> ${smileAppValueNotifier.getCurrentValue()}");
-              debugPrint("SENT> ${smileAppValueNotifier.value.smileDurationCount.value}");
               // if(updatedTokenIndex <= 0){
              // if(counterNotifier.getCurrentValue() <= 0){
               if(smileAppValueNotifier.value.smileDurationCount.value <= 0){
