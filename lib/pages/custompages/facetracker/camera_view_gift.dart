@@ -34,7 +34,7 @@ class CameraViewGift extends StatefulWidget {
      // required this.text,
       required this.onImage,
       this.onScreenModeChanged,
-      this.initialDirection = CameraLensDirection.back,
+      this.initialDirection = CameraLensDirection.front,
         this.readmessage = false})
       : super(key: key);
 
@@ -173,9 +173,12 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         DeviceOrientation.portraitDown
       ]);
 
-      SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
-      sgMessage.setShowCountdown(countDownVisibility: false);
-      StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
+      smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
+      smileAppValueNotifier.updateShowCountDown(showCoundown: true);
+      //
+      // SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+      // sgMessage.setShowCountdown(countDownVisibility: false);
+      // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
 
     }catch(e){
       debugPrint("CAMERA ERROR : ${e.toString()}");
@@ -189,6 +192,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     _stopLiveFeed();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -303,15 +307,15 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       child: const Text('Refresh',),
                       onPressed: () {
                         refreshCamera(); // Refresh
-                        SGMessage sgMSG = SGMessage(
-                          content: "",
-                          updated: true,
-                          tokenIndex: 0,
-                          iscompleted: false,
-                          showStartCountDown: true,
-                        );
-                        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                        _count += 1;
+                        // SGMessage sgMSG = SGMessage(
+                        //   content: "",
+                        //   updated: true,
+                        //   tokenIndex: 0,
+                        //   iscompleted: false,
+                        //   showStartCountDown: true,
+                        // );
+                        // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+                        // _count += 1;
                       },
                     ),
                     SizedBox(width: 3,),
@@ -564,7 +568,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     final camera = cameras[_cameraIndex];
     _controller = CameraController(
       camera,
-      ResolutionPreset.high,
+     // ResolutionPreset.high,
+      ResolutionPreset.low,
       enableAudio: false,
     );
     _controller?.initialize().then((_) {
@@ -586,7 +591,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   Future _stopLiveFeed() async {
     await _controller?.stopImageStream();
     await _controller?.dispose();
-    _controller = null;
+    //_controller = null;
   }
 
   Future _switchLiveCamera() async {
@@ -947,7 +952,6 @@ Widget weatherMap(){
     onCancelled: () => print('cancelled'),
     onSubmitted: (response) {
       Navigator.of(context).popAndPushNamed('/home',);
-      print('rating: ${response.rating}, comment: ${response.comment}');
     },
     submitButtonTextStyle: const TextStyle(
         fontWeight: FontWeight.bold,

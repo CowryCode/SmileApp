@@ -67,7 +67,7 @@ class _HappinessMapState extends State<HappinessMap> {
       padding: EdgeInsets.only(left: 15, right: 15),
       child: ValueListenableBuilder(
         // valueListenable: counterNotifier,
-        valueListenable: smileAppValueNotifier.value.mapdatasource!,
+        valueListenable: smileAppValueNotifier.value.mapdatasource,
         builder: (context, MapShapeSource mapShapeSource, child) {
           return SfMaps(
             layers: <MapShapeLayer>[

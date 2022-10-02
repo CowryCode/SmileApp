@@ -94,7 +94,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
+    debugPrint("Face Detection Started :::${DateTime.now().second}");
     final faces = await _faceDetector.processImage(inputImage);
+    debugPrint("Face Detection Ended :::${DateTime.now().second}");
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
 
@@ -226,10 +228,10 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         }
       }
     } else {
-      // String text = 'Faces found: ${faces.length}\n\n';
-      // for (final face in faces) {
-      //   text += 'face: ${face.boundingBox}\n\n';
-      // }
+      String text = 'Faces found: ${faces.length}\n\n';
+      for (final face in faces) {
+        text += 'face: ${face.boundingBox}\n\n';
+      }
       // _text = text;
       // TODO: set _customPaint to draw boundingRect on top of image
       //TODO: COMMENTED OUT TODAY 20-09-2022
