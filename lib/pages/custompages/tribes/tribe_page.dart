@@ -1,4 +1,5 @@
 import 'package:SmileApp/pages/custompages/tribes/tribe_page_widget.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
@@ -19,6 +20,7 @@ class _TribePageState extends State<TribePage> {
   void initState() {
     //this.doctorsList = new model.DoctorsList();
     _leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
+    messageNotifier.update(message: "", index: 0);
     super.initState();
   }
   @override

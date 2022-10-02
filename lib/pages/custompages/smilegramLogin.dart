@@ -68,12 +68,9 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_){
-      SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
-      sgMSG.setTokenindex(indexcount: 5);
-      sgMSG.setCountriesID(countriesID: "0");
-      sgMSG.setSubLayerDataSource(subelayerdata: sublayerDataSource);
-      print("DATA SET : ${sgMSG.sublayerDataSource}");
-      StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
+      // SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
+      // sgMSG.setTokenindex(indexcount: 5);
+      // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
       Navigator.of(context).pushNamed('/home_with_alert');
     });
 

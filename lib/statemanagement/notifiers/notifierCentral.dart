@@ -1,6 +1,8 @@
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
+import 'package:SmileApp/statemanagement/notifiers/sgMessageNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
@@ -28,3 +30,5 @@ final SmileAppValueNotifier smileAppValueNotifier = SmileAppValueNotifier(
         ],
       ))),
 );
+
+final SGmessageNotifier messageNotifier = SGmessageNotifier(value: SGmessageModel(msg: "", index: 0));

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
+import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
@@ -307,15 +308,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       child: const Text('Refresh',),
                       onPressed: () {
                         refreshCamera(); // Refresh
-                        // SGMessage sgMSG = SGMessage(
-                        //   content: "",
-                        //   updated: true,
-                        //   tokenIndex: 0,
-                        //   iscompleted: false,
-                        //   showStartCountDown: true,
-                        // );
-                        // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                        // _count += 1;
                       },
                     ),
                     SizedBox(width: 3,),
@@ -765,7 +757,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
               if(value == false && widget.readmessage ){
-                return glassmorphicReadMessage();
+                return _glassmorphicReadMessage();
               }else{
                 return Text("");
               }
@@ -853,11 +845,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   // }
 
 
-Widget glassmorphicReadMessage(){
+Widget _glassmorphicReadMessage(){
     return  SingleChildScrollView(
-      child: StoreConnector<MyAppState, SGMessage>(
-          converter: (store) => store.state.sg_message,
-          builder: (context, SGMessage currentMessagestate) => Center(
+      child:Center(
             child: GlassmorphicContainer(
               width: MediaQuery.of(context).size.width * 0.93,
               height: MediaQuery.of(context).size.height,
@@ -892,16 +882,27 @@ Widget glassmorphicReadMessage(){
                       transitionBuilder: (Widget child, Animation<double> animation) {
                         return ScaleTransition(scale: animation, child: child);
                       },
-                      child: Text(
-                        currentMessagestate.content,
-                        key: ValueKey<int>(_count),
-                        style: Theme.of(context).textTheme.subtitle2,
+                      // child: Text(
+                      //   currentMessagestate.content,
+                      //   key: ValueKey<int>(_count),
+                      //   style: Theme.of(context).textTheme.subtitle2,
+                      // ),
+                      child: ValueListenableBuilder(
+                        // valueListenable: counterNotifier,
+                        valueListenable: messageNotifier,
+                        builder: (context, SGmessageModel sgmodel, child) {
+                          return Text(
+                            sgmodel.msg,
+                           // key: ValueKey<int>(_count),
+                            style: Theme.of(context).textTheme.subtitle2,
+                          );
+                        },
                       ),
                     ),
                 ),
               ),
             ),
-          )),
+          ),
     );
   }
 

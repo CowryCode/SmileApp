@@ -44,10 +44,10 @@ class _SmileDurationCounterState extends State<SmileDurationCounter> {
   void _randomize(){
     Timer.periodic(Duration(seconds: 1), (timer){
       if (countValue <= 0) {
-        debugPrint('Countdown Ended');
-        SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
-        sgMessage.setShowCountdown(countDownVisibility: false);
-        StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
+        // debugPrint('Countdown Ended');
+        // SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+        // sgMessage.setShowCountdown(countDownVisibility: false);
+        // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
         timer.cancel();
       }else{
         setState(() {
