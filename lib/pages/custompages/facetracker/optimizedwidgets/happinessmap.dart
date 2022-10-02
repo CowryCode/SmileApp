@@ -2,6 +2,7 @@ import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/statemanagement/my_app_state.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -64,22 +65,25 @@ class _HappinessMapState extends State<HappinessMap> {
 
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
-      child:  StoreConnector<MyAppState, SGMessage>(
-      converter: (store) => store.state.sg_message,
-    builder: (context, SGMessage currentMessagestate) =>
-       SfMaps(
-        layers: <MapShapeLayer>[
-          MapShapeLayer(
-            source: shapeDataSource,
-            sublayers: [
-              MapShapeSublayer(
-               // source: sublayerDataSource,
-                source: currentMessagestate.sublayerDataSource!,
-              )
+      child: ValueListenableBuilder(
+        // valueListenable: counterNotifier,
+        valueListenable: smileAppValueNotifier.value.mapdatasource!,
+        builder: (context, MapShapeSource mapShapeSource, child) {
+          return SfMaps(
+            layers: <MapShapeLayer>[
+              MapShapeLayer(
+                source: shapeDataSource,
+                sublayers: [
+                  MapShapeSublayer(
+                    // source: sublayerDataSource,
+                    source: mapShapeSource,
+                  )
+                ],
+              ),
             ],
-          ),
-        ],
-      ),
+          );
+        },
+
 
       //   SfMaps(
       //   layers: <MapShapeLayer>[

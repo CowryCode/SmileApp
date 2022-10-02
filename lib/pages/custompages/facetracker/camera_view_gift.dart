@@ -102,6 +102,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   @override
   void initState() {
     super.initState();
+
     try {
       _tokenArray = _fulltext.split(" ");
 
@@ -127,7 +128,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         );
       }
       _startLiveFeed();
-
       //_startLiveFeed();
       // SET PREFERRED ORIENTATION
       SystemChrome.setPreferredOrientations([
@@ -285,12 +285,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ValueListenableBuilder(
             // valueListenable: counterNotifier,
             valueListenable: smileAppValueNotifier.value.showCountDown,
-            builder: (context, value, child) {
-              if(value == true){
+            builder: (context, bool value, child) {
                 return _cameraDisplay(smilestartCountdown: true);
-              }else{
-                return _cameraDisplay(smilestartCountdown: false);
-              }
             },
           ),
           SizedBox(height: 20,),

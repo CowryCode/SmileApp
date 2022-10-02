@@ -58,7 +58,6 @@ class GlobeModel {
 
   List<Model> modelsDictionary(){
     return <Model>[
-      Model(state: "Country Name", storage: "Low"),
       Model(state:   "Afghanistan", storage: "High"),
       Model(state:   "Angola", storage: "High"),
       Model(state:   "Albania", storage: "High"),

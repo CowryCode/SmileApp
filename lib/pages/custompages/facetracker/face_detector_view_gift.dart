@@ -148,6 +148,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 //  List<Model>? data = GlobeModel().getProcessedcountries(userCountriesIndexString: countryIDstring);
                   List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
                   String updatedIDs =  countryIDstring + ",${data!.length}";
+                  print("INDEX STRING WITHIN: $updatedIDs");
                   smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs);
                   // MapShapeSource sublayerDataSource = MapShapeSource.asset(
                   //   "assets/world_map.json",

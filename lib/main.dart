@@ -58,6 +58,7 @@ Future<void> main() async {  // The code before I added Flutter_redux
   WidgetsFlutterBinding.ensureInitialized();
 
   cameras = await availableCameras();
+
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {
