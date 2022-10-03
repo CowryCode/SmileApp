@@ -28,7 +28,9 @@ final SmileAppValueNotifier smileAppValueNotifier = SmileAppValueNotifier(
           MapColorMapper(value: "Low", color: Colors.red),
           MapColorMapper(value: "High", color: Colors.green)
         ],
-      ))),
+      )),
+    nextCountry: ValueNotifier<String>("Afghanistan"),
+  ),
 );
 
 final SGmessageNotifier messageNotifier = SGmessageNotifier(value: SGmessageModel(msg: "", index: 0));

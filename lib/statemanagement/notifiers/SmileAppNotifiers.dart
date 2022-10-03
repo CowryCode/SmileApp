@@ -26,7 +26,7 @@ class NotifiersSection {
       MapColorMapper(value: "High", color: Colors.green)
     ],
   ));
-
+  ValueNotifier<String> nextCountry = ValueNotifier<String>("Afghanistan");
   NotifiersSection({
     required this.smileDurationCount,
     required this.smileDurationCompleted,
@@ -34,6 +34,7 @@ class NotifiersSection {
     required this.countriesIndexString,
     required this.showShowMoodRating,
     required this.mapdatasource,
+    required this.nextCountry,
   });
 }
 
@@ -93,6 +94,7 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
         ],
       );
       value.mapdatasource.value = sublayerDataSource;
+      value.nextCountry.value = data.last.state;
       notifyListeners();
     } catch (e) {
       // Do Nothing
