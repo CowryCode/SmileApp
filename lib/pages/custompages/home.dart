@@ -396,14 +396,12 @@ class _HomeState extends State<Home> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      // encourage your user to leave a high rating?
       message: Text(
         'How happy do you feel now?',
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 15),
       ),
       // your app's logo?
-      //image: const FlutterLogo(size: 100),
       image: Image.asset("assets/logo1.jpeg",width: 100, height: 100,),
       submitButtonText: 'Submit',
       commentHint: 'Set your custom comment hint',

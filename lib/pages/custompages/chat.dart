@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/models/mymodels/user.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 
 
 class ChatWidget extends StatefulWidget {
@@ -30,7 +31,12 @@ class _ChatWidgetState extends State<ChatWidget> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
           onPressed: () {
-            Navigator.of(context).popAndPushNamed('/home');
+            showDialog(
+              context: context,
+              barrierDismissible: true, // set to false if you want to force a rating
+              builder: (context) => _showRatingAlert(context),
+            );
+           // Navigator.of(context).popAndPushNamed('/home');
           },
         ),
         shape: RoundedRectangleBorder(
@@ -38,7 +44,7 @@ class _ChatWidgetState extends State<ChatWidget> {
         ),
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          "_currentDoctor.name!",
+          "Baby AI Speaks!",
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -226,6 +232,44 @@ class _ChatWidgetState extends State<ChatWidget> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  RatingDialog _showRatingAlert(BuildContext context){
+    return RatingDialog(
+      showCloseButton: false,
+      starSize: 30.0,
+      initialRating: 0.0,
+      // your app's name?
+      title: Text(
+        'Rate Your Mood',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      // encourage your user to leave a high rating?
+      message: Text(
+        'How do you feel chatting with the bot?',
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 15),
+      ),
+      // // your app's logo?
+      //image: const FlutterLogo(size: 100),
+      image: Image.asset("assets/logo1.jpeg",width: 100, height: 100,),
+      submitButtonText: 'Submit',
+      commentHint: 'Set your custom comment hint',
+      onCancelled: () => print('cancelled'),
+      onSubmitted: (response) {
+        Navigator.of(context).popAndPushNamed('/home',);
+        print('rating: ${response.rating}, comment: ${response.comment}');
+      },
+      submitButtonTextStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
+          color: Colors.green
       ),
     );
   }

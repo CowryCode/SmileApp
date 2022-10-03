@@ -128,8 +128,9 @@ class _EmotionsState extends State<Emotions> {
                     ),
                     SizedBox(height: 20),
                     Container(
+                      //TODO: USE PAPER MENTIONED BY OLA TO PICK THE DOMINANT NEGATIVE EMOTIONS
                       child: Text(
-                        "Select your dominant emotion(s). \n (Use paper related to emotion)",
+                        "Select your dominant emotion(s).",
                         style: TextStyle(
                             fontSize: 20.0,
                             fontFamily: 'Poppins',

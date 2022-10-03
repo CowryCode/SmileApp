@@ -281,7 +281,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 showDialog(
                   context: context,
                   barrierDismissible: true, // set to false if you want to force a rating
-                  builder: (context) => showRatingAlert(context),
+                  builder: (context) => showRatingAlert(context, justreadmessage: widget.readmessage),
                 );
               }
               return SizedBox(height: 1,);
@@ -318,7 +318,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                         showDialog(
                           context: context,
                           barrierDismissible: true, // set to false if you want to force a rating
-                          builder: (context) => showRatingAlert(context),
+                          builder: (context) => showRatingAlert(context, justreadmessage: true),
                         );
                       },
                     ),
@@ -901,7 +901,7 @@ Widget weatherMap(){
 }
 
 
-  RatingDialog showRatingAlert(BuildContext context){
+  RatingDialog showRatingAlert(BuildContext context, {required bool justreadmessage}){
   return RatingDialog(
     showCloseButton: false,
     initialRating: 0.0,
@@ -917,7 +917,7 @@ Widget weatherMap(){
     ),
     // encourage your user to leave a high rating?
     message: Text(
-      'How happy do you feel now?',
+      (justreadmessage == true) ? 'Does it feel good to unlock your message wit a smile?' : 'How does it feel to smile this long?',
       textAlign: TextAlign.center,
       style: const TextStyle(fontSize: 15),
     ),
