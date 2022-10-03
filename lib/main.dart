@@ -2,21 +2,14 @@
 import 'dart:io';
 
 import 'package:SmileApp/apis/secret.dart';
-import 'package:SmileApp/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/statemanagement/models/timerdatamodel.dart';
-import 'package:SmileApp/statemanagement/my_app_state.dart';
-import 'package:SmileApp/statemanagement/sg_message_reducer.dart';
 import 'package:SmileApp/routes_generator.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:SmileApp/config/app_config.dart' as config;
 
-import 'package:redux/redux.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 import 'apis/models/countrymodel.dart';
@@ -58,13 +51,13 @@ Future<void> main() async {  // The code before I added Flutter_redux
   WidgetsFlutterBinding.ensureInitialized();
 
   cameras = await availableCameras();
-
-  try {
-    cameras = await availableCameras();
-  } on CameraException catch (e) {
-    print("Threw error");
-    print(e.toString());
-  }
+  //
+  // try {
+  //   cameras = await availableCameras();
+  // } on CameraException catch (e) {
+  //   print("Threw error");
+  //   print(e.toString());
+  // }
   runApp(MyApp());
 }
 
@@ -99,21 +92,22 @@ Future init() async{
 
 class MyApp extends StatelessWidget {
 
-  final Store<MyAppState> _store = Store<MyAppState>(
-      updateSGmessageReducer,
-      initialState: MyAppState(
-        sg_message: SGMessage(content: "", updated: false),
-        luckPotTimerstatemodel: LuckPotTimerstatemodel(activate: false)
-      )
-  );
+  // final Store<MyAppState> _store = Store<MyAppState>(
+  //     updateSGmessageReducer,
+  //     initialState: MyAppState(
+  //       sg_message: SGMessage(content: "", updated: false),
+  //       luckPotTimerstatemodel: LuckPotTimerstatemodel(activate: false)
+  //     )
+  // );
 
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
-    return StoreProvider<MyAppState>(
-      store: _store,
-      child: MaterialApp(
+    // return StoreProvider<MyAppState>(
+    //   store: _store,
+    //   child:
+     return  MaterialApp(
         title: 'Smile App',
        // initialRoute: '/',
         initialRoute: '/home_with_alert',
@@ -176,7 +170,6 @@ class MyApp extends StatelessWidget {
           Locale('sk', ''),
           Locale('pl', ''),
         ],
-      ),
     );
   }
  }

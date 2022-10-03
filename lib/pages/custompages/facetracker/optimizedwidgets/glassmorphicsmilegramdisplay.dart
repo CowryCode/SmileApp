@@ -4,7 +4,6 @@ import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 
 class GlassmorphicSmilegramDisplay extends StatefulWidget {
   const GlassmorphicSmilegramDisplay({Key? key}) : super(key: key);
@@ -56,9 +55,7 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<MyAppState, SGMessage>(
-          converter: (store) => store.state.sg_message,
-          builder: (context, SGMessage currentMessagestate) => Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
          children:<Widget> [
@@ -68,7 +65,7 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
             // valueListenable: counterNotifier,
             valueListenable: smileAppValueNotifier.value.smileDurationCount,
             builder: (context, value, child) {
-              return Text("${value.toString()}",
+              return Text("${value.toString()} ",
                 style: const TextStyle(
                     fontSize: 33.0,
                     color: Colors.green,
@@ -78,9 +75,13 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
           ),
         ),
         Align(
-          alignment: Alignment.topLeft,
+            alignment: Alignment.center,
+            child:  HappinessMap()
+           ),
+        Align(
+          alignment: Alignment.bottomLeft,
           child: Text(
-            'Smile rating is : ',
+            '   Country Name: ',
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
@@ -91,12 +92,9 @@ class _GlassmorphicSmilegramDisplayState extends State<GlassmorphicSmilegramDisp
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.center,
-          child:  HappinessMap()
-        ),
+
       ],
-    )));
+    ));
           //     Center(
           //   child: GlassmorphicContainer(
           //     width: MediaQuery.of(context).size.width,

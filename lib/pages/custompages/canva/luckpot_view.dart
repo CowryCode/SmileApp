@@ -5,7 +5,6 @@ import 'package:SmileApp/statemanagement/models/timerdatamodel.dart';
 import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 
 class LuckPot extends StatefulWidget {
 
@@ -51,12 +50,10 @@ class _LuckPotState extends State<LuckPot> {
             //           )),
             //     ],
             //   ),
-            child: StoreConnector<MyAppState, LuckPotTimerstatemodel>(
-              converter: (store) => store.state.luckPotTimerstatemodel,
-              builder: (context, LuckPotTimerstatemodel luckpot) =>  AnimatedTextKit(
+            child:  AnimatedTextKit(
                   repeatForever: true,
                   animatedTexts: [
-                    ScaleAnimatedText('Remaining $progressBarvalue! Smiling ? ${luckpot.activate}',
+                    ScaleAnimatedText('Remaining $progressBarvalue! Smiling ?',
                         scalingFactor: 0.2,
                         textStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -65,7 +62,7 @@ class _LuckPotState extends State<LuckPot> {
                         )),
                   ],
                 ),
-            ),
+
           ) : SizedBox(
                 height: 30,
                 width: MediaQuery.of(context).size.width * 0.8,

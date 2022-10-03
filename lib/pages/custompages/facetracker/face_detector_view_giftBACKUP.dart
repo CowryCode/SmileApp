@@ -1,18 +1,12 @@
 
 import 'package:SmileApp/apis/models/countrymodel.dart';
-import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:SmileApp/statemanagement/actions.dart';
-import 'package:SmileApp/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/statemanagement/my_app_state.dart';
-import 'package:syncfusion_flutter_maps/maps.dart';
 
 class FaceDetectorGiftView_Backup extends StatefulWidget {
 

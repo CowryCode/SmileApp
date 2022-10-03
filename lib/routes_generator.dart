@@ -3,16 +3,12 @@ import 'package:SmileApp/pages/custompages/smilegramLogin.dart';
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/pages/custompages/emotions.dart';
-import 'package:SmileApp/pages/custompages/facetracker/face_detector_view.dart';
 import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';
 import 'package:SmileApp/pages/custompages/leaderboard/smileleader.dart';
 import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/custompages/patient/completeprofile.dart';
 import 'package:SmileApp/pages/custompages/tribe_messages.dart';
 import 'package:SmileApp/pages/custompages/chat.dart';
-
-
-
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -28,14 +24,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: true,));
       case '/home' :
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: false,));
-      // case '/mydoctors':
-      //   return MaterialPageRoute(builder: (_) => MyDoctorsList());
       case '/chat' :
         return MaterialPageRoute(builder: (_) => ChatWidget());
       case '/emotions':
         return MaterialPageRoute(builder: (_) => Emotions());
-      case '/smilegram':
-        return MaterialPageRoute(builder: (_) => FaceDetectorView());
+      // case '/smilegram':
+      //   return MaterialPageRoute(builder: (_) => FaceDetectorView());
       case '/smilegramgift':
         return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(giftVariableObject: args as GiftVariableObject,));
       case '/leaderboard':

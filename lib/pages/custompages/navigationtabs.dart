@@ -28,15 +28,12 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
     switch (page){
       case 0 :
         currentTitle = 'Home';
-       // return Home(value: "${widget.acountInfos[0]}");
         return Home(checkEmotion: false,);
       case 1 :
         currentTitle = 'chat';  
-       // return prefix0.Conversation();
         return TribePage();
       case 2 :
         currentTitle = 'LeaderBoard';
-        // return UserAcountWidget();
         return LeadderBoard();
       default:
         currentTitle = 'Home';
@@ -63,7 +60,6 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
         items: <Widget>[
           Icon(Icons.home, size: 25,color: Theme.of(context).primaryColor,),
           Icon(FontAwesomeIcons.peopleGroup, size: 25,color: Theme.of(context).primaryColor,),
-          //Icon(Icons.perm_identity, size: 25,color: Theme.of(context).primaryColor,),
           Icon(FontAwesomeIcons.chartPie, size: 25,color: Theme.of(context).primaryColor,),
         ],
         color: Theme.of(context).accentColor,

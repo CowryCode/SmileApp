@@ -9,15 +9,12 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
-import 'package:SmileApp/statemanagement/actions.dart';
-import 'package:SmileApp/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:flutter/services.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
+import 'package:wakelock/wakelock.dart';
 import '../../../main.dart';
 
 enum ScreenMode { liveFeed, gallery }
@@ -103,7 +100,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   @override
   void initState() {
     super.initState();
-
+    Wakelock.enable();
     try {
       _tokenArray = _fulltext.split(" ");
 
@@ -191,6 +188,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   @override
   void dispose() {
     _stopLiveFeed();
+    Wakelock.disable();
     super.dispose();
   }
 
@@ -575,7 +573,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   Future _stopLiveFeed() async {
     await _controller?.stopImageStream();
     await _controller?.dispose();
-    //_controller = null;
+    _controller = null;
   }
 
   Future _switchLiveCamera() async {

@@ -4,7 +4,6 @@ import 'package:SmileApp/statemanagement/notifiers/countdownnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 
 class CountdownTimer extends StatefulWidget {
   const CountdownTimer({Key? key}) : super(key: key);

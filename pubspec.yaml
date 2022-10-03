@@ -46,9 +46,7 @@ dependencies:
   glassmorphism: ^3.0.0
   syncfusion_flutter_maps: ^20.2.50
   rating_dialog: ^2.0.4
-  # State management with flutter Redux
-  flutter_redux: ^0.10.0
-  # Animated Text
+  wakelock: ^0.6.2
   animated_text_kit: ^4.2.1
   # Notification
   firebase_core: ^1.10.0
