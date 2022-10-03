@@ -8,7 +8,6 @@ import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.d
 import 'package:SmileApp/pages/custompages/leaderboard/smileleader.dart';
 import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/custompages/patient/completeprofile.dart';
-import 'package:SmileApp/pages/custompages/pending_task_tribe.dart';
 import 'package:SmileApp/pages/custompages/tribe_messages.dart';
 import 'package:SmileApp/pages/custompages/chat.dart';
 
@@ -37,42 +36,18 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Emotions());
       case '/smilegram':
         return MaterialPageRoute(builder: (_) => FaceDetectorView());
-       // return MaterialPageRoute(builder: (_) => SmileHome());
       case '/smilegramgift':
         return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(giftVariableObject: args as GiftVariableObject,));
       case '/leaderboard':
         return MaterialPageRoute(builder: (_) => LeadderBoard());
       case '/tribemessages':
         return MaterialPageRoute(builder: (_) => TribeMessageList());
-      case '/tribependingtasks':
-        return MaterialPageRoute(builder: (_) => TribePendingTaskList());
       case '/tribeunreadmessages':
         return MaterialPageRoute(builder: (_) => TribePage());
     // SMILE APP
 
-
-
-       // PATIENT
-      // case '/voicecall' :
-      //   return MaterialPageRoute(builder: (_) => VioceCallWidget());
-      // case '/hospitals' :
-      //   return MaterialPageRoute(builder: (_) => HospitalsList());
-      // case '/hospitaldetail' :
-      //   return MaterialPageRoute(builder: (_) => HospitalDetail());
-      // case '/services':
-      //   return MaterialPageRoute(builder: (_) => ServicesList());
       case '/completeprofile':
         return MaterialPageRoute(builder: (_) => CompleteProfile());
-        // PROVIDER
-      // case '/providerhome':
-      //   return MaterialPageRoute(builder: (_) =>  ProviderTabsWidget(acountInfos: args,));
-      // case '/mypatients':
-      //   return MaterialPageRoute(builder: (_) =>  MyPatientsList());
-      // case '/patientencounterprofile':
-      //   return MaterialPageRoute(builder: (_) =>  PatientEncounterProfile());
-      // case '/patientqueuelist':
-      //   return MaterialPageRoute(builder: (_) => PatientQueueList());
-    // END OF MY CUSTOME ROUTE
 
       default:
         // If there is no such named route in the switch statement, e.g. /third

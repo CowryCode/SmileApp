@@ -1,8 +1,9 @@
+import 'package:SmileApp/pages/custompages/leaderboard/smileleader.dart';
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:SmileApp/pages/custompages/home.dart';
-import 'package:SmileApp/pages/custompages/user_profile_widget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NavigateTabsWidget extends StatefulWidget {
 
@@ -34,9 +35,9 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
        // return prefix0.Conversation();
         return TribePage();
       case 2 :
-        currentTitle = 'profile';
-       // return AcountWidget(acountInfos: ["${widget.acountInfos[0]}","${widget.acountInfos[1]}"],);
-        return UserAcountWidget();
+        currentTitle = 'LeaderBoard';
+        // return UserAcountWidget();
+        return LeadderBoard();
       default:
         currentTitle = 'Home';
      //   return Home(value: "${widget.acountInfos[0]}");
@@ -61,8 +62,9 @@ class _BubblesState extends State<NavigateTabsWidget> with SingleTickerProviderS
         index: 0,
         items: <Widget>[
           Icon(Icons.home, size: 25,color: Theme.of(context).primaryColor,),
-          Icon(Icons.chat, size: 25,color: Theme.of(context).primaryColor,),
-          Icon(Icons.perm_identity, size: 25,color: Theme.of(context).primaryColor,),
+          Icon(FontAwesomeIcons.peopleGroup, size: 25,color: Theme.of(context).primaryColor,),
+          //Icon(Icons.perm_identity, size: 25,color: Theme.of(context).primaryColor,),
+          Icon(FontAwesomeIcons.chartPie, size: 25,color: Theme.of(context).primaryColor,),
         ],
         color: Theme.of(context).accentColor,
         buttonBackgroundColor: Theme.of(context).accentColor,

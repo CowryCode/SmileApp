@@ -20,17 +20,8 @@ class LeaderBoardModelLIST{
   LeaderBoardModelLIST(){
     this._leaderboards = [
       new LeaderBoardModel(
-          name:  "I feel scared, lonely and anxious. From Halifax ",
-          count: 10,
-          percentage: 60.0,
-          avartar: 'images/imageuser.png'),
-      new LeaderBoardModel(name: "I feel Sad, lonely and anxious. From USA"
-          "I feel Sad, lonely and anxious. From USA"
-          "I feel Sad, lonely and anxious. From USA"
-          "I feel Sad, lonely and anxious. From USA"
-          "I feel Sad, lonely and anxious. From USA"
-          "I feel Sad, lonely and anxious. From USAI feel Sad, lonely and anxious. From USA"
-          "", count: 10, percentage: 60.0, avartar: 'images/imageuser.png'),
+          name:  "I feel scared, lonely and anxious. From Halifax ", count: 10, percentage: 60.0, avartar: 'images/imageuser.png'),
+      new LeaderBoardModel(name: "I feel Sad, lonely and anxious. From USA", count: 10, percentage: 60.0, avartar: 'images/imageuser.png'),
       new LeaderBoardModel(name: "I feel Anxious, lonely and anxious. From South Africa", count: 10, percentage: 60.0, avartar: 'images/imageuser.png'),
       new LeaderBoardModel(name: "I feel ill, lonely and anxious. From Australia", count: 10, percentage: 60.0, avartar: 'images/imageuser.png'),
       new LeaderBoardModel(name: "I feel disturbed, lonely and anxious. From Ghana", count: 10, percentage: 60.0, avartar: 'images/imageuser.png'),

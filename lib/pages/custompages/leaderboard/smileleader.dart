@@ -1,8 +1,7 @@
-import 'package:SmileApp/config/custom_design.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
-import 'package:SmileApp/pages/custompages/leaderboard/tribeleader_widget.dart';
 
 class LeadderBoard extends StatefulWidget {
   // final User currentUser=User.init().getCurrentUser();
@@ -37,7 +36,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
           ),
           backgroundColor: Theme.of(context).colorScheme.secondary,
           title: Text(
-            'LeaderBoard',
+            'Achievements',
             style: TextStyle(
               fontSize:22.0,
               fontFamily: 'Poppins',
@@ -48,20 +47,17 @@ class _LeadderBoardState extends State<LeadderBoard> {
           ),
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(FontAwesomeIcons.faceSmileBeam,color: Colors.white,semanticLabel: "Smile Gram",)),
+              Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
             //  Tab(icon: Icon(FontAwesomeIcons.message, color: Colors.white,semanticLabel: "Pocket Buddy",)),
-              Tab(icon: Icon(FontAwesomeIcons.peopleGroup,color: Colors.white,semanticLabel: "My Tribe",)),
+              Tab(icon: Icon(FontAwesomeIcons.faceSmileBeam,color: Colors.white,semanticLabel: "My Tribe",)),
             ],
           ),
         ),
 
         body:TabBarView(
           children: [
+            HappinessMap(),
             _smileGramLeaderboar(),
-           //  Icon(FontAwesomeIcons.faceSmileBeam,color: Colors.green,semanticLabel: "Smile Gram",),
-          //  Icon(FontAwesomeIcons.message, color: Colors.green,semanticLabel: "Pocket Buddy",),
-            _tribeLeaaderBoard(),
-           // Icon(FontAwesomeIcons.peopleGroup,color: Colors.green,semanticLabel: "My Tribe",),
           ],
         ),
       ),
@@ -123,16 +119,5 @@ class _LeadderBoardState extends State<LeadderBoard> {
     );
   }
 
-  Widget _tribeLeaaderBoard(){
-
-    return ListView.builder(
-        itemCount: leaderBoardModelLIST!.length,
-        itemBuilder: (BuildContext context, int index) {
-          return TribeLeaderCardWidget(
-                              leader: leaderBoardModelLIST!.elementAt(index),
-                            );
-
-        });
-  }
 
 }

@@ -40,37 +40,7 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
   @override
   void initState() {
     super.initState();
-
-    GlobeModel  gm = GlobeModel();
-    data = gm.getProcessedcountries(userCountriesIndexString: "0")!;
-    // INITIALIZE WHEN DATA IS NULL
-    if(data == null){
-      data = <Model>[
-        Model(state: 'Algeria', storage: "Low"), // Used to initialize Map
-      ];
-    }
-    print("Raw Data Source : $data");
-    //Map Data
-    MapShapeSource sublayerDataSource = MapShapeSource.asset(
-      "assets/world_map.json",
-      shapeDataField: "admin",
-      dataCount: data!.length,
-      primaryValueMapper: (int index) {
-        return data![index].state;
-      },
-      shapeColorValueMapper: (int index) {
-        return data![index].storage;
-      },
-      shapeColorMappers: [
-        MapColorMapper(value: "Low", color: Colors.red),
-        MapColorMapper(value: "High", color: Colors.green)
-      ],
-    );
-
     WidgetsBinding.instance.addPostFrameCallback((_){
-      // SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
-      // sgMSG.setTokenindex(indexcount: 5);
-      // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
       Navigator.of(context).pushNamed('/home_with_alert');
     });
 
