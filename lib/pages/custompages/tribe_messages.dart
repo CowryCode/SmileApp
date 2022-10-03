@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +17,11 @@ class TribeMessageList extends StatefulWidget {
 
 class _TribeMessageListState extends State<TribeMessageList> {
 
+  Random? random;
 
   @override
   void initState() {
+     random = new Random();
   }
 
   User currentUser = new User.init().getCurrentUser();
@@ -91,218 +95,19 @@ class _TribeMessageListState extends State<TribeMessageList> {
               scrollDirection: Axis.horizontal,
             ),
             items: getMessages(),
-            // items: <Widget>[
-              //TODO: Limit the number of words that will be posted by tribe members
-              //TODO: When the number of Tribe messages reaches 10 older once will be deleted
-              // Card(
-              //   elevation: 1,
-              //   color: Colors.blueGrey,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(16)),
-              //   child: Container(
-              //     padding: EdgeInsets.all(12),
-              //     child: Column(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: <Widget>[
-              //         Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: <Widget>[
-              //             Text(
-              //               "Monday 26th April",
-              //               style: TextStyle(
-              //                 fontSize:12.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
-              //               ),
-              //             ),
-              //             Text(
-              //               "Wednsday 28th April",
-              //               style: TextStyle(
-              //                 fontSize:12.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         SizedBox(height: 80),
-              //         Container(
-              //           child: Text(
-              //             "Neurobics for your mind . ",
-              //             style: TextStyle(
-              //                 fontSize:28.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor,
-              //                 fontWeight: FontWeight.bold
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(height: 120),
-              //         Row(
-              //             mainAxisAlignment: MainAxisAlignment.start,
-              //             children: <Widget>[
-              //               IconButton(
-              //                 icon: const Icon(FontAwesomeIcons.thumbsUp),
-              //                 color: Theme.of(context).primaryColor,
-              //                 onPressed: () {
-              //                 },
-              //               ),
-              //               SizedBox(width: 20,),
-              //               IconButton(
-              //                 icon: const Icon(FontAwesomeIcons.heart),
-              //                 color: Theme.of(context).primaryColor,
-              //                 onPressed: () {
-              //                 },
-              //               ),
-              //             ]
-              //         )
-              //
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // Card(
-              //   elevation: 1,
-              //   color: Colors.green,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(16)),
-              //   child: Container(
-              //     padding: EdgeInsets.all(12),
-              //     height: 400,
-              //     width: 300,
-              //     child: Column(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: <Widget>[
-              //         Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: <Widget>[
-              //             Text(
-              //               "Monday 26th April",
-              //               style: TextStyle(
-              //                 fontSize:12.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
-              //               ),
-              //             ),
-              //             Text(
-              //               "Wednsday 28th April",
-              //               style: TextStyle(
-              //                 fontSize:12.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         SizedBox(height: 80),
-              //         Container(
-              //           child: Text(
-              //             "Brush up on hygiene . ",
-              //             style: TextStyle(
-              //                 fontSize:28.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor,
-              //                 fontWeight: FontWeight.bold
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(height: 120),
-              //         Row(
-              //             mainAxisAlignment: MainAxisAlignment.start,
-              //             children: <Widget>[
-              //               IconButton(
-              //                 icon: const Icon(FontAwesomeIcons.thumbsUp),
-              //                 color: Theme.of(context).primaryColor,
-              //                 onPressed: () {
-              //                 },
-              //               ),
-              //               SizedBox(width: 20,),
-              //               IconButton(
-              //                 icon: const Icon(FontAwesomeIcons.heart),
-              //                 color: Theme.of(context).primaryColor,
-              //                 onPressed: () {
-              //                 },
-              //               ),
-              //             ]
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // Card(
-              //   elevation: 1,
-              //   color: Colors.blue,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(16)),
-              //   child: Container(
-              //     padding: EdgeInsets.all(12),
-              //     height: 400,
-              //     width: 300,
-              //     child: Column(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: <Widget>[
-              //         Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: <Widget>[
-              //             Text(
-              //               "Monday 26th April",
-              //               style: TextStyle(
-              //                 fontSize:12.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
-              //               ),
-              //             ),
-              //             Text(
-              //               "Wednsday 28th April",
-              //               style: TextStyle(
-              //                 fontSize:12.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         SizedBox(height: 80),
-              //         Container(
-              //           child: Text(
-              //             "Don't skip your breakfast . ",
-              //             style: TextStyle(
-              //                 fontSize:28.0,
-              //                 fontFamily: 'Poppins',
-              //                 color: Theme.of(context).primaryColor,
-              //                 fontWeight: FontWeight.bold
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(height: 120),
-              //         Row(
-              //             mainAxisAlignment: MainAxisAlignment.start,
-              //             children: <Widget>[
-              //               IconButton(
-              //                 icon: const Icon(FontAwesomeIcons.thumbsUp),
-              //                 color: Theme.of(context).primaryColor,
-              //                 onPressed: () {
-              //                 },
-              //               ),
-              //               SizedBox(width: 20,),
-              //               IconButton(
-              //                 icon: const Icon(FontAwesomeIcons.heart),
-              //                 color: Theme.of(context).primaryColor,
-              //                 onPressed: () {
-              //                 },
-              //               ),
-              //             ]
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
-           // ],
-            // height: 400, // I commented this out
           ),
         ),
       ),
     );
+  }
+
+  int randomColorSelector(){
+    try{
+      return random!.nextInt(3) + 1;
+    }catch(e){
+      return 1;
+    }
+
   }
 
   List<Widget> getMessages(){
@@ -317,21 +122,22 @@ class _TribeMessageListState extends State<TribeMessageList> {
         content: "Few organizations see the “big picture” of charitable giving. But thanks to Brad and Beth Thorp, the Mitchell Thorp Foundation does. Through their own life tragedy in losing their son Mitchell in 2008, Brad and Beth Thorp have embraced their sorrow and have turned it into the most beautiful way of honoring his legacy, by helping those most vulnerable patients and their families."
       ),
     ];
-   return data.map((e) => MessageCard(measageModel: e,) ).toList();
+   return data.map((e) => MessageCard(measageModel: e, colorID: randomColorSelector(),) ).toList();
   }
 
 }
 
 class MessageCard extends StatelessWidget {
   final TribeMessageModel measageModel;
-  const MessageCard({Key? key, required this.measageModel }) : super(key: key);
+  final int colorID;
+  const MessageCard({Key? key, required this.measageModel, required this.colorID }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child:  Card(
         elevation: 1,
-        color: Colors.blueGrey,
+        color: (colorID == 1) ? Colors.blueGrey : (colorID == 2) ? Colors.orange : Colors.blue,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16)),
         child: Container(
