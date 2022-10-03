@@ -88,8 +88,7 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                                 ),
                                 TextButton(
                                   onPressed: (){
-                                   // GiftVariableObject giftobject = GiftVariableObject(fulltext: "${widget.leader.name}", readmessage: true);
-                                  //  Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
+
                                   },
                                   child: const Text('Continue'),
                                 ),

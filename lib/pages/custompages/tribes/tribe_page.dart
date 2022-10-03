@@ -1,4 +1,4 @@
-import 'package:SmileApp/pages/custompages/tribes/tribe_page_widget.dart';
+import 'package:SmileApp/pages/custompages/tribe_pending_task_widget.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,7 +37,7 @@ class _TribePageState extends State<TribePage> {
         ),
         backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(
-          'Empathic Messages',
+          'Share Empathy',
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -73,31 +73,60 @@ class _TribePageState extends State<TribePage> {
         child: const Icon(FontAwesomeIcons.peopleGroup),
       ),
       body: Column(
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  height: 20,
-                  padding: const EdgeInsets.only(top:0,left:12.0,right: 12.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                height: 20,
+                padding: const EdgeInsets.only(top:0,left:12.0,right: 12.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
 
-             //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
-             Flexible(
-               child: ListView.builder(
+          //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
+          Flexible(
+            child: ListView.builder(
                 itemCount: _leaderBoardModelLIST!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return TribePageWidget(
+                  return TribePendingTaskWidget(
                     leader: _leaderBoardModelLIST!.elementAt(index), );
                 }),
-             ),
-          ],
-        ),
+          ),
+
+        ],
+      ),
+
+
+      // Column(
+      //     children: <Widget>[
+      //       Stack(
+      //         children: <Widget>[
+      //           Container(
+      //             height: 20,
+      //             padding: const EdgeInsets.only(top:0,left:12.0,right: 12.0),
+      //             decoration: BoxDecoration(
+      //               borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
+      //               color: Theme.of(context).colorScheme.secondary,
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //
+      //        //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
+      //        Flexible(
+      //          child: ListView.builder(
+      //           itemCount: _leaderBoardModelLIST!.length,
+      //           itemBuilder: (BuildContext context, int index) {
+      //             return TribePageWidget(
+      //               leader: _leaderBoardModelLIST!.elementAt(index), );
+      //           }),
+      //        ),
+      //     ],
+      //   ),
 
     );
   }

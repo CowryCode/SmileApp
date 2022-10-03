@@ -21,10 +21,9 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget> [
-        SizedBox(width: 20,),
+       // SizedBox(width: 20,),
         Container(
-          // height: 150.0,
-          height: MediaQuery.of(context).size.height * 0.25,
+          width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(6.0),
           child:FlatButton(
             highlightColor: Theme.of(context).primaryColor,
@@ -53,13 +52,12 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Expanded(
-                      child: Text(
+                    Text(
                         '${widget.leader.name}',
                         textAlign: TextAlign.left,
                         style: CustomeStyling().customContenttext(),
                       ),
-                    ),
+                    SizedBox(height: 10,),
                     //TODO: Color this button
                     TextButton(
                         onPressed: (){
@@ -75,7 +73,6 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                           ],
                         ),
                     )
-
                   ],
                 ),
                 //   ],
@@ -105,15 +102,6 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                 )
               ],
             ),
-            // child: Text(
-            //   '${widget.leader.name} ',
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(
-            //     fontFamily: 'Poppins',
-            //     fontSize: 12.0,
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            // ),
           ),
           visible: showfulltext,
         ),
