@@ -823,37 +823,18 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  // void _randomize(){
-  //   int _start = timerTastoPremuto.inMilliseconds;
-  //   Random random = new Random();
-  //   const oneDecimal = const Duration(seconds: 1);
-  //   Timer _timer = new Timer.periodic(
-  //       oneDecimal,
-  //           (Timer timer) =>
-  //           setState(() {
-  //             _value = random.nextInt(23);
-  //             print('Timer is : $_start  Index Value is $_value');
-  //             if (_start < 1000) {
-  //               _activated = true;
-  //               _activation_index = _value;
-  //               timer.cancel();
-  //             } else {
-  //               _start = _start - 1000;
-  //               progressBarvalue = progressBarvalue - 1;
-  //             }
-  //           }));
-  // }
 
 
 Widget _glassmorphicReadMessage(){
     return  SingleChildScrollView(
       child:Center(
             child: GlassmorphicContainer(
-              width: MediaQuery.of(context).size.width * 0.93,
-              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width * 0.90,
+              height: MediaQuery.of(context).size.height * 0.85,
               borderRadius: 20,
-              blur: 20,
-              alignment: Alignment.bottomCenter,
+              blur: 1,
+              //alignment: Alignment.bottomCenter,
+              alignment: Alignment.topCenter,
               border: 2,
               linearGradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -882,11 +863,6 @@ Widget _glassmorphicReadMessage(){
                       transitionBuilder: (Widget child, Animation<double> animation) {
                         return ScaleTransition(scale: animation, child: child);
                       },
-                      // child: Text(
-                      //   currentMessagestate.content,
-                      //   key: ValueKey<int>(_count),
-                      //   style: Theme.of(context).textTheme.subtitle2,
-                      // ),
                       child: ValueListenableBuilder(
                         // valueListenable: counterNotifier,
                         valueListenable: messageNotifier,

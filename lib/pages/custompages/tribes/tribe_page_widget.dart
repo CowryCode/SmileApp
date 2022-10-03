@@ -88,12 +88,8 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                                 ),
                                 TextButton(
                                   onPressed: (){
-                                    // SGMessage sgMSG = SGMessage(content: '${widget.leader.name}', updated: true, tokenIndex: 0);
-                                    // StoreProvider.of<MyAppState>(context).dispatch(
-                                    //     UpdateSGmessageAction(sgMSG)
-                                    // );
-                                    GiftVariableObject giftobject = GiftVariableObject(fulltext: "${widget.leader.name}", readmessage: true);
-                                    Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
+                                   // GiftVariableObject giftobject = GiftVariableObject(fulltext: "${widget.leader.name}", readmessage: true);
+                                  //  Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
                                   },
                                   child: const Text('Continue'),
                                 ),

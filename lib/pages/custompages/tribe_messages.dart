@@ -1,3 +1,5 @@
+
+import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +15,10 @@ class TribeMessageList extends StatefulWidget {
 
 class _TribeMessageListState extends State<TribeMessageList> {
 
+
+  @override
+  void initState() {
+  }
 
   User currentUser = new User.init().getCurrentUser();
   @override
@@ -32,7 +38,7 @@ class _TribeMessageListState extends State<TribeMessageList> {
         ),
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Short Notes',
+          'Support Notes',
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -47,8 +53,8 @@ class _TribeMessageListState extends State<TribeMessageList> {
                showDialog<String>(
                  context: context,
                  builder: (BuildContext context) => AlertDialog(
-                   title: const Text('My Tribe',),
-                   content: const Text('Get beautiful messages from across the world. Will you want to continue ?'),
+                   title: const Text('My Tribe', style: TextStyle(color: Colors.black45),),
+                   content: const Text('Get beautiful messages from across the world. Will you want to continue ?', style: TextStyle(color: Colors.black45),),
                    actions: <Widget>[
                      TextButton(
                        onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -84,330 +90,330 @@ class _TribeMessageListState extends State<TribeMessageList> {
               enlargeCenterPage: true,
               scrollDirection: Axis.horizontal,
             ),
-            items: <Widget>[
+            items: getMessages(),
+            // items: <Widget>[
               //TODO: Limit the number of words that will be posted by tribe members
               //TODO: When the number of Tribe messages reaches 10 older once will be deleted
-              Card(
-                elevation: 1,
-                color: Colors.blueGrey,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Monday 26th April",
-                            style: TextStyle(
-                              fontSize:12.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor.withOpacity(0.8),
-                            ),
-                          ),
-                          Text(
-                            "Wednsday 28th April",
-                            style: TextStyle(
-                              fontSize:12.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor.withOpacity(0.8),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 80),
-                      Container(
-                        child: Text(
-                          "Neurobics for your mind . ",
-                          style: TextStyle(
-                              fontSize:28.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 120),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            IconButton(
-                              icon: const Icon(FontAwesomeIcons.thumbsUp),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                              },
-                            ),
-                            SizedBox(width: 20,),
-                            IconButton(
-                              icon: const Icon(FontAwesomeIcons.heart),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                              },
-                            ),
-                          ]
-                      )
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: <Widget>[
-                      //     Text(
-                      //       "",
-                      //       style: TextStyle(
-                      //         fontSize:18.0,
-                      //         fontFamily: 'Poppins',
-                      //         color: Theme.of(context).primaryColor.withOpacity(0.8),
-                      //       ),
-                      //     ),
-                      //     Text(
-                      //       "Read more",
-                      //       style: TextStyle(
-                      //         fontSize:18.0,
-                      //         fontFamily: 'Poppins',
-                      //         color: Theme.of(context).primaryColor.withOpacity(0.8),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 1,
-                color: Colors.green,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  height: 400,
-                  width: 300,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Monday 26th April",
-                            style: TextStyle(
-                              fontSize:12.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor.withOpacity(0.8),
-                            ),
-                          ),
-                          Text(
-                            "Wednsday 28th April",
-                            style: TextStyle(
-                              fontSize:12.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor.withOpacity(0.8),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 80),
-                      Container(
-                        child: Text(
-                          "Brush up on hygiene . ",
-                          style: TextStyle(
-                              fontSize:28.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 120),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            IconButton(
-                              icon: const Icon(FontAwesomeIcons.thumbsUp),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                              },
-                            ),
-                            SizedBox(width: 20,),
-                            IconButton(
-                              icon: const Icon(FontAwesomeIcons.heart),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                              },
-                            ),
-                          ]
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 1,
-                color: Colors.blue,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  height: 400,
-                  width: 300,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Monday 26th April",
-                            style: TextStyle(
-                              fontSize:12.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor.withOpacity(0.8),
-                            ),
-                          ),
-                          Text(
-                            "Wednsday 28th April",
-                            style: TextStyle(
-                              fontSize:12.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor.withOpacity(0.8),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 80),
-                      Container(
-                        child: Text(
-                          "Don't skip your breakfast . ",
-                          style: TextStyle(
-                              fontSize:28.0,
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 120),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            IconButton(
-                              icon: const Icon(FontAwesomeIcons.thumbsUp),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                              },
-                            ),
-                            SizedBox(width: 20,),
-                            IconButton(
-                              icon: const Icon(FontAwesomeIcons.heart),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                              },
-                            ),
-                          ]
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              // Card(
+              //   elevation: 1,
+              //   color: Colors.blueGrey,
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(16)),
+              //   child: Container(
+              //     padding: EdgeInsets.all(12),
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: <Widget>[
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: <Widget>[
+              //             Text(
+              //               "Monday 26th April",
+              //               style: TextStyle(
+              //                 fontSize:12.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
+              //               ),
+              //             ),
+              //             Text(
+              //               "Wednsday 28th April",
+              //               style: TextStyle(
+              //                 fontSize:12.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(height: 80),
+              //         Container(
+              //           child: Text(
+              //             "Neurobics for your mind . ",
+              //             style: TextStyle(
+              //                 fontSize:28.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor,
+              //                 fontWeight: FontWeight.bold
+              //             ),
+              //           ),
+              //         ),
+              //         SizedBox(height: 120),
+              //         Row(
+              //             mainAxisAlignment: MainAxisAlignment.start,
+              //             children: <Widget>[
+              //               IconButton(
+              //                 icon: const Icon(FontAwesomeIcons.thumbsUp),
+              //                 color: Theme.of(context).primaryColor,
+              //                 onPressed: () {
+              //                 },
+              //               ),
+              //               SizedBox(width: 20,),
+              //               IconButton(
+              //                 icon: const Icon(FontAwesomeIcons.heart),
+              //                 color: Theme.of(context).primaryColor,
+              //                 onPressed: () {
+              //                 },
+              //               ),
+              //             ]
+              //         )
+              //
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // Card(
+              //   elevation: 1,
+              //   color: Colors.green,
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(16)),
+              //   child: Container(
+              //     padding: EdgeInsets.all(12),
+              //     height: 400,
+              //     width: 300,
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: <Widget>[
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: <Widget>[
+              //             Text(
+              //               "Monday 26th April",
+              //               style: TextStyle(
+              //                 fontSize:12.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
+              //               ),
+              //             ),
+              //             Text(
+              //               "Wednsday 28th April",
+              //               style: TextStyle(
+              //                 fontSize:12.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(height: 80),
+              //         Container(
+              //           child: Text(
+              //             "Brush up on hygiene . ",
+              //             style: TextStyle(
+              //                 fontSize:28.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor,
+              //                 fontWeight: FontWeight.bold
+              //             ),
+              //           ),
+              //         ),
+              //         SizedBox(height: 120),
+              //         Row(
+              //             mainAxisAlignment: MainAxisAlignment.start,
+              //             children: <Widget>[
+              //               IconButton(
+              //                 icon: const Icon(FontAwesomeIcons.thumbsUp),
+              //                 color: Theme.of(context).primaryColor,
+              //                 onPressed: () {
+              //                 },
+              //               ),
+              //               SizedBox(width: 20,),
+              //               IconButton(
+              //                 icon: const Icon(FontAwesomeIcons.heart),
+              //                 color: Theme.of(context).primaryColor,
+              //                 onPressed: () {
+              //                 },
+              //               ),
+              //             ]
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // Card(
+              //   elevation: 1,
+              //   color: Colors.blue,
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(16)),
+              //   child: Container(
+              //     padding: EdgeInsets.all(12),
+              //     height: 400,
+              //     width: 300,
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: <Widget>[
+              //         Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: <Widget>[
+              //             Text(
+              //               "Monday 26th April",
+              //               style: TextStyle(
+              //                 fontSize:12.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
+              //               ),
+              //             ),
+              //             Text(
+              //               "Wednsday 28th April",
+              //               style: TextStyle(
+              //                 fontSize:12.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor.withOpacity(0.8),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         SizedBox(height: 80),
+              //         Container(
+              //           child: Text(
+              //             "Don't skip your breakfast . ",
+              //             style: TextStyle(
+              //                 fontSize:28.0,
+              //                 fontFamily: 'Poppins',
+              //                 color: Theme.of(context).primaryColor,
+              //                 fontWeight: FontWeight.bold
+              //             ),
+              //           ),
+              //         ),
+              //         SizedBox(height: 120),
+              //         Row(
+              //             mainAxisAlignment: MainAxisAlignment.start,
+              //             children: <Widget>[
+              //               IconButton(
+              //                 icon: const Icon(FontAwesomeIcons.thumbsUp),
+              //                 color: Theme.of(context).primaryColor,
+              //                 onPressed: () {
+              //                 },
+              //               ),
+              //               SizedBox(width: 20,),
+              //               IconButton(
+              //                 icon: const Icon(FontAwesomeIcons.heart),
+              //                 color: Theme.of(context).primaryColor,
+              //                 onPressed: () {
+              //                 },
+              //               ),
+              //             ]
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
+           // ],
             // height: 400, // I commented this out
           ),
         ),
       ),
-
     );
   }
 
+  List<Widget> getMessages(){
+    List<TribeMessageModel> data = <TribeMessageModel>[
+      TribeMessageModel(messageID: 1, source: "United Kindom", read: true,
+    content: "This story leapt off the pages as I relived it with tears and joy. My friends Brad and Beth have done a superb job of retelling the story that changed so many of our lives. Truly, Mitchell Thorp’s story will change your life as well. "
+    ),
+      TribeMessageModel(messageID: 2, source: "South Africa", read: false,
+        content: "This incredible true story is how God can take what was meant for evil and turn it into something beautiful for his glory. This story will touch the hearts of many who need to know how to hear the voice of God, and how God intervenes in our lives in many amazing ways."
+      ),
+      TribeMessageModel(messageID: 3, source: "Canada", read: true,
+        content: "Few organizations see the “big picture” of charitable giving. But thanks to Brad and Beth Thorp, the Mitchell Thorp Foundation does. Through their own life tragedy in losing their son Mitchell in 2008, Brad and Beth Thorp have embraced their sorrow and have turned it into the most beautiful way of honoring his legacy, by helping those most vulnerable patients and their families."
+      ),
+    ];
+   return data.map((e) => MessageCard(measageModel: e,) ).toList();
+  }
 
+}
 
+class MessageCard extends StatelessWidget {
+  final TribeMessageModel measageModel;
+  const MessageCard({Key? key, required this.measageModel }) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:  Card(
+        elevation: 1,
+        color: Colors.blueGrey,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          padding: EdgeInsets.all(12),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                     "${measageModel.source}",
+                      style: TextStyle(
+                        fontSize:12.0,
+                        fontFamily: 'Poppins',
+                        color: Theme.of(context).primaryColor.withOpacity(0.8),
+                      ),
+                    ),
+                    (measageModel.read == false) ? IconButton(
+                      icon: const Icon(FontAwesomeIcons.solidFolderClosed),
+                      color: Theme.of(context).primaryColor,
+                      onPressed: () {
+                        _showAlert(context: context, msgModel: measageModel);
+                      },
+                    ) : SizedBox(height: 2,)
+                  ],
+                ),
+                SizedBox(height: (measageModel.read == true) ? 20 : 80),
+                Center(
+                  child: Text(
+                    (measageModel.read == true) ?  "${measageModel.content}" : " Note from someone in Nigeria. \n Click on the box icon to read",
+                    style: TextStyle(
+                        fontSize:16.0,
+                        fontFamily: 'Poppins',
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
-//  List<LeaderBoardModel> _leaderBoardModelLIST;
- //  @override
- //  void initState() {
- //    //this.doctorsList = new model.DoctorsList();
- //    _leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
- //    super.initState();
- //  }
- //  @override
- //  Widget build(BuildContext context) {
- //    return Scaffold(
- //      appBar: AppBar(
- //        elevation: 0,
- //        leading: IconButton(
- //          icon: Icon(Icons.arrow_back, color:Theme.of(context).primaryColor )
- //          ,
- //          onPressed: (){
- //            Navigator.of(context).pushNamed('/home', arguments:[widget.currentUser.name,widget.currentUser.phoneNumber]);
- //          },
- //        ),
- //        backgroundColor: Theme.of(context).colorScheme.secondary,
- //        title: Text(
- //          'Tribe Messages',
- //          style: TextStyle(
- //            fontSize:22.0,
- //            fontFamily: 'Poppins',
- //            fontWeight: FontWeight.bold,
- //            color: Theme.of(context).primaryColor,
- //          ),
- //        ),
- //
- //      ),
- //      floatingActionButton: FloatingActionButton(
- //        onPressed: () {
- //          showDialog<String>(
- //            context: context,
- //            builder: (BuildContext context) => AlertDialog(
- //              title: const Text('My Tribe',),
- //              content: const Text('Get beautiful messages from across the world. Will you want to continue ?'),
- //              actions: <Widget>[
- //                TextButton(
- //                  onPressed: () => Navigator.pop(context, 'Cancel'),
- //                  child: const Text('Cancel'),
- //                ),
- //                TextButton(
- //                  onPressed: (){
- //                    Navigator.popAndPushNamed(context, '/emotions');
- //                  },
- //                  child: const Text('Yes'),
- //                ),
- //              ],
- //            ),
- //          );
- //        },
- //        backgroundColor: Theme.of(context).colorScheme.secondary,
- //        child: const Icon(FontAwesomeIcons.peopleGroup),
- //      ),
- //      body: Column(
- //          children: <Widget>[
- //            Stack(
- //              children: <Widget>[
- //                Container(
- //                  height: 20,
- //                  padding: const EdgeInsets.only(top:0,left:12.0,right: 12.0),
- //                  decoration: BoxDecoration(
- //                    borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
- //                    color: Theme.of(context).colorScheme.secondary,
- //                  ),
- //                ),
- //              ],
- //            ),
- //
- //             //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
- //             Flexible(
- //               child: ListView.builder(
- //                itemCount: _leaderBoardModelLIST.length,
- //                itemBuilder: (BuildContext context, int index) {
- //                  return TribeMessageCardWidget(
- //                    leader: _leaderBoardModelLIST.elementAt(index), );
- //                }),
- //             ),
- //
- //          ],
- //        ),
- //
- //    );
- //  }
+  _showAlert({required BuildContext context, required TribeMessageModel msgModel}){
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Smile Gram'),
+        content: const Text('To read this you need to maintain a smile as the message unfolds',
+          style: TextStyle(color: Colors.black45),
+        ),
+        actions: <Widget>[
+          TextButton(
+            //  onPressed: () => Navigator.pop(context, 'Cancel'),
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cancel', ),
+          ),
+          TextButton(
+            onPressed: (){
+              debugPrint("PRESSED THE BUTTON ::::");
+              GiftVariableObject giftobject = GiftVariableObject(messageModel: msgModel, readmessage: true);
+              Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
+            },
+            child: const Text('Continue'),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
+class TribeMessageModel{
+  int messageID;
+  String source;
+  String content;
+  bool read;
+  TribeMessageModel({required this.messageID,  required this.source ,required this.content, required this.read});
 }

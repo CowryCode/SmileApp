@@ -1,23 +1,17 @@
 
 import 'package:SmileApp/apis/models/countrymodel.dart';
-import 'package:SmileApp/apis/models/globemodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
-import 'package:SmileApp/statemanagement/actions.dart';
-import 'package:SmileApp/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/statemanagement/my_app_state.dart';
-import 'package:syncfusion_flutter_maps/maps.dart';
+
 
 class FaceDetectorGiftView extends StatefulWidget {
 
 
-  //final List<Object>? data;
   final GiftVariableObject giftVariableObject;
 
   FaceDetectorGiftView({Key? key,  required this.giftVariableObject});
@@ -55,7 +49,11 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   @override
   void initState() {
     super.initState();
-    _fulltext = widget.giftVariableObject.fulltext;
+   // _fulltext = widget.giftVariableObject.fulltext;
+    if(widget.giftVariableObject.readmessage == true){
+      _fulltext = widget.giftVariableObject.messageModel!.content;
+    }
+
     _tokenArray = _fulltext!.split(" ");
     _tokenArrayLength = _tokenArray!.length;
   }

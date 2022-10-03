@@ -4,7 +4,6 @@ import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/apis/Variables.dart';
 import 'package:rating_dialog/rating_dialog.dart';
@@ -111,7 +110,7 @@ class _HomeState extends State<Home> {
                         // sgMSG.setCompleted(completed: false);
                         // print("Current Map State : ${sgMSG.sublayerDataSource}");
                         // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-                        Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(fulltext: "", readmessage: false));
+                        Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
                        },
                       child: const Text('Continue'),
                     ),

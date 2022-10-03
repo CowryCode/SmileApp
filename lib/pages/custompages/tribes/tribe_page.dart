@@ -96,7 +96,6 @@ class _TribePageState extends State<TribePage> {
                     leader: _leaderBoardModelLIST!.elementAt(index), );
                 }),
              ),
-
           ],
         ),
 

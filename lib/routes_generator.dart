@@ -39,7 +39,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FaceDetectorView());
        // return MaterialPageRoute(builder: (_) => SmileHome());
       case '/smilegramgift':
-       // return MaterialPageRoute(builder: (_) => FaceDetectorGiftView());
         return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(giftVariableObject: args as GiftVariableObject,));
       case '/leaderboard':
         return MaterialPageRoute(builder: (_) => LeadderBoard());

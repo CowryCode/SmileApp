@@ -14,19 +14,19 @@ import 'package:SmileApp/statemanagement/models/sgmessage.dart';
 import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-class FaceDetectorGiftView extends StatefulWidget {
+class FaceDetectorGiftView_Backup extends StatefulWidget {
 
 
   //final List<Object>? data;
   final GiftVariableObject giftVariableObject;
 
-  FaceDetectorGiftView({Key? key,  required this.giftVariableObject});
+  FaceDetectorGiftView_Backup({Key? key,  required this.giftVariableObject});
 
   @override
   _FaceDetectorGiftViewState createState() => _FaceDetectorGiftViewState();
 }
 
-class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
+class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView_Backup> {
 
   final FaceDetector _faceDetector = FaceDetector(
     options: FaceDetectorOptions(
@@ -55,7 +55,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   @override
   void initState() {
     super.initState();
-    _fulltext = widget.giftVariableObject.fulltext;
+   // _fulltext = widget.giftVariableObject.fulltext;
+    _fulltext = widget.giftVariableObject.messageModel!.content;
     _tokenArray = _fulltext!.split(" ");
     _tokenArrayLength = _tokenArray!.length;
   }
@@ -89,9 +90,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
-    debugPrint("Face Detection Started :::${DateTime.now().second}");
     final faces = await _faceDetector.processImage(inputImage);
-    debugPrint("Face Detection Ended :::${DateTime.now().second}");
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
 
