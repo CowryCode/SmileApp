@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -204,7 +205,7 @@ class MessageCard extends StatelessWidget {
           ),
           TextButton(
             onPressed: (){
-              debugPrint("PRESSED THE BUTTON ::::");
+              messageNotifier.update(message: "", index: 0);
               GiftVariableObject giftobject = GiftVariableObject(messageModel: msgModel, readmessage: true);
               Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
             },

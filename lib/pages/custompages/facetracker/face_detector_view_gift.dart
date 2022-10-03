@@ -52,10 +52,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
    // _fulltext = widget.giftVariableObject.fulltext;
     if(widget.giftVariableObject.readmessage == true){
       _fulltext = widget.giftVariableObject.messageModel!.content;
+      _tokenArray = _fulltext!.split(" ");
+      _tokenArrayLength = _tokenArray!.length;
     }
-
-    _tokenArray = _fulltext!.split(" ");
-    _tokenArrayLength = _tokenArray!.length;
   }
   //  End
 
@@ -108,6 +107,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 messageNotifier.update(message: _msg, index: updatedTokenIndex);
               }
             }else{
+              smileAppValueNotifier.updateShowMoodRating(showMoodrate: true);
               return ;
             }
           } else {

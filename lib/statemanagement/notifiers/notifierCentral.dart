@@ -2,7 +2,7 @@ import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
-import 'package:SmileApp/statemanagement/notifiers/sgMessageNotifier.dart';
+import 'package:SmileApp/statemanagement/notifiers/SGmessageNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 

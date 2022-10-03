@@ -202,7 +202,12 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
           onPressed: () {
-            Navigator.of(context).popAndPushNamed('/home');
+            showDialog(
+              context: context,
+              barrierDismissible: true, // set to false if you want to force a rating
+              builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
+            );
+            //Navigator.of(context).popAndPushNamed('/home');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -275,23 +280,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ),
           ValueListenableBuilder(
             // valueListenable: counterNotifier,
-            valueListenable: smileAppValueNotifier.value.showShowMoodRating,
-            builder: (context, value, child) {
-              if(value == true){
-                showDialog(
-                  context: context,
-                  barrierDismissible: true, // set to false if you want to force a rating
-                  builder: (context) => showRatingAlert(context, justreadmessage: widget.readmessage),
-                );
-              }
-              return SizedBox(height: 1,);
-            },
-          ),
-          ValueListenableBuilder(
-            // valueListenable: counterNotifier,
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, bool value, child) {
-                return _cameraDisplay(smilestartCountdown: true);
+               // return _cameraDisplay(smilestartCountdown: true);
+                return _cameraDisplay(smilestartCountdown: value);
             },
           ),
           SizedBox(height: 20,),
@@ -318,7 +310,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                         showDialog(
                           context: context,
                           barrierDismissible: true, // set to false if you want to force a rating
-                          builder: (context) => showRatingAlert(context, justreadmessage: true),
+                          builder: (context) => _showRatingAlert(context, justreadmessage: true),
                         );
                       },
                     ),
@@ -719,12 +711,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
-          // ((){
-            // if(smilestartCountdown == true){
-            //   return Center(child: CountdownTimer());
-            // }else{
-            //   return SizedBox(height: 3.0,);
-            // }
+
             ValueListenableBuilder(
               valueListenable: smileAppValueNotifier.value.showCountDown,
               builder: (context, value, child) {
@@ -735,13 +722,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 }
               },
             ),
-           // }()),
-           // ((){
-            // if(smilestartCountdown == false && !widget.readmessage ){
-            //   return GlassmorphicSmilegramDisplay();
-            // }else{
-            //   return SizedBox(height: 3.0,);
-            // }
+
             ValueListenableBuilder(
               valueListenable: smileAppValueNotifier.value.showCountDown,
               builder: (context, value, child) {
@@ -763,15 +744,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
-          // ((){
-          //   if(smilestartCountdown == false && widget.readmessage){
-          //     return glassmorphicReadMessage();
-          //   }else{
-          //     return SizedBox(height: 3.0,);
-          //   }
-          // }()),
-         // LuckPot(),
-         // _giftMatrix()
         ],
       ),
     );
@@ -864,7 +836,6 @@ Widget _glassmorphicReadMessage(){
                         return ScaleTransition(scale: animation, child: child);
                       },
                       child: ValueListenableBuilder(
-                        // valueListenable: counterNotifier,
                         valueListenable: messageNotifier,
                         builder: (context, SGmessageModel sgmodel, child) {
                           return Text(
@@ -901,7 +872,7 @@ Widget weatherMap(){
 }
 
 
-  RatingDialog showRatingAlert(BuildContext context, {required bool justreadmessage}){
+  RatingDialog _showRatingAlert(BuildContext context, {required bool justreadmessage}){
   return RatingDialog(
     showCloseButton: false,
     initialRating: 0.0,
