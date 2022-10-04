@@ -1,4 +1,5 @@
 
+import 'package:SmileApp/TextToSpeech/smileappvoice.dart';
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
@@ -46,6 +47,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
 
   bool readmessage_ = false;
   String? _fulltext;
+
+  SmileAppVoice? talker;
   @override
   void initState() {
     super.initState();
@@ -55,6 +58,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
       _tokenArray = _fulltext!.split(" ");
       _tokenArrayLength = _tokenArray!.length;
     }
+    talker = SmileAppVoice();
   }
   //  End
 
@@ -103,6 +107,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? _msg = _msg + " *** End" : _msg = _msg;
                 int updatedTokenIndex = messageNotifier.value.index + 1;
                 messageNotifier.update(message: _msg, index: updatedTokenIndex);
+              }else{
+                talker!.speak(text: "Keep Smiling");
               }
             }else{
               smileAppValueNotifier.updateShowMoodRating(showMoodrate: true);
@@ -127,6 +133,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 smileAppValueNotifier.refreshSmileDurationCount();
               }else{
               }
+            }else{
+              talker!.speak(text: "Keep Smiling");
             }
           }
         }

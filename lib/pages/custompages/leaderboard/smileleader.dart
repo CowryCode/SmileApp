@@ -1,4 +1,6 @@
+import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
@@ -47,17 +49,62 @@ class _LeadderBoardState extends State<LeadderBoard> {
           ),
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
-            //  Tab(icon: Icon(FontAwesomeIcons.message, color: Colors.white,semanticLabel: "Pocket Buddy",)),
               Tab(icon: Icon(FontAwesomeIcons.faceSmileBeam,color: Colors.white,semanticLabel: "My Tribe",)),
+              Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
             ],
           ),
         ),
 
         body:TabBarView(
           children: [
-            HappinessMap(),
             _smileGramLeaderboar(),
+            Column(
+              children: <Widget>[
+                HappinessMap(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      ValueListenableBuilder(
+                        // valueListenable: counterNotifier,
+                        valueListenable: smileAppValueNotifier.value.nextCountry,
+                        builder: (context, String value, child) {
+                          return Text(
+                            '   $value',
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                              fontFamily: 'Poppins',
+                              fontSize: 16.0,
+                            ),
+                          );
+                        },
+                      ),
+                      Text(
+                        'Needs your smile to be GREEN ',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                          fontFamily: 'Poppins',
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: (){
+                            smileAppValueNotifier.updateShowCountDown(showCoundown: true);
+                            Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
+                          },
+                          icon: Icon(FontAwesomeIcons.play,color: Colors.green,)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

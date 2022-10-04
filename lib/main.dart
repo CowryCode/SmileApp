@@ -15,34 +15,6 @@ import 'package:syncfusion_flutter_maps/maps.dart';
 import 'apis/models/countrymodel.dart';
 
 
-// void main() => runApp(MyApp()); // Original Code
-
-// class MyApp extends StatelessWidget {
-//   final Store<AppState> _store = Store<AppState>(
-//     updateDrinksReducer,
-//     initialState: AppState(drinks:[
-//       Drink("Water", true),
-//       Drink("Coka Cola", false),
-//       Drink("Juice", true),
-//       Drink("Alcohol", false)
-//      ]
-//     )
-//   );
-//   @override
-//   Widget build(BuildContext context) {
-//     return StoreProvider(
-//         store: _store,
-//       child: MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Redux solution - Flutter Explained',
-//       theme: ThemeData.light().copyWith(primaryColor: Color(0xFFe13133)),
-//       home: ReduxScreen(),
-//     )
-//     );
-//   }
-// }
-
-
 // ORIGINAL CODE START HERE, PLEASE REVERT TO IT AFTER ADDING FLUTTER_REDUX
 
  List<CameraDescription> cameras = [];
@@ -51,13 +23,6 @@ Future<void> main() async {  // The code before I added Flutter_redux
   WidgetsFlutterBinding.ensureInitialized();
 
   cameras = await availableCameras();
-  //
-  // try {
-  //   cameras = await availableCameras();
-  // } on CameraException catch (e) {
-  //   print("Threw error");
-  //   print(e.toString());
-  // }
   runApp(MyApp());
 }
 
@@ -109,7 +74,7 @@ class MyApp extends StatelessWidget {
     //   child:
      return  MaterialApp(
         title: 'Smile App',
-       // initialRoute: '/',
+        //initialRoute: '/',
         initialRoute: '/home_with_alert',
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,

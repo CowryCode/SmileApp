@@ -86,10 +86,10 @@ class _EmotionsState extends State<Emotions> {
           ),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.85,
-          width: MediaQuery.of(context).size.width * 90,
+          width: MediaQuery.of(context).size.width * 80,
           margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
           child: Card(
             elevation: 1,
@@ -97,7 +97,7 @@ class _EmotionsState extends State<Emotions> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Container(
-              padding: EdgeInsets.all(12),
+              padding: EdgeInsets.all(9),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -139,7 +139,7 @@ class _EmotionsState extends State<Emotions> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Wrap(
+                    Row(
                       children: <Widget>[
                         TextButton(
                           onPressed: () {
@@ -155,7 +155,6 @@ class _EmotionsState extends State<Emotions> {
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.10,
                             width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
                             decoration: BoxDecoration(
                               color: Clicked0 == true
                                   ? Colors.green
@@ -249,6 +248,10 @@ class _EmotionsState extends State<Emotions> {
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
                         TextButton(
                           onPressed: () {
                             // changeColor();
@@ -357,6 +360,10 @@ class _EmotionsState extends State<Emotions> {
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
                         TextButton(
                           onPressed: () {
                             // changeColor();
@@ -453,6 +460,64 @@ class _EmotionsState extends State<Emotions> {
                                 ),
                                 Text(
                                   " Sick ",
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            // changeColor();
+                            setState(() {
+                              if (Clicked6 == true) {
+                                Clicked6 = false;
+                              } else {
+                                Clicked6 = true;
+                              }
+                            });
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.10,
+                            width: MediaQuery.of(context).size.width * 0.40,
+                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+                            decoration: BoxDecoration(
+                              color: Clicked6 == true
+                                  ? Colors.green
+                                  : Colors.white,
+                              // color: Theme.of(context).primaryColor,
+                              border: Border.all(
+                                  width: 1.0,
+                                  color: Colors.grey.withOpacity(0.2)),
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(
+                                  FontAwesomeIcons.faceFlushed,
+                                  color:
+                                  Theme.of(context).colorScheme.secondary,
+                                  size: 20,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  " Lonely ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,

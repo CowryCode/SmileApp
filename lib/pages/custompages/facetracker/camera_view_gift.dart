@@ -585,18 +585,18 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     setState(() => _changingCameraLens = false);
   }
 
-  Future _processPickedFile(XFile pickedFile) async {
-    final path = pickedFile?.path;
-    if (path == null) {
-      return;
-    }
-    setState(() {
-      _image = File(path);
-    });
-    _path = path;
-    final inputImage = InputImage.fromFilePath(path);
-    widget.onImage(inputImage);
-  }
+  // Future _processPickedFile(XFile pickedFile) async {
+  //   final path = pickedFile?.path;
+  //   if (path == null) {
+  //     return;
+  //   }
+  //   setState(() {
+  //     _image = File(path);
+  //   });
+  //   _path = path;
+  //   final inputImage = InputImage.fromFilePath(path);
+  //   widget.onImage(inputImage);
+  // }
 
   Future _processCameraImage(CameraImage image) async {
     final WriteBuffer allBytes = WriteBuffer();
@@ -720,7 +720,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 }
               },
             ),
-
             ValueListenableBuilder(
               valueListenable: smileAppValueNotifier.value.showCountDown,
               builder: (context, value, child) {

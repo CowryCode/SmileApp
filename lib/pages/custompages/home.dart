@@ -105,11 +105,6 @@ class _HomeState extends State<Home> {
                     TextButton(
                       onPressed: (){
                         smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-                        // SGMessage sgMSG = StoreProvider.of<MyAppState>(context).state.sg_message;
-                        // sgMSG.setTokenindex(indexcount: 5);
-                        // sgMSG.setCompleted(completed: false);
-                        // print("Current Map State : ${sgMSG.sublayerDataSource}");
-                        // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
                         Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
                        },
                       child: const Text('Continue'),

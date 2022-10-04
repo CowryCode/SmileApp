@@ -20,7 +20,6 @@ class RouteGenerator {
       case '/' :
         return MaterialPageRoute(builder: (_) => SmilegramLogin());
       case '/home_with_alert' :
-      //  return MaterialPageRoute(builder: (_) => Home());
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: true,));
       case '/home' :
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: false,));
