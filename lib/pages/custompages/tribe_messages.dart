@@ -1,7 +1,7 @@
 
 import 'dart:math';
 
-import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

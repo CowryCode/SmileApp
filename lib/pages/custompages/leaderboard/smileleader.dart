@@ -1,9 +1,9 @@
-import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
+import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
 
 class LeadderBoard extends StatefulWidget {
   // final User currentUser=User.init().getCurrentUser();

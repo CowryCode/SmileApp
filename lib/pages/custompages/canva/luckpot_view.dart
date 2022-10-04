@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:SmileApp/statemanagement/models/timerdatamodel.dart';
-import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 

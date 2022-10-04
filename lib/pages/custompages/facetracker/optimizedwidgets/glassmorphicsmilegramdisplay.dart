@@ -1,6 +1,4 @@
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
-import 'package:SmileApp/statemanagement/models/sgmessage.dart';
-import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

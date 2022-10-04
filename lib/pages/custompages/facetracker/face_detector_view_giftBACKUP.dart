@@ -1,7 +1,7 @@
 
 import 'package:SmileApp/apis/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
-import 'package:SmileApp/models/mymodels/smilemodels/giftvariableobject.dart';
+import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:camera/camera.dart';

@@ -2,7 +2,7 @@ import 'package:SmileApp/pages/custompages/tribe_pending_task_widget.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:SmileApp/models/mymodels/smilemodels/leaderboardmodel.dart';
+import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
 import 'package:SmileApp/models/mymodels/user.dart';
 
 
