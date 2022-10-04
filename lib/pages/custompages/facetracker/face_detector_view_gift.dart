@@ -96,7 +96,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
 
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
-       // SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
+        bool soundAllowed = smileAppValueNotifier.value.deactivetSound.value;
+        bool activateSpeech = smileAppValueNotifier.value.activatespeech.value;
         double? prob = face.smilingProbability;
         if(smileAppValueNotifier.value.showCountDown.value == false){
           if (widget.giftVariableObject.readmessage!) {
@@ -108,15 +109,21 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 int updatedTokenIndex = messageNotifier.value.index + 1;
                 messageNotifier.update(message: _msg, index: updatedTokenIndex);
               }else{
-                talker!.speak(text: "Keep Smiling");
+                if(!soundAllowed){
+                  if(activateSpeech){
+                    talker!.speak(text: "Keep Smiling");
+                    smileAppValueNotifier.speechActivationCountInitialized();
+                  }
+                  smileAppValueNotifier.updateSpeechActivationCount();
+                }
               }
             }else{
               smileAppValueNotifier.updateShowMoodRating(showMoodrate: true);
               return ;
             }
           } else {
-            double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
-            if (prob > 0.5) {
+            //double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
+            if (prob! > 0.5) {
               int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
               smileAppValueNotifier.updateSmileDurationCount();
               if(updatedTokenIndex <= 0){
@@ -134,7 +141,13 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               }else{
               }
             }else{
-              talker!.speak(text: "Keep Smiling");
+              if(!soundAllowed){
+                if(activateSpeech){
+                  talker!.speak(text: "Keep Smiling");
+                  smileAppValueNotifier.speechActivationCountInitialized();
+                }
+                smileAppValueNotifier.updateSpeechActivationCount();
+              }
             }
           }
         }

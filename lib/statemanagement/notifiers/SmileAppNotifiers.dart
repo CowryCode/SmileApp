@@ -27,6 +27,9 @@ class NotifiersSection {
     ],
   ));
   ValueNotifier<String> nextCountry = ValueNotifier<String>("Afghanistan");
+  ValueNotifier<int> speechActivationCount = ValueNotifier<int>(0);
+  ValueNotifier<bool> activatespeech = ValueNotifier<bool>(false);
+  ValueNotifier<bool> deactivetSound = ValueNotifier<bool>(false);
   NotifiersSection({
     required this.smileDurationCount,
     required this.smileDurationCompleted,
@@ -99,6 +102,25 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
     } catch (e) {
       // Do Nothing
     }
+  }
+  void activateSpeech({required bool activateSpeech}) {
+    value.activatespeech.value = activateSpeech;
+  }
+  void updateSpeechActivationCount() {
+    value.speechActivationCount.value++;
+    if(value.speechActivationCount.value >= Speech_Activation_Count){
+      value.activatespeech.value = true;
+    }
+    notifyListeners();
+  }
+  void speechActivationCountInitialized() {
+    value.speechActivationCount.value = 0;
+    value.activatespeech.value = false;
+    notifyListeners();
+  }
+  void updateSoundDeactivation({required bool deactivateSound}) {
+    value.deactivetSound.value = deactivateSound;
+    notifyListeners();
   }
 }
 

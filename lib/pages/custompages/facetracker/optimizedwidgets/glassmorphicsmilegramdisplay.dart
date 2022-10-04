@@ -4,6 +4,7 @@ import 'package:SmileApp/statemanagement/my_app_state.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GlassmorphicSmilegramDisplay extends StatefulWidget {
   const GlassmorphicSmilegramDisplay({Key? key}) : super(key: key);
@@ -15,65 +16,39 @@ class GlassmorphicSmilegramDisplay extends StatefulWidget {
 
 class _GlassmorphicSmilegramDisplayState
     extends State<GlassmorphicSmilegramDisplay> {
-  // late List<Model> data;
-  // late MapShapeSource sublayerDataSource;
-  // late MapShapeSource shapeDataSource;
-  // CounterNotifier counter = CounterNotifier(value: 5);
-
-  @override
-  void initState() {
-    // data = <Model>[
-    //   Model('Algeria', "Low"),
-    //   Model('Nigeria', "High"),
-    //   Model('Libya', "Low"),
-    //   Model('Azerbaijan', "Low"),
-    //   Model('Burkina Faso', "Low"),
-    //   Model('Afghanistan', "Low"),
-    // ];
-    //
-    // shapeDataSource = MapShapeSource.asset(
-    //   "assets/world_map.json",
-    //   shapeDataField: 'continent',
-    // );
-    //
-    // sublayerDataSource = MapShapeSource.asset(
-    //   "assets/world_map.json",
-    //   shapeDataField: "admin",
-    //   dataCount: data.length,
-    //   primaryValueMapper: (int index) {
-    //     return data[index].state;
-    //   },
-    //   shapeColorValueMapper: (int index) {
-    //     return data[index].storage;
-    //   },
-    //   shapeColorMappers: [
-    //     MapColorMapper(value: "Low", color: Colors.red),
-    //     MapColorMapper(value: "High", color: Colors.green)
-    //   ],
-    // );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SingleChildScrollView(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Align(
-          alignment: Alignment.topRight,
-          child: ValueListenableBuilder(
-            // valueListenable: counterNotifier,
-            valueListenable: smileAppValueNotifier.value.smileDurationCount,
-            builder: (context, value, child) {
-              return Text(
-                "${value.toString()} ",
-                style: const TextStyle(
-                    fontSize: 33.0,
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold),
-              );
-            },
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ValueListenableBuilder(
+              // valueListenable: counterNotifier,
+              valueListenable: smileAppValueNotifier.value.deactivetSound,
+              builder: (context, bool value, child) {
+                return IconButton(
+                    onPressed: (){
+                      smileAppValueNotifier.updateSoundDeactivation(deactivateSound: !value);
+                }, icon: Icon( (value != true)? FontAwesomeIcons.volumeHigh : FontAwesomeIcons.volumeOff, color: Colors.green,));
+              },
+            ),
+            ValueListenableBuilder(
+              // valueListenable: counterNotifier,
+              valueListenable: smileAppValueNotifier.value.smileDurationCount,
+              builder: (context, value, child) {
+                return Text(
+                  "${value.toString()} ",
+                  style: const TextStyle(
+                      fontSize: 33.0,
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold),
+                );
+              },
+            ),
+          ],
         ),
         Align(alignment: Alignment.center, child: HappinessMap()),
         Align(
@@ -82,7 +57,7 @@ class _GlassmorphicSmilegramDisplayState
             width: MediaQuery.of(context).size.width ,
             // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
             decoration: BoxDecoration(
-              color:  Colors.white12,
+              color:  Colors.black12,
               // color: Theme.of(context).primaryColor,
               border: Border.all(
                   width: 1.0,
@@ -93,7 +68,7 @@ class _GlassmorphicSmilegramDisplayState
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '   Country Name:',
+                  'Country Name:',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -126,98 +101,7 @@ class _GlassmorphicSmilegramDisplayState
         ),
       ],
     ));
-    //     Center(
-    //   child: GlassmorphicContainer(
-    //     width: MediaQuery.of(context).size.width,
-    //     height: MediaQuery.of(context).size.height,
-    //     borderRadius: 20,
-    //     blur: 20,
-    //     alignment: Alignment.bottomCenter,
-    //     border: 2,
-    //     linearGradient: LinearGradient(
-    //         begin: Alignment.topLeft,
-    //         end: Alignment.bottomRight,
-    //         colors: [
-    //           Color(0xFFffffff).withOpacity(0.1),
-    //           Color(0xFFFFFFFF).withOpacity(0.05),
-    //         ],
-    //         stops: [
-    //           0.1,
-    //           1,
-    //         ]),
-    //     borderGradient: LinearGradient(
-    //       begin: Alignment.topLeft,
-    //       end: Alignment.bottomRight,
-    //       colors: [
-    //         Color(0xFFffffff).withOpacity(0.5),
-    //         Color((0xFFFFFFFF)).withOpacity(0.5),
-    //       ],
-    //     ),
-    //     child: Center(
-    //         child: Column(
-    //           mainAxisAlignment: MainAxisAlignment.start,
-    //           children:<Widget> [
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               children: <Widget>[
-    //                 Row(
-    //                   mainAxisAlignment: MainAxisAlignment.start,
-    //                   children: <Widget>[
-    //                     SizedBox(width: 3,),
-    //                     Text(
-    //                       'Smile rating is : ',
-    //                       textAlign: TextAlign.center,
-    //                       overflow: TextOverflow.ellipsis,
-    //                       style: const TextStyle(
-    //                         fontWeight: FontWeight.bold,
-    //                         color: Colors.black45,
-    //                         fontFamily: 'Poppins',
-    //                         fontSize: 14.0,
-    //                       ),
-    //                     ),
-    //                     SizedBox(width: 3,),
-    //                     Text(
-    //                       (currentMessagestate.smileProbability == 0) ? 'Not started' : '${currentMessagestate.smileProbability}%',
-    //                       textAlign: TextAlign.center,
-    //                       overflow: TextOverflow.ellipsis,
-    //                       style: const TextStyle(
-    //                         fontWeight: FontWeight.bold,
-    //                         color: Colors.red,
-    //                         fontSize: 12.0,
-    //                       ),
-    //                     ),
-    //                   ],
-    //                 ),
-    //                  SizedBox(
-    //                    height: 40,
-    //                    child: ValueListenableBuilder(
-    //                     // valueListenable: counterNotifier,
-    //                      valueListenable: smileAppValueNotifier.value.smileDurationCount,
-    //                      builder: (context, value, child) {
-    //                        return Text("${value.toString()}",
-    //                          style: const TextStyle(
-    //                              fontSize: 33.0,
-    //                              color: Colors.green,
-    //                              fontWeight: FontWeight.bold),
-    //                        );
-    //                      },
-    //                    ),
-    //                  ),
-    //               ],
-    //             ),
-    //             HappinessMap()
-    //           ],
-    //         )
-    //       //child: _smilegramDetector()
-    //     ),
-    //   ),
-    // ));
+  
   }
 }
 
-// class Model {
-//   const Model(this.state, this.storage);
-//
-//   final String state;
-//   final String storage;
-// }

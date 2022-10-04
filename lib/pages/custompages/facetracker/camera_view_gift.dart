@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
+import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
@@ -9,6 +10,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:flutter/services.dart';
@@ -210,22 +212,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ),
         backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(widget.title),
-        // actions: [
-        //   if (_allowPicker)
-        //     Padding(
-        //       padding: EdgeInsets.only(right: 20.0),
-        //       child: GestureDetector(
-        //         onTap: _switchScreenMode,
-        //         child: Icon(
-        //           _mode == ScreenMode.liveFeed
-        //               ? Icons.photo_library_outlined
-        //               : (Platform.isIOS
-        //               ? Icons.camera_alt_outlined
-        //               : Icons.camera),
-        //         ),
-        //       ),
-        //     ),
-        // ],
       ),
       body: _body(),
       // floatingActionButton: _floatingActionButton(), // I removed the floating button
@@ -324,88 +310,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       ),
     );
 
-    // return StoreConnector<MyAppState, SGMessage>(
-    // converter: (store) => store.state.sg_message,
-    // builder: (context, SGMessage currentMessagestate) =>
-    //
-    //     SingleChildScrollView(
-    //     scrollDirection: Axis.vertical,
-    //     child: Column(
-    //       children: [
-    //         SizedBox(
-    //           height: 20,
-    //         ),
-    //         ((){
-    //           if(widget.readmessage && currentMessagestate.showStartCountDown == false){
-    //             if(currentMessagestate.iscompleted){
-    //               showDialog(
-    //                 context: context,
-    //                 barrierDismissible: true, // set to false if you want to force a rating
-    //                 builder: (context) => showRatingAlert(context),
-    //               );
-    //             }
-    //             return SizedBox(height: 5,);
-    //           }else{
-    //             return SizedBox(height: 5,);
-    //           }
-    //         }()),
-    //         // ((){
-    //         //   if(currentMessagestate.iscompleted){
-    //         //     _stopLiveFeed();
-    //         //     if(highestpoint > currentMessagestate.tokenIndex){
-    //         //       return _giftAlert(message: "you stopped smiling !",  amountWon: currentMessagestate.tokenIndex);
-    //         //     }else{
-    //         //       return _giftAlert(message: "Congratulations! highest score surpaased", amountWon: currentMessagestate.tokenIndex);
-    //         //     }
-    //         //   }else {
-    //         //      return _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown);
-    //         //   }
-    //         // }()),
-    //         _cameraDisplay(smilestartCountdown: currentMessagestate.showStartCountDown),
-    //         SizedBox(height: 20,),
-    //        // ((){
-    //           if(!widget.readmessage && currentMessagestate.showStartCountDown == false)
-    //            Row(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: [
-    //                 ElevatedButton(
-    //                   style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-    //                   child: const Text('Refresh',),
-    //                   onPressed: () {
-    //                     refreshCamera(); // Refresh
-    //                     SGMessage sgMSG = SGMessage(
-    //                       content: "",
-    //                       updated: true,
-    //                       tokenIndex: 0,
-    //                       iscompleted: false,
-    //                       showStartCountDown: true,
-    //                     );
-    //                     StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMSG));
-    //                     _count += 1;
-    //                   },
-    //                 ),
-    //                 SizedBox(width: 3,),
-    //                 ElevatedButton(
-    //                   style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-    //                   child: const Text('Done',),
-    //                   onPressed: () {
-    //                     showDialog(
-    //                       context: context,
-    //                       barrierDismissible: true, // set to false if you want to force a rating
-    //                       builder: (context) => showRatingAlert(context),
-    //                     );
-    //                   },
-    //                 ),
-    //               ],
-    //             ),
-    //           // }else{
-    //           //   return SizedBox(height: 5,);
-    //           // }
-    //       //  }()),
-    //       ],
-    //     ),
-    // ));
-   // return body;
   }
 
   Widget _liveFeedBody() {
@@ -688,17 +592,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
-        //  (_controller != null)? Transform.scale(
-        //   (_controller != null && smilestartCountdown == false)? Transform.scale(
-        //     scale: 1,
-        //     child: Center(
-        //       child: _changingCameraLens
-        //           ? Center(
-        //         child: const Text('Changing camera lens'),
-        //       )
-        //           : CameraPreview(_controller!),
-        //     ),
-        //   ) : SizedBox(height: MediaQuery.of(context).size.height * 0.6),
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
@@ -709,7 +602,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
-
             ValueListenableBuilder(
               valueListenable: smileAppValueNotifier.value.showCountDown,
               builder: (context, value, child) {
@@ -735,11 +627,25 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
               if(value == false && widget.readmessage ){
-                return _glassmorphicReadMessage();
+                //return _glassmorphicReadMessage();
+                return GlassmorphicReadMessage();
               }else{
                 return Text("");
               }
             },
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: ValueListenableBuilder(
+              // valueListenable: counterNotifier,
+              valueListenable: smileAppValueNotifier.value.deactivetSound,
+              builder: (context, bool value, child) {
+                return IconButton(
+                    onPressed: (){
+                      smileAppValueNotifier.updateSoundDeactivation(deactivateSound: !value);
+                    }, icon: Icon( (value != true)? FontAwesomeIcons.volumeHigh : FontAwesomeIcons.volumeOff, color: Colors.green,));
+              },
+            ),
           ),
         ],
       ),

@@ -16,5 +16,6 @@ final getProfile_URL = "${baseURL}/smile/get-user";
 
  // NOTIFIER VARIABLES
 final int Smile_Count_Initial = 20;
+final int Speech_Activation_Count = 8;
 // WORLD MAP Json
 final GlobeModel worldmapModel = GlobeModel();
