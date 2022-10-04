@@ -158,26 +158,34 @@ class MessageCard extends StatelessWidget {
                         color: Theme.of(context).primaryColor.withOpacity(0.8),
                       ),
                     ),
-                    (measageModel.read == false) ? IconButton(
-                      icon: const Icon(FontAwesomeIcons.solidFolderClosed),
+                    if(measageModel.read == true) IconButton(
+                      icon: const Icon(FontAwesomeIcons.solidEnvelopeOpen),
                       color: Theme.of(context).primaryColor,
                       onPressed: () {
                         _showAlert(context: context, msgModel: measageModel);
                       },
-                    ) : SizedBox(height: 2,)
+                    ),
                   ],
                 ),
                 SizedBox(height: (measageModel.read == true) ? 20 : 80),
                 Center(
                   child: Text(
-                    (measageModel.read == true) ?  "${measageModel.content}" : " Note from someone in Nigeria. \n Click on the box icon to read",
+                    (measageModel.read == true) ?  "${measageModel.content}" : " You received \n a note from ${measageModel.source}. \n Open the envelope below to read",
                     style: TextStyle(
                         fontSize:16.0,
                         fontFamily: 'Poppins',
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold
                     ),
+                    textAlign: TextAlign.center,
                   ),
+                ),
+                if(measageModel.read == false) IconButton(
+                  icon: const Icon(FontAwesomeIcons.solidEnvelope),
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    _showAlert(context: context, msgModel: measageModel);
+                  },
                 ),
               ],
             ),
