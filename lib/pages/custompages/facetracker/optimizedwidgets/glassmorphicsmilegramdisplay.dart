@@ -59,7 +59,7 @@ class _GlassmorphicSmilegramDisplayState
               color: Theme.of(context).primaryColor,
               border: Border.all(
                   width: 1.0,
-                  color: Colors.grey.withOpacity(0.2)),
+                  color: Colors.grey.withOpacity(0.5)),
               borderRadius: BorderRadius.circular(16.0),
             ),
             child: ValueListenableBuilder(
