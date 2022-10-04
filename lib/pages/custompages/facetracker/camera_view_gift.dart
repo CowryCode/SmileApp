@@ -176,9 +176,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
       smileAppValueNotifier.updateShowCountDown(showCoundown: true);
       //
-      // SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;
-      // sgMessage.setShowCountdown(countDownVisibility: false);
-      // StoreProvider.of<MyAppState>(context).dispatch(UpdateSGmessageAction(sgMessage));
 
     }catch(e){
       debugPrint("CAMERA ERROR : ${e.toString()}");
@@ -699,62 +696,62 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
 
-
-Widget _glassmorphicReadMessage(){
-    return  SingleChildScrollView(
-      child:Center(
-            child: GlassmorphicContainer(
-              width: MediaQuery.of(context).size.width * 0.90,
-              height: MediaQuery.of(context).size.height * 0.85,
-              borderRadius: 20,
-              blur: 1,
-              //alignment: Alignment.bottomCenter,
-              alignment: Alignment.topCenter,
-              border: 2,
-              linearGradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFffffff).withOpacity(0.1),
-                    Color(0xFFFFFFFF).withOpacity(0.05),
-                  ],
-                  stops: [
-                    0.1,
-                    1,
-                  ]),
-              borderGradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFffffff).withOpacity(0.5),
-                  Color((0xFFFFFFFF)).withOpacity(0.5),
-                ],
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(15),
-                child: Center(
-                    child:  AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 500),
-                      transitionBuilder: (Widget child, Animation<double> animation) {
-                        return ScaleTransition(scale: animation, child: child);
-                      },
-                      child: ValueListenableBuilder(
-                        valueListenable: messageNotifier,
-                        builder: (context, SGmessageModel sgmodel, child) {
-                          return Text(
-                            sgmodel.msg,
-                           // key: ValueKey<int>(_count),
-                            style: Theme.of(context).textTheme.subtitle2,
-                          );
-                        },
-                      ),
-                    ),
-                ),
-              ),
-            ),
-          ),
-    );
-  }
+//
+// Widget _glassmorphicReadMessage(){
+//     return  SingleChildScrollView(
+//       child:Center(
+//             child: GlassmorphicContainer(
+//               width: MediaQuery.of(context).size.width * 0.90,
+//               height: MediaQuery.of(context).size.height * 0.85,
+//               borderRadius: 20,
+//               blur: 1,
+//               //alignment: Alignment.bottomCenter,
+//               alignment: Alignment.topCenter,
+//               border: 2,
+//               linearGradient: LinearGradient(
+//                   begin: Alignment.topLeft,
+//                   end: Alignment.bottomRight,
+//                   colors: [
+//                     Color(0xFFffffff).withOpacity(0.1),
+//                     Color(0xFFFFFFFF).withOpacity(0.05),
+//                   ],
+//                   stops: [
+//                     0.1,
+//                     1,
+//                   ]),
+//               borderGradient: LinearGradient(
+//                 begin: Alignment.topLeft,
+//                 end: Alignment.bottomRight,
+//                 colors: [
+//                   Color(0xFFffffff).withOpacity(0.5),
+//                   Color((0xFFFFFFFF)).withOpacity(0.5),
+//                 ],
+//               ),
+//               child: Padding(
+//                 padding: EdgeInsets.all(15),
+//                 child: Center(
+//                     child:  AnimatedSwitcher(
+//                       duration: const Duration(milliseconds: 500),
+//                       transitionBuilder: (Widget child, Animation<double> animation) {
+//                         return ScaleTransition(scale: animation, child: child);
+//                       },
+//                       child: ValueListenableBuilder(
+//                         valueListenable: messageNotifier,
+//                         builder: (context, SGmessageModel sgmodel, child) {
+//                           return Text(
+//                             sgmodel.msg,
+//                            // key: ValueKey<int>(_count),
+//                             style: Theme.of(context).textTheme.subtitle2,
+//                           );
+//                         },
+//                       ),
+//                     ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//     );
+//   }
 
 Widget weatherMap(){
     return Padding(

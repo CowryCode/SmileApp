@@ -491,7 +491,7 @@ class _EmotionsState extends State<Emotions> {
                       ),
                       TextButton(
                           onPressed: (){
-                            Navigator.of(context).popAndPushNamed('/home');
+                            _showAlert(context: context);
                           },
                           child: Text(
                             "Done",
@@ -570,6 +570,28 @@ class _EmotionsState extends State<Emotions> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+
+  _showAlert({required BuildContext context,}){
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('My Tribe'),
+        content: const Text('Message sent, community members will reach out to you',
+          style: TextStyle(color: Colors.black45),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: (){
+              Navigator.of(context).popAndPushNamed('/home');
+            },
+            child: const Text('Ok', ),
+          ),
+
+        ],
       ),
     );
   }

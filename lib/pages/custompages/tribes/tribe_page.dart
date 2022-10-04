@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
 import 'package:SmileApp/models/mymodels/user.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 
 
 class TribePage extends StatefulWidget {
@@ -99,36 +100,6 @@ class _TribePageState extends State<TribePage> {
 
         ],
       ),
-
-
-      // Column(
-      //     children: <Widget>[
-      //       Stack(
-      //         children: <Widget>[
-      //           Container(
-      //             height: 20,
-      //             padding: const EdgeInsets.only(top:0,left:12.0,right: 12.0),
-      //             decoration: BoxDecoration(
-      //               borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
-      //               color: Theme.of(context).colorScheme.secondary,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //
-      //        //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
-      //        Flexible(
-      //          child: ListView.builder(
-      //           itemCount: _leaderBoardModelLIST!.length,
-      //           itemBuilder: (BuildContext context, int index) {
-      //             return TribePageWidget(
-      //               leader: _leaderBoardModelLIST!.elementAt(index), );
-      //           }),
-      //        ),
-      //     ],
-      //   ),
-
     );
   }
-
 }

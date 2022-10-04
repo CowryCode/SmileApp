@@ -44,7 +44,6 @@ class GlobeModel {
 
         //nextTargetStart = indices.last + 1;
         int nextTargetend = getNextTargetEndIndex(currentLastIndex: indices.last);
-        debugPrint("NEXT TARGET IS $nextTargetend");
         //Added +1 to Target Start b/cos from item 2 to Target_Countries_COUNT should be Red and item 1 Amber
         for(int x = nextTargetStart+1 ; x <= nextTargetend; x++){
           if(x < modelsDictionary().length){
