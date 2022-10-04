@@ -1,5 +1,6 @@
-import 'package:SmileApp/apis/models/countrymodel.dart';
+import 'package:SmileApp/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/models/globemodel.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
@@ -14,19 +15,24 @@ class NotifiersSection {
       ValueNotifier<MapShapeSource>(MapShapeSource.asset(
     "assets/world_map.json",
     shapeDataField: "admin",
-    dataCount: 1,
+   // dataCount: 1,
+    dataCount: worldmapModel.getProcessedcountries(userCountriesIndexString: "0").length,
     primaryValueMapper: (int index) {
-      return "Afghanistan";
+     // return "Afghanistan";
+      return worldmapModel.getProcessedcountries(userCountriesIndexString: "0").elementAt(index).state;
     },
     shapeColorValueMapper: (int index) {
-      return "Low";
+     // return "Low";
+      return worldmapModel.getProcessedcountries(userCountriesIndexString: "0").elementAt(index).storage;
     },
     shapeColorMappers: [
       MapColorMapper(value: "Low", color: Colors.red),
+      MapColorMapper(value: "Medium", color: Colors.orange),
       MapColorMapper(value: "High", color: Colors.green)
     ],
   ));
-  ValueNotifier<String> nextCountry = ValueNotifier<String>("Afghanistan");
+  // ValueNotifier<String> nextCountry = ValueNotifier<String>("Afghanistan");
+  ValueNotifier<String> nextCountry = ValueNotifier<String>(worldmapModel.modelsDictionary().first.state);
   ValueNotifier<int> speechActivationCount = ValueNotifier<int>(0);
   ValueNotifier<bool> activatespeech = ValueNotifier<bool>(false);
   ValueNotifier<bool> deactivetSound = ValueNotifier<bool>(false);
@@ -93,6 +99,7 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
         },
         shapeColorMappers: [
           MapColorMapper(value: "Low", color: Colors.red),
+          MapColorMapper(value: "Medium", color: Colors.orange),
           MapColorMapper(value: "High", color: Colors.green)
         ],
       );

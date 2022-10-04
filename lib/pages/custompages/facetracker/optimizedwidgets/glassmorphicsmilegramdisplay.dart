@@ -55,45 +55,29 @@ class _GlassmorphicSmilegramDisplayState
             width: MediaQuery.of(context).size.width ,
             // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
             decoration: BoxDecoration(
-              color:  Colors.black12,
-              // color: Theme.of(context).primaryColor,
+              // color:  Colors.black12,
+              color: Theme.of(context).primaryColor,
               border: Border.all(
                   width: 1.0,
                   color: Colors.grey.withOpacity(0.2)),
               borderRadius: BorderRadius.circular(16.0),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Country Name:',
+            child: ValueListenableBuilder(
+              // valueListenable: counterNotifier,
+              valueListenable: smileAppValueNotifier.value.nextCountry,
+              builder: (context, String value, child) {
+                return Text(
+                  '   $value',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Colors.orange,
                     fontFamily: 'Poppins',
                     fontSize: 14.0,
                   ),
-                ),
-                ValueListenableBuilder(
-                  // valueListenable: counterNotifier,
-                  valueListenable: smileAppValueNotifier.value.nextCountry,
-                  builder: (context, String value, child) {
-                    return Text(
-                      '   $value',
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red,
-                        fontFamily: 'Poppins',
-                        fontSize: 14.0,
-                      ),
-                    );
-                  },
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),

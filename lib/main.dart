@@ -12,7 +12,7 @@ import 'package:SmileApp/config/app_config.dart' as config;
 
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-import 'apis/models/countrymodel.dart';
+import 'models/countrymodel.dart';
 
 
 // ORIGINAL CODE START HERE, PLEASE REVERT TO IT AFTER ADDING FLUTTER_REDUX

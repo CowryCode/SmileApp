@@ -52,7 +52,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
     //   },
     // );
     return CircularCountDownTimer(
-              duration: 10,
+              duration: 5,
               initialDuration: 0,
               controller: CountDownController(),
               width: MediaQuery.of(context).size.width / 2,

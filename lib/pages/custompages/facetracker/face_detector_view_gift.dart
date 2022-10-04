@@ -1,6 +1,6 @@
 
 import 'package:SmileApp/TextToSpeech/smileappvoice.dart';
-import 'package:SmileApp/apis/models/countrymodel.dart';
+import 'package:SmileApp/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
@@ -131,7 +131,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 List<int>? indicesCount = worldmapModel.splitString(countriesIndexString: countryIDstring);
                 if((indicesCount!.length) < worldmapModel.modelsDictionary().length){
                   List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
-                  String updatedIDs =  countryIDstring + ",${data!.length}";
+                  //String updatedIDs =  countryIDstring + ",${data!.length}";
+                  String updatedIDs =  countryIDstring + ",${indicesCount.length}";
                   print("INDEX STRING WITHIN: $updatedIDs");
                   smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs);
                 }else{

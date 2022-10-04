@@ -1,4 +1,4 @@
-import 'package:SmileApp/apis/models/countrymodel.dart';
+import 'package:SmileApp/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
@@ -17,19 +17,24 @@ final SmileAppValueNotifier smileAppValueNotifier = SmileAppValueNotifier(
       mapdatasource: ValueNotifier<MapShapeSource>(MapShapeSource.asset(
         "assets/world_map.json",
         shapeDataField: "admin",
-        dataCount: 1,
+       // dataCount: 1,
+        dataCount: worldmapModel.getProcessedcountries(userCountriesIndexString: "0").length,
         primaryValueMapper: (int index) {
-          return "Afghanistan";
+         // return "Afghanistan";
+          return  worldmapModel.getProcessedcountries(userCountriesIndexString: "0").elementAt(index).state;
         },
         shapeColorValueMapper: (int index) {
-          return "Low";
+         // return "Low";
+          return worldmapModel.getProcessedcountries(userCountriesIndexString: "0").elementAt(index).storage;
         },
         shapeColorMappers: [
           MapColorMapper(value: "Low", color: Colors.red),
+          MapColorMapper(value: "Medium", color: Colors.orange),
           MapColorMapper(value: "High", color: Colors.green)
         ],
       )),
-    nextCountry: ValueNotifier<String>("Afghanistan"),
+    //nextCountry: ValueNotifier<String>("Afghanistan"),
+    nextCountry: ValueNotifier<String>(worldmapModel.modelsDictionary().first.state),
   ),
 );
 

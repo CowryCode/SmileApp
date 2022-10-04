@@ -1,7 +1,8 @@
-import 'package:SmileApp/apis/models/countrymodel.dart';
+import 'package:SmileApp/models/countrymodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class HappinessMap extends StatefulWidget {
@@ -61,39 +62,87 @@ class _HappinessMapState extends State<HappinessMap> {
 
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
-      child: ValueListenableBuilder(
-        // valueListenable: counterNotifier,
-        valueListenable: smileAppValueNotifier.value.mapdatasource,
-        builder: (context, MapShapeSource mapShapeSource, child) {
-          return SfMaps(
-            layers: <MapShapeLayer>[
-              MapShapeLayer(
-                source: shapeDataSource,
-                sublayers: [
-                  MapShapeSublayer(
-                    // source: sublayerDataSource,
-                    source: mapShapeSource,
-                  )
+      child: Column(
+        children: <Widget>[
+          ValueListenableBuilder(
+            // valueListenable: counterNotifier,
+            valueListenable: smileAppValueNotifier.value.mapdatasource,
+            builder: (context, MapShapeSource mapShapeSource, child) {
+              return SfMaps(
+                layers: <MapShapeLayer>[
+                  MapShapeLayer(
+                    source: shapeDataSource,
+                    sublayers: [
+                      MapShapeSublayer(
+                        // source: sublayerDataSource,
+                        source: mapShapeSource,
+                      )
+                    ],
+                  ),
                 ],
+              );
+            },
+          ),
+          SizedBox(height: 5,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Completed:  ',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black45,
+                  fontFamily: 'Poppins',
+                  fontSize: 12.0,
+                ),
               ),
+              Icon(FontAwesomeIcons.solidCircle,color: Colors.green, size: 12 ,),
+              Text(
+                "  Today's Target:  ",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black45,
+                  fontFamily: 'Poppins',
+                  fontSize: 12.0,
+                ),
+              ),
+              Icon(FontAwesomeIcons.solidCircle,color: Colors.red, size: 12 ,),
+              Text(
+                '  Current:  ',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black45,
+                  fontFamily: 'Poppins',
+                  fontSize: 12.0,
+                ),
+              ),
+              Icon(FontAwesomeIcons.solidCircle,color: Colors.orange, size: 12 ,)
             ],
-          );
-        },
+          )
+        ],
+      )
 
 
-      //   SfMaps(
-      //   layers: <MapShapeLayer>[
-      //     MapShapeLayer(
-      //       source: shapeDataSource,
-      //       sublayers: [
-      //         MapShapeSublayer(
-      //           source: sublayerDataSource,
-      //         )
-      //       ],
-      //     ),
-      //   ],
-      // ),
-    ));
+    //   ValueListenableBuilder(
+    //     // valueListenable: counterNotifier,
+    //     valueListenable: smileAppValueNotifier.value.mapdatasource,
+    //     builder: (context, MapShapeSource mapShapeSource, child) {
+    //       return SfMaps(
+    //         layers: <MapShapeLayer>[
+    //           MapShapeLayer(
+    //             source: shapeDataSource,
+    //             sublayers: [
+    //               MapShapeSublayer(
+    //                 // source: sublayerDataSource,
+    //                 source: mapShapeSource,
+    //               )
+    //             ],
+    //           ),
+    //         ],
+    //       );
+    //     },
+    // )
+    );
   }
 
 

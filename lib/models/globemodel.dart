@@ -1,9 +1,13 @@
-import 'package:SmileApp/apis/models/countrymodel.dart';
+import 'package:SmileApp/models/countrymodel.dart';
+import 'package:flutter/material.dart';
+
+import '../apis/networkUtilities.dart';
 
 class GlobeModel {
   String userCountriesIndexString = "0";
   String? nextCountry;
-  List<Model>? countriesmodel;
+  //List<Model>? countriesmodel;
+  List<Model> countriesmodel = <Model>[Model(state:   "Afghanistan", storage: "Low")];
   List<int>? indices;
 
 
@@ -23,35 +27,61 @@ class GlobeModel {
 
   }
 
-  List<Model>? loadModels({List<int>? indices}){
+  List<Model> loadModels({List<int>? indices}){
     try{
       if(indices != null){
+        int nextTargetStart;
         List<Model> list = [];
-        indices.forEach((element) {
-         list.add(modelsDictionary().elementAt(element));
-        });
-
-        int nextElement = indices.last + 1;
-        if(nextElement < modelsDictionary().length){
-          Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(nextElement).state, storage: "Low");
-          list.add(nextCountryTopaint);
+        if(indices.length == 1){
+          nextTargetStart = 0;
+          list.add(Model(state: modelsDictionary().elementAt(0).state, storage: "Medium"));
+        }else{
+          nextTargetStart = indices.last + 1;
+          indices.forEach((element) {
+            list.add(modelsDictionary().elementAt(element));
+          });
         }
+
+        //nextTargetStart = indices.last + 1;
+        int nextTargetend = getNextTargetEndIndex(currentLastIndex: indices.last);
+        debugPrint("NEXT TARGET IS $nextTargetend");
+        //Added +1 to Target Start b/cos from item 2 to Target_Countries_COUNT should be Red and item 1 Amber
+        for(int x = nextTargetStart+1 ; x <= nextTargetend; x++){
+          if(x < modelsDictionary().length){
+            Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(x).state, storage: "Low");
+            list.add(nextCountryTopaint);
+          }
+        }
+        //int nextElement = indices.last + 1;
+        // if(nextTargetStart < modelsDictionary().length){
+        //   Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(nextTargetStart).state, storage: "Medium");
+        //   list.add(nextCountryTopaint);
+        // }
 
         return list;
       }else{
-        return null;
+        return countriesmodel;
       }
     }catch(e){
-      return null;
+      return countriesmodel;
     }
 
   }
+  
+  int getNextTargetEndIndex({required int currentLastIndex}){
+    if(currentLastIndex > Target_Countries_COUNT){
+      int intDiv = currentLastIndex ~/ Target_Countries_COUNT;
+      return (intDiv + 1) * Target_Countries_COUNT;
+    }else{
+      return Target_Countries_COUNT;
+    }
+  }
 
-  List<Model>? getProcessedcountries({required String userCountriesIndexString}){
+  List<Model> getProcessedcountries({required String userCountriesIndexString}){
     List<int>? indes = splitString(countriesIndexString: userCountriesIndexString);
     this.indices = indes;
     if(indes != null){
-      this.countriesmodel = loadModels(indices: splitString(countriesIndexString: userCountriesIndexString)!);
+      this.countriesmodel = loadModels(indices: splitString(countriesIndexString: userCountriesIndexString));
     }
     return this.countriesmodel;
   }

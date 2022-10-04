@@ -1,5 +1,5 @@
 // SG stands for Smile Gram
-import 'package:SmileApp/apis/models/globemodel.dart';
+import 'package:SmileApp/models/globemodel.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class SGMessage{
