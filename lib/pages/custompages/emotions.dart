@@ -181,7 +181,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Comfused ",
+                                  " Happy ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,
@@ -235,7 +235,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Tired ",
+                                  " Surprised ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,
@@ -293,7 +293,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Happy ",
+                                  " Fearful ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,
@@ -347,7 +347,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Busy ",
+                                  " Sad ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,
@@ -405,7 +405,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Stressed ",
+                                  " Angry ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,
@@ -459,119 +459,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Sick ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            // changeColor();
-                            setState(() {
-                              if (Clicked6 == true) {
-                                Clicked6 = false;
-                              } else {
-                                Clicked6 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                            decoration: BoxDecoration(
-                              color: Clicked6 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.faceFlushed,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Lonely ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // changeColor();
-                            setState(() {
-                              if (Clicked6 == true) {
-                                Clicked6 = false;
-                              } else {
-                                Clicked6 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                            decoration: BoxDecoration(
-                              color: Clicked6 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.faceFlushed,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Lonely ",
+                                  " Disgusted ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,

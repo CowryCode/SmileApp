@@ -42,7 +42,7 @@ dependencies:
   camera_android: ^0.10.0
   camera_avfoundation: ^0.9.8+2
   shared_preferences: ^2.0.6
-  #circular_countdown_timer: ^0.2.2
+  circular_countdown_timer: ^0.2.2
   glassmorphism: ^3.0.0
   syncfusion_flutter_maps: ^20.2.50
   rating_dialog: ^2.0.4
