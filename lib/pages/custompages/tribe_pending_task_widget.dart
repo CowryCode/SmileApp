@@ -94,6 +94,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                   ),
                 ),
                 TextButton(
+                  //TODO: IMPLEMENT ML TO FILTER THIS TEXT
                     onPressed: (){
                       showDialog(
                         context: context,

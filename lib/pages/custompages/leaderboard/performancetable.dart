@@ -52,7 +52,7 @@ class _PerformanceTableState extends State<PerformanceTable> {
                         ),
                         SizedBox(width: MediaQuery.of(context).size.width * 0.1,),
                         Text(
-                          'Target Value',
+                          'Target \n Value',
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _PerformanceTableState extends State<PerformanceTable> {
                         ),
                         SizedBox(width: MediaQuery.of(context).size.width * 0.1,),
                         Text(
-                          'Achieved Value',
+                          'Achieved \n Value',
                           textAlign: TextAlign.left,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
@@ -73,7 +73,16 @@ class _PerformanceTableState extends State<PerformanceTable> {
                           ),
                         ),
                         SizedBox(width: MediaQuery.of(context).size.width * 0.1,),
-
+                        Text(
+                          'Rating',
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black45,
+                            fontFamily: 'Poppins',
+                            fontSize: 12.0,
+                          ),
+                        ),
 
                       ],
                     ),
@@ -142,7 +151,7 @@ class _PerformanceTableState extends State<PerformanceTable> {
                 fontSize: 12.0,
               ),
             ),
-            SizedBox(width: MediaQuery.of(context).size.width * 0.1,),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.2,),
             Text(
               '$scoredValue',
               textAlign: TextAlign.left,

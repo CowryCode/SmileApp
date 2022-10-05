@@ -2,7 +2,6 @@
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/apis/Variables.dart';
@@ -17,12 +16,12 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-
+//TODO: CREATE INSTRUCTION PAGES
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     print("The show dialogue status is : ${widget.checkEmotion}");
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_)  {
       if(widget.checkEmotion == true){
         // show Rating dialog
         showDialog(
@@ -369,10 +368,7 @@ class _HomeState extends State<Home> {
             ),
           ),
       ),
-        // Container(
-        //   margin:EdgeInsets.symmetric(horizontal: 30.0,vertical:0.0),
-        //  child:ballcard(image,Colors.transparent),
-        // ),
+
      ],
     );
   }
