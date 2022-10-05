@@ -99,10 +99,8 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                   cursorColor: Theme.of(context).colorScheme.secondary ,
                   controller: textEditingController,
                   style:  const TextStyle(
-                    fontWeight: FontWeight.bold,
                     color: Colors.black45,
                     fontFamily: 'Poppins',
-                    fontSize: .0,
                   ),
                 ),
                 TextButton(
