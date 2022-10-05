@@ -72,8 +72,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(width: 20,),
-                            Icon(FontAwesomeIcons.reply, color: Theme.of(context).colorScheme.secondary,),
+                            Text("Reply", style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
                           ],
                         ),
                     )
