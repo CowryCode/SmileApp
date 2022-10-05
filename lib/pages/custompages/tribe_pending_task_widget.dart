@@ -1,4 +1,5 @@
 import 'package:SmileApp/config/custom_design.dart';
+import 'package:dart_sentiment/dart_sentiment.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
@@ -17,6 +18,8 @@ class TribePendingTaskWidget extends StatefulWidget {
 class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
 
   bool showfulltext = false;
+  TextEditingController textEditingController = TextEditingController();
+  final sentiment = Sentiment();
 
   @override
   Widget build(BuildContext context) {
@@ -92,15 +95,50 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                     border: OutlineInputBorder(),
                     hintText: '200 Character empathic messsage',
                   ),
+                  maxLines: 2,
+                  maxLength: 250,
+                  cursorColor: Theme.of(context).colorScheme.secondary ,
+                  controller: textEditingController,
+                  style:  const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black45,
+                    fontFamily: 'Poppins',
+                    fontSize: .0,
+                  ),
                 ),
                 TextButton(
                   //TODO: IMPLEMENT ML TO FILTER THIS TEXT
                     onPressed: (){
-                      showDialog(
-                        context: context,
-                        barrierDismissible: true, // set to false if you want to force a rating
-                        builder: (context) => _showRatingAlert(context, justreadmessage: true),
-                      );
+                      double sentimentScore = sentiment.analysis(textEditingController.value.text).entries.elementAt(1).value;
+                      if(sentimentScore > 0){
+                        showDialog(
+                          context: context,
+                          barrierDismissible: true, // set to false if you want to force a rating
+                          builder: (context) => _showRatingAlert(context, justreadmessage: true),
+                        );
+                      }else {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Center(child: const Icon(FontAwesomeIcons.triangleExclamation,color: Colors.red, size: 26 ,)),
+                            content: Text('Hurtful words detected. \n Please rephrase with kinds words only',
+                              style:  const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black45,
+                                fontFamily: 'Poppins',
+                                fontSize: 18.0,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     },
                     child: Text("Send", style: TextStyle(color: Theme.of(context).colorScheme.secondary),)
                 )

@@ -2,7 +2,6 @@ import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/smilegramLogin.dart';
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:SmileApp/pages/instructions/getStarted.dart';
-import 'package:SmileApp/pages/instructions/getStarted1.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/pages/custompages/emotions.dart';
 import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';

@@ -1,4 +1,4 @@
-// SG stands for Smile Gram
+// SG stands for SmileGram
 import 'package:SmileApp/models/globemodel.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 

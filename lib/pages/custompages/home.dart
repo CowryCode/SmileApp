@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
-                  title: const Text('Smile Gram'),
+                  title: const Text('SmileGram'),
                   content: const Text('Beat the highest smile score to win redeemable points! ',
                     style: TextStyle(color: Colors.black45),
                   ),
@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Smile-Gram",
+                      Text("SmileGram",
                           style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 25,

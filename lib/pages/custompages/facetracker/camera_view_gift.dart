@@ -788,7 +788,7 @@ Widget weatherMap(){
     ),
     // encourage your user to leave a high rating?
     message: Text(
-      (justreadmessage == true) ? 'Does it feel good to unlock your message wit a smile?' : 'How does it feel to smile this long?',
+      (justreadmessage == true) ? 'Does it feel good to unlock your message with a smile?' : 'How does it feel to smile this long?',
       textAlign: TextAlign.center,
       style: const TextStyle(fontSize: 15),
     ),

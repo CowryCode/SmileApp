@@ -74,9 +74,9 @@ class MyApp extends StatelessWidget {
     //   child:
      return  MaterialApp(
         title: 'Smile App',
-        initialRoute: '/instructions',
+        //initialRoute: '/instructions',
         //initialRoute: '/',
-        //initialRoute: '/home_with_alert',
+        initialRoute: '/home_with_alert',
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         darkTheme: ThemeData(

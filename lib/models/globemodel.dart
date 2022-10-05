@@ -40,6 +40,10 @@ class GlobeModel {
           indices.forEach((element) {
             list.add(modelsDictionary().elementAt(element));
           });
+          if(nextTargetStart < modelsDictionary().length){
+            Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(nextTargetStart).state, storage: "Medium");
+            list.add(nextCountryTopaint);
+          }
         }
 
         //nextTargetStart = indices.last + 1;

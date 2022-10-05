@@ -119,7 +119,7 @@ class _HappinessMapState extends State<HappinessMap> {
                 ),
                 Icon(FontAwesomeIcons.solidCircle,color: Colors.red, size: 12 ,),
                 Text(
-                  '  Current:  ',
+                  '  Now:  ',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black45,
