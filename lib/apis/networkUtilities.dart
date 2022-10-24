@@ -25,3 +25,18 @@ final int Speech_Activation_Count = 8;
 final int Target_Countries_COUNT = 12;
 // WORLD MAP Json
 final GlobeModel worldmapModel = GlobeModel();
+
+
+
+// GET DATE AND TIME FROM DEVICE
+String getDateFromDevice(){
+ DateTime now = DateTime.now();
+ String date = "${now.year}-${now.month}-${now.day}";
+ return date;
+}
+
+String getTimeFromDevice(){
+ DateTime now = DateTime.now();
+ String time = "${now.hour}:${now.minute}:00";
+ return time;
+}
