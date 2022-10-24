@@ -1,8 +1,13 @@
-//final baseURL = "http://192.168.4.31:8080";
 import 'package:SmileApp/models/globemodel.dart';
 
-final baseURL = "http://192.168.2.180:8080";
+final baseURL = "http://192.168.4.31:8080/";
 final MobileURL = "https://com.cowrycode.healthensuite";
+
+final SmileGram_Mood_URL = "${baseURL}/smile/smilegram-mood";
+final PocketBuddy_Mood_URL = "${baseURL}/smile/pocketbuddy-mood";
+final Tribe_Mood_URL = "${baseURL}/smile/tribe-mood";
+final Tribe_Message_URL = "${baseURL}/smile/tribemessage";
+final Leader_Board_URL = "${baseURL}/smile/leaderboard";
 
 final CreateProfile_URL = "${baseURL}/smile/create-user";
 final getProfile_URL = "${baseURL}/smile/get-user";
