@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'package:SmileApp/apis/diskstorage.dart';
+import 'package:SmileApp/apis/models/leaderboard.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
 import 'package:http/http.dart' as http;
 
 class ApiAccess {
@@ -135,16 +137,11 @@ class ApiAccess {
 
   }
 
-  Future<UserProfile> getLeaderBoard({String? phonenumber}) async {
+  Future<LeaderBoard?> getLeaderBoard() async {
     try {
       String? token;
-
-      if(phonenumber == null){
-        Future<String?> tk = Localstorage().getString(key_login_token);
-        await tk.then((value) => {token = value!});
-      }else{
-        token = phonenumber;
-      }
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
 
       final response = await http.get(Uri.parse(Leader_Board_URL),
         headers: <String, String>{
@@ -156,14 +153,10 @@ class ApiAccess {
       );
 
       if (response.statusCode == 200) {
-        UserProfile userProfile = UserProfile.fromJson(jsonDecode(response.body));
-        if(phonenumber != null){
-          Localstorage().saveString(key_login_token, phonenumber);
-        }
-        print('USES PROFILE ${userProfile.toJson()}');
-        return userProfile;
+        LeaderBoard lb = LeaderBoard.fromJson(jsonDecode(response.body));
+        return lb;
       } else {
-        throw Exception("Could not pull user record, status code ${response.statusCode} ");
+        return null;
       }
     } catch (e) {
       throw Exception("User Profile error, status code ${e.toString()}");
