@@ -1,6 +1,6 @@
 class GlobalProgresses {
   String? username;
-  int? acumulatedValue;
+  double? acumulatedValue;
   double? globalpercent;
 
   GlobalProgresses({this.username, this.acumulatedValue, this.globalpercent});

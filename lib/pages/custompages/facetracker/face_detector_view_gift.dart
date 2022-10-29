@@ -94,6 +94,10 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
 
+      if(smileAppValueNotifier.value.showCountDown.value == false || widget.giftVariableObject.readmessage!){
+        smileAppValueNotifier.recordSmileStartTime();
+      }
+
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
         bool soundAllowed = smileAppValueNotifier.value.deactivetSound.value;

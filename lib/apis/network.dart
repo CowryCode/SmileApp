@@ -111,10 +111,12 @@ class ApiAccess {
   }
 
   void saveMood({required MoodModel moodModel, required String url}) async {
-    String? token;
-    Future<String?> tk = Localstorage().getString(key_login_token);
-    await tk.then((value) => {token = value!});
-
+    String? token = "100";
+    //TODO: REVERT THIS TO BE DYNAMIC
+    // String? token;
+    // Future<String?> tk = Localstorage().getString(key_login_token);
+    // await tk.then((value) => {token = value!});
+    print("URL : $url");
     final response = await http.post(
       Uri.parse(url),
       headers: <String, String>{
@@ -139,9 +141,11 @@ class ApiAccess {
 
   Future<LeaderBoard?> getLeaderBoard() async {
     try {
-      String? token;
-      Future<String?> tk = Localstorage().getString(key_login_token);
-      await tk.then((value) => {token = value!});
+      String? token = "100";
+      //TODO: REVERT THIS TO BE DYNAMIC
+      // String? token;
+      // Future<String?> tk = Localstorage().getString(key_login_token);
+      // await tk.then((value) => {token = value!});
 
       final response = await http.get(Uri.parse(Leader_Board_URL),
         headers: <String, String>{
@@ -154,6 +158,7 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         LeaderBoard lb = LeaderBoard.fromJson(jsonDecode(response.body));
+        print("The LeaderBoard : ${lb.toJson()}");
         return lb;
       } else {
         return null;

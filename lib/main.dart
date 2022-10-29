@@ -57,14 +57,6 @@ Future init() async{
 
 class MyApp extends StatelessWidget {
 
-  // final Store<MyAppState> _store = Store<MyAppState>(
-  //     updateSGmessageReducer,
-  //     initialState: MyAppState(
-  //       sg_message: SGMessage(content: "", updated: false),
-  //       luckPotTimerstatemodel: LuckPotTimerstatemodel(activate: false)
-  //     )
-  // );
-
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);

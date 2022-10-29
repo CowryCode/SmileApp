@@ -1,6 +1,6 @@
+import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
-import 'package:SmileApp/models/globemodel.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
@@ -36,6 +36,8 @@ class NotifiersSection {
   ValueNotifier<int> speechActivationCount = ValueNotifier<int>(0);
   ValueNotifier<bool> activatespeech = ValueNotifier<bool>(false);
   ValueNotifier<bool> deactivetSound = ValueNotifier<bool>(false);
+  ValueNotifier<MoodModel> moodmodel = ValueNotifier<MoodModel>(MoodModel());
+  ValueNotifier<DateTime> smileStartTime = ValueNotifier<DateTime>(DateTime.now());
   NotifiersSection({
     required this.smileDurationCount,
     required this.smileDurationCompleted,
@@ -44,6 +46,7 @@ class NotifiersSection {
     required this.showShowMoodRating,
     required this.mapdatasource,
     required this.nextCountry,
+    required this.moodmodel,
   });
 }
 
@@ -125,30 +128,28 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
     value.activatespeech.value = false;
     notifyListeners();
   }
+  void muteSpeech(){
+    value.activatespeech.value = false;
+    notifyListeners();
+  }
   void updateSoundDeactivation({required bool deactivateSound}) {
     value.deactivetSound.value = deactivateSound;
     notifyListeners();
   }
+
+  void initializeMoodNotifier({required MoodModel mood}){
+    value.moodmodel.value = mood;
+    notifyListeners();
+  }
+
+  void resetMoodObject(){
+    value.moodmodel.value.resetMood();
+    notifyListeners();
+  }
+
+  void recordSmileStartTime(){
+    value.smileStartTime.value = DateTime.now();
+    notifyListeners();
+  }
 }
 
-// class SmileAppValueNotifier extends ValueNotifier<int> {
-//     SmileAppValueNotifier({int? value}) : super(value ?? 0);
-//   void increment() {
-//     value++;
-//     notifyListeners();
-//   }
-//
-//   void decrement() {
-//     value--;
-//     notifyListeners();
-//   }
-//
-//   void reStartvalue({required int newValue}){
-//     value = newValue;
-//     notifyListeners();
-//   }
-//
-//   int getCurrentValue(){
-//     return value;
-//   }
-// }

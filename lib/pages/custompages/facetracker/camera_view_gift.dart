@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:SmileApp/apis/models/moodmodel.dart';
+import 'package:SmileApp/apis/network.dart';
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
@@ -624,7 +627,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
               if(value == false && widget.readmessage ){
-                //return _glassmorphicReadMessage();
                 return GlassmorphicReadMessage();
               }else{
                 return Text("");
@@ -788,7 +790,8 @@ Widget weatherMap(){
     ),
     // encourage your user to leave a high rating?
     message: Text(
-      (justreadmessage == true) ? 'Does it feel good to unlock your message with a smile?' : 'How does it feel to smile this long?',
+      //(justreadmessage == true) ? 'How happy does it feel to unlock your message with a smile?' : 'How happy does it feel to smile this long?',
+      (widget.readmessage == true) ? 'How happy does it feel to unlock your message with a smile?' : 'How happy does it feel to smile this long?',
       textAlign: TextAlign.center,
       style: const TextStyle(fontSize: 15),
     ),
@@ -799,6 +802,11 @@ Widget weatherMap(){
     commentHint: 'Set your custom comment hint',
     onCancelled: () => print('cancelled'),
     onSubmitted: (response) {
+      MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+      mood.captureMood(rating: response.rating.round(), smileStartTime: smileAppValueNotifier.value.smileStartTime.value);
+      ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
+      debugPrint("GOT TO THIS POINT *****");
+      smileAppValueNotifier.resetMoodObject();
       Navigator.of(context).popAndPushNamed('/home',);
     },
     submitButtonTextStyle: const TextStyle(

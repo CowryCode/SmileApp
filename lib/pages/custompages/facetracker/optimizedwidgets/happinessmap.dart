@@ -21,39 +21,12 @@ class _HappinessMapState extends State<HappinessMap> {
 
   @override
   void initState() {
-    // SET DATA FOR MAP
-    // GobeModel  gm = GobeModel();
-    // data = gm.getProcessedcountries(userCountriesIndexString: "0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17")!;
-    // data1 = <Dummy.Model>[
-    //   Dummy.Model('Algeria', "Low"),
-    //   Dummy.Model('Nigeria', "High"),
-    //   Dummy.Model('Libya', "Low"),
-    //   Dummy.Model('Azerbaijan', "Low"),
-    //   Dummy.Model('Burkina Faso', "Low"),
-    //   Dummy.Model('Afghanistan', "Low"),
-    // ];
 
     shapeDataSource = MapShapeSource.asset(
       "assets/world_map.json",
       shapeDataField: 'continent',
     );
 
-    //
-    // sublayerDataSource = MapShapeSource.asset(
-    //   "assets/world_map.json",
-    //   shapeDataField: "admin",
-    //   dataCount: data.length,
-    //   primaryValueMapper: (int index) {
-    //     return data[index].state;
-    //   },
-    //   shapeColorValueMapper: (int index) {
-    //     return data[index].storage;
-    //   },
-    //   shapeColorMappers: [
-    //     MapColorMapper(value: "Low", color: Colors.red),
-    //     MapColorMapper(value: "High", color: Colors.green)
-    //   ],
-    // );
 
   }
 

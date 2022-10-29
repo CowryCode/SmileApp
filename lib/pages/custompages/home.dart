@@ -1,10 +1,12 @@
 
+import 'package:SmileApp/apis/models/moodmodel.dart';
+import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:SmileApp/apis/Variables.dart';
+import 'package:SmileApp/apis/Utilities.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 class Home extends StatefulWidget {
@@ -20,7 +22,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
-    print("The show dialogue status is : ${widget.checkEmotion}");
     WidgetsBinding.instance.addPostFrameCallback((_)  {
       if(widget.checkEmotion == true){
         // show Rating dialog
@@ -31,6 +32,9 @@ class _HomeState extends State<Home> {
         );
        }
     });
+
+    //Load the leaderboard
+    ApiAccess().getLeaderBoard();
   }
 
   @override
@@ -56,7 +60,7 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          '${Variables().AppName}',
+                          '${Utilities().AppName}',
                           style: TextStyle(
                             fontSize:22.0,
                             fontFamily: 'Poppins',
@@ -399,7 +403,10 @@ class _HomeState extends State<Home> {
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
         Navigator.of(context).popAndPushNamed('/home',);
-        print('rating: ${response.rating}, comment: ${response.comment}');
+        print('rating: , comment: ${response.comment}');
+        MoodModel mood = MoodModel();
+        mood.initializeMood(rating: response.rating.round());
+        smileAppValueNotifier.initializeMoodNotifier(mood: mood);
       },
       submitButtonTextStyle: const TextStyle(
           fontWeight: FontWeight.bold,

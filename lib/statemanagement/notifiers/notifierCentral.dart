@@ -1,4 +1,4 @@
-import 'package:SmileApp/models/countrymodel.dart';
+import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
@@ -35,6 +35,7 @@ final SmileAppValueNotifier smileAppValueNotifier = SmileAppValueNotifier(
       )),
     //nextCountry: ValueNotifier<String>("Afghanistan"),
     nextCountry: ValueNotifier<String>(worldmapModel.modelsDictionary().first.state),
+    moodmodel:  ValueNotifier<MoodModel>(MoodModel()),
   ),
 );
 

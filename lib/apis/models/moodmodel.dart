@@ -1,3 +1,5 @@
+import 'package:SmileApp/apis/Utilities.dart';
+
 class MoodModel {
   String? startDate;
   String? startTime;
@@ -36,5 +38,37 @@ class MoodModel {
     data['endMood'] = this.endMood;
     data['smileduration'] = this.smileduration;
     return data;
+  }
+
+  void initializeMood({required int rating}){
+    Utilities utilities = Utilities();
+    this.startDate = utilities.getDateFromDevice();
+    this.startTime = utilities.getTimeFromDevice();
+    this.startMood = rating;
+  }
+
+  void captureMood({required int rating, required DateTime smileStartTime}){
+    Utilities utilities = Utilities();
+    this.endDate = utilities.getDateFromDevice();
+    this.endTime = utilities.getTimeFromDevice();
+    this.endMood = rating;
+   this.smileduration = utilities.calculateDurationInSeconds(smileStartTime, DateTime.now());
+  }
+
+  void resetMood(){
+    Utilities utilities = Utilities();
+    DateTime date1 = DateTime.parse("$startDate 00:00:00");
+    DateTime date2 = DateTime.parse("$endDate 00:00:00");
+    if(date1.compareTo(date2) == 0){
+      this.endDate = null;
+      this.endTime = null;
+      this.endMood = null;
+    }else{
+      this.startDate = utilities.getDateFromDevice();
+      this.startTime = utilities.getTimeFromDevice();
+      this.endDate = null;
+      this.endTime = null;
+      this.endMood = null;
+    }
   }
 }
