@@ -1,6 +1,8 @@
+import 'package:SmileApp/apis/models/globalprogressmodel.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/statemanagement/notifiers/LeaderBoardNotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/ProgressTableNotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
@@ -58,4 +60,17 @@ final ProgressTableNotifier progressTable = ProgressTableNotifier(value: [
   PersonalProgresses(targetValue: 170, scoredValue: 0),
   PersonalProgresses(targetValue: 170, scoredValue: 0),
   PersonalProgresses(targetValue: 170, scoredValue: 0),
+]);
+
+final LeaderBoardNotifier globalscoresTable = LeaderBoardNotifier(value: [
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
+  GlobalProgresses(username: "Pikin", acumulatedValue: 120),
 ]);

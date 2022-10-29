@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'package:SmileApp/apis/diskstorage.dart';
+import 'package:SmileApp/apis/models/globalprogressmodel.dart';
 import 'package:SmileApp/apis/models/leaderboard.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
@@ -162,6 +163,7 @@ class ApiAccess {
         LeaderBoard lb = LeaderBoard.fromJson(jsonDecode(response.body));
         print("The LeaderBoard : ${lb.toJson()}");
         _populateProgressTable(progress: lb.personalProgresses!);
+        _populateGlobalLeaderBoard(gloableranking: lb.globalProgresses!);
         return lb;
       } else {
         return null;
@@ -177,6 +179,12 @@ class ApiAccess {
       currentTable[i].setScore(score: progress[i].scoredValue!);
     }
     progressTable.updateScoreTable(table: currentTable);
+  }
+
+  void _populateGlobalLeaderBoard({required List<GlobalProgresses> gloableranking}){
+    globalscoresTable.updateScoreRanking(globalscores: gloableranking);
+    int x = globalscoresTable.value.length;
+    print("Score Count init : $x ");
   }
 }
 

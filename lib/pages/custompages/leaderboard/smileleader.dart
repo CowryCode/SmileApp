@@ -1,5 +1,6 @@
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
+import 'package:SmileApp/pages/custompages/leaderboard/globalperformancetable.dart';
 import 'package:SmileApp/pages/custompages/leaderboard/performancetable.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,9 @@ class LeadderBoard extends StatefulWidget {
 }
 
 class _LeadderBoardState extends State<LeadderBoard> {
- // model.DoctorsList doctorsList;
-  List<LeaderBoardModel>? leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
+ // List<LeaderBoardModel>? leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
   @override
   void initState() {
-  //  this.doctorsList = new model.DoctorsList();
-  //  _leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
-    print("THE SIZE IS ${leaderBoardModelLIST!.length}");
     super.initState();
   }
   @override
@@ -61,111 +58,9 @@ class _LeadderBoardState extends State<LeadderBoard> {
           children: [
             _map(),
             PerformanceTable(),
-            _smileGramLeaderboar(),
-            // Column(
-            //   children: <Widget>[
-            //     HappinessMap(),
-            //     Align(
-            //       alignment: Alignment.bottomCenter,
-            //       child: Column(
-            //         mainAxisAlignment: MainAxisAlignment.start,
-            //         children: <Widget>[
-            //           ValueListenableBuilder(
-            //             // valueListenable: counterNotifier,
-            //             valueListenable: smileAppValueNotifier.value.nextCountry,
-            //             builder: (context, String value, child) {
-            //               return Text(
-            //                 '   $value',
-            //                 textAlign: TextAlign.center,
-            //                 overflow: TextOverflow.ellipsis,
-            //                 style: const TextStyle(
-            //                   fontWeight: FontWeight.bold,
-            //                   color: Colors.red,
-            //                   fontFamily: 'Poppins',
-            //                   fontSize: 16.0,
-            //                 ),
-            //               );
-            //             },
-            //           ),
-            //           Text(
-            //             'Needs your smile to be GREEN ',
-            //             textAlign: TextAlign.center,
-            //             overflow: TextOverflow.ellipsis,
-            //             style: const TextStyle(
-            //               fontWeight: FontWeight.bold,
-            //               color: Colors.green,
-            //               fontFamily: 'Poppins',
-            //               fontSize: 16.0,
-            //             ),
-            //           ),
-            //           IconButton(
-            //               onPressed: (){
-            //                 smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-            //                 Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
-            //               },
-            //               icon: Icon(FontAwesomeIcons.play,color: Colors.green,)),
-            //         ],
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            GlobalPerformanceTable(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _smileGramLeaderboar() {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget> [
-          SizedBox(height: 10,),
-           ListView.separated(
-            shrinkWrap: true,
-            primary: false,
-            itemCount: 20,
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 4.0);
-            },
-            itemBuilder: (context, index) {
-              //  return Text(" This is index $index");
-              return Stack(
-                children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width * (1 - (index + 1)/(index + 3)),
-                      padding: EdgeInsets.all(7.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        color: Theme.of(context).colorScheme.secondary,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(""),
-                  ),
-                  Positioned(
-                    left: 10.0,
-                    top: 7.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget> [
-                        Text("${index + 1}",),
-                        SizedBox(width: 5,),
-                        Text("Name $index"),
-                        SizedBox(width: 10,),
-                        Icon(FontAwesomeIcons.star, color: Theme.of(context).primaryColor,),
-                     //   Icon(Icons.card_giftcard_rounded, color: Colors.white,),
-                        SizedBox(width: 20,),
-                        Text("${index * 10}%"),
-                      ],
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
-        ],
       ),
     );
   }
