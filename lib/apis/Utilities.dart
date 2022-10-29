@@ -17,15 +17,12 @@ class Utilities{
   }
 
   double calculateDurationInSeconds(DateTime startTime, DateTime endTime){
-    DateTime dateEnd = DateTime(endTime.year, endTime.month, endTime.day, endTime.hour, endTime.minute, endTime.second);
-    DateTime dateStart = DateTime(startTime.year, startTime.month, startTime.day, startTime.hour, startTime.minute, startTime.second);
-
-
-
-    print("Start time is : ${dateStart.toString()}");
-    print("End time is : ${dateEnd.toString()}");
-    print("Time Difference iN milliSeconds : ${endTime.difference(startTime).inMilliseconds}");
-    print("Time Difference inSeconds : ${endTime.difference(startTime).inMilliseconds /10}");
+   // DateTime dateEnd = DateTime(endTime.year, endTime.month, endTime.day, endTime.hour, endTime.minute, endTime.second);
+   // DateTime dateStart = DateTime(startTime.year, startTime.month, startTime.day, startTime.hour, startTime.minute, startTime.second);
     return endTime.difference(startTime).inMilliseconds / 10;
+  }
+
+  int getPercentage({required int value, required int total}){
+    return ((value/total)*100).round();
   }
 }

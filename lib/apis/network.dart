@@ -4,10 +4,12 @@ import 'dart:core';
 import 'package:SmileApp/apis/diskstorage.dart';
 import 'package:SmileApp/apis/models/leaderboard.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
+import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:http/http.dart' as http;
 
 class ApiAccess {
@@ -159,6 +161,7 @@ class ApiAccess {
       if (response.statusCode == 200) {
         LeaderBoard lb = LeaderBoard.fromJson(jsonDecode(response.body));
         print("The LeaderBoard : ${lb.toJson()}");
+        _populateProgressTable(progress: lb.personalProgresses!);
         return lb;
       } else {
         return null;
@@ -166,6 +169,14 @@ class ApiAccess {
     } catch (e) {
       throw Exception("User Profile error, status code ${e.toString()}");
     }
+  }
+
+  void _populateProgressTable({required List<PersonalProgresses> progress}){
+    List<PersonalProgresses> currentTable = progressTable.value;
+    for(int i = 0; i < progress.length; i++ ){
+      currentTable[i].setScore(score: progress[i].scoredValue!);
+    }
+    progressTable.updateScoreTable(table: currentTable);
   }
 }
 

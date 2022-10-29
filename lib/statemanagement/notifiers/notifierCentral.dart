@@ -1,5 +1,7 @@
 import 'package:SmileApp/apis/models/moodmodel.dart';
+import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/statemanagement/notifiers/ProgressTableNotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageNotifier.dart';
@@ -40,3 +42,20 @@ final SmileAppValueNotifier smileAppValueNotifier = SmileAppValueNotifier(
 );
 
 final SGmessageNotifier messageNotifier = SGmessageNotifier(value: SGmessageModel(msg: "", index: 0));
+
+final ProgressTableNotifier progressTable = ProgressTableNotifier(value: [
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 170, scoredValue: 0),
+]);

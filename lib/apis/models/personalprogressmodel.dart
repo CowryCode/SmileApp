@@ -3,7 +3,7 @@ class PersonalProgresses {
   int? scoredValue;
   int? targetValue;
 
-  PersonalProgresses({this.id, this.scoredValue, this.targetValue});
+  PersonalProgresses({this.id, this.targetValue , this.scoredValue});
 
   PersonalProgresses.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -17,5 +17,14 @@ class PersonalProgresses {
     data['scoredValue'] = this.scoredValue;
     data['targetValue'] = this.targetValue;
     return data;
+  }
+
+  void initialize({required int targetValue, required int scoredValue}){
+    this.targetValue = targetValue;
+    this.scoredValue = scoredValue;
+  }
+
+  void setScore({required int score}){
+    this.scoredValue = score;
   }
 }
