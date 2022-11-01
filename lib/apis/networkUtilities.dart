@@ -11,13 +11,13 @@ import 'package:SmileApp/models/globemodel.dart';
 
  final CreateProfile_URL = "${baseURL}/smile/create-user";
  final getProfile_URL = "${baseURL}/smile/get-user";
+ final Save_Device_Identtifier_URL = "${baseURL}/smile/add-device";
 
 // GLOBAL VIARIABLES
  final int timeout_duration = 10;
  final String key_phone_number = "phonenumber";
  final String key_login_token = "token";
  final String key_login_status = "loginstatus";
-
 
  // NOTIFIER VARIABLES
  final int Smile_Count_Initial = 20;

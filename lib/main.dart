@@ -2,17 +2,16 @@
 import 'dart:io';
 
 import 'package:SmileApp/apis/secret.dart';
+import 'package:SmileApp/firebase_options.dart';
 import 'package:SmileApp/routes_generator.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:SmileApp/config/app_config.dart' as config;
 
-import 'package:syncfusion_flutter_maps/maps.dart';
-
-import 'models/countrymodel.dart';
 
 
 // ORIGINAL CODE START HERE, PLEASE REVERT TO IT AFTER ADDING FLUTTER_REDUX
@@ -21,6 +20,7 @@ import 'models/countrymodel.dart';
 
 Future<void> main() async {  // The code before I added Flutter_redux
   WidgetsFlutterBinding.ensureInitialized();
+ await init();
 
   cameras = await availableCameras();
   runApp(MyApp());
@@ -28,31 +28,40 @@ Future<void> main() async {  // The code before I added Flutter_redux
 
 
 Future init() async{
-  WidgetsFlutterBinding.ensureInitialized();
 
-  if(Platform.isIOS){
+  if (Platform.isIOS) {
     await Firebase.initializeApp(
-      options: FirebaseOptions(
+        options: FirebaseOptions(
           apiKey: ApiKey,
           appId: AppId,
           messagingSenderId: MessagingSenderID,
-          projectId: ProjectID
-      )).then((value) => {
-       // FirebaseMessaging
-       //     .instance
-       //     .getInitialMessage()
-       //     .then((RemoteMessage message) {
-       //   if (message != null) {
-       //     // Do Nothing
-       //   }
-       // }),
+          projectId: ProjectID,
+        )).then((value) => {
+      FirebaseMessaging
+          .instance // This is to enable the notification run while app is in terminated mode
+          .getInitialMessage()
+          .then((RemoteMessage? message) {
+        if (message != null) {}
+      }),
+
     });
-  }else{
-    await Firebase.initializeApp();
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+  } else {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform
+    );
   }
-  // FirebaseMessaging.instance.getToken().then((value) => {
-  //   print("FB TOken is : $value");
-  // });
+
+  await WidgetsFlutterBinding.ensureInitialized();
 }
 
 class MyApp extends StatelessWidget {

@@ -9,7 +9,6 @@ import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
-import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:http/http.dart' as http;
 
@@ -110,6 +109,34 @@ class ApiAccess {
       return msg;
     } else {
       return null;
+    }
+  }
+
+  Future<bool> uploadDeviceIdentifier({required String token}) async {
+    String? token = "100";
+    // Future<String?> tk = Localstorage().getString(key_Device_Identifier);
+    // await tk.then((value) => {identifier = value});
+
+    String logintoken = await Localstorage().getString(key_login_token)??"";
+
+
+    final response = await http.post(
+      Uri.parse(Save_Device_Identtifier_URL),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Origin': '$MobileURL',
+        'Authorization': 'Bearer $logintoken'
+      },
+      body: jsonEncode(
+          <String, String?>{"value": token}),
+    );
+
+    if (response.statusCode == 201) {
+      print("Successfully saved");
+      return true;
+    }else{
+      return false;
     }
   }
 
