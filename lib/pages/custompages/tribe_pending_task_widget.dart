@@ -8,8 +8,10 @@ import 'package:rating_dialog/rating_dialog.dart';
 
 
 class TribePendingTaskWidget extends StatefulWidget {
-  final LeaderBoardModel leader;
-  const TribePendingTaskWidget({Key? key, required this.leader}) : super(key: key);
+  // final LeaderBoardModel leader;
+  // const TribePendingTaskWidget({Key? key, required this.leader}) : super(key: key);
+  final String msg;
+  const TribePendingTaskWidget({Key? key, required this.msg}) : super(key: key);
 
   @override
   _TribePendingTaskWidgetState createState() => _TribePendingTaskWidgetState();
@@ -57,7 +59,8 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                        '${widget.leader.name}',
+                       // '${widget.leader.name}',
+                        '${widget.msg}',
                         textAlign: TextAlign.left,
                         style: CustomeStyling().customContenttext(),
                       ),

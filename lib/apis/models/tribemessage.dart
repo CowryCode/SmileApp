@@ -1,24 +1,26 @@
 class TribeMessage {
-  int? id;
+  int? receiverID;
   String? content;
-  int? numberoflikes;
+  String? sourceCountry;
   bool? isread;
 
-  TribeMessage({this.id, this.content, this.numberoflikes, this.isread});
+  TribeMessage(
+      {this.receiverID, this.content, this.sourceCountry, this.isread});
 
   TribeMessage.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    receiverID = json['receiverID'];
     content = json['content'];
-    numberoflikes = json['numberoflikes'];
+    sourceCountry = json['sourceCountry'];
     isread = json['isread'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    data['receiverID'] = this.receiverID;
     data['content'] = this.content;
-    data['numberoflikes'] = this.numberoflikes;
+    data['sourceCountry'] = this.sourceCountry;
     data['isread'] = this.isread;
     return data;
   }
+
 }

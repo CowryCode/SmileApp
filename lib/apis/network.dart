@@ -10,6 +10,7 @@ import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class ApiAccess {
@@ -72,7 +73,6 @@ class ApiAccess {
         if(phonenumber != null){
           Localstorage().saveString(key_login_token, phonenumber);
         }
-        print('USES PROFILE ${userProfile.toJson()}');
         return userProfile;
       } else {
         throw Exception("Could not pull user record, status code ${response.statusCode} ");
@@ -97,10 +97,10 @@ class ApiAccess {
       },
       body: jsonEncode(
           <String, dynamic>{
-            "id" : message.id,
-            "content" : message.content,
-            "numberoflikes" : message.numberoflikes,
-            "isread" : message.isread,
+            // "id" : message.id,
+            // "content" : message.content,
+            // "numberoflikes" : message.numberoflikes,
+            // "isread" : message.isread,
           }),
     );
 
@@ -112,12 +112,12 @@ class ApiAccess {
     }
   }
 
-  Future<bool> uploadDeviceIdentifier({required String token}) async {
-    String? token = "100";
+  Future<bool> uploadDeviceIdentifier({required String deviceID}) async {
+    String token = "100";
     // Future<String?> tk = Localstorage().getString(key_Device_Identifier);
     // await tk.then((value) => {identifier = value});
 
-    String logintoken = await Localstorage().getString(key_login_token)??"";
+   // String logintoken = await Localstorage().getString(key_login_token)??"";
 
 
     final response = await http.post(
@@ -126,14 +126,13 @@ class ApiAccess {
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
         'Origin': '$MobileURL',
-        'Authorization': 'Bearer $logintoken'
+        'Authorization': 'Bearer $token'
       },
       body: jsonEncode(
-          <String, String?>{"value": token}),
+          <String, String?>{"value": deviceID}),
     );
 
     if (response.statusCode == 201) {
-      print("Successfully saved");
       return true;
     }else{
       return false;
@@ -176,7 +175,6 @@ class ApiAccess {
       // String? token;
       // Future<String?> tk = Localstorage().getString(key_login_token);
       // await tk.then((value) => {token = value!});
-
       final response = await http.get(Uri.parse(Leader_Board_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -188,7 +186,6 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         LeaderBoard lb = LeaderBoard.fromJson(jsonDecode(response.body));
-        print("The LeaderBoard : ${lb.toJson()}");
         _populateProgressTable(progress: lb.personalProgresses!);
         _populateGlobalLeaderBoard(gloableranking: lb.globalProgresses!);
         return lb;
@@ -211,7 +208,34 @@ class ApiAccess {
   void _populateGlobalLeaderBoard({required List<GlobalProgresses> gloableranking}){
     globalscoresTable.updateScoreRanking(globalscores: gloableranking);
     int x = globalscoresTable.value.length;
-    print("Score Count init : $x ");
+  }
+
+  Future<List<TribeMessage>?> getSmilePacks() async {
+    try {
+      String? token = "100";
+      //TODO: REVERT THIS TO BE DYNAMIC
+      // String? token;
+      // Future<String?> tk = Localstorage().getString(key_login_token);
+      // await tk.then((value) => {token = value!});
+      final response = await http.get(Uri.parse(Unread_SmilePack_URL),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Origin': '$MobileURL',
+          'Authorization': 'Bearer $token'
+        },
+      );
+
+      if (response.statusCode == 200) {
+        List<TribeMessage>  msges = jsonDecode(response.body);
+        print("Print out : $msges");
+        return null;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception("User Profile error, status code ${e.toString()}");
+    }
   }
 }
 

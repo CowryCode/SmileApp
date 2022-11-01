@@ -8,6 +8,7 @@ import 'package:SmileApp/models/globemodel.dart';
  final Tribe_Mood_URL = "${baseURL}/smile/tribe-mood";
  final Tribe_Message_URL = "${baseURL}/smile/tribemessage";
  final Leader_Board_URL = "${baseURL}/smile/leaderboard";
+ final Unread_SmilePack_URL = "${baseURL}/smile/get-tribemessages";
 
  final CreateProfile_URL = "${baseURL}/smile/create-user";
  final getProfile_URL = "${baseURL}/smile/get-user";

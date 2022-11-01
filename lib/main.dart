@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:SmileApp/apis/secret.dart';
 import 'package:SmileApp/firebase_options.dart';
+import 'package:SmileApp/notification/notification.dart';
 import 'package:SmileApp/routes_generator.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';

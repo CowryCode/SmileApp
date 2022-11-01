@@ -3,6 +3,7 @@ import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
+import 'package:SmileApp/notification/notification.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -21,9 +22,6 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-
-
-
 //TODO: CREATE INSTRUCTION PAGES
 class _HomeState extends State<Home> {
   void initState() {
@@ -37,18 +35,19 @@ class _HomeState extends State<Home> {
           builder: (context) => _showRatingAlert(context),
         );
        }
-      print("GOT TO THIS POINT ::::::::: 0");
       await Firebase.initializeApp();
-      print("GOT TO THIS POINT ::::::::: 1");
       await FirebaseMessaging.instance.getToken().then((token){
-        print("GOT TO THIS POINT ::::::::: 2");
-        ApiAccess().uploadDeviceIdentifier(token: token!);
+        ApiAccess().uploadDeviceIdentifier(deviceID: token!);
       });
-      print("GOT TO THIS POINT ::::::::: 3");
-
     });
     //Load the leaderboard
     ApiAccess().getLeaderBoard();
+    // Load Unread SmilePack
+    ApiAccess().getSmilePacks();
+
+    // TRAP NOTIFICATIONS
+    final firebaseMessaging = FCM();
+    firebaseMessaging.setNotifications();
   }
 
   @override
