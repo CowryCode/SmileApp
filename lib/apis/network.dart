@@ -167,6 +167,9 @@ class ApiAccess {
           }),
     );
 
+    if (response.statusCode == 200) {
+      smileAppValueNotifier.resetMoodObject();
+    }
   }
 
   Future<LeaderBoard?> getLeaderBoard() async {
@@ -208,7 +211,7 @@ class ApiAccess {
 
   void _populateGlobalLeaderBoard({required List<GlobalProgresses> gloableranking}){
     globalscoresTable.updateScoreRanking(globalscores: gloableranking);
-    int x = globalscoresTable.value.length;
+    // int x = globalscoresTable.value.length;
   }
 
   Future<UnreadTribeMessage?> getSmilePacks() async {

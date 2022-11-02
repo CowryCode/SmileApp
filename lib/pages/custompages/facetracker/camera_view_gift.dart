@@ -806,7 +806,6 @@ Widget weatherMap(){
       mood.captureMood(rating: response.rating.round(), smileStartTime: smileAppValueNotifier.value.smileStartTime.value);
       ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
       debugPrint("GOT TO THIS POINT *****");
-      smileAppValueNotifier.resetMoodObject();
       Navigator.of(context).popAndPushNamed('/home',);
     },
     submitButtonTextStyle: const TextStyle(
