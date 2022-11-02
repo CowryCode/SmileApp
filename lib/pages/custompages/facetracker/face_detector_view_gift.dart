@@ -54,7 +54,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     super.initState();
    // _fulltext = widget.giftVariableObject.fulltext;
     if(widget.giftVariableObject.readmessage == true){
-      _fulltext = widget.giftVariableObject.messageModel!.content;
+      //_fulltext = widget.giftVariableObject.messageModel!.content;
+      _fulltext = widget.giftVariableObject.msg!;
       _tokenArray = _fulltext!.split(" ");
       _tokenArrayLength = _tokenArray!.length;
     }

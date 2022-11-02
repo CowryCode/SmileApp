@@ -214,7 +214,7 @@ class MessageCard extends StatelessWidget {
           TextButton(
             onPressed: (){
               messageNotifier.update(message: "", index: 0);
-              GiftVariableObject giftobject = GiftVariableObject(messageModel: msgModel, readmessage: true);
+              GiftVariableObject giftobject = GiftVariableObject(msg: msgModel.content, readmessage: true);
               Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
             },
             child: const Text('Continue'),

@@ -7,6 +7,7 @@ import 'package:SmileApp/apis/models/leaderboard.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
+import 'package:SmileApp/apis/models/unreadtribemessages.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
@@ -210,7 +211,7 @@ class ApiAccess {
     int x = globalscoresTable.value.length;
   }
 
-  Future<List<TribeMessage>?> getSmilePacks() async {
+  Future<UnreadTribeMessage?> getSmilePacks() async {
     try {
       String? token = "100";
       //TODO: REVERT THIS TO BE DYNAMIC
@@ -227,9 +228,10 @@ class ApiAccess {
       );
 
       if (response.statusCode == 200) {
-        List<TribeMessage>  msges = jsonDecode(response.body);
+        UnreadTribeMessage msges = UnreadTribeMessage.fromJson(jsonDecode(response.body));
         print("Print out : $msges");
-        return null;
+        tribeMessagesRequestNotifier.updateEmpathyRequestList(requestlist: msges.messages!);
+        return msges;
       } else {
         return null;
       }

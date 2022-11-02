@@ -49,8 +49,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView_Backup> {
   @override
   void initState() {
     super.initState();
-   // _fulltext = widget.giftVariableObject.fulltext;
-    _fulltext = widget.giftVariableObject.messageModel!.content;
+   // _fulltext = widget.giftVariableObject.messageModel!.content;
+    _fulltext = widget.giftVariableObject.msg!;
     _tokenArray = _fulltext!.split(" ");
     _tokenArrayLength = _tokenArray!.length;
   }

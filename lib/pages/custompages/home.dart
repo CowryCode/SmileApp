@@ -1,9 +1,11 @@
 
 import 'package:SmileApp/apis/models/moodmodel.dart';
+import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
+import 'package:SmileApp/pages/custompages/tribe_messages.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -26,6 +28,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
+    //Load the leaderboard
+    ApiAccess().getLeaderBoard();
+    // Load Unread SmilePack
+    ApiAccess().getSmilePacks();
+    // TRAP NOTIFICATIONS
+    final firebaseMessaging = FCM();
+    firebaseMessaging.setNotifications();
+
     WidgetsBinding.instance.addPostFrameCallback((_)  async{
       if(widget.checkEmotion == true){
         // show Rating dialog
@@ -40,19 +50,12 @@ class _HomeState extends State<Home> {
         ApiAccess().uploadDeviceIdentifier(deviceID: token!);
       });
     });
-    //Load the leaderboard
-    ApiAccess().getLeaderBoard();
-    // Load Unread SmilePack
-    ApiAccess().getSmilePacks();
-
-    // TRAP NOTIFICATIONS
-    final firebaseMessaging = FCM();
-    firebaseMessaging.setNotifications();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     // body: SingleChildScrollView(
       body: SingleChildScrollView(
         child: Column(
         children: <Widget>[
@@ -270,61 +273,44 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 1,),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-            // Container(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: (){},
-                    child: Text(
-                      'Unread SmilePacks',
-                      style: TextStyle(
-                          fontSize:12.0,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.secondary
-                      ),
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: (){
-                      Navigator.of(context).pushNamed("/tribeunreadmessages");
-                    },
-                    child: Text(
-                      'See All',
-                      style: TextStyle(
-                        fontSize:12.0,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            // ),
+          Text(
+            '${tribeMessagesRequestNotifier.value.length} Unread SmilePacks',
+            style: TextStyle(
+                fontSize:16.0,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary
+            ),
+          ),
+
             Container(
               height: MediaQuery.of(context).size.height * 0.3,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  card("images/asset-1.png","South Africa",),
-                  card("images/asset-2.png","Ontario Canada",),
-                  card("images/asset-3.png","Dr. Senila Aaraf",),
-                ],
+                children: getSmilePacks(tribeMessagesRequestNotifier.value),
+                // children: <Widget>[
+                //   card("images/asset-1.png","South Africa",),
+                //   card("images/asset-2.png","Ontario Canada",),
+                //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                // ],
               ),
             ),
           ],),
-
-        ],
       ),
-     ),
     );
+  }
 
-
+  List<Widget> getSmilePacks(List<TribeMessage> msgs ){
+     List<Widget> cards = [];
+     for(int x = 0; x < msgs.length; x++){
+       cards.add(card("images/asset-1.png","${msgs[x].sourceCountry}",));
+     }
+     return cards;
   }
   Widget ball(String image,Color color){
     return Container(
@@ -352,39 +338,45 @@ class _HomeState extends State<Home> {
     );
   }
   Widget card(String image,String message,){
-    return 
-     Stack(
+    return Stack(
      children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              boxShadow: [BoxShadow( color: Theme.of(context).primaryColor .withOpacity(0.1), offset: Offset(0,4), blurRadius: 10)],
-          ),
-          width: 140.0,
-          //height: 110.0,
-          child: Card(
-            elevation: 0.2,
-            margin: EdgeInsets.all(15),
-            child: Wrap(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Icon(Icons.email_rounded, color: Theme.of(context).colorScheme.secondary,),
-                    Text(
-                      "From : \n $message",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 10.0,
-                        color: Colors.black45,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+          GestureDetector(
+            onTap: (){
+               _showAlert(context: context, message: message);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                boxShadow: [BoxShadow( color: Theme.of(context).primaryColor .withOpacity(0.1), offset: Offset(0,4), blurRadius: 10)],
             ),
-          ),
+            width: 140.0,
+            //height: 110.0,
+            child: Card(
+              elevation: 0.2,
+              margin: EdgeInsets.all(15),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Icon(Icons.email_rounded, color: Theme.of(context).colorScheme.secondary,),
+                        Text(
+                          "From : \n $message ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 10.0,
+                            color: Colors.black45,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                      ],
+                    ),
+                ],
+              ),
+            ),
       ),
+          ),
 
      ],
     );
@@ -425,6 +417,35 @@ class _HomeState extends State<Home> {
           fontWeight: FontWeight.bold,
           fontSize: 17,
           color: Colors.green
+      ),
+    );
+  }
+
+  _showAlert({required BuildContext context, required String message}){
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('My Tribe'),
+        content: const Text('To read this you need to maintain a smile as the message unfolds',
+          style: TextStyle(color: Colors.black45),
+        ),
+        actions: <Widget>[
+          TextButton(
+            //  onPressed: () => Navigator.pop(context, 'Cancel'),
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cancel', ),
+          ),
+          TextButton(
+            onPressed: (){
+              messageNotifier.update(message: "", index: 0);
+              GiftVariableObject giftobject = GiftVariableObject(msg: message, readmessage: true);
+              Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
+            },
+            child: const Text('Continue'),
+          ),
+        ],
       ),
     );
   }

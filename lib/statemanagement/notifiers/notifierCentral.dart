@@ -7,6 +7,7 @@ import 'package:SmileApp/statemanagement/notifiers/ProgressTableNotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageNotifier.dart';
+import 'package:SmileApp/statemanagement/notifiers/tribemessagerequestnotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
@@ -74,3 +75,5 @@ final LeaderBoardNotifier globalscoresTable = LeaderBoardNotifier(value: [
   GlobalProgresses(username: "Pikin", acumulatedValue: 120),
   GlobalProgresses(username: "Pikin", acumulatedValue: 120),
 ]);
+
+final TribeMessagesRequestNotifier tribeMessagesRequestNotifier = TribeMessagesRequestNotifier(value: []);
