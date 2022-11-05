@@ -1,3 +1,4 @@
+import 'package:SmileApp/apis/models/triberequest.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:dart_sentiment/dart_sentiment.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,8 @@ import 'package:rating_dialog/rating_dialog.dart';
 
 
 class TribePendingTaskWidget extends StatefulWidget {
-  // final LeaderBoardModel leader;
-  // const TribePendingTaskWidget({Key? key, required this.leader}) : super(key: key);
-  final String msg;
+  //final String msg;
+  final TribeRequest msg;
   const TribePendingTaskWidget({Key? key, required this.msg}) : super(key: key);
 
   @override
@@ -60,7 +60,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                   children: <Widget>[
                     Text(
                        // '${widget.leader.name}',
-                        '${widget.msg}',
+                        '${widget.msg.content}',
                         textAlign: TextAlign.left,
                         style: CustomeStyling().customContenttext(),
                       ),

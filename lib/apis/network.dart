@@ -8,6 +8,7 @@ import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/unreadtribemessages.dart';
+import 'package:SmileApp/apis/models/unrepliedtribecalls.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
@@ -232,14 +233,42 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         UnreadTribeMessage msges = UnreadTribeMessage.fromJson(jsonDecode(response.body));
-        print("Print out : $msges");
-        tribeMessagesRequestNotifier.updateEmpathyRequestList(requestlist: msges.messages!);
+        tribeMessagesNotifier.updateTribeMessageList(requestlist: msges.messages!);
         return msges;
       } else {
         return null;
       }
     } catch (e) {
-      throw Exception("User Profile error, status code ${e.toString()}");
+      throw Exception("Error, status code ${e.toString()}");
+    }
+  }
+
+  Future<UnrepliedTribeCalls?> getUnrepliedTribeCalls() async {
+    try {
+      String? token = "101";
+      //TODO: REVERT THIS TO BE DYNAMIC
+      // String? token;
+      // Future<String?> tk = Localstorage().getString(key_login_token);
+      // await tk.then((value) => {token = value!});
+      final response = await http.get(Uri.parse(Unreplied_Requests_URL),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Origin': '$MobileURL',
+          'Authorization': 'Bearer $token'
+        },
+      );
+
+      if (response.statusCode == 200) {
+        UnrepliedTribeCalls msges = UnrepliedTribeCalls.fromJson(jsonDecode(response.body));
+        print('UNREPLIED TRIBE CALLS : ${msges.msgcalls!}');
+        tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+        return msges;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception("Error, status code ${e.toString()}");
     }
   }
 }

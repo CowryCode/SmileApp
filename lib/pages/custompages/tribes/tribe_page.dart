@@ -1,3 +1,4 @@
+import 'package:SmileApp/apis/models/triberequest.dart';
 import 'package:SmileApp/pages/custompages/tribe_pending_task_widget.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,13 @@ class TribePage extends StatefulWidget {
 
 class _TribePageState extends State<TribePage> {
 
-// List<LeaderBoardModel>? _leaderBoardModelLIST;
   List<String> _leaderBoardModelLIST = [
     "I feel scared, lonely and anxious. From Halifax ",
     "I feel Sad, lonely and anxious. From USA",
     "I feel Anxious, lonely and anxious. From South Africa"
   ];
+
+
   @override
   void initState() {
     // _leaderBoardModelLIST = LeaderBoardModelLIST().leaderboardlist;
@@ -92,15 +94,20 @@ class _TribePageState extends State<TribePage> {
           ),
 
           //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
-          Flexible(
-            child: ListView.builder(
-                itemCount: _leaderBoardModelLIST.length,
-                itemBuilder: (BuildContext context, int index) {
-                  // return TribePendingTaskWidget(
-                  //   leader: _leaderBoardModelLIST!.elementAt(index), );
-                  return TribePendingTaskWidget(
-                      msg: _leaderBoardModelLIST[index] );
-                }),
+          ValueListenableBuilder(
+            valueListenable: tribeEmpathyRequestNotifier,
+            builder: (context,  List<TribeRequest> value, child) {
+              return  Flexible(
+                child: ListView.builder(
+                   // itemCount: _leaderBoardModelLIST.length,
+                    itemCount: value.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return TribePendingTaskWidget(
+                        //  msg: _leaderBoardModelLIST[index]);
+                          msg: value[index]);
+                    }),
+              );
+            }
           ),
         ],
       ),

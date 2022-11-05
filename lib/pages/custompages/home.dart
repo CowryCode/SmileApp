@@ -28,10 +28,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
+    //TODO: CREATE DATA STRUCTURE TO GET THIS WITH ONE CALL
     //Load the leaderboard
     ApiAccess().getLeaderBoard();
     // Load Unread SmilePack
     ApiAccess().getSmilePacks();
+    // Load Un-replied Tribe Calls
+    ApiAccess().getUnrepliedTribeCalls();
     // TRAP NOTIFICATIONS
     final firebaseMessaging = FCM();
     firebaseMessaging.setNotifications();
@@ -274,7 +277,7 @@ class _HomeState extends State<Home> {
           ),
           SizedBox(height: 1,),
           Text(
-            '${tribeMessagesRequestNotifier.value.length} Unread SmilePacks',
+            '${tribeMessagesNotifier.value.length} Unread SmilePacks',
             style: TextStyle(
                 fontSize:16.0,
                 fontFamily: 'Poppins',
@@ -287,7 +290,7 @@ class _HomeState extends State<Home> {
               height: MediaQuery.of(context).size.height * 0.3,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: getSmilePacks(tribeMessagesRequestNotifier.value),
+                children: getSmilePacks(tribeMessagesNotifier.value),
                 // children: <Widget>[
                 //   card("images/asset-1.png","South Africa",),
                 //   card("images/asset-2.png","Ontario Canada",),
