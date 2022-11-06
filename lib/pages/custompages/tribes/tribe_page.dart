@@ -16,12 +16,6 @@ class TribePage extends StatefulWidget {
 
 class _TribePageState extends State<TribePage> {
 
-  List<String> _leaderBoardModelLIST = [
-    "I feel scared, lonely and anxious. From Halifax ",
-    "I feel Sad, lonely and anxious. From USA",
-    "I feel Anxious, lonely and anxious. From South Africa"
-  ];
-
 
   @override
   void initState() {

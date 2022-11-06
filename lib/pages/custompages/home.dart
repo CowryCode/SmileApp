@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
 
     WidgetsBinding.instance.addPostFrameCallback((_)  async{
       if(widget.checkEmotion == true){
-        // show Rating dialog
+      // show Rating dialog
         showDialog(
           context: context,
           barrierDismissible: true, // set to false if you want to force a rating
@@ -286,22 +286,31 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-            Container(
-              height: MediaQuery.of(context).size.height * 0.3,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: getSmilePacks(tribeMessagesNotifier.value),
-                // children: <Widget>[
-                //   card("images/asset-1.png","South Africa",),
-                //   card("images/asset-2.png","Ontario Canada",),
-                //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                // ],
-              ),
+            ValueListenableBuilder(
+                valueListenable: tribeMessagesNotifier,
+                builder: (context,  List<TribeMessage> value, child) {
+                  return Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.3,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      //  children: getSmilePacks(tribeMessagesNotifier.value),
+                      children: getSmilePacks(value),
+                      // children: <Widget>[
+                      //   card("images/asset-1.png","South Africa",),
+                      //   card("images/asset-2.png","Ontario Canada",),
+                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
+                      // ],
+                    ),
+                  );
+                }
             ),
           ],),
       ),
@@ -452,4 +461,5 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
 }

@@ -7,6 +7,7 @@ import 'package:SmileApp/apis/models/leaderboard.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
+import 'package:SmileApp/apis/models/triberequest.dart';
 import 'package:SmileApp/apis/models/unreadtribemessages.dart';
 import 'package:SmileApp/apis/models/unrepliedtribecalls.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
@@ -193,6 +194,7 @@ class ApiAccess {
         LeaderBoard lb = LeaderBoard.fromJson(jsonDecode(response.body));
         _populateProgressTable(progress: lb.personalProgresses!);
         _populateGlobalLeaderBoard(gloableranking: lb.globalProgresses!);
+        print('GOT LEADER BOARD ************');
         return lb;
       } else {
         return null;
@@ -217,7 +219,7 @@ class ApiAccess {
 
   Future<UnreadTribeMessage?> getSmilePacks() async {
     try {
-      String? token = "100";
+      String? token = "101";
       //TODO: REVERT THIS TO BE DYNAMIC
       // String? token;
       // Future<String?> tk = Localstorage().getString(key_login_token);
@@ -234,6 +236,7 @@ class ApiAccess {
       if (response.statusCode == 200) {
         UnreadTribeMessage msges = UnreadTribeMessage.fromJson(jsonDecode(response.body));
         tribeMessagesNotifier.updateTribeMessageList(requestlist: msges.messages!);
+        print('GOT SMILE PACK ************');
         return msges;
       } else {
         return null;
@@ -245,7 +248,7 @@ class ApiAccess {
 
   Future<UnrepliedTribeCalls?> getUnrepliedTribeCalls() async {
     try {
-      String? token = "101";
+      String? token = "100";
       //TODO: REVERT THIS TO BE DYNAMIC
       // String? token;
       // Future<String?> tk = Localstorage().getString(key_login_token);
@@ -269,6 +272,75 @@ class ApiAccess {
       }
     } catch (e) {
       throw Exception("Error, status code ${e.toString()}");
+    }
+  }
+
+  Future<bool?> requestEmpatheticMessage({required String emotions}) async {
+    String? token = "100";
+    //TODO: PICK THIS LOCATION AUTOMATICALLY
+    String location = "Lagos Nigeria";
+    // String? token;
+    // Future<String?> tk = Localstorage().getString(key_login_token);
+    // await tk.then((value) => {token = value!});
+
+    final response = await http.post(
+      Uri.parse(Empathy_Request_URL),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Origin': '$MobileURL',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(
+          <String, dynamic>{
+            "senderID" : token,
+            "content" : " Hi, someone in $location is feeling $emotions, please reply with an empathic message to encourage this person",
+            "sourceCountry" : location,
+            "responded" : false,
+          }),
+    );
+
+    if (response.statusCode == 200) {
+     // TribeMessage msg = TribeMessage.fromJson(jsonDecode(response.body));
+      return true;
+    } else {
+      return null;
+    }
+  }
+
+
+  Future<bool?> replyTribeCall({required TribeRequest tribeRequest, required String reply}) async {
+    String? token = "100";
+    //TODO: PICK THIS LOCATION AUTOMATICALLY
+    String location = "Lagos Nigeria";
+    // String? token;
+    // Future<String?> tk = Localstorage().getString(key_login_token);
+    // await tk.then((value) => {token = value!});
+
+    final response = await http.post(
+      Uri.parse(Reply_Requests_URL),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Origin': '$MobileURL',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(
+          <String, dynamic>{
+            "id" : tribeRequest.id,
+            "senderID" : tribeRequest.senderID,
+            "receiverID" : token,
+            "content" : reply,
+            "sourceCountry" : location,
+            "responded" : tribeRequest.responded,
+          }),
+    );
+
+    if (response.statusCode == 200) {
+      TribeMessage msg = TribeMessage.fromJson(jsonDecode(response.body));
+      return true;
+    } else {
+      return null;
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:SmileApp/apis/models/triberequest.dart';
+import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:dart_sentiment/dart_sentiment.dart';
 import 'package:flutter/material.dart';
@@ -111,6 +112,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                     onPressed: (){
                       double sentimentScore = sentiment.analysis(textEditingController.value.text).entries.elementAt(1).value;
                       if(sentimentScore > 0){
+                        ApiAccess().replyTribeCall(tribeRequest: widget.msg, reply: textEditingController.value.text);
                         showDialog(
                           context: context,
                           barrierDismissible: true, // set to false if you want to force a rating
@@ -121,7 +123,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: Center(child: const Icon(FontAwesomeIcons.triangleExclamation,color: Colors.red, size: 26 ,)),
-                            content: Text('Hurtful words detected. \n Please rephrase with kinds words only',
+                            content: Text('This content may be hurtful. \n Please rephrase with kinds words only',
                               style:  const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black45,
@@ -191,7 +193,8 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
       commentHint: 'Set your custom comment hint',
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
-        Navigator.of(context).popAndPushNamed('/home',);
+       // Navigator.of(context).popAndPushNamed('/home',);
+        Navigator.of(context).pop();
       },
       submitButtonTextStyle: const TextStyle(
           fontWeight: FontWeight.bold,

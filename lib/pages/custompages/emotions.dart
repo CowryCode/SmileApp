@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:SmileApp/apis/network.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/user.dart';
@@ -99,7 +100,7 @@ class _EmotionsState extends State<Emotions> {
             child: Container(
               padding: EdgeInsets.all(9),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: <
                       Widget>[
@@ -143,6 +144,7 @@ class _EmotionsState extends State<Emotions> {
                       children: <Widget>[
                         TextButton(
                           onPressed: () {
+                            print('Clicked on 0');
                             // changeColor();
                             setState(() {
                               if (Clicked0 == true) {
@@ -196,6 +198,7 @@ class _EmotionsState extends State<Emotions> {
                         ),
                         TextButton(
                           onPressed: () {
+                            print('Clicked on 1');
                             // changeColor();
                             setState(() {
                               if (Clicked1 == true) {
@@ -254,6 +257,7 @@ class _EmotionsState extends State<Emotions> {
                       children: <Widget>[
                         TextButton(
                           onPressed: () {
+                            print('Clicked on 2');
                             // changeColor();
                             setState(() {
                               if (Clicked2 == true) {
@@ -308,6 +312,7 @@ class _EmotionsState extends State<Emotions> {
                         ),
                         TextButton(
                           onPressed: () {
+                            print('Clicked on 3');
                             // changeColor();
                             setState(() {
                               if (Clicked3 == true) {
@@ -366,6 +371,7 @@ class _EmotionsState extends State<Emotions> {
                       children: <Widget>[
                         TextButton(
                           onPressed: () {
+                            print('Clicked on 4');
                             // changeColor();
                             setState(() {
                               if (Clicked4 == true) {
@@ -420,6 +426,7 @@ class _EmotionsState extends State<Emotions> {
                         ),
                         TextButton(
                           onPressed: () {
+                            print('Clicked on 5');
                             // changeColor();
                             setState(() {
                               if (Clicked5 == true) {
@@ -476,32 +483,29 @@ class _EmotionsState extends State<Emotions> {
                     ),
                   ]),
                   //  SizedBox(height: 20),
-                  SizedBox(height: 20),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.08),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        "",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontFamily: 'Poppins',
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.8),
-                        ),
-                      ),
-                      TextButton(
-                          onPressed: (){
-                            _showAlert(context: context);
-                          },
-                          child: Text(
-                            "Done",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontFamily: 'Poppins',
-                              color:
-                              Theme.of(context).primaryColor.withOpacity(0.8),
+                      Visibility(
+                        child: TextButton(
+                            onPressed: (){
+                              String useremotions = getOptions() ?? "";
+                              print('Emotions : $useremotions');
+                              ApiAccess().requestEmpatheticMessage(emotions: useremotions);
+                             _showAlert(context: context);
+                            },
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                fontSize: 25.0,
+                                fontFamily: 'Poppins',
+                                color: Theme.of(context).primaryColor.withOpacity(0.8),
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
+                        ),
+                        visible: Clicked0 == true || Clicked1 == true || Clicked2 == true || Clicked3 == true || Clicked4 == true || Clicked5 == true
                       ),
 
                     ],
@@ -590,9 +594,31 @@ class _EmotionsState extends State<Emotions> {
             },
             child: const Text('Ok', ),
           ),
-
         ],
       ),
     );
+  }
+
+  String? getOptions(){
+    String options = "" ;
+    if(Clicked0 == true){
+      options = options + "happy,";
+    }
+    if(Clicked1 == true){
+      options = options + "surprised,";
+    }
+    if(Clicked2 == true){
+      options = options + "fearful,";
+    }
+    if(Clicked3 == true){
+      options = options + "sad,";
+    }
+    if(Clicked4 == true){
+      options = options + "angry,";
+    }
+    if(Clicked5 == true){
+      options = options + "disgusted";
+    }
+    return options;
   }
 }
