@@ -1,6 +1,7 @@
 
 import 'dart:math';
 
+import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -79,24 +80,29 @@ class _TribeMessageListState extends State<TribeMessageList> {
              child: const Icon(FontAwesomeIcons.peopleGroup),
       ),
       body: Center(
-        child:Container(
-          child:CarouselSlider(
-            options: CarouselOptions(
-              // height: 100,
-              height: (MediaQuery.of(context).size.height) * 0.8 ,
-              aspectRatio: 16/9,
-              viewportFraction: 0.8, initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: getMessages(),
-          ),
+        child:ValueListenableBuilder(
+          valueListenable: readtribeMessageNotifier,
+            builder: (context,  List<TribeMessage> messeges, child){
+            return Container(
+              child:CarouselSlider(
+                options: CarouselOptions(
+                  // height: 100,
+                  height: (MediaQuery.of(context).size.height) * 0.8 ,
+                  aspectRatio: 16/9,
+                  viewportFraction: 0.8, initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  scrollDirection: Axis.horizontal,
+                ),
+                items: messeges.map((e) => MessageCard(measageModel: e, colorID: randomColorSelector(),) ).toList(),
+              ),
+            );
+            }
         ),
       ),
     );
@@ -111,26 +117,14 @@ class _TribeMessageListState extends State<TribeMessageList> {
 
   }
 
-  List<Widget> getMessages(){
-    List<TribeMessageModel> data = <TribeMessageModel>[
-      TribeMessageModel(id: 1, source: "United Kindom", read: true,
-    content: "This story leapt off the pages as I relived it with tears and joy. My friends Brad and Beth have done a superb job of retelling the story that changed so many of our lives. Truly, Mitchell Thorp’s story will change your life as well. "
-    ),
-      TribeMessageModel(id: 2, source: "South Africa", read: false,
-        content: "This incredible true story is how God can take what was meant for evil and turn it into something beautiful for his glory. This story will touch the hearts of many who need to know how to hear the voice of God, and how God intervenes in our lives in many amazing ways."
-      ),
-      TribeMessageModel(id: 3, source: "Canada", read: true,
-        content: "Few organizations see the “big picture” of charitable giving. But thanks to Brad and Beth Thorp, the Mitchell Thorp Foundation does. Through their own life tragedy in losing their son Mitchell in 2008, Brad and Beth Thorp have embraced their sorrow and have turned it into the most beautiful way of honoring his legacy, by helping those most vulnerable patients and their families."
-      ),
-    ];
-   return data.map((e) => MessageCard(measageModel: e, colorID: randomColorSelector(),) ).toList();
-  }
 
 }
 
 class MessageCard extends StatelessWidget {
-  final TribeMessageModel measageModel;
+ // final TribeMessageModel measageModel;
+  final TribeMessage measageModel;
   final int colorID;
+ // const MessageCard({Key? key, required this.measageModel, required this.colorID }) : super(key: key);
   const MessageCard({Key? key, required this.measageModel, required this.colorID }) : super(key: key);
 
   @override
@@ -151,14 +145,16 @@ class MessageCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                     "${measageModel.source}",
+                     //"${measageModel.source}",
+                     "${measageModel.sourceCountry}",
                       style: TextStyle(
                         fontSize:12.0,
                         fontFamily: 'Poppins',
                         color: Theme.of(context).primaryColor.withOpacity(0.8),
                       ),
                     ),
-                    if(measageModel.read == true) IconButton(
+                  //  if(measageModel.read == true) IconButton(
+                    if(measageModel.isread == true) IconButton(
                       icon: const Icon(FontAwesomeIcons.solidEnvelopeOpen),
                       color: Theme.of(context).primaryColor,
                       onPressed: () {
@@ -167,10 +163,12 @@ class MessageCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: (measageModel.read == true) ? 20 : 80),
+               // SizedBox(height: (measageModel.read == true) ? 20 : 80),
+                SizedBox(height: (measageModel.isread == true) ? 20 : 80),
                 Center(
                   child: Text(
-                    (measageModel.read == true) ?  "${measageModel.content}" : " You received \n a note from ${measageModel.source}. \n Open the envelope below to read",
+                   // (measageModel.read == true) ?  "${measageModel.content}" : " You received \n a note from ${measageModel.source}. \n Open the envelope below to read",
+                    (measageModel.isread == true) ?  "${measageModel.content}" : " You received \n a note from ${measageModel.sourceCountry}. \n Open the envelope below to read",
                     style: TextStyle(
                         fontSize:16.0,
                         fontFamily: 'Poppins',
@@ -180,7 +178,8 @@ class MessageCard extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                if(measageModel.read == false) IconButton(
+               // if(measageModel.read == false) IconButton(
+                if(measageModel.isread == false) IconButton(
                   icon: const Icon(FontAwesomeIcons.solidEnvelope),
                   color: Theme.of(context).primaryColor,
                   onPressed: () {
@@ -195,7 +194,8 @@ class MessageCard extends StatelessWidget {
     );
   }
 
-  _showAlert({required BuildContext context, required TribeMessageModel msgModel}){
+  // _showAlert({required BuildContext context, required TribeMessageModel msgModel}){
+  _showAlert({required BuildContext context, required TribeMessage msgModel}){
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
