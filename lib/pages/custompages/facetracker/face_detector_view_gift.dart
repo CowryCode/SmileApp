@@ -1,5 +1,6 @@
 
 import 'package:SmileApp/TextToSpeech/smileappvoice.dart';
+import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/countrymodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
@@ -87,7 +88,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   }
 
   Future<void> processImage(InputImage inputImage) async {
-
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
@@ -98,7 +98,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
       if(smileAppValueNotifier.value.showCountDown.value == false || widget.giftVariableObject.readmessage!){
         smileAppValueNotifier.recordSmileStartTime();
       }
-
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
         bool soundAllowed = smileAppValueNotifier.value.deactivetSound.value;
@@ -111,6 +110,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               if (prob! > 0.5) {
                 _msg = messageNotifier.value.msg + " " + _tokenArray![messageNotifier.value.index];
                 (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? _msg = _msg + " *** End" : _msg = _msg;
+                (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? ApiAccess().readTribeMessage(messageID: widget.giftVariableObject.id!):"";
                 int updatedTokenIndex = messageNotifier.value.index + 1;
                 messageNotifier.update(message: _msg, index: updatedTokenIndex);
               }else{

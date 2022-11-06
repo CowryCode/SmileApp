@@ -298,16 +298,6 @@ class _HomeState extends State<Home> {
                       scrollDirection: Axis.horizontal,
                       //  children: getSmilePacks(tribeMessagesNotifier.value),
                       children: getSmilePacks(value),
-                      // children: <Widget>[
-                      //   card("images/asset-1.png","South Africa",),
-                      //   card("images/asset-2.png","Ontario Canada",),
-                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                      //   card("images/asset-3.png","Dr. Senila Aaraf",),
-                      // ],
                     ),
                   );
                 }
@@ -320,7 +310,7 @@ class _HomeState extends State<Home> {
   List<Widget> getSmilePacks(List<TribeMessage> msgs ){
      List<Widget> cards = [];
      for(int x = 0; x < msgs.length; x++){
-       cards.add(card("images/asset-1.png","${msgs[x].sourceCountry}",));
+       cards.add(card(image: "images/asset-1.png",message: "${msgs[x].content}", msgid: msgs[x].id! ));
      }
      return cards;
   }
@@ -349,12 +339,12 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget card(String image,String message,){
+  Widget card({required String image, required String message, required int msgid}){
     return Stack(
      children: <Widget>[
           GestureDetector(
             onTap: (){
-               _showAlert(context: context, message: message);
+               _showAlert(context: context, message: message, msgID: msgid);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -433,7 +423,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _showAlert({required BuildContext context, required String message}){
+  _showAlert({required BuildContext context, required String message, required int msgID}){
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -452,7 +442,7 @@ class _HomeState extends State<Home> {
           TextButton(
             onPressed: (){
               messageNotifier.update(message: "", index: 0);
-              GiftVariableObject giftobject = GiftVariableObject(msg: message, readmessage: true);
+              GiftVariableObject giftobject = GiftVariableObject(id:msgID, msg: message, readmessage: true);
               Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
             },
             child: const Text('Continue'),

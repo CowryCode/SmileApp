@@ -194,7 +194,6 @@ class ApiAccess {
         LeaderBoard lb = LeaderBoard.fromJson(jsonDecode(response.body));
         _populateProgressTable(progress: lb.personalProgresses!);
         _populateGlobalLeaderBoard(gloableranking: lb.globalProgresses!);
-        print('GOT LEADER BOARD ************');
         return lb;
       } else {
         return null;
@@ -217,6 +216,38 @@ class ApiAccess {
     // int x = globalscoresTable.value.length;
   }
 
+
+  Future<UnreadTribeMessage?> readTribeMessage({required int messageID}) async {
+    String token = "101";
+    //TODO: REVERT THIS TO BE DYNAMIC
+    // String? token;
+    // Future<String?> tk = Localstorage().getString(key_login_token);
+    // await tk.then((value) => {token = value!});
+
+    final response = await http.post(
+      Uri.parse(Read_A_SmilePack_URL),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Origin': '$MobileURL',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(
+          <String, dynamic>{
+            "id" : messageID,
+            "isread" : true,
+          }),
+    );
+
+    if (response.statusCode == 200) {
+      UnreadTribeMessage msges = UnreadTribeMessage.fromJson(jsonDecode(response.body));
+      tribeMessagesNotifier.updateTribeMessageList(requestlist: msges.messages!);
+      return msges;
+    } else {
+      return null;
+    }
+  }
+
   Future<UnreadTribeMessage?> getSmilePacks() async {
     try {
       String? token = "101";
@@ -224,7 +255,7 @@ class ApiAccess {
       // String? token;
       // Future<String?> tk = Localstorage().getString(key_login_token);
       // await tk.then((value) => {token = value!});
-      final response = await http.get(Uri.parse(Unread_SmilePack_URL),
+      final response = await http.get(Uri.parse(Unread_SmilePacks_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
@@ -236,7 +267,35 @@ class ApiAccess {
       if (response.statusCode == 200) {
         UnreadTribeMessage msges = UnreadTribeMessage.fromJson(jsonDecode(response.body));
         tribeMessagesNotifier.updateTribeMessageList(requestlist: msges.messages!);
-        print('GOT SMILE PACK ************');
+        getAllReadSmilePacks();
+        return msges;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception("Error, status code ${e.toString()}");
+    }
+  }
+
+  Future<UnreadTribeMessage?> getAllReadSmilePacks() async {
+    try {
+      String? token = "101";
+      //TODO: REVERT THIS TO BE DYNAMIC
+      // String? token;
+      // Future<String?> tk = Localstorage().getString(key_login_token);
+      // await tk.then((value) => {token = value!});
+      final response = await http.get(Uri.parse(ALL_Read_SmilePacks_URL),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Origin': '$MobileURL',
+          'Authorization': 'Bearer $token'
+        },
+      );
+
+      if (response.statusCode == 200) {
+        UnreadTribeMessage msges = UnreadTribeMessage.fromJson(jsonDecode(response.body));
+        readtribeMessageNotifier.updateMessageList(requestlist: msges.messages!);
         return msges;
       } else {
         return null;
@@ -264,7 +323,6 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         UnrepliedTribeCalls msges = UnrepliedTribeCalls.fromJson(jsonDecode(response.body));
-        print('UNREPLIED TRIBE CALLS : ${msges.msgcalls!}');
         tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
         return msges;
       } else {

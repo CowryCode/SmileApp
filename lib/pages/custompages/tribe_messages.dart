@@ -113,13 +113,13 @@ class _TribeMessageListState extends State<TribeMessageList> {
 
   List<Widget> getMessages(){
     List<TribeMessageModel> data = <TribeMessageModel>[
-      TribeMessageModel(messageID: 1, source: "United Kindom", read: true,
+      TribeMessageModel(id: 1, source: "United Kindom", read: true,
     content: "This story leapt off the pages as I relived it with tears and joy. My friends Brad and Beth have done a superb job of retelling the story that changed so many of our lives. Truly, Mitchell Thorp’s story will change your life as well. "
     ),
-      TribeMessageModel(messageID: 2, source: "South Africa", read: false,
+      TribeMessageModel(id: 2, source: "South Africa", read: false,
         content: "This incredible true story is how God can take what was meant for evil and turn it into something beautiful for his glory. This story will touch the hearts of many who need to know how to hear the voice of God, and how God intervenes in our lives in many amazing ways."
       ),
-      TribeMessageModel(messageID: 3, source: "Canada", read: true,
+      TribeMessageModel(id: 3, source: "Canada", read: true,
         content: "Few organizations see the “big picture” of charitable giving. But thanks to Brad and Beth Thorp, the Mitchell Thorp Foundation does. Through their own life tragedy in losing their son Mitchell in 2008, Brad and Beth Thorp have embraced their sorrow and have turned it into the most beautiful way of honoring his legacy, by helping those most vulnerable patients and their families."
       ),
     ];
@@ -214,7 +214,7 @@ class MessageCard extends StatelessWidget {
           TextButton(
             onPressed: (){
               messageNotifier.update(message: "", index: 0);
-              GiftVariableObject giftobject = GiftVariableObject(msg: msgModel.content, readmessage: true);
+              GiftVariableObject giftobject = GiftVariableObject(id:msgModel.id,  msg: msgModel.content, readmessage: true);
               Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
             },
             child: const Text('Continue'),
@@ -226,9 +226,9 @@ class MessageCard extends StatelessWidget {
 }
 
 class TribeMessageModel{
-  int messageID;
+  int id;
   String source;
   String content;
   bool read;
-  TribeMessageModel({required this.messageID,  required this.source ,required this.content, required this.read});
+  TribeMessageModel({required this.id,  required this.source ,required this.content, required this.read});
 }

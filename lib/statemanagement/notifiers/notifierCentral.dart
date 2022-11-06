@@ -7,6 +7,7 @@ import 'package:SmileApp/statemanagement/notifiers/ProgressTableNotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageNotifier.dart';
+import 'package:SmileApp/statemanagement/notifiers/readtribemessagenotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/tribeempathyrequestnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/tribemessagenotifier.dart';
 import 'package:flutter/material.dart';
@@ -78,4 +79,5 @@ final LeaderBoardNotifier globalscoresTable = LeaderBoardNotifier(value: [
 ]);
 
 final TribeMessagesNotifier tribeMessagesNotifier = TribeMessagesNotifier(value: []);
+final ReadTribeMessagesNotifier readtribeMessageNotifier = ReadTribeMessagesNotifier(value: []);
 final TribeEmpathyRequestNotifier tribeEmpathyRequestNotifier = TribeEmpathyRequestNotifier(value: []);
