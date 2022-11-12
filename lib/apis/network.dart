@@ -51,38 +51,9 @@ class ApiAccess {
   }
 
 
-  Future<UserProfile> loginWithPhoneNumber({String? phonenumber}) async {
-    try {
-    String? token;
-
-    if(phonenumber == null){
-      Future<String?> tk = Localstorage().getString(key_login_token);
-      await tk.then((value) => {token = value!});
-    }else{
-      token = phonenumber;
-    }
-
-      final response = await http.get(Uri.parse(getProfile_URL),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json',
-          'Origin': '$MobileURL',
-          'Authorization': 'Bearer $token'
-        },
-      );
-
-      if (response.statusCode == 200) {
-        UserProfile userProfile = UserProfile.fromJson(jsonDecode(response.body));
-        if(phonenumber != null){
-          Localstorage().saveString(key_login_token, phonenumber);
-        }
-        return userProfile;
-      } else {
-        throw Exception("Could not pull user record, status code ${response.statusCode} ");
-      }
-    } catch (e) {
-      throw Exception("User Profile error, status code ${e.toString()}");
-    }
+  void login({required String logincode}) async {
+    print('Login Code : $logincode');
+    Localstorage().saveString(key_login_token, logincode);
  }
 
   Future<TribeMessage?> sendTribeMessage({required TribeMessage message}) async {
@@ -116,11 +87,11 @@ class ApiAccess {
   }
 
   Future<bool> uploadDeviceIdentifier({required String deviceID}) async {
-    String token = "100";
+    // String token = "100";
     // Future<String?> tk = Localstorage().getString(key_Device_Identifier);
     // await tk.then((value) => {identifier = value});
 
-   // String logintoken = await Localstorage().getString(key_login_token)??"";
+   String token = await Localstorage().getString(key_login_token)??"";
 
 
     final response = await http.post(
@@ -143,11 +114,10 @@ class ApiAccess {
   }
 
   void saveMood({required MoodModel moodModel, required String url}) async {
-    String? token = "100";
-    //TODO: REVERT THIS TO BE DYNAMIC
-    // String? token;
-    // Future<String?> tk = Localstorage().getString(key_login_token);
-    // await tk.then((value) => {token = value!});
+    // String? token = "100";
+    String? token;
+    Future<String?> tk = Localstorage().getString(key_login_token);
+    await tk.then((value) => {token = value!});
     print("URL : $url");
     final response = await http.post(
       Uri.parse(url),
@@ -218,11 +188,10 @@ class ApiAccess {
 
 
   Future<UnreadTribeMessage?> readTribeMessage({required int messageID}) async {
-    String token = "101";
-    //TODO: REVERT THIS TO BE DYNAMIC
-    // String? token;
-    // Future<String?> tk = Localstorage().getString(key_login_token);
-    // await tk.then((value) => {token = value!});
+   // String token = "100";
+    String? token;
+    Future<String?> tk = Localstorage().getString(key_login_token);
+    await tk.then((value) => {token = value!});
 
     final response = await http.post(
       Uri.parse(Read_A_SmilePack_URL),
@@ -250,11 +219,10 @@ class ApiAccess {
 
   Future<UnreadTribeMessage?> getSmilePacks() async {
     try {
-      String? token = "101";
-      //TODO: REVERT THIS TO BE DYNAMIC
-      // String? token;
-      // Future<String?> tk = Localstorage().getString(key_login_token);
-      // await tk.then((value) => {token = value!});
+     // String? token = "100";
+      String? token;
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
       final response = await http.get(Uri.parse(Unread_SmilePacks_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -279,11 +247,10 @@ class ApiAccess {
 
   Future<UnreadTribeMessage?> getAllReadSmilePacks() async {
     try {
-      String? token = "101";
-      //TODO: REVERT THIS TO BE DYNAMIC
-      // String? token;
-      // Future<String?> tk = Localstorage().getString(key_login_token);
-      // await tk.then((value) => {token = value!});
+     // String? token = "100";
+      String? token;
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
       final response = await http.get(Uri.parse(ALL_Read_SmilePacks_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -307,11 +274,10 @@ class ApiAccess {
 
   Future<UnrepliedTribeCalls?> getUnrepliedTribeCalls() async {
     try {
-      String? token = "100";
-      //TODO: REVERT THIS TO BE DYNAMIC
-      // String? token;
-      // Future<String?> tk = Localstorage().getString(key_login_token);
-      // await tk.then((value) => {token = value!});
+    // String? token = "101";
+      String? token;
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
       final response = await http.get(Uri.parse(Unreplied_Requests_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -334,12 +300,12 @@ class ApiAccess {
   }
 
   Future<bool?> requestEmpatheticMessage({required String emotions}) async {
-    String? token = "100";
-    //TODO: PICK THIS LOCATION AUTOMATICALLY
+    //String? token = "100";
+    //TODO: PICK LOCATION DYNAMICALLY
     String location = "Lagos Nigeria";
-    // String? token;
-    // Future<String?> tk = Localstorage().getString(key_login_token);
-    // await tk.then((value) => {token = value!});
+    String? token;
+    Future<String?> tk = Localstorage().getString(key_login_token);
+    await tk.then((value) => {token = value!});
 
     final response = await http.post(
       Uri.parse(Empathy_Request_URL),
@@ -367,13 +333,13 @@ class ApiAccess {
   }
 
 
-  Future<bool?> replyTribeCall({required TribeRequest tribeRequest, required String reply}) async {
-    String? token = "100";
+  Future<UnrepliedTribeCalls?> replyTribeCall({required TribeRequest tribeRequest, required String reply}) async {
+  //  String? token = "101";
     //TODO: PICK THIS LOCATION AUTOMATICALLY
     String location = "Lagos Nigeria";
-    // String? token;
-    // Future<String?> tk = Localstorage().getString(key_login_token);
-    // await tk.then((value) => {token = value!});
+    String? token;
+    Future<String?> tk = Localstorage().getString(key_login_token);
+    await tk.then((value) => {token = value!});
 
     final response = await http.post(
       Uri.parse(Reply_Requests_URL),
@@ -395,8 +361,10 @@ class ApiAccess {
     );
 
     if (response.statusCode == 200) {
-      TribeMessage msg = TribeMessage.fromJson(jsonDecode(response.body));
-      return true;
+      UnrepliedTribeCalls msges = UnrepliedTribeCalls.fromJson(jsonDecode(response.body));
+      tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+      //TribeMessage msg = TribeMessage.fromJson(jsonDecode(response.body));
+      return msges;
     } else {
       return null;
     }

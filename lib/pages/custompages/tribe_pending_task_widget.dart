@@ -193,8 +193,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
       commentHint: 'Set your custom comment hint',
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
-       // Navigator.of(context).popAndPushNamed('/home',);
-        Navigator.of(context).pop();
+        Navigator.of(context).popAndPushNamed('/home',);
       },
       submitButtonTextStyle: const TextStyle(
           fontWeight: FontWeight.bold,

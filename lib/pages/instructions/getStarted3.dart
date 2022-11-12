@@ -18,7 +18,7 @@ class _GetStarted3State extends State<GetStarted3> {
           Container(
             padding: EdgeInsets.only(left: 12.0,right: 12.0,),
             child: Image(
-              image: AssetImage('images/undraw_alien_science_nonm.png'),
+              image: AssetImage('images/f-1.png'),
             ),
           ),
           Column(

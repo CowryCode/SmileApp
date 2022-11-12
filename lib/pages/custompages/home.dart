@@ -276,14 +276,22 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 1,),
-          Text(
-            '${tribeMessagesNotifier.value.length} Unread SmilePacks',
-            style: TextStyle(
-                fontSize:16.0,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.secondary
-            ),
+          ValueListenableBuilder(
+              valueListenable: tribeMessagesNotifier,
+              builder: (context,  List<TribeMessage> value, child) {
+                return Text(
+                  '${value.length} Unread SmilePacks',
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      color: Theme
+                          .of(context)
+                          .colorScheme
+                          .secondary
+                  ),
+                );
+              }
           ),
 
             ValueListenableBuilder(
@@ -310,7 +318,7 @@ class _HomeState extends State<Home> {
   List<Widget> getSmilePacks(List<TribeMessage> msgs ){
      List<Widget> cards = [];
      for(int x = 0; x < msgs.length; x++){
-       cards.add(card(image: "images/asset-1.png",message: "${msgs[x].content}", msgid: msgs[x].id! ));
+       cards.add(card(image: "images/asset-1.png",message: "${msgs[x].content}", msgid: msgs[x].id! , location: msgs[x].sourceCountry!));
      }
      return cards;
   }
@@ -339,7 +347,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Widget card({required String image, required String message, required int msgid}){
+  Widget card({required String image, required String message, required int msgid, required String location}){
     return Stack(
      children: <Widget>[
           GestureDetector(
@@ -363,7 +371,7 @@ class _HomeState extends State<Home> {
                       children: <Widget>[
                         Icon(Icons.email_rounded, color: Theme.of(context).colorScheme.secondary,),
                         Text(
-                          "From : \n $message ",
+                          "From : \n $location",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'Poppins',

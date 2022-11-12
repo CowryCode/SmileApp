@@ -12,7 +12,6 @@ class NavigateTabsWidget extends StatefulWidget {
   final bool showEmotionalert;
   const NavigateTabsWidget({Key? key, required this.showEmotionalert}) : super(key: key);
 
-  
   @override
   State<StatefulWidget> createState() {
     return _BubblesState();

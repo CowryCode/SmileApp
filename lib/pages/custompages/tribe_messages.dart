@@ -126,7 +126,6 @@ class MessageCard extends StatelessWidget {
   final int colorID;
  // const MessageCard({Key? key, required this.measageModel, required this.colorID }) : super(key: key);
   const MessageCard({Key? key, required this.measageModel, required this.colorID }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,7 +138,7 @@ class MessageCard extends StatelessWidget {
           padding: EdgeInsets.all(12),
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,8 +162,7 @@ class MessageCard extends StatelessWidget {
                     ),
                   ],
                 ),
-               // SizedBox(height: (measageModel.read == true) ? 20 : 80),
-                SizedBox(height: (measageModel.isread == true) ? 20 : 80),
+               SizedBox(height:20 ),
                 Center(
                   child: Text(
                    // (measageModel.read == true) ?  "${measageModel.content}" : " You received \n a note from ${measageModel.source}. \n Open the envelope below to read",

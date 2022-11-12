@@ -35,7 +35,7 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_){
-      Navigator.of(context).pushNamed('/home_with_alert');
+     // Navigator.of(context).pushNamed('/home_with_alert');
     });
 
   }
@@ -128,7 +128,7 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
                    setState(() {
                      justloggedin = true;
                    });
-                   userprofile = ApiAccess().loginWithPhoneNumber(phonenumber: phonenumber);
+                  // userprofile = ApiAccess().login(logincode: phonenumber);
                    userprofile.then((value) => {
                      if(value != null){
                        Localstorage().saveBoolean(key_login_status, true),
