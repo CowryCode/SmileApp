@@ -4,6 +4,7 @@ class UserProfile {
   String? phonenumber;
   bool? isconsented;
   double? smilegrampoint;
+  double? accumulatedValue;
   String? deviceId;
 
   UserProfile(
@@ -20,6 +21,7 @@ class UserProfile {
     phonenumber = json['phonenumber'];
     isconsented = json['isconsented'];
     smilegrampoint = json['smilegrampoint'];
+    accumulatedValue = json['accumulatedValue'];
     deviceId = json['deviceId'];
   }
 
@@ -30,6 +32,7 @@ class UserProfile {
     data['phonenumber'] = this.phonenumber;
     data['isconsented'] = this.isconsented;
     data['smilegrampoint'] = this.smilegrampoint;
+    data['accumulatedValue'] = this.accumulatedValue;
     data['deviceId'] = this.deviceId;
     return data;
   }

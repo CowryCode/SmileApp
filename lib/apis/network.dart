@@ -51,9 +51,33 @@ class ApiAccess {
   }
 
 
-  void login({required String logincode}) async {
-    print('Login Code : $logincode');
-    Localstorage().saveString(key_login_token, logincode);
+  Future<UserProfile?> login({required String logincode}) async {
+    try {
+      // String? token = "100";
+      String? token;
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
+      final response = await http.get(Uri.parse(getProfile_URL),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Origin': '$MobileURL',
+          'Authorization': 'Bearer $token'
+        },
+      );
+
+      if (response.statusCode == 200) {
+        UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
+        print('Login Code : $logincode');
+        print('Profile Detail : ${profile.toJson()}');
+        Localstorage().saveString(key_login_token, logincode);
+        return profile;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception("Error, status code ${e.toString()}");
+    }
  }
 
   Future<TribeMessage?> sendTribeMessage({required TribeMessage message}) async {
