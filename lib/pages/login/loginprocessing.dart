@@ -52,7 +52,6 @@ class _LoginProcessingState extends State<LoginProcessing> {
                   if (snapshot.hasData) {
                     timer.cancel();
                     ((){
-                      print('Logged in Successfully');
                       return Navigator.of(context).popAndPushNamed('/home_with_alert');
                     }());
 
