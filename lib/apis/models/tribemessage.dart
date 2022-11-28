@@ -1,6 +1,6 @@
 class TribeMessage {
   int? id;
-  int? receiverID;
+  String? receiverID;
   String? content;
   String? sourceCountry;
   bool? isread;

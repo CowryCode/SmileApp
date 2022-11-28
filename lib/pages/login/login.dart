@@ -1,4 +1,5 @@
 import 'package:SmileApp/apis/network.dart';
+import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: EdgeInsets.only(top: 12.0),
                 child: Text(
-                  "Enter the ID you received  \n while signing up for the study",
+                  "Enter the email address you used  \n while signing up for the study",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.grey,
@@ -99,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                   // validators: [
                                   //   FormBuilderValidators.required()
                                   // ],
-                                  keyboardType: TextInputType.number,
+                                  //keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.only(top: 6,left:12,right: 12),
                                     border: InputBorder.none,
@@ -122,9 +123,11 @@ class _LoginPageState extends State<LoginPage> {
                       child: RaisedButton(
                         color: Theme.of(context).accentColor,
                         onPressed: (){
-                          ApiAccess().login(logincode: textEditingController.value.text.trim());
-                          Navigator.of(context).pushNamed('/welcome');
-                          print('Value is : ${textEditingController.value.text.trim()}');
+                          String userid = textEditingController.value.text.trim();
+                          //ApiAccess().login(logincode: textEditingController.value.text.trim());
+                          //Navigator.of(context).pushNamed('/welcome');
+                          GiftVariableObject variables = GiftVariableObject(readmessage: false, msg: userid);
+                          Navigator.of(context).pushNamed('/processlogin', arguments: variables);
                       },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),

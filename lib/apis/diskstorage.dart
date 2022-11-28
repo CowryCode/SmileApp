@@ -34,7 +34,6 @@ class Localstorage  {
     final pref = await SharedPreferences.getInstance();
      this.stringval  = pref.getString(key);
 
-    print("The localValue its 01 ${this.stringval}");
     return pref.getString(key)?? null;
   }
 

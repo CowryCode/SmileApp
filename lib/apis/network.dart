@@ -51,29 +51,26 @@ class ApiAccess {
   }
 
 
-  Future<UserProfile?> login({required String logincode}) async {
+  Future<UserProfile> login({required String logincode}) async {
     try {
-      // String? token = "100";
-      String? token;
-      Future<String?> tk = Localstorage().getString(key_login_token);
-      await tk.then((value) => {token = value!});
       final response = await http.get(Uri.parse(getProfile_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
           'Origin': '$MobileURL',
-          'Authorization': 'Bearer $token'
+          'Authorization': 'Bearer $logincode'
         },
       );
 
       if (response.statusCode == 200) {
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
         print('Login Code : $logincode');
-        print('Profile Detail : ${profile.toJson()}');
+        if (profile != null )  print('Profile Detail : ${profile.toJson()}');
         Localstorage().saveString(key_login_token, logincode);
+        Localstorage().saveBoolean(key_login_status, true);
         return profile;
       } else {
-        return null;
+        throw Exception("`Couldn't pull the profile ");
       }
     } catch (e) {
       throw Exception("Error, status code ${e.toString()}");
@@ -170,11 +167,9 @@ class ApiAccess {
 
   Future<LeaderBoard?> getLeaderBoard() async {
     try {
-      String? token = "100";
-      //TODO: REVERT THIS TO BE DYNAMIC
-      // String? token;
-      // Future<String?> tk = Localstorage().getString(key_login_token);
-      // await tk.then((value) => {token = value!});
+      String? token;
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
       final response = await http.get(Uri.parse(Leader_Board_URL),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

@@ -1,6 +1,8 @@
 
 import 'dart:io';
 
+import 'package:SmileApp/apis/diskstorage.dart';
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/apis/secret.dart';
 import 'package:SmileApp/firebase_options.dart';
 import 'package:SmileApp/notification/notification.dart';
@@ -24,7 +26,23 @@ Future<void> main() async {  // The code before I added Flutter_redux
  await init();
 
   cameras = await availableCameras();
-  runApp(MyApp());
+  //runApp(MyApp());
+
+  bool? loginStatus = await Localstorage().getBoolean(key_login_status);
+  print('Login Status is : ${loginStatus}');
+
+  ((){
+    if(loginStatus != null){
+      if (loginStatus == true){
+        runApp(MyApp(landingURL: '/home_with_alert',));
+      }else{
+        runApp(MyApp(landingURL: '/',));
+      }
+    }else{
+      runApp(MyApp(landingURL: '/',));
+    }
+  }());
+
 }
 
 
@@ -67,16 +85,20 @@ Future init() async{
 
 class MyApp extends StatelessWidget {
 
+  String landingURL;
+  MyApp({required String this.landingURL });
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
-
+    print("The Login URL is : $landingURL");
     // return StoreProvider<MyAppState>(
     //   store: _store,
     //   child:
      return  MaterialApp(
         title: 'Smile App',
-        initialRoute: '/',
+       // initialRoute: '/',
+        initialRoute: landingURL,
         onGenerateRoute: RouteGenerator.generateRoute,
         debugShowCheckedModeBanner: false,
         darkTheme: ThemeData(

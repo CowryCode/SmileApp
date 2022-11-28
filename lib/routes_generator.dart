@@ -5,6 +5,7 @@ import 'package:SmileApp/pages/instructions/Welcome.dart';
 import 'package:SmileApp/pages/instructions/getStarted.dart';
 import 'package:SmileApp/pages/instructions/getStarted1.dart';
 import 'package:SmileApp/pages/login/login.dart';
+import 'package:SmileApp/pages/login/loginprocessing.dart';
 import 'package:flutter/material.dart';
 import 'package:SmileApp/pages/custompages/emotions.dart';
 import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';
@@ -20,10 +21,10 @@ class RouteGenerator {
     switch(settings.name){
         // MY CUSTOM ROUTE START
     // SMILE APP
-    //   case '/' :
-    //     return MaterialPageRoute(builder: (_) => SmilegramLogin());
       case '/' :
         return MaterialPageRoute(builder: (_) => LoginPage());
+      case '/processlogin' :
+        return MaterialPageRoute(builder: (_) => LoginProcessing(justLoggedin: true, giftVariableObject: args as GiftVariableObject,));
       case '/welcome' :
         return MaterialPageRoute(builder: (_) => Welcome());
       case '/home_with_alert' :

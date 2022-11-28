@@ -1,7 +1,7 @@
 class TribeRequest {
   int? id;
-  int? senderID;
-  int? receiverID;
+  String? senderID;
+  String? receiverID;
   String? content;
   String? sourceCountry;
   bool? responded;
