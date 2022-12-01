@@ -1,7 +1,13 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:SmileApp/pages/custompages/chat/chatWidget.dart';
+import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
+import 'package:SmileApp/pages/custompages/chat/model/buddyconversation.dart';
+import 'package:SmileApp/pages/custompages/chat/model/chat.dart';
+import 'package:SmileApp/pages/custompages/chat/model/conversation.dart';
+import 'package:SmileApp/pages/custompages/chat/model/doctor.dart';
+import 'package:SmileApp/pages/custompages/chat/model/user.dart';
 import 'package:flutter/material.dart';
-import 'package:SmileApp/models/mymodels/user.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 
@@ -11,9 +17,13 @@ class ChatWidget extends StatefulWidget {
 }
 
 class _ChatWidgetState extends State<ChatWidget> {
+  //ConversationList _conversationList = new ConversationList();
+  BuddyConversationList _buddyconversationList = new BuddyConversationList();
   User _currentUser = new User.init().getCurrentUser();
+  Doctor _currentDoctor =new Doctor.init().getCurrentDoctor();
   final _myListKey = GlobalKey<AnimatedListState>();
   final myController = TextEditingController();
+
 
 
   @override
@@ -57,19 +67,30 @@ class _ChatWidgetState extends State<ChatWidget> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Expanded(
+              // child: AnimatedList(
+              //   key: _myListKey,
+              //   reverse: true,
+              //   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+              //   //initialItemCount: _conversationList.conversation![0].chats!.length,
+              //   initialItemCount: 1,
+              //   itemBuilder: (context, index, Animation<double> animation) {
+              //    return SizedBox(child: Text("REDESIGN THEIS "),);
+              //   },
+              // ),
               child: AnimatedList(
                 key: _myListKey,
                 reverse: true,
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                //initialItemCount: _conversationList.conversation![0].chats!.length,
-                initialItemCount: 1,
+               // initialItemCount: _conversationList.conversation[0].chats!.length,
+                initialItemCount: _buddyconversationList.conversation[0].buddychats!.length,
                 itemBuilder: (context, index, Animation<double> animation) {
-                  return SizedBox(child: Text("REDESIGN THEIS "),);
-                  // Chat chat = _conversationList.conversation![0].chats![index];
-                  // // return ChatMessageListItem(
-                  // //   chat: chat,
-                  // //   animation: animation,
-                  // // );
+                 // Chat chat = _conversationList.conversation[0].chats[index];
+                  return ChatMessageListItem(
+                    //chat: chat,
+                   // chat: _conversationList.conversation[0].chats![index],
+                    chat: _buddyconversationList.conversation[0].buddychats![index],
+                    animation: animation,
+                  );
                 },
               ),
             ),
@@ -119,18 +140,27 @@ class _ChatWidgetState extends State<ChatWidget> {
                   suffixIcon: IconButton(
                     padding: EdgeInsets.only(right: 30),
                     onPressed: () {
-                      bool random = Random().nextBool(); // I used this to simulate chat alternations between two people
-                      String messageType = random ? "Sent" : "Recieved";
+                      // bool random = Random().nextBool(); // I used this to simulate chat alternations between two people
+                      // String messageType = random ? "Sent" : "Recieved";
 
-                      // setState(() {
-                      //   _conversationList.conversation![0].chats!
-                      //       .insert(0, new Chat(myController.text,'21min ago', _currentUser, messageType));
-                      //   _myListKey.currentState!.insertItem(0);
-                      //}
-                      //);
+                      setState(() {
+                       // _conversationList.conversation[0].chats!
+                        _buddyconversationList.conversation[0].buddychats!
+                          //  .insert(0, new Chat(myController.text,'21min ago', _currentUser));
+                            .insert(0, new BuddyChat(text:  myController.text, time:'21min ago', isBot: false));
+                      });
+
+                      setState(() {
+                        // Use this to simulate bot response
+                        _buddyconversationList.conversation[0].buddychats!
+                            .insert(0, new BuddyChat( text:" Bot Said ${myController.text}" , time:'21min ago', isBot: true));
+                        _myListKey.currentState!.insertItem(0);
+                      });
+
                       Timer(Duration(milliseconds: 100), () {
                         myController.clear();
                       });
+
                     },
                     icon: Icon(
                       Icons.send,
@@ -150,7 +180,7 @@ class _ChatWidgetState extends State<ChatWidget> {
 
 
   }
-  Widget getSentMessageLayout1(@required String name, @required String messageContent, @required StringmessageType, @required String userAverta) {
+  Widget _getSentMessageLayout1(@required String name, @required String messageContent, @required StringmessageType, @required String userAverta) {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
@@ -191,7 +221,7 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
   }
 
-  Widget getReceivedMessageLayout1(@required String name, @required String messageContent, @required StringmessageType, @required String userAverta) {
+  Widget _getReceivedMessageLayout1(@required String name, @required String messageContent, @required StringmessageType, @required String userAverta) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(

@@ -12,7 +12,7 @@ import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.d
 import 'package:SmileApp/pages/custompages/leaderboard/smileleader.dart';
 import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/custompages/tribe_messages.dart';
-import 'package:SmileApp/pages/custompages/chat.dart';
+import 'package:SmileApp/pages/custompages/chat/chat.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

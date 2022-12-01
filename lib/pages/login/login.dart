@@ -15,6 +15,15 @@ class _LoginPageState extends State<LoginPage> {
   String countryCode = "";
   String phoneNumber = "";
   TextEditingController textEditingController = TextEditingController();
+
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    textEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
