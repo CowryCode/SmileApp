@@ -2,11 +2,13 @@ import 'package:SmileApp/apis/models/globalprogressmodel.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
 import 'package:SmileApp/statemanagement/notifiers/LeaderBoardNotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/ProgressTableNotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SmileAppNotifiers.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageNotifier.dart';
+import 'package:SmileApp/statemanagement/notifiers/chatnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/readtribemessagenotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/tribeempathyrequestnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/tribemessagenotifier.dart';
@@ -81,3 +83,4 @@ final LeaderBoardNotifier globalscoresTable = LeaderBoardNotifier(value: [
 final TribeMessagesNotifier tribeMessagesNotifier = TribeMessagesNotifier(value: []);
 final ReadTribeMessagesNotifier readtribeMessageNotifier = ReadTribeMessagesNotifier(value: []);
 final TribeEmpathyRequestNotifier tribeEmpathyRequestNotifier = TribeEmpathyRequestNotifier(value: []);
+final ChatHistoryValueNotifier chatcentralnotifier = ChatHistoryValueNotifier();

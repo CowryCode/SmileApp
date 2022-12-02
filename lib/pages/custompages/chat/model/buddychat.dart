@@ -5,13 +5,18 @@ import 'package:flutter/material.dart';
 class BuddyChat {
   String id = UniqueKey().toString();
   String? text;
-  String? time;
   bool? isBot;
+  // List<BuddyChat> chats = [new BuddyChat(text: "Hey, How can I help you Do you have any problem?  ", isBot: true),];
   BuddyChat.init();
-  BuddyChat({required this.text, required this.time,required this.isBot});
+  BuddyChat({required this.text, required this.isBot});
   List<BuddyChat> getChat() {
+    //return chats;
     return [
-      new BuddyChat(text: "Hey, How can I help you Do you have any problem?  ", time: "32 min ago",isBot: true),
+      new BuddyChat(text: "Hey, How can I help you Do you have any problem?  ", isBot: true),
     ];
   }
+
+  // void updateChats({ required List<BuddyChat> updatedchat}){
+  //   this.chats = updatedchat;
+  // }
 }
