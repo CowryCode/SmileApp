@@ -91,7 +91,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
-    print("The Login URL is : $landingURL");
     // return StoreProvider<MyAppState>(
     //   store: _store,
     //   child:

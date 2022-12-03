@@ -54,7 +54,6 @@ class _LoginProcessingState extends State<LoginProcessing> {
                     ((){
                       return Navigator.of(context).popAndPushNamed('/home_with_alert');
                     }());
-
                   } else {
                     if(widget.justLoggedin == true && !snapshot.hasData ){
                       timer.cancel();

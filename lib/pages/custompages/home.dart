@@ -160,8 +160,8 @@ class _HomeState extends State<Home> {
                           color: Theme.of(context).primaryColor),
                           textAlign: TextAlign.center
                       ),
-                      Text("A smile can get you a gift and  \n "
-                          "compose a great text. Try it !\n ",
+                      Text("Your Smile is Powerful,  \n "
+                          "Play the Smile Game!\n ",
                           style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center,),
                     ],
                   ),
@@ -436,7 +436,7 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: const Text('My Tribe'),
-        content: const Text('To read this you need to maintain a smile as the message unfolds',
+        content: const Text('To unlock this message, you need to maintain a smile as the message unfolds',
           style: TextStyle(color: Colors.black45),
         ),
         actions: <Widget>[
@@ -450,8 +450,9 @@ class _HomeState extends State<Home> {
           TextButton(
             onPressed: (){
               messageNotifier.update(message: "", index: 0);
-              GiftVariableObject giftobject = GiftVariableObject(id:msgID, msg: message, readmessage: true);
-              Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: giftobject);
+              smileAppValueNotifier.updateShowCountDown(showCoundown: true);
+            //  GiftVariableObject giftobject = GiftVariableObject(id:msgID, msg: message, readmessage: true);
+              Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(id:msgID, msg: message, readmessage: true));
             },
             child: const Text('Continue'),
           ),

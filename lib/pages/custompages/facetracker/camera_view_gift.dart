@@ -32,20 +32,22 @@ class CameraViewGift extends StatefulWidget {
   CameraViewGift(
       {Key? key,
       required this.title,
-        //TODO: COMMENTED OUT TODAY 20-09-2022
-     // required this.customPaint,
-     // required this.text,
+      //TODO: COMMENTED OUT TODAY 20-09-2022
+      // required this.customPaint,
+      // required this.text,
       required this.onImage,
       this.onScreenModeChanged,
       this.initialDirection = CameraLensDirection.front,
-        this.readmessage = false})
+      this.readmessage = false})
       : super(key: key);
 
   final String title;
+
   //TODO: COMMENTED OUT TODAY 20-09-2022
   //final CustomPaint customPaint;
- // final String text;
+  // final String text;
   final Function(InputImage inputImage) onImage;
+
   // final Function(ScreenMode mode) onScreenModeChanged;
   Function(ScreenMode mode)? onScreenModeChanged;
   final CameraLensDirection initialDirection;
@@ -61,6 +63,7 @@ class CameraViewGift extends StatefulWidget {
 
 class _CameraViewGiftState extends State<CameraViewGift> {
   ScreenMode _mode = ScreenMode.liveFeed;
+
   // CameraController _controller;
   // File _image;
   // String _path;
@@ -68,8 +71,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   CameraController? _controller;
   File? _image;
   String? _path;
- // ImagePicker? _imagePicker;
-  int _cameraIndex = 0;
+
+  // ImagePicker? _imagePicker;
+  int _cameraIndex = 1;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
   bool _changingCameraLens = false;
@@ -79,108 +83,96 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   String _fulltext =
       "I am a living testimony testimony that God is good"; // My Code
   int _tokenIndex = 0; // My Code
-  var _tokenArray;
+  //var _tokenArray;
 
   late int _tokenArrayLength;
-
-
 
   int _value = 0;
   bool _activated = false;
   int _activation_index = -1;
   final Duration timerTastoPremuto = Duration(seconds: 20);
+
   //Todo: Add real value
   int highestpoint = 20;
 
   int progressBarvalue = 20;
- // bool smilestartCountdown = false;
 
+  // bool smilestartCountdown = false;
 
   // VARIABLES FOR THE MAP
   // late List<Model> data;
   late MapShapeSource sublayerDataSource;
   late MapShapeSource shapeDataSource;
 
-
   @override
   void initState() {
     super.initState();
     Wakelock.enable();
     try {
-      _tokenArray = _fulltext.split(" ");
 
-      _tokenArrayLength = _tokenArray.length;
+      // if (cameras.any(
+      //   (element) =>
+      //       element.lensDirection == widget.initialDirection &&
+      //       element.sensorOrientation == 90,
+      // )) {
+      //   _cameraIndex = cameras.indexOf(
+      //     cameras.firstWhere((element) =>
+      //         element.lensDirection == widget.initialDirection &&
+      //         element.sensorOrientation == 90),
+      //   );
+      // } else {
+      //   _cameraIndex = cameras.indexOf(
+      //     cameras.firstWhere(
+      //       (element) => element.lensDirection == widget.initialDirection,
+      //     ),
+      //   );
+      // }
 
-     // _imagePicker = ImagePicker();
-
-      if (cameras.any(
-            (element) =>
-        element.lensDirection == widget.initialDirection &&
-            element.sensorOrientation == 90,
-      )) {
-        _cameraIndex = cameras.indexOf(
-          cameras.firstWhere((element) =>
-          element.lensDirection == widget.initialDirection &&
-              element.sensorOrientation == 90),
-        );
-      } else {
-        _cameraIndex = cameras.indexOf(
-          cameras.firstWhere(
-                (element) => element.lensDirection == widget.initialDirection,
-          ),
-        );
-      }
-      _startLiveFeed();
-      //_startLiveFeed();
+     // _startLiveFeed();
       // SET PREFERRED ORIENTATION
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown
-      ]);
-    }catch(e){
+      SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+      _startLiveFeed();
+    } catch (e) {
       print("Error : ${e.toString()}");
     }
-   // _randomize();
+    // _randomize();
   }
 
   // Added this code on 21-08-2021 //
 
-  void refreshCamera(){
+  void refreshCamera() {
     try {
-      _tokenArray = _fulltext.split(" ");
-      _tokenArrayLength = _tokenArray.length;
-
-     // _imagePicker = ImagePicker();
+      // _imagePicker = ImagePicker();
 
       if (cameras.any(
-            (element) =>
-        element.lensDirection == widget.initialDirection &&
+        (element) =>
+            element.lensDirection == widget.initialDirection &&
             element.sensorOrientation == 90,
       )) {
         _cameraIndex = cameras.indexOf(
           cameras.firstWhere((element) =>
-          element.lensDirection == widget.initialDirection &&
+              element.lensDirection == widget.initialDirection &&
               element.sensorOrientation == 90),
         );
       } else {
         _cameraIndex = cameras.indexOf(
           cameras.firstWhere(
-                (element) => element.lensDirection == widget.initialDirection,
+            (element) => element.lensDirection == widget.initialDirection,
           ),
         );
       }
       _startLiveFeed();
       // SET PREFERRED ORIENTATION
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown
-      ]);
+      SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
       smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
       smileAppValueNotifier.updateShowCountDown(showCoundown: true);
       //
 
-    }catch(e){
+    } catch (e) {
       debugPrint("CAMERA ERROR : ${e.toString()}");
     }
   }
@@ -194,7 +186,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -204,8 +195,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           onPressed: () {
             showDialog(
               context: context,
-              barrierDismissible: true, // set to false if you want to force a rating
-              builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
+              barrierDismissible: true,
+              // set to false if you want to force a rating
+              builder: (context) => _showRatingAlert(context,
+                  justreadmessage: widget.readmessage),
             );
             //Navigator.of(context).popAndPushNamed('/home');
           },
@@ -219,22 +212,22 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  Widget? _floatingActionButton() {
-    if (_mode == ScreenMode.gallery) return null;
-    if (cameras.length == 1) return null;
-    return SizedBox(
-        height: 70.0,
-        width: 70.0,
-        child: FloatingActionButton(
-          child: Icon(
-            Platform.isIOS
-                ? Icons.flip_camera_ios_outlined
-                : Icons.flip_camera_android_outlined,
-            size: 40,
-          ),
-          onPressed: _switchLiveCamera,
-        ));
-  }
+  // Widget? _floatingActionButton() {
+  //   if (_mode == ScreenMode.gallery) return null;
+  //   if (cameras.length == 1) return null;
+  //   return SizedBox(
+  //       height: 70.0,
+  //       width: 70.0,
+  //       child: FloatingActionButton(
+  //         child: Icon(
+  //           Platform.isIOS
+  //               ? Icons.flip_camera_ios_outlined
+  //               : Icons.flip_camera_android_outlined,
+  //           size: 40,
+  //         ),
+  //         onPressed: _switchLiveCamera,
+  //       ));
+  // }
 
   // DO NOT DELETE
   // Widget _body() { // the Original Code
@@ -247,15 +240,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   //   return body;
   // }
   Widget _body() {
-    // Commnented Out today 29-09-2022
-    // Widget body;
-    // if (_mode == ScreenMode.liveFeed) {
-    //   body = _liveFeedBody();
-    // } else {
-    //   body = _galleryBody();
-    // }
-
-   return SingleChildScrollView(
+    return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
         children: [
@@ -266,63 +251,73 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             // valueListenable: counterNotifier,
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, bool value, child) {
-               // return _cameraDisplay(smilestartCountdown: true);
-                return _cameraDisplay(smilestartCountdown: value);
+              return _cameraDisplay(smilestartCountdown: value);
             },
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           ValueListenableBuilder(
             // valueListenable: counterNotifier,
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
-              if(value == false && !widget.readmessage){
-                return  Row(
+              if (value == false && !widget.readmessage) {
+                return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                      child: const Text('Refresh',),
+                      style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).colorScheme.secondary),
+                      child: const Text(
+                        'Refresh',
+                      ),
                       onPressed: () {
                         refreshCamera(); // Refresh
                       },
                     ),
-                    SizedBox(width: 3,),
+                    SizedBox(
+                      width: 3,
+                    ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.secondary),
-                      child: const Text('Done',),
+                      style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).colorScheme.secondary),
+                      child: const Text(
+                        'Done',
+                      ),
                       onPressed: () {
                         showDialog(
                           context: context,
-                          barrierDismissible: true, // set to false if you want to force a rating
-                          builder: (context) => _showRatingAlert(context, justreadmessage: true),
+                          barrierDismissible: true,
+                          // set to false if you want to force a rating
+                          builder: (context) =>
+                              _showRatingAlert(context, justreadmessage: true),
                         );
                       },
                     ),
                   ],
                 );
-              }else{
-                return SizedBox(height: 1,);
+              } else {
+                return SizedBox(
+                  height: 1,
+                );
               }
             },
           ),
-
         ],
       ),
     );
-
   }
 
   Widget _liveFeedBody() {
-
-    if(_controller != null){
-      if(_controller?.value != null){
-        if(_controller?.value.isInitialized == false){
+    if (_controller != null) {
+      if (_controller?.value != null) {
+        if (_controller?.value.isInitialized == false) {
           return Container();
         }
-      }else{
+      } else {
         return Container();
       }
-    }else{
+    } else {
       return Container();
     }
     // Old working code
@@ -381,60 +376,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  // Widget _galleryBody() {
-  //   return ListView(shrinkWrap: true, children: [
-  //     _image != null
-  //         ? SizedBox(
-  //             height: 400,
-  //             width: 400,
-  //             child: Stack(
-  //               fit: StackFit.expand,
-  //               children: <Widget>[
-  //                 Image.file(_image!),
-  //                 //TODO: COMMENTED OUT TODAY 20-09-2022
-  //                 //if (widget.customPaint != null) widget.customPaint,
-  //               ],
-  //             ),
-  //           )
-  //         : Icon(
-  //             Icons.image,
-  //             size: 200,
-  //           ),
-  //     Padding(
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: ElevatedButton(
-  //         child: Text('From Gallery'),
-  //         onPressed: () => _getImage(ImageSource.gallery),
-  //       ),
-  //     ),
-  //     Padding(
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: ElevatedButton(
-  //         child: Text('Take a picture'),
-  //         onPressed: () => _getImage(ImageSource.camera),
-  //       ),
-  //     ),
-  //     if (_image != null)
-  //       Padding(
-  //         padding: const EdgeInsets.all(16.0),
-  //         child: Text(
-  //             '${_path == null ? '' : 'Image path: $_path'}\n\n${widget.text ?? ''}'),
-  //       ),
-  //   ]);
-  // }
-
-  // Future _getImage(ImageSource source) async {
-  //   setState(() {
-  //     _image = null;
-  //     _path = null;
-  //   });
-  //   final pickedFile = await _imagePicker?.pickImage(source: source);
-  //   if (pickedFile != null) {
-  //     _processPickedFile(pickedFile);
-  //   }
-  //   setState(() {});
-  // }
-
   void _switchScreenMode() {
     _image = null;
     if (_mode == ScreenMode.liveFeed) {
@@ -454,7 +395,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     final camera = cameras[_cameraIndex];
     _controller = CameraController(
       camera,
-     // ResolutionPreset.high,
+      // ResolutionPreset.high,
       ResolutionPreset.low,
       enableAudio: false,
     );
@@ -470,36 +411,30 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         maxZoomLevel = value;
       });
       _controller?.startImageStream(_processCameraImage);
-       setState(() {});
+      setState(() {});
     });
   }
 
   Future _stopLiveFeed() async {
-    await _controller?.stopImageStream();
-    await _controller?.dispose();
+    //ORIGINAL
+    // await _controller?.stopImageStream();
+    // await _controller?.dispose();
+    // _controller = null;
+
+    if(_controller != null){
+      await _controller?.stopImageStream() ;
+      await _controller?.dispose();
+    }
     _controller = null;
   }
 
-  Future _switchLiveCamera() async {
-    setState(() => _changingCameraLens = true);
-    _cameraIndex = (_cameraIndex + 1) % cameras.length;
-
-    await _stopLiveFeed();
-    await _startLiveFeed();
-    setState(() => _changingCameraLens = false);
-  }
-
-  // Future _processPickedFile(XFile pickedFile) async {
-  //   final path = pickedFile?.path;
-  //   if (path == null) {
-  //     return;
-  //   }
-  //   setState(() {
-  //     _image = File(path);
-  //   });
-  //   _path = path;
-  //   final inputImage = InputImage.fromFilePath(path);
-  //   widget.onImage(inputImage);
+  // Future _switchLiveCamera() async {
+  //   setState(() => _changingCameraLens = true);
+  //   _cameraIndex = (_cameraIndex + 1) % cameras.length;
+  //
+  //   await _stopLiveFeed();
+  //   await _startLiveFeed();
+  //   setState(() => _changingCameraLens = false);
   // }
 
   Future _processCameraImage(CameraImage image) async {
@@ -538,27 +473,36 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       planeData: planeData,
     );
 
-    final inputImage = InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+    final inputImage =
+        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
 
     widget.onImage(inputImage);
   }
 
   // MY CODE
   Widget _cameraDisplay({required bool smilestartCountdown}) {
-
-    if(_controller != null){
-      if(_controller?.value != null){
-        if(_controller?.value.isInitialized == false){
+    if (_controller != null) {
+      if (_controller?.value != null) {
+        if (_controller?.value.isInitialized == false) {
           // return Container();
-          return SizedBox(height: MediaQuery.of(context).size.height * 0.6,);
+          print("CONTROLLER  VALUE IS NOT INITIALIZED");
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+          );
         }
-      }else{
-       // return Container();
-        return SizedBox(height: MediaQuery.of(context).size.height * 0.6,);
+      } else {
+        // return Container();
+        print("CONTROLLER VALUE IS NULL");
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.6,
+        );
       }
-    }else{
-     // return Container();
-      return SizedBox(height: MediaQuery.of(context).size.height * 0.6,);
+    } else {
+      // return Container();
+      print("CONTROLLER IS NULL");
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.6,
+      );
     }
     // Old working code
     // if (_controller?.value.isInitialized == false) {
@@ -576,8 +520,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     if (scale < 1) scale = 1 / scale;
 
     // added by me
-   // final height = MediaQuery.of(context).size.height;
-   // final width = MediaQuery.of(context).size.width;
+    // final height = MediaQuery.of(context).size.height;
+    // final width = MediaQuery.of(context).size.width;
     // end of added by me
     return Container(
       //color: Theme.of(context).colorScheme.secondary,
@@ -587,49 +531,55 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           border: Border.all(
             color: Theme.of(context).colorScheme.secondary,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(20))),
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
-              if(_controller != null && value == false){
+              if (_controller != null && value == false) {
                 return Center(child: CameraPreview(_controller!));
-              }else{
-                return  SizedBox(height: MediaQuery.of(context).size.height * 0.6);
+              } else {
+                return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.6);
               }
             },
           ),
-            ValueListenableBuilder(
-              valueListenable: smileAppValueNotifier.value.showCountDown,
-              builder: (context, value, child) {
-                if(value == true){
-                  return Center(child: CountdownTimer());
-                }else{
-                  return SizedBox(height: 3.0,);
-                }
-              },
-            ),
-            ValueListenableBuilder(
-              valueListenable: smileAppValueNotifier.value.showCountDown,
-              builder: (context, value, child) {
-                if(value == false && !widget.readmessage ){
-                  return GlassmorphicSmilegramDisplay();
-                }else{
-                  return SizedBox(height: 3.0,);
-                }
-              },
-            ),
+          ValueListenableBuilder(
+            valueListenable: smileAppValueNotifier.value.showCountDown,
+            builder: (context, value, child) {
+              if (value == true) {
+                return Center(child: CountdownTimer());
+              } else {
+                return SizedBox(
+                  height: 3.0,
+                );
+              }
+            },
+          ),
+          ValueListenableBuilder(
+            valueListenable: smileAppValueNotifier.value.showCountDown,
+            builder: (context, value, child) {
+              if (value == false && !widget.readmessage) {
+                return GlassmorphicSmilegramDisplay();
+              } else {
+                return SizedBox(
+                  height: 3.0,
+                );
+              }
+            },
+          ),
           //}()),
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
-              if(value == false && widget.readmessage ){
+              if (value == false && widget.readmessage) {
                 return GlassmorphicReadMessage();
-              }else{
-                return Text("");
+              } else {
+                return SizedBox(
+                  height: 3.0,
+                );
               }
             },
           ),
@@ -640,9 +590,16 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               valueListenable: smileAppValueNotifier.value.deactivetSound,
               builder: (context, bool value, child) {
                 return IconButton(
-                    onPressed: (){
-                      smileAppValueNotifier.updateSoundDeactivation(deactivateSound: !value);
-                    }, icon: Icon( (value != true)? FontAwesomeIcons.volumeHigh : FontAwesomeIcons.volumeOff, color: Colors.green,));
+                    onPressed: () {
+                      smileAppValueNotifier.updateSoundDeactivation(
+                          deactivateSound: !value);
+                    },
+                    icon: Icon(
+                      (value != true)
+                          ? FontAwesomeIcons.volumeHigh
+                          : FontAwesomeIcons.volumeOff,
+                      color: Colors.green,
+                    ));
               },
             ),
           ),
@@ -651,7 +608,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  ScaleAnimatedText scaleValue({required String val}){
+  ScaleAnimatedText scaleValue({required String val}) {
     return ScaleAnimatedText('$val',
         scalingFactor: 0.2,
         textStyle: TextStyle(
@@ -661,101 +618,42 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ));
   }
 
-  Widget _giftAlert({required String message, required int amountWon}){
-
+  Widget _giftAlert({required String message, required int amountWon}) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.8,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            image:DecorationImage(
-              image:AssetImage('images/custom/giftopen.png'),
-              fit: BoxFit.cover,)),
+            image: DecorationImage(
+              image: AssetImage('images/custom/giftopen.png'),
+              fit: BoxFit.cover,
+            )),
         child: Stack(
           children: <Widget>[
             Center(
               //  child: Text(' Congratulations! your won $_value points', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
               child: DefaultTextStyle(
                 style: const TextStyle(
-                    fontSize: 30.0,
-                    fontFamily: 'SF',
-                    color: Colors.red
-                ),
+                    fontSize: 30.0, fontFamily: 'SF', color: Colors.red),
                 child: Center(
                   child: AnimatedTextKit(
                     repeatForever: true,
                     animatedTexts: [
-                      ScaleAnimatedText('$amountWon points won!',scalingFactor: 0.2, textAlign: TextAlign.center),
-                      ScaleAnimatedText('$message !',scalingFactor: 0.2, textAlign: TextAlign.center),
-                      ScaleAnimatedText('$amountWon points won!',scalingFactor: 0.2, textAlign: TextAlign.center),
+                      ScaleAnimatedText('$amountWon points won!',
+                          scalingFactor: 0.2, textAlign: TextAlign.center),
+                      ScaleAnimatedText('$message !',
+                          scalingFactor: 0.2, textAlign: TextAlign.center),
+                      ScaleAnimatedText('$amountWon points won!',
+                          scalingFactor: 0.2, textAlign: TextAlign.center),
                     ],
                   ),
                 ),
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 
-
-//
-// Widget _glassmorphicReadMessage(){
-//     return  SingleChildScrollView(
-//       child:Center(
-//             child: GlassmorphicContainer(
-//               width: MediaQuery.of(context).size.width * 0.90,
-//               height: MediaQuery.of(context).size.height * 0.85,
-//               borderRadius: 20,
-//               blur: 1,
-//               //alignment: Alignment.bottomCenter,
-//               alignment: Alignment.topCenter,
-//               border: 2,
-//               linearGradient: LinearGradient(
-//                   begin: Alignment.topLeft,
-//                   end: Alignment.bottomRight,
-//                   colors: [
-//                     Color(0xFFffffff).withOpacity(0.1),
-//                     Color(0xFFFFFFFF).withOpacity(0.05),
-//                   ],
-//                   stops: [
-//                     0.1,
-//                     1,
-//                   ]),
-//               borderGradient: LinearGradient(
-//                 begin: Alignment.topLeft,
-//                 end: Alignment.bottomRight,
-//                 colors: [
-//                   Color(0xFFffffff).withOpacity(0.5),
-//                   Color((0xFFFFFFFF)).withOpacity(0.5),
-//                 ],
-//               ),
-//               child: Padding(
-//                 padding: EdgeInsets.all(15),
-//                 child: Center(
-//                     child:  AnimatedSwitcher(
-//                       duration: const Duration(milliseconds: 500),
-//                       transitionBuilder: (Widget child, Animation<double> animation) {
-//                         return ScaleTransition(scale: animation, child: child);
-//                       },
-//                       child: ValueListenableBuilder(
-//                         valueListenable: messageNotifier,
-//                         builder: (context, SGmessageModel sgmodel, child) {
-//                           return Text(
-//                             sgmodel.msg,
-//                            // key: ValueKey<int>(_count),
-//                             style: Theme.of(context).textTheme.subtitle2,
-//                           );
-//                         },
-//                       ),
-//                     ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//     );
-//   }
-
-Widget weatherMap(){
+  Widget weatherMap() {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
       child: SfMaps(
@@ -771,51 +669,60 @@ Widget weatherMap(){
         ],
       ),
     );
-}
+  }
 
-
-  RatingDialog _showRatingAlert(BuildContext context, {required bool justreadmessage}){
-  return RatingDialog(
-    showCloseButton: false,
-    initialRating: 0.0,
-    starSize: 30.0,
-    // your app's name?
-    title: Text(
-      'Rate Your Mood',
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-        fontSize: 25,
-        fontWeight: FontWeight.bold,
+  RatingDialog _showRatingAlert(BuildContext context, {required bool justreadmessage}) {
+    return RatingDialog(
+      showCloseButton: false,
+      initialRating: 0.0,
+      starSize: 30.0,
+      // your app's name?
+      title: Text(
+        'Rate Your Mood',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-    ),
-    // encourage your user to leave a high rating?
-    message: Text(
-      //(justreadmessage == true) ? 'How happy does it feel to unlock your message with a smile?' : 'How happy does it feel to smile this long?',
-      (widget.readmessage == true) ? 'How happy does it feel to unlock your message with a smile?' : 'How happy does it feel to smile this long?',
-      textAlign: TextAlign.center,
-      style: const TextStyle(fontSize: 15),
-    ),
-    // your app's logo?
-    //image: const FlutterLogo(size: 100),
-    image: Image.asset("assets/logo1.jpeg",width: 100, height: 100,),
-    submitButtonText: 'Submit',
-    commentHint: 'Set your custom comment hint',
-    onCancelled: () => print('cancelled'),
-    onSubmitted: (response) {
-      MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-      mood.captureMood(rating: response.rating.round(), smileStartTime: smileAppValueNotifier.value.smileStartTime.value);
-      ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
-      debugPrint("GOT TO THIS POINT *****");
-      Navigator.of(context).popAndPushNamed('/home',);
-    },
-    submitButtonTextStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 17,
-        color: Colors.green
-    ),
-  );
-}
-
+      // encourage your user to leave a high rating?
+      message: Text(
+        //(justreadmessage == true) ? 'How happy does it feel to unlock your message with a smile?' : 'How happy does it feel to smile this long?',
+        (widget.readmessage == true)
+            ? 'How happy does it feel to unlock your message with a smile?'
+            : 'How happy does it feel to smile this long?',
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 15),
+      ),
+      // your app's logo?
+      //image: const FlutterLogo(size: 100),
+      image: Image.asset(
+        "assets/logo1.jpeg",
+        width: 100,
+        height: 100,
+      ),
+      submitButtonText: 'Submit',
+      commentHint: 'Set your custom comment hint',
+      onCancelled: () => print('cancelled'),
+      onSubmitted: (response) {
+        MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+        mood.captureMood(
+            rating: response.rating.round(),
+            smileStartTime: smileAppValueNotifier.value.smileStartTime.value);
+        ApiAccess().saveMood(
+            moodModel: mood,
+            url: (widget.readmessage == true)
+                ? Tribe_Mood_URL
+                : SmileGram_Mood_URL);
+        debugPrint("GOT TO THIS POINT *****");
+        Navigator.of(context).popAndPushNamed(
+          '/home',
+        );
+      },
+      submitButtonTextStyle: const TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
+    );
+  }
 }
 
 // class Model {
@@ -824,4 +731,3 @@ Widget weatherMap(){
 //   final String state;
 //   final String storage;
 // }
-
