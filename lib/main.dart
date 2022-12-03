@@ -29,7 +29,6 @@ Future<void> main() async {  // The code before I added Flutter_redux
   //runApp(MyApp());
 
   bool? loginStatus = await Localstorage().getBoolean(key_login_status);
-  print('Login Status is : ${loginStatus}');
 
   ((){
     if(loginStatus != null){

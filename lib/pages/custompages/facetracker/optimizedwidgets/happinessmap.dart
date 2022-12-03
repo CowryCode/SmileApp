@@ -57,76 +57,9 @@ class _HappinessMapState extends State<HappinessMap> {
             },
           ),
           SizedBox(height: 5,),
-          Container(
-            width: MediaQuery.of(context).size.width ,
-            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-            decoration: BoxDecoration(
-              // color:  Colors.black12,
-              color: Theme.of(context).primaryColor,
-              border: Border.all(
-                  width: 1.0,
-                  color: Colors.grey.withOpacity(0.5)),
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Completed:  ',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black45,
-                    fontFamily: 'Poppins',
-                    fontSize: 12.0,
-                  ),
-                ),
-                Icon(FontAwesomeIcons.solidCircle,color: Colors.green, size: 12 ,),
-                Text(
-                  "  Today's Target:  ",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black45,
-                    fontFamily: 'Poppins',
-                    fontSize: 12.0,
-                  ),
-                ),
-                Icon(FontAwesomeIcons.solidCircle,color: Colors.red, size: 12 ,),
-                Text(
-                  '  Now:  ',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black45,
-                    fontFamily: 'Poppins',
-                    fontSize: 12.0,
-                  ),
-                ),
-                Icon(FontAwesomeIcons.solidCircle,color: Colors.orange, size: 12 ,)
-              ],
-            ),
-          )
         ],
       )
 
-
-    //   ValueListenableBuilder(
-    //     // valueListenable: counterNotifier,
-    //     valueListenable: smileAppValueNotifier.value.mapdatasource,
-    //     builder: (context, MapShapeSource mapShapeSource, child) {
-    //       return SfMaps(
-    //         layers: <MapShapeLayer>[
-    //           MapShapeLayer(
-    //             source: shapeDataSource,
-    //             sublayers: [
-    //               MapShapeSublayer(
-    //                 // source: sublayerDataSource,
-    //                 source: mapShapeSource,
-    //               )
-    //             ],
-    //           ),
-    //         ],
-    //       );
-    //     },
-    // )
     );
   }
 

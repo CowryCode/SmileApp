@@ -64,32 +64,20 @@ class CameraViewGift extends StatefulWidget {
 class _CameraViewGiftState extends State<CameraViewGift> {
   ScreenMode _mode = ScreenMode.liveFeed;
 
-  // CameraController _controller;
-  // File _image;
-  // String _path;
-  // ImagePicker _imagePicker;
-  CameraController? _controller;
-  File? _image;
-  String? _path;
 
-  // ImagePicker? _imagePicker;
+  CameraController? _controller;
+
   int _cameraIndex = 1;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
   bool _changingCameraLens = false;
 
-  int _count = 0; // My Code
-  String _msg = ""; // My Code
-  String _fulltext =
-      "I am a living testimony testimony that God is good"; // My Code
-  int _tokenIndex = 0; // My Code
-  //var _tokenArray;
 
   late int _tokenArrayLength;
 
-  int _value = 0;
-  bool _activated = false;
-  int _activation_index = -1;
+  // int _value = 0;
+  // bool _activated = false;
+  // int _activation_index = -1;
   final Duration timerTastoPremuto = Duration(seconds: 20);
 
   //Todo: Add real value
@@ -108,43 +96,40 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   void initState() {
     super.initState();
     Wakelock.enable();
-    try {
 
-      // if (cameras.any(
-      //   (element) =>
-      //       element.lensDirection == widget.initialDirection &&
-      //       element.sensorOrientation == 90,
-      // )) {
-      //   _cameraIndex = cameras.indexOf(
-      //     cameras.firstWhere((element) =>
-      //         element.lensDirection == widget.initialDirection &&
-      //         element.sensorOrientation == 90),
-      //   );
-      // } else {
-      //   _cameraIndex = cameras.indexOf(
-      //     cameras.firstWhere(
-      //       (element) => element.lensDirection == widget.initialDirection,
-      //     ),
-      //   );
-      // }
+        try {
+          if (cameras.any(
+                (element) =>
+            element.lensDirection == widget.initialDirection &&
+                element.sensorOrientation == 90,
+          )) {
+            _cameraIndex = cameras.indexOf(
+              cameras.firstWhere((element) =>
+              element.lensDirection == widget.initialDirection &&
+                  element.sensorOrientation == 90),
+            );
+          } else {
+            _cameraIndex = cameras.indexOf(
+              cameras.firstWhere(
+                    (element) => element.lensDirection == widget.initialDirection,
+              ),
+            );
+          }
 
-     // _startLiveFeed();
-      // SET PREFERRED ORIENTATION
-      SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+          SystemChrome.setPreferredOrientations(
+              [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-      _startLiveFeed();
-    } catch (e) {
-      print("Error : ${e.toString()}");
-    }
-    // _randomize();
+          _startLiveFeed();
+
+        } catch (e) {
+          print("Error : ${e.toString()}");
+        }
+
   }
 
-  // Added this code on 21-08-2021 //
 
   void refreshCamera() {
     try {
-      // _imagePicker = ImagePicker();
 
       if (cameras.any(
         (element) =>
@@ -167,10 +152,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       // SET PREFERRED ORIENTATION
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
-      smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
-      smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-      //
 
     } catch (e) {
       debugPrint("CAMERA ERROR : ${e.toString()}");
@@ -265,7 +246,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
+                    (value == false && !widget.readmessage) ? ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Theme.of(context).colorScheme.secondary),
                       child: const Text(
@@ -274,11 +255,11 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                       onPressed: () {
                         refreshCamera(); // Refresh
                       },
-                    ),
+                    ) : SizedBox( height: 1,),
                     SizedBox(
                       width: 3,
                     ),
-                    ElevatedButton(
+                    (value == false) ? ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Theme.of(context).colorScheme.secondary),
                       child: const Text(
@@ -293,7 +274,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                               _showRatingAlert(context, justreadmessage: true),
                         );
                       },
-                    ),
+                    ) : SizedBox( height: 1,),
                   ],
                 );
               } else {
@@ -320,10 +301,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     } else {
       return Container();
     }
-    // Old working code
-    // if (_controller?.value.isInitialized == false) {
-    //   return Container();
-    // }
+
 
     final size = MediaQuery.of(context).size;
     // calculate scale depending on screen and camera ratios
@@ -377,18 +355,18 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   void _switchScreenMode() {
-    _image = null;
-    if (_mode == ScreenMode.liveFeed) {
-      _mode = ScreenMode.gallery;
-      _stopLiveFeed();
-    } else {
-      _mode = ScreenMode.liveFeed;
-      _startLiveFeed();
-    }
-    if (widget.onScreenModeChanged != null) {
-      widget.onScreenModeChanged!(_mode);
-    }
-    setState(() {});
+    // _image = null;
+    // if (_mode == ScreenMode.liveFeed) {
+    //   _mode = ScreenMode.gallery;
+    //   _stopLiveFeed();
+    // } else {
+    //   _mode = ScreenMode.liveFeed;
+    //   _startLiveFeed();
+    // }
+    // if (widget.onScreenModeChanged != null) {
+    //   widget.onScreenModeChanged!(_mode);
+    // }
+    // setState(() {});
   }
 
   Future _startLiveFeed() async {
@@ -422,8 +400,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // _controller = null;
 
     if(_controller != null){
-      await _controller?.stopImageStream() ;
-      await _controller?.dispose();
+      if(_controller?.value.isInitialized == false){
+        await _controller?.stopImageStream() ;
+        await _controller?.dispose();
+      }
     }
     _controller = null;
   }
@@ -524,7 +504,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // final width = MediaQuery.of(context).size.width;
     // end of added by me
     return Container(
-      //color: Theme.of(context).colorScheme.secondary,
       height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -539,7 +518,16 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
               if (_controller != null && value == false) {
-                return Center(child: CameraPreview(_controller!));
+              //  return Center(child: CameraPreview(_controller!));
+                return Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Container(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        margin: EdgeInsets.only(left: 15.0),
+                        child: CameraPreview(_controller!)
+                    )
+                );
               } else {
                 return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.6);
@@ -606,6 +594,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ],
       ),
     );
+
   }
 
   ScaleAnimatedText scaleValue({required String val}) {

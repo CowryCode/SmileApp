@@ -28,9 +28,16 @@ class _GlassmorphicSmilegramDisplayState
               valueListenable: smileAppValueNotifier.value.deactivetSound,
               builder: (context, bool value, child) {
                 return IconButton(
-                    onPressed: (){
-                      smileAppValueNotifier.updateSoundDeactivation(deactivateSound: !value);
-                }, icon: Icon( (value != true)? FontAwesomeIcons.volumeHigh : FontAwesomeIcons.volumeOff, color: Colors.green,));
+                    onPressed: () {
+                      smileAppValueNotifier.updateSoundDeactivation(
+                          deactivateSound: !value);
+                    },
+                    icon: Icon(
+                      (value != true)
+                          ? FontAwesomeIcons.volumeHigh
+                          : FontAwesomeIcons.volumeOff,
+                      color: Colors.green,
+                    ));
               },
             ),
             ValueListenableBuilder(
@@ -48,42 +55,119 @@ class _GlassmorphicSmilegramDisplayState
             ),
           ],
         ),
-        Align(alignment: Alignment.center, child: HappinessMap()),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            width: MediaQuery.of(context).size.width ,
-            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-            decoration: BoxDecoration(
-              // color:  Colors.black12,
-              color: Theme.of(context).primaryColor,
-              border: Border.all(
-                  width: 1.0,
-                  color: Colors.grey.withOpacity(0.5)),
-              borderRadius: BorderRadius.circular(16.0),
+        Column(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+              decoration: BoxDecoration(
+                // color:  Colors.black12,
+                color: Theme.of(context).primaryColor,
+                border:
+                    Border.all(width: 1.0, color: Colors.grey.withOpacity(0.5)),
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: ValueListenableBuilder(
+                // valueListenable: counterNotifier,
+                valueListenable: smileAppValueNotifier.value.nextCountry,
+                builder: (context, String value, child) {
+                  return Text(
+                    '   $value',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                      fontFamily: 'Poppins',
+                      fontSize: 14.0,
+                    ),
+                  );
+                },
+              ),
             ),
-            child: ValueListenableBuilder(
-              // valueListenable: counterNotifier,
-              valueListenable: smileAppValueNotifier.value.nextCountry,
-              builder: (context, String value, child) {
-                return Text(
-                  '   $value',
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange,
-                    fontFamily: 'Poppins',
-                    fontSize: 14.0,
+            Container(
+              width: MediaQuery.of(context).size.width ,
+              // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+              decoration: BoxDecoration(
+                // color:  Colors.black12,
+                color: Theme.of(context).primaryColor,
+                border: Border.all(
+                    width: 1.0,
+                    color: Colors.grey.withOpacity(0.5)),
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Completed:  ',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                      fontFamily: 'Poppins',
+                      fontSize: 12.0,
+                    ),
                   ),
-                );
-              },
-            ),
-          ),
+                  Icon(FontAwesomeIcons.solidCircle,color: Colors.green, size: 12 ,),
+                  Text(
+                    "  Today's Target:  ",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                      fontFamily: 'Poppins',
+                      fontSize: 12.0,
+                    ),
+                  ),
+                  Icon(FontAwesomeIcons.solidCircle,color: Colors.red, size: 12 ,),
+                  Text(
+                    '  Now:  ',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black45,
+                      fontFamily: 'Poppins',
+                      fontSize: 12.0,
+                    ),
+                  ),
+                  Icon(FontAwesomeIcons.solidCircle,color: Colors.orange, size: 12 ,)
+                ],
+              ),
+            )
+          ],
         ),
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: Container(
+        //     width: MediaQuery.of(context).size.width ,
+        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+        //     decoration: BoxDecoration(
+        //       // color:  Colors.black12,
+        //       color: Theme.of(context).primaryColor,
+        //       border: Border.all(
+        //           width: 1.0,
+        //           color: Colors.grey.withOpacity(0.5)),
+        //       borderRadius: BorderRadius.circular(16.0),
+        //     ),
+        //     child: ValueListenableBuilder(
+        //       // valueListenable: counterNotifier,
+        //       valueListenable: smileAppValueNotifier.value.nextCountry,
+        //       builder: (context, String value, child) {
+        //         return Text(
+        //           '   $value',
+        //           textAlign: TextAlign.center,
+        //           overflow: TextOverflow.ellipsis,
+        //           style: const TextStyle(
+        //             fontWeight: FontWeight.bold,
+        //             color: Colors.orange,
+        //             fontFamily: 'Poppins',
+        //             fontSize: 14.0,
+        //           ),
+        //         );
+        //       },
+        //     ),
+        //   ),
+        // ),
+        Align(alignment: Alignment.center, child: HappinessMap()),
       ],
     ));
-  
   }
 }
-
