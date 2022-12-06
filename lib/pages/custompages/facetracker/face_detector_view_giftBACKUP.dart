@@ -117,9 +117,10 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView_Backup> {
                   List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
                   String updatedIDs =  countryIDstring + ",${data!.length}";
                   print("INDEX STRING WITHIN: $updatedIDs");
-                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs);
+                  int nextCountryID = indicesCount.length + 1;
+                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs, nextID: nextCountryID);
                 }else{
-                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
+                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0", nextID: 0);
                 }
                 smileAppValueNotifier.refreshSmileDurationCount();
               }else{

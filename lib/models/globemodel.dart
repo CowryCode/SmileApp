@@ -27,6 +27,17 @@ class GlobeModel {
 
   }
 
+
+  List<Model> getProcessedcountries({required String userCountriesIndexString}){
+    List<int>? indes = splitString(countriesIndexString: userCountriesIndexString);
+    this.indices = indes;
+    if(indes != null){
+      this.countriesmodel = loadModels(indices: splitString(countriesIndexString: userCountriesIndexString));
+    }
+    return this.countriesmodel;
+  }
+
+
   List<Model> loadModels({List<int>? indices}){
     try{
       if(indices != null){
@@ -46,19 +57,12 @@ class GlobeModel {
           }
         }
 
-        //nextTargetStart = indices.last + 1;
-        int nextTargetend = getNextTargetEndIndex(currentLastIndex: indices.last);
-        //Added +1 to Target Start b/cos from item 2 to Target_Countries_COUNT should be Red and item 1 Amber
-        for(int x = nextTargetStart+1 ; x <= nextTargetend; x++){
-          if(x < modelsDictionary().length){
-            Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(x).state, storage: "Low");
-            list.add(nextCountryTopaint);
-          }
-        }
-        //int nextElement = indices.last + 1;
-        // if(nextTargetStart < modelsDictionary().length){
-        //   Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(nextTargetStart).state, storage: "Medium");
-        //   list.add(nextCountryTopaint);
+        // int nextTargetend = getNextTargetEndIndex(currentLastIndex: indices.last);
+        // for(int x = nextTargetStart+1 ; x <= nextTargetend; x++){
+        //   if(x < modelsDictionary().length){
+        //     Model nextCountryTopaint = Model(state: modelsDictionary().elementAt(x).state, storage: "Low");
+        //     list.add(nextCountryTopaint);
+        //   }
         // }
 
         return list;
@@ -78,15 +82,6 @@ class GlobeModel {
     }else{
       return Target_Countries_COUNT;
     }
-  }
-
-  List<Model> getProcessedcountries({required String userCountriesIndexString}){
-    List<int>? indes = splitString(countriesIndexString: userCountriesIndexString);
-    this.indices = indes;
-    if(indes != null){
-      this.countriesmodel = loadModels(indices: splitString(countriesIndexString: userCountriesIndexString));
-    }
-    return this.countriesmodel;
   }
 
   List<Model> modelsDictionary(){

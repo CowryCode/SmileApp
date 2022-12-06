@@ -26,7 +26,7 @@ import 'package:SmileApp/models/globemodel.dart';
  final String key_login_status = "loginstatus";
 
  // NOTIFIER VARIABLES
- final int Smile_Count_Initial = 20;
+ final int Smile_Count_Initial = 20; // 20 counts = 5 Seconds
  final int Speech_Activation_Count = 8;
  final int Target_Countries_COUNT = 12;
 

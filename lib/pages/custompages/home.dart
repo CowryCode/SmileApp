@@ -5,6 +5,7 @@ import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/smilegramfeedbackwidget.dart';
 import 'package:SmileApp/pages/custompages/tribe_messages.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -310,6 +311,9 @@ class _HomeState extends State<Home> {
                   );
                 }
             ),
+
+          SmileGramFeedBackWidget(),
+
           ],),
       ),
     );

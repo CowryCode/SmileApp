@@ -37,7 +37,7 @@ class NotifiersSection {
   ValueNotifier<bool> activatespeech = ValueNotifier<bool>(false);
   ValueNotifier<bool> deactivetSound = ValueNotifier<bool>(false);
   ValueNotifier<MoodModel> moodmodel = ValueNotifier<MoodModel>(MoodModel());
-  ValueNotifier<DateTime> smileStartTime = ValueNotifier<DateTime>(DateTime.now());
+  ValueNotifier<int> smileDurationCounter = ValueNotifier<int>(0);
   NotifiersSection({
     required this.smileDurationCount,
     required this.smileDurationCompleted,
@@ -60,6 +60,7 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
 
   void refreshSmileDurationCount() {
     value.smileDurationCount.value = Smile_Count_Initial;
+    updateSmileDurationCounter();
     notifyListeners();
   }
 
@@ -77,13 +78,13 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
     value.showShowMoodRating.value = showMoodrate;
   }
 
-  void updateCountriesIndexString({required String countriesIndex}) {
+  void updateCountriesIndexString({required String countriesIndex, required int nextID}) {
     value.countriesIndexString.value = countriesIndex;
-    updateMapData(countriesIDstring: countriesIndex);
+    updateMapData(countriesIDstring: countriesIndex, nextCountryID: nextID);
     notifyListeners();
   }
 
-  void updateMapData({required String countriesIDstring}) {
+  void updateMapData({required String countriesIDstring, required int nextCountryID}) {
     try {
       List<Model>? data = worldmapModel.getProcessedcountries(
           userCountriesIndexString: countriesIDstring);
@@ -107,7 +108,8 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
         ],
       );
       value.mapdatasource.value = sublayerDataSource;
-      value.nextCountry.value = data.last.state;
+
+      value.nextCountry.value = data.last.state; //last as at 05/12/2022
       notifyListeners();
     } catch (e) {
       // Do Nothing
@@ -147,9 +149,16 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
     notifyListeners();
   }
 
-  void recordSmileStartTime(){
-    value.smileStartTime.value = DateTime.now();
+  //JUST ADDED
+  void updateSmileDurationCounter(){
+    value.smileDurationCounter.value++;
     notifyListeners();
+  }
+
+  int getSmileDurationCounter(){
+    /* The Value represent number of countries that have bean painted green
+     Each country count = 5secs of Smile */
+    return  value.smileDurationCounter.value;
   }
 }
 

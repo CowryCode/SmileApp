@@ -676,15 +676,12 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       ),
       // encourage your user to leave a high rating?
       message: Text(
-        //(justreadmessage == true) ? 'How happy does it feel to unlock your message with a smile?' : 'How happy does it feel to smile this long?',
         (widget.readmessage == true)
             ? 'How happy does it feel to unlock your message with a smile?'
             : 'How happy does it feel to smile this long?',
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 15),
       ),
-      // your app's logo?
-      //image: const FlutterLogo(size: 100),
       image: Image.asset(
         "assets/logo1.jpeg",
         width: 100,
@@ -697,13 +694,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
         mood.captureMood(
             rating: response.rating.round(),
-            smileStartTime: smileAppValueNotifier.value.smileStartTime.value);
+            countrycount: smileAppValueNotifier.getSmileDurationCounter());
         ApiAccess().saveMood(
             moodModel: mood,
             url: (widget.readmessage == true)
                 ? Tribe_Mood_URL
                 : SmileGram_Mood_URL);
-        debugPrint("GOT TO THIS POINT *****");
+
         Navigator.of(context).popAndPushNamed(
           '/home',
         );

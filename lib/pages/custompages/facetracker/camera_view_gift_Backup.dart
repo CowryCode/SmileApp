@@ -170,7 +170,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         DeviceOrientation.portraitDown
       ]);
 
-      smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
+      smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0", nextID: 0);
       smileAppValueNotifier.updateShowCountDown(showCoundown: true);
       //
       // SGMessage sgMessage = StoreProvider.of<MyAppState>(context).state.sg_message;

@@ -95,9 +95,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null) {
 
-      if(smileAppValueNotifier.value.showCountDown.value == false || widget.giftVariableObject.readmessage!){
-        smileAppValueNotifier.recordSmileStartTime();
-      }
       for (final face in faces) {
         print(" SMILE Probability is :  ${face.smilingProbability}");
         bool soundAllowed = smileAppValueNotifier.value.deactivetSound.value;
@@ -135,12 +132,12 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                 String countryIDstring = smileAppValueNotifier.value.countriesIndexString.value;
                 List<int>? indicesCount = worldmapModel.splitString(countriesIndexString: countryIDstring);
                 if((indicesCount!.length) < worldmapModel.modelsDictionary().length){
-                  List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
-                  //String updatedIDs =  countryIDstring + ",${data!.length}";
+                 // List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
                   String updatedIDs =  countryIDstring + ",${indicesCount.length}";
-                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs);
+                  int nextCountryID = indicesCount.length + 1;
+                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs, nextID: nextCountryID);
                 }else{
-                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0");
+                  smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0", nextID: 0);
                 }
                 smileAppValueNotifier.refreshSmileDurationCount();
               }else{
