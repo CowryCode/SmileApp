@@ -123,6 +123,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         theme: ThemeData(
+          primarySwatch: Colors.green, // Just Added
           fontFamily: 'Poppins',
           primaryColor: Colors.white,
           brightness: Brightness.light,
@@ -142,6 +143,12 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w600, color: config.Colors().secondDarkColor(1)),
             caption: TextStyle(fontSize: 12.0, color: config.Colors().secondDarkColor(0.7)),
           ),
+          dialogTheme: DialogTheme(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+          )
         ),
         localizationsDelegates: [
           FormBuilderLocalizations.delegate,

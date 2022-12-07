@@ -1,3 +1,4 @@
+import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/ratingcontroller.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -18,13 +19,13 @@ class _SmileGramFeedBackWidgetState extends State<SmileGramFeedBackWidget> {
   String emotion = "Very Sad";
   String _currentAnimation = "1+";
   RatingController _controller = RatingController();
+
   void _onChanged(double value) {
-    if(_rating == value) return;
+    if (_rating == value) return;
     setState(() {
       var direction = _rating < value ? '+' : '-';
       _rating = value;
-      int cases =_rating.round();
-      switch(_rating.round()){
+      switch (_rating.round()) {
         case 1:
           emotion = "Very Sad";
           break;
@@ -47,71 +48,44 @@ class _SmileGramFeedBackWidgetState extends State<SmileGramFeedBackWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.8,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0),
-          // color: Colors.green,
-          // image: DecorationImage(
-          //   image: AssetImage('images/custom/giftopen.png'),
-          //   fit: BoxFit.cover,
-          // )
-        ),
-        child: Column(
-          children: <Widget>[
-            Icon(FontAwesomeIcons.faceSmile, color: Theme
-                .of(context)
-                .colorScheme
-                .secondary,),
-            Container(
-                height:300,
-                width: 300,
-                /*flr file is created from RIV*/
-                child: FlareActor('assets/happiness_emoji.flr',
-                  alignment: Alignment.center,
-                  fit: BoxFit.contain,
-                  controller: _controller,
-                  animation: _currentAnimation,
-                )
-            ),
-            Slider(
-                value: _rating,
-                min: 1,
-                max: 5,
-                divisions: 4,
-                onChanged: _onChanged
-            ),
-            Text(
-              '$emotion',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline4,
-            )
-            // Center(
-            //   //  child: Text(' Congratulations! your won $_value points', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
-            //   child: DefaultTextStyle(
-            //     style: const TextStyle(
-            //         fontSize: 30.0, fontFamily: 'SF', color: Colors.red),
-            //     child: Center(
-            //       child: AnimatedTextKit(
-            //         repeatForever: true,
-            //         animatedTexts: [
-            //           ScaleAnimatedText('x points won!',
-            //               scalingFactor: 0.2, textAlign: TextAlign.center),
-            //           ScaleAnimatedText('You try Jor !',
-            //               scalingFactor: 0.2, textAlign: TextAlign.center),
-            //           ScaleAnimatedText('y oints won!',
-            //               scalingFactor: 0.2, textAlign: TextAlign.center),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
-          ],
-        ));
+    return SafeArea(
+      child: Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            // color: Colors.green,
+            // image: DecorationImage(
+            //   image: AssetImage('images/custom/giftopen.png'),
+            //   fit: BoxFit.cover,
+            // )
+          ),
+          child: Column(
+            children: <Widget>[
+
+              Container(
+                  height: 300,
+                  width: 300,
+                  /*flr file is created from RIV*/
+                  child: FlareActor(
+                    'assets/happiness_emoji.flr',
+                    alignment: Alignment.center,
+                    fit: BoxFit.contain,
+                    controller: _controller,
+                    animation: _currentAnimation,
+                  )),
+              Slider(
+                  value: _rating,
+                  min: 1,
+                  max: 5,
+                  divisions: 4,
+                  onChanged: _onChanged),
+              Text(
+                '$emotion',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ],
+          )),
+    );
   }
+
 }
