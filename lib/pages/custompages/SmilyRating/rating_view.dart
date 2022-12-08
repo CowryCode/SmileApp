@@ -13,6 +13,9 @@ class _RatingViewState extends State<RatingView> {
   var _ratingPageController = PageController();
   var _starPosition = 200.0;
   var _rating = 0;
+  var _selectedChipIndex = -1;
+  var _isMoreDetailsActive = false;
+  var _moreDetailFocuseNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class _RatingViewState extends State<RatingView> {
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
+          //Thanks Note
           Container(
             height: max(300, MediaQuery.of(context).size.height * 0.3),
             child: PageView(
@@ -34,6 +38,7 @@ class _RatingViewState extends State<RatingView> {
               ],
             ),
           ),
+          // Done Button
           Positioned(
               bottom: 0,
               left: 0,
@@ -41,7 +46,7 @@ class _RatingViewState extends State<RatingView> {
               child: Container(
                 color: Theme.of(context).colorScheme.secondary,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: _hideDialog,
                   child: Text(
                     'Done',
                     style: TextStyle(
@@ -51,12 +56,14 @@ class _RatingViewState extends State<RatingView> {
                   ),
                 ),
               )),
+          //Skip Button
           Positioned(
               right: 0,
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: _hideDialog,
                 child: Text('Skip'),
               )),
+          //Star Rating
           AnimatedPositioned(
               top: _starPosition,
               left: 0,
@@ -66,9 +73,20 @@ class _RatingViewState extends State<RatingView> {
                 children: List.generate(
                     5,
                     (index) => IconButton(
-                          icon: index < _rating ? Icon(Icons.star, size: 32,) :  Icon(Icons.star_border, size: 32,) ,
+                          icon: index < _rating
+                              ? Icon(
+                                  Icons.star,
+                                  size: 32,
+                                )
+                              : Icon(
+                                  Icons.star_border,
+                                  size: 32,
+                                ),
                           color: Theme.of(context).colorScheme.secondary,
                           onPressed: () {
+                            _ratingPageController.nextPage(
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.easeIn);
                             print(" Rating : ${index + 1}");
                             setState(() {
                               _starPosition = 20.0;
@@ -78,6 +96,21 @@ class _RatingViewState extends State<RatingView> {
                         )),
               ),
               duration: Duration(milliseconds: 300)),
+          //Back Button
+          if(_isMoreDetailsActive)
+          Positioned(
+            left: 0,
+              top: 0,
+              child: MaterialButton(
+                onPressed: (){
+                  setState(() {
+                    _isMoreDetailsActive = false;
+                  });
+                },
+                child: Icon(Icons.arrow_back_ios),
+              )
+          )
+
         ],
       ),
     );
@@ -102,6 +135,73 @@ class _RatingViewState extends State<RatingView> {
   }
 
   _causeofRating() {
-    return Container();
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Visibility(
+            visible: !_isMoreDetailsActive,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('What could we do better'),
+                // Cause Selection
+                Wrap(
+                  spacing: 8.0,
+                  alignment: WrapAlignment.center,
+                  children: List.generate(6, (index) => InkWell(
+                    onTap: (){
+                      setState(() {
+                        _selectedChipIndex = index;
+                      });
+                    },
+                    child: Chip(
+                      backgroundColor: _selectedChipIndex == index ? Theme.of(context).colorScheme.secondary : Colors.grey[300],
+                      label: Text('Text ${index + 1}', style: TextStyle(color: _selectedChipIndex == index ? Theme.of(context).primaryColor :  Theme.of(context).colorScheme.secondary ),),
+                    ),
+                  )),
+                ),
+                SizedBox(height: 16,),
+                // More Button
+                InkWell(
+                  onTap: (){
+                    _moreDetailFocuseNode.requestFocus();
+                    setState(() {
+                      _isMoreDetailsActive = true;
+                    });
+                  },
+                  child: Text(
+                    'Want to tell us more',
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                )
+              ],
+            ),
+          replacement: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Tell Us More'),
+              Chip(label: Text('Text ${_selectedChipIndex + 1}')),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  focusNode: _moreDetailFocuseNode,
+                  decoration: InputDecoration(
+                    hintText: "Write your review here...",
+                    hintStyle: TextStyle(
+                      color: Colors.grey[400],
+                    ),
+                    border: InputBorder.none
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  _hideDialog(){
+    if(Navigator.canPop(context))  Navigator.pop(context);
   }
 }
