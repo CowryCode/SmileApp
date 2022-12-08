@@ -166,30 +166,41 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     Wakelock.disable();
     super.dispose();
   }
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      barrierDismissible: true,
+      // set to false if you want to force a rating
+      builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
+    )) ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
-          onPressed: () {
-            showDialog(
-              context: context,
-              barrierDismissible: true,
-              // set to false if you want to force a rating
-              builder: (context) => _showRatingAlert(context,
-                  justreadmessage: widget.readmessage),
-            );
-            //Navigator.of(context).popAndPushNamed('/home');
-          },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+            onPressed: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                // set to false if you want to force a rating
+                builder: (context) => _showRatingAlert(context,
+                    justreadmessage: widget.readmessage),
+              );
+              //Navigator.of(context).popAndPushNamed('/home');
+            },
+          ),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          title: Text(widget.title),
         ),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        title: Text(widget.title),
+        body: _body(),
+        // floatingActionButton: _floatingActionButton(), // I removed the floating button
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // I removed the floating Button
       ),
-      body: _body(),
-      // floatingActionButton: _floatingActionButton(), // I removed the floating button
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // I removed the floating Button
     );
   }
 

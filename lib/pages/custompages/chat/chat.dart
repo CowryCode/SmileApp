@@ -32,105 +32,119 @@ class _ChatWidgetState extends State<ChatWidget> {
     myController.dispose();
   }
 
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      barrierDismissible: true,
+      // set to false if you want to force a rating
+      builder: (context) => _showRatingAlert(context),
+    )) ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
-            onPressed: () {
-              showDialog(
-                context: context,
-                barrierDismissible: true,
-                // set to false if you want to force a rating
-                builder: (context) => _showRatingAlert(context),
-              );
-              // Navigator.of(context).popAndPushNamed('/home');
-            },
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16.0),
-                bottomRight: Radius.circular(16.0)),
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          title: Text(
-            "Baby AI Speaks!",
-            style: TextStyle(
-              fontSize: 22.0,
-              fontFamily: 'Poppins',
-              color: Theme.of(context).primaryColor,
+    return WillPopScope(
+      //onWillPop: () async => false,
+      onWillPop: _onWillPop,
+      child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  // set to false if you want to force a rating
+                  builder: (context) => _showRatingAlert(context),
+                );
+                // Navigator.of(context).popAndPushNamed('/home');
+              },
             ),
-          ),
-        ),
-        body: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-          Expanded(
-            child: ValueListenableBuilder(
-                valueListenable: chatcentralnotifier,
-                builder: (context, List<BuddyChat> value, child) {
-                  return AnimatedList(
-                    key: _myListKey,
-                    reverse: true,
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                    initialItemCount: value.length,
-                    // Latest
-                    itemBuilder: (context, index, Animation<double> animation) {
-                      return ChatMessageListItem(
-                       // chat: _buddyconversationList.conversation[0].buddychats![index],
-                        chat: value[index],
-                        animation: animation,
-                      );
-                    },
-                  );
-                }),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 12.0, right: 6.0, left: 6.0),
-            decoration: BoxDecoration(
-              border:
-                  Border.all(width: 1.0, color: Colors.grey.withOpacity(0.6)),
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20.0),
-              boxShadow: [
-                // BoxShadow(color: Theme.of(context).hintColor.withOpacity(0.10), offset: Offset(0,-4), blurRadius: 10)
-              ],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16.0),
+                  bottomRight: Radius.circular(16.0)),
             ),
-            child: TextField(
-              controller: myController,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(
-                    left: 20.0, right: 20.0, top: 10, bottom: 10),
-                hintText: 'Message ...',
-                hintStyle: TextStyle(color: Colors.grey, fontFamily: 'Poppins'),
-                suffixIcon: IconButton(
-                  padding: EdgeInsets.only(right: 30),
-                  onPressed: () {
-                    chatcentralnotifier.updateComment(
-                        chat: myController.text, isbot: false);
-                    setState(() {
-                      _myListKey.currentState!.insertItem(0);
-                    });
-
-                    Timer(Duration(milliseconds: 100), () {
-                      myController.clear();
-                    });
-                  },
-                  icon: Icon(
-                    Icons.send,
-                    color: Theme.of(context).accentColor,
-                    size: 25,
-                  ),
-                ),
-                border: UnderlineInputBorder(borderSide: BorderSide.none),
-                enabledBorder:
-                    UnderlineInputBorder(borderSide: BorderSide.none),
-                focusedBorder:
-                    UnderlineInputBorder(borderSide: BorderSide.none),
+            backgroundColor: Theme.of(context).accentColor,
+            title: Text(
+              ""
+                  "Baby AI Speaks!",
+              style: TextStyle(
+                fontSize: 22.0,
+                fontFamily: 'Poppins',
+                color: Theme.of(context).primaryColor,
               ),
             ),
-          )
-        ]));
+          ),
+          body: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+            Expanded(
+              child: ValueListenableBuilder(
+                  valueListenable: chatcentralnotifier,
+                  builder: (context, List<BuddyChat> value, child) {
+                    return AnimatedList(
+                      key: _myListKey,
+                      reverse: true,
+                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      initialItemCount: value.length,
+                      // Latest
+                      itemBuilder: (context, index, Animation<double> animation) {
+                        return ChatMessageListItem(
+                         // chat: _buddyconversationList.conversation[0].buddychats![index],
+                          chat: value[index],
+                          animation: animation,
+                        );
+                      },
+                    );
+                  }),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 12.0, right: 6.0, left: 6.0),
+              decoration: BoxDecoration(
+                border:
+                    Border.all(width: 1.0, color: Colors.grey.withOpacity(0.6)),
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: [
+                  // BoxShadow(color: Theme.of(context).hintColor.withOpacity(0.10), offset: Offset(0,-4), blurRadius: 10)
+                ],
+              ),
+              child: TextField(
+                controller: myController,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                      left: 20.0, right: 20.0, top: 10, bottom: 10),
+                  hintText: 'Message ...',
+                  hintStyle: TextStyle(color: Colors.grey, fontFamily: 'Poppins'),
+                  suffixIcon: IconButton(
+                    padding: EdgeInsets.only(right: 30),
+                    onPressed: () {
+                      chatcentralnotifier.updateComment(
+                          chat: myController.text, isbot: false);
+                      setState(() {
+                        _myListKey.currentState!.insertItem(0);
+                      });
+
+                      Timer(Duration(milliseconds: 100), () {
+                        myController.clear();
+                      });
+                    },
+                    icon: Icon(
+                      Icons.send,
+                      color: Theme.of(context).accentColor,
+                      size: 25,
+                    ),
+                  ),
+                  border: UnderlineInputBorder(borderSide: BorderSide.none),
+                  enabledBorder:
+                      UnderlineInputBorder(borderSide: BorderSide.none),
+                  focusedBorder:
+                      UnderlineInputBorder(borderSide: BorderSide.none),
+                ),
+              ),
+            )
+          ])),
+    );
   }
 
   Widget _getSentMessageLayout1(
