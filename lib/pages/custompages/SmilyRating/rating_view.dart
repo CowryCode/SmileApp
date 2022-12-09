@@ -26,6 +26,27 @@ class _RatingViewState extends State<RatingView> {
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
+          //Back Button
+          if(_isMoreDetailsActive)
+            Positioned(
+                left: 0,
+                top: 0,
+                child: MaterialButton(
+                  onPressed: (){
+                    setState(() {
+                      _isMoreDetailsActive = false;
+                    });
+                  },
+                  child: Icon(Icons.arrow_back_ios),
+                )
+            ),
+          //Skip Button
+          Positioned(
+              right: 0,
+              child: MaterialButton(
+                onPressed: _hideDialog,
+                child: Text('Skip'),
+              )),
           //Thanks Note
           Container(
             height: max(300, MediaQuery.of(context).size.height * 0.3),
@@ -38,31 +59,6 @@ class _RatingViewState extends State<RatingView> {
               ],
             ),
           ),
-          // Done Button
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                color: Theme.of(context).colorScheme.secondary,
-                child: MaterialButton(
-                  onPressed: _hideDialog,
-                  child: Text(
-                    'Done',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0),
-                  ),
-                ),
-              )),
-          //Skip Button
-          Positioned(
-              right: 0,
-              child: MaterialButton(
-                onPressed: _hideDialog,
-                child: Text('Skip'),
-              )),
           //Star Rating
           AnimatedPositioned(
               top: _starPosition,
@@ -96,20 +92,24 @@ class _RatingViewState extends State<RatingView> {
                         )),
               ),
               duration: Duration(milliseconds: 300)),
-          //Back Button
-          if(_isMoreDetailsActive)
+          // Done Button
           Positioned(
-            left: 0,
-              top: 0,
-              child: MaterialButton(
-                onPressed: (){
-                  setState(() {
-                    _isMoreDetailsActive = false;
-                  });
-                },
-                child: Icon(Icons.arrow_back_ios),
-              )
-          )
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Theme.of(context).colorScheme.secondary,
+                child: MaterialButton(
+                  onPressed: _hideDialog,
+                  child: Text(
+                    'Done',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0),
+                  ),
+                ),
+              )),
 
         ],
       ),
