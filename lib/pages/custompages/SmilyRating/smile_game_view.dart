@@ -26,8 +26,10 @@ class _SmileGameState extends State<SmileGame> {
       child: Stack(
         children: [
           AnimatedPositioned(
-                      top: _verticalPosition,
-                      left: _horizontalPosition,
+                      // top: _verticalPosition,
+                      // left: _horizontalPosition,
+                      top: 17,
+                      left: 310,
                       child: Icon(
                         Icons.star,
                         size: 32,
@@ -35,12 +37,12 @@ class _SmileGameState extends State<SmileGame> {
                       duration: Duration(milliseconds: 300),
                     ),
           AnimatedPositioned(
-            top: 12.0,
-            left: 25.0,
+            top: 7.0,
+            left: 300.0,
             //right: 20.0,
             child: Icon(
               Icons.star_border,
-              size: 45,
+              size: 52,
             ) ,
             duration: Duration(milliseconds: 300),
           ),

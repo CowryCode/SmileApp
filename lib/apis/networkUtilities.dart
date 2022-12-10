@@ -30,6 +30,15 @@ import 'package:SmileApp/models/globemodel.dart';
  final int Speech_Activation_Count = 8;
  final int Target_Countries_COUNT = 12;
 
+ //SMILE GAME: DISTANCE BETWEEN TARGET AND MOVING OBJECT
+final double TargetObjectDistance = 50;
+//SMILE GAME: MAXIMUM POSITION FROM THE LEFT FOR ALL OBJECTS
+final double MaximumHorrizontalLocation = 300;
+//SMILE GAME: MINIMUM POSITION FROM THE LEFT FOR ALL OBJECTS
+final double MinimumHorrizontalLocation = 0.0;
+
+
+
 // WORLD MAP Json
  final GlobeModel worldmapModel = GlobeModel();
 
