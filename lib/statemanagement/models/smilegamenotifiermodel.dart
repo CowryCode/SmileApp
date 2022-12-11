@@ -6,7 +6,7 @@ import 'package:SmileApp/apis/networkUtilities.dart';
 class SmileGameVariables {
   bool direction = true;
   double targetVerticalposition = 0.0;
-  double movingObjectVerticalposition = 0.0;
+  double movingObjectVerticalposition = 10.0; // ORIGINAL CODE
   double targetHorrizontalposition;
   double movingObjectHorrizontalposition;
   SmileGameVariables({required this.targetHorrizontalposition , required this.movingObjectHorrizontalposition});
@@ -17,17 +17,19 @@ class SmileGameVariables {
     if (!direction) {
       movingObjectHorrizontalposition = (movingObjectHorrizontalposition >= speedInterval)
           ? (movingObjectHorrizontalposition - speedInterval)
-          : MinimumHorrizontalLocation;
+          : MinimumLocation ;
     }
     //MOVE THE OBJECT LEFT TO RIGHT
+    /* 10 was added because of the difference in size between
+       the Target Object (big) and the moving object(Small) */
     if (direction) {
-      movingObjectHorrizontalposition = ((movingObjectHorrizontalposition + speedInterval) <= MaximumHorrizontalLocation)
+      movingObjectHorrizontalposition = ((movingObjectHorrizontalposition + speedInterval) <= (MaximumHorrizontalLocation + 10))
           ? (movingObjectHorrizontalposition + speedInterval)
-          : MaximumHorrizontalLocation;
+          : MaximumHorrizontalLocation + 10;
     }
 
-    if(movingObjectHorrizontalposition == MaximumHorrizontalLocation
-        || movingObjectHorrizontalposition == MaximumHorrizontalLocation ) direction = !direction;
+    if(movingObjectHorrizontalposition == (MaximumHorrizontalLocation + 10)
+        || movingObjectHorrizontalposition == MinimumLocation ) direction = !direction;
   }
 
   /* WHEN DIRECTION IS TRUE, OBJECGT IS MOVING FROM LEFT TO RIGHT
@@ -40,17 +42,27 @@ class SmileGameVariables {
 
   void changeTargeObjectPositon() {
     bool dir = Random().nextBool();
-    if (dir) {
-      targetHorrizontalposition = ((movingObjectHorrizontalposition + TargetObjectDistance) <= MaximumHorrizontalLocation )
-          ? (movingObjectHorrizontalposition + TargetObjectDistance) : movingObjectHorrizontalposition - TargetObjectDistance;
-    }else{
-      //0 IS THE LEAST MAR
-      targetHorrizontalposition = ((movingObjectHorrizontalposition - TargetObjectDistance) >= MinimumHorrizontalLocation )
-          ? (movingObjectHorrizontalposition - TargetObjectDistance) : movingObjectHorrizontalposition + TargetObjectDistance;
-    }
-    targetVerticalposition = Random(300).nextDouble();
+    // if (dir) {
+    //   targetHorrizontalposition = ((movingObjectHorrizontalposition + TargetObjectDistance) <= MaximumHorrizontalLocation )
+    //       ? (movingObjectHorrizontalposition + TargetObjectDistance) : movingObjectHorrizontalposition - TargetObjectDistance;
+    // }else{
+    //   //0 IS THE LEAST MAR
+    //   targetHorrizontalposition = ((movingObjectHorrizontalposition - TargetObjectDistance) >= MinimumHorrizontalLocation )
+    //       ? (movingObjectHorrizontalposition - TargetObjectDistance) : movingObjectHorrizontalposition + TargetObjectDistance;
+    // }
+
+
+    targetVerticalposition = Random().nextInt(MaximumVerticalLocation).roundToDouble();
     // This 10 was added to align the height of the  target Object and the moving object (which is smaller)
     movingObjectVerticalposition = targetVerticalposition + 10;
+
+    targetHorrizontalposition = Random().nextInt(MaximumHorrizontalLocation.round()).roundToDouble();
+    /* USER NEED TO USE SMILE TO CLOSE THE DISTANCE SO THEY CAN LAP ON EACH OTHER */
+    movingObjectHorrizontalposition = (targetHorrizontalposition + TargetObjectDistance)
+        >= MaximumHorrizontalLocation ? (targetHorrizontalposition - TargetObjectDistance)
+        : (targetHorrizontalposition + TargetObjectDistance);
+
     _updateDirection();
+
   }
 }

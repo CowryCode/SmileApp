@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
@@ -240,7 +241,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             height: 20,
           ),
           ValueListenableBuilder(
-            // valueListenable: counterNotifier,
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, bool value, child) {
               return _cameraDisplay(smilestartCountdown: value);
@@ -525,6 +525,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
+          // USER IMAGE VIEW
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
@@ -545,6 +546,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
+          // COUNT DOWN TIMER
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
@@ -557,6 +559,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
+          //SMILE GRAM OBJECT
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
@@ -569,7 +572,20 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
-          //}()),
+          // SMILE GAME OBJECT
+          ValueListenableBuilder(
+            valueListenable: smileAppValueNotifier.value.showCountDown,
+            builder: (context, value, child) {
+              if (value == false && !widget.readmessage) {
+                return Center(child: SmileGame());
+              } else {
+                return SizedBox(
+                  height: 3.0,
+                );
+              }
+            },
+          ),
+          // TRIBE MESSAGE READING OBJECT
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {

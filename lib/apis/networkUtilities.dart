@@ -26,16 +26,20 @@ import 'package:SmileApp/models/globemodel.dart';
  final String key_login_status = "loginstatus";
 
  // NOTIFIER VARIABLES
- final int Smile_Count_Initial = 20; // 20 counts = 5 Seconds
+ final int Smile_Count_Initial = 25; // 20 counts = 5 Seconds
  final int Speech_Activation_Count = 8;
  final int Target_Countries_COUNT = 12;
 
  //SMILE GAME: DISTANCE BETWEEN TARGET AND MOVING OBJECT
-final double TargetObjectDistance = 50;
+final double TargetObjectHorrizontalInitializer = 150;
+//SMILE GAME: DISTANCE BETWEEN TARGET AND MOVING OBJECT
+final double TargetObjectDistance = 100;
 //SMILE GAME: MAXIMUM POSITION FROM THE LEFT FOR ALL OBJECTS
-final double MaximumHorrizontalLocation = 300;
+final double MaximumHorrizontalLocation = 280;
 //SMILE GAME: MINIMUM POSITION FROM THE LEFT FOR ALL OBJECTS
-final double MinimumHorrizontalLocation = 0.0;
+final double MinimumLocation = 0.0;
+//SMILE GAME: MAXIMUM POSITION FROM THE TOP FOR ALL OBJECTS
+final int MaximumVerticalLocation = 170;
 
 
 
