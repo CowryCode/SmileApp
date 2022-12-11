@@ -5,6 +5,7 @@ import 'package:SmileApp/apis/networkUtilities.dart';
 
 class SmileGameVariables {
   bool direction = true;
+  bool targetCaught = false;
   double targetVerticalposition = 0.0;
   double movingObjectVerticalposition = 10.0; // ORIGINAL CODE
   double targetHorrizontalposition;
@@ -30,6 +31,14 @@ class SmileGameVariables {
 
     if(movingObjectHorrizontalposition == (MaximumHorrizontalLocation + 10)
         || movingObjectHorrizontalposition == MinimumLocation ) direction = !direction;
+
+    if(movingObjectHorrizontalposition == (targetHorrizontalposition + 10) ||
+        movingObjectHorrizontalposition == (targetHorrizontalposition + 11) ||
+        movingObjectHorrizontalposition == (targetHorrizontalposition + 9)){
+      targetCaught = true;
+    }else{
+      targetCaught = false;
+    }
   }
 
   /* WHEN DIRECTION IS TRUE, OBJECGT IS MOVING FROM LEFT TO RIGHT

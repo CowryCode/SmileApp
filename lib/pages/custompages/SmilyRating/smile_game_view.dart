@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
@@ -28,35 +29,41 @@ class _SmileGameState extends State<SmileGame> {
           ValueListenableBuilder(
             valueListenable: smileGameNofitier,
             builder: (context, SmileGameVariables gamevariables, child){
-             return AnimatedPositioned(
-                        //    top: 27.0,
-                        //    left: 310.0,
-                        top: gamevariables.movingObjectVerticalposition,
-                        left: gamevariables.movingObjectHorrizontalposition,
-                        child: Icon(
-                          Icons.star,
-                          size: 32,
-                          color: Colors.orange,
-                        ) ,
-                        duration: Duration(milliseconds: 300),
-                      );
+             return Visibility(
+               visible: !gamevariables.targetCaught,
+               child: AnimatedPositioned(
+                          //    top: 27.0,
+                          //    left: 310.0,
+                          top: gamevariables.movingObjectVerticalposition,
+                          left: gamevariables.movingObjectHorrizontalposition,
+                          child: Icon(
+                            Icons.star,
+                            size: 32,
+                            color: Colors.orange,
+                          ) ,
+                          duration: Duration(milliseconds: 300),
+                        ),
+             );
             }
           ),
           ValueListenableBuilder(
               valueListenable: smileGameNofitier,
               builder: (context, SmileGameVariables gamevariables, child) {
-               return AnimatedPositioned(
-                  // top: 17.0,
-                  // left: 300.0,
-                 top: gamevariables.targetVerticalposition,
-                 left: gamevariables.targetHorrizontalposition,
-                  child: Icon(
-                   Icons.star_border,
-                    size: 52,
-                    color: Colors.orange,
+               return Visibility(
+                 visible: !gamevariables.targetCaught,
+                 child: AnimatedPositioned(
+                    // top: 17.0,
+                    // left: 300.0,
+                   top: gamevariables.targetVerticalposition,
+                   left: gamevariables.targetHorrizontalposition,
+                    child: Icon(
+                     Icons.star_border,
+                      size: 52,
+                      color: Colors.orange,
+                    ),
+                    duration: Duration(milliseconds: 300),
                   ),
-                  duration: Duration(milliseconds: 300),
-                );
+               );
               }
           ),
           //TODO: DO NOT REMOVE YET
@@ -87,6 +94,5 @@ class _SmileGameState extends State<SmileGame> {
       ),
     );
   }
-
 
 }

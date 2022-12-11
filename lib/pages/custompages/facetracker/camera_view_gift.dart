@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
+import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/SGmessageModel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -525,6 +527,27 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
+          //SOUND CONTROL
+          Align(
+            alignment: Alignment.topLeft,
+            child: ValueListenableBuilder(
+              // valueListenable: counterNotifier,
+              valueListenable: smileAppValueNotifier.value.deactivetSound,
+              builder: (context, bool value, child) {
+                return IconButton(
+                    onPressed: () {
+                      smileAppValueNotifier.updateSoundDeactivation(
+                          deactivateSound: !value);
+                    },
+                    icon: Icon(
+                      (value != true)
+                          ? FontAwesomeIcons.volumeHigh
+                          : FontAwesomeIcons.volumeOff,
+                      color: Colors.green,
+                    ));
+              },
+            ),
+          ),
           // USER IMAGE VIEW
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
@@ -598,25 +621,22 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: ValueListenableBuilder(
-              // valueListenable: counterNotifier,
-              valueListenable: smileAppValueNotifier.value.deactivetSound,
-              builder: (context, bool value, child) {
-                return IconButton(
-                    onPressed: () {
-                      smileAppValueNotifier.updateSoundDeactivation(
-                          deactivateSound: !value);
-                    },
-                    icon: Icon(
-                      (value != true)
-                          ? FontAwesomeIcons.volumeHigh
-                          : FontAwesomeIcons.volumeOff,
-                      color: Colors.green,
-                    ));
-              },
-            ),
+          // SHOW PROGRESS ALERT
+          ValueListenableBuilder(
+              valueListenable: smileGameNofitier,
+              builder: (context, SmileGameVariables gamevariables, child) {
+                if(gamevariables.targetCaught){
+                 // return _openRatingDialog(context);
+                  return Dialog(
+                    child: RatingView(),
+                    // child: SmileGramFeedBackWidget(),
+                  );
+                }else{
+                  return SizedBox(
+                    height: 3.0,
+                  );
+                }
+              }
           ),
         ],
       ),
@@ -634,40 +654,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ));
   }
 
-  Widget _giftAlert({required String message, required int amountWon}) {
-    return Container(
-        height: MediaQuery.of(context).size.height * 0.8,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            image: DecorationImage(
-              image: AssetImage('images/custom/giftopen.png'),
-              fit: BoxFit.cover,
-            )),
-        child: Stack(
-          children: <Widget>[
-            Center(
-              //  child: Text(' Congratulations! your won $_value points', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
-              child: DefaultTextStyle(
-                style: const TextStyle(
-                    fontSize: 30.0, fontFamily: 'SF', color: Colors.red),
-                child: Center(
-                  child: AnimatedTextKit(
-                    repeatForever: true,
-                    animatedTexts: [
-                      ScaleAnimatedText('$amountWon points won!',
-                          scalingFactor: 0.2, textAlign: TextAlign.center),
-                      ScaleAnimatedText('$message !',
-                          scalingFactor: 0.2, textAlign: TextAlign.center),
-                      ScaleAnimatedText('$amountWon points won!',
-                          scalingFactor: 0.2, textAlign: TextAlign.center),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
 
   Widget weatherMap() {
     return Padding(
@@ -736,11 +722,50 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
     );
   }
-}
 
-// class Model {
-//   const Model(this.state, this.storage);
-//
-//   final String state;
-//   final String storage;
-// }
+  _openRatingDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: RatingView(),
+          // child: SmileGramFeedBackWidget(),
+        )
+    );
+  }
+
+  Widget _giftAlert({required String message, required int amountWon}) {
+    return Container(
+        height: MediaQuery.of(context).size.height * 0.8,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: AssetImage('images/custom/giftopen.png'),
+              fit: BoxFit.cover,
+            )),
+        child: Stack(
+          children: <Widget>[
+            Center(
+              //  child: Text(' Congratulations! your won $_value points', style: TextStyle(color: Theme.of(context).colorScheme.secondary ),),
+              child: DefaultTextStyle(
+                style: const TextStyle(
+                    fontSize: 30.0, fontFamily: 'SF', color: Colors.red),
+                child: Center(
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      ScaleAnimatedText('$amountWon points won!',
+                          scalingFactor: 0.2, textAlign: TextAlign.center),
+                      ScaleAnimatedText('$message !',
+                          scalingFactor: 0.2, textAlign: TextAlign.center),
+                      ScaleAnimatedText('$amountWon points won!',
+                          scalingFactor: 0.2, textAlign: TextAlign.center),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ));
+  }
+
+}

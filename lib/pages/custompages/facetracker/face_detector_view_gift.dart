@@ -125,7 +125,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             }
           } else {
             //double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
-            if (prob! > 0.5) {
+            if (prob! > 0.5 && smileGameNofitier.value.targetCaught == false) {
               //TODO: THE SMILE GAME START
               smileGameNofitier.moveObject(smilesize: prob);
               //TODO: THE SMILE GAME END
