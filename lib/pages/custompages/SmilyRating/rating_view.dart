@@ -1,12 +1,18 @@
 import 'dart:math';
 
+import 'package:SmileApp/apis/models/moodmodel.dart';
+import 'package:SmileApp/apis/network.dart';
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/smilefactmodel.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/ratingcontroller.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class RatingView extends StatefulWidget {
-  const RatingView({Key? key}) : super(key: key);
+  final bool readmessage;
+  final bool checkinitialEmotion;
+  const RatingView({Key? key, this.readmessage = false, this.checkinitialEmotion = false, }) : super(key: key);
 
   @override
   _RatingViewState createState() => _RatingViewState();
@@ -273,14 +279,23 @@ class _RatingViewState extends State<RatingView> {
   }
 
   _submit() {
-    _ratingPageController.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
-    setState(() {
-      ratingSubmitted = true;
-    });
+    if(widget.checkinitialEmotion == true){
+      _continueAction();
+    }else{
+      _ratingPageController.nextPage(
+          duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+      setState(() {
+        ratingSubmitted = true;
+      });
+    }
   }
 
   _continueAction(){
-    if (Navigator.canPop(context)) Navigator.pop(context);
+    MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+    mood.captureMood(rating: _rating, countrycount: smileAppValueNotifier.getSmileDurationCounter());
+    ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
+
+    if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
+  //  if (Navigator.canPop(context)) Navigator.pop(context);
   }
 }

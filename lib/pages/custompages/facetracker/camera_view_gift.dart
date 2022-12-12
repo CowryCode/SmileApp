@@ -705,18 +705,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
         MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-        mood.captureMood(
-            rating: response.rating.round(),
-            countrycount: smileAppValueNotifier.getSmileDurationCounter());
-        ApiAccess().saveMood(
-            moodModel: mood,
-            url: (widget.readmessage == true)
-                ? Tribe_Mood_URL
-                : SmileGram_Mood_URL);
+        mood.captureMood(rating: response.rating.round(), countrycount: smileAppValueNotifier.getSmileDurationCounter());
+        ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
 
-        Navigator.of(context).popAndPushNamed(
-          '/home',
-        );
+        Navigator.of(context).popAndPushNamed('/home',);
       },
       submitButtonTextStyle: const TextStyle(
           fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),

@@ -50,16 +50,6 @@ class SmileGameVariables {
   }
 
   void changeTargeObjectPositon() {
-    bool dir = Random().nextBool();
-    // if (dir) {
-    //   targetHorrizontalposition = ((movingObjectHorrizontalposition + TargetObjectDistance) <= MaximumHorrizontalLocation )
-    //       ? (movingObjectHorrizontalposition + TargetObjectDistance) : movingObjectHorrizontalposition - TargetObjectDistance;
-    // }else{
-    //   //0 IS THE LEAST MAR
-    //   targetHorrizontalposition = ((movingObjectHorrizontalposition - TargetObjectDistance) >= MinimumHorrizontalLocation )
-    //       ? (movingObjectHorrizontalposition - TargetObjectDistance) : movingObjectHorrizontalposition + TargetObjectDistance;
-    // }
-
 
     targetVerticalposition = Random().nextInt(MaximumVerticalLocation).roundToDouble();
     // This 10 was added to align the height of the  target Object and the moving object (which is smaller)
@@ -72,6 +62,5 @@ class SmileGameVariables {
         : (targetHorrizontalposition + TargetObjectDistance);
 
     _updateDirection();
-
   }
 }
