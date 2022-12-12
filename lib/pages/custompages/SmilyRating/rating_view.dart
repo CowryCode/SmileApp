@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:SmileApp/models/smilefactmodel.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/ratingcontroller.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class RatingView extends StatefulWidget {
@@ -13,9 +16,37 @@ class _RatingViewState extends State<RatingView> {
   var _ratingPageController = PageController();
   var _starPosition = 200.0;
   var _rating = 0;
-  var _selectedChipIndex = -1;
-  var _isMoreDetailsActive = false;
-  var _moreDetailFocuseNode = FocusNode();
+
+  bool ratingSubmitted = false;
+  String emotion = "";
+  String _currentAnimation = "";
+  RatingController _controller = RatingController();
+
+  void _onChanged({required double value}) {
+    if (_rating == value) return;
+    setState(() {
+      var direction = _rating < value ? '+' : '-';
+      _rating = value.round();
+      switch (_rating.round()) {
+        case 1:
+          emotion = "Very Sad";
+          break;
+        case 2:
+          emotion = "Sad";
+          break;
+        case 3:
+          emotion = "Neutral";
+          break;
+        case 4:
+          emotion = "Happy";
+          break;
+        case 5:
+          emotion = "Very Happy";
+          break;
+      }
+      _currentAnimation = '${value.round()}$direction';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,40 +57,62 @@ class _RatingViewState extends State<RatingView> {
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          //Back Button
-          if(_isMoreDetailsActive)
+          //THE FLR EMOJI
             Positioned(
-                left: 0,
-                top: 0,
-                child: MaterialButton(
-                  onPressed: (){
-                    setState(() {
-                      _isMoreDetailsActive = false;
-                    });
-                  },
-                  child: Icon(Icons.arrow_back_ios),
-                )
+              top: 0,
+              left: 0,
+              right: 25,
+              child: AnimatedOpacity(
+                opacity:  _rating > 0 ? 1 : 0,
+                duration: Duration(milliseconds: 500),
+                child: Container(
+                    height: 100,
+                    width: 100,
+                    /*flr file is created from RIV*/
+                    child: FlareActor(
+                      'assets/happiness_emoji.flr',
+                      alignment: Alignment.center,
+                      fit: BoxFit.contain,
+                      controller: _controller,
+                      animation: _currentAnimation,
+                    )),
+              ),
             ),
-          //Skip Button
-          Positioned(
-              right: 0,
-              child: MaterialButton(
-                onPressed: _hideDialog,
-                child: Text('Skip'),
-              )),
-          //Thanks Note
+            Positioned(
+              top: 13,
+              left: 0,
+              right: 25,
+              child: AnimatedOpacity(
+                opacity: _rating < 1 ? 1 : 0,
+                duration: (Duration(milliseconds: 400)),
+                child: Container(
+                    height: 80,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50.0),
+                          bottomRight: Radius.circular(50.0)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/logo1.jpeg'),
+                        //fit: BoxFit.cover,
+                        fit: BoxFit.scaleDown,
+                      ),
+                    )),
+              ),
+            ),
+          //RATING CONTENT
           Container(
             height: max(300, MediaQuery.of(context).size.height * 0.3),
             child: PageView(
               controller: _ratingPageController,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                _builderThanksNote(),
-                _causeofRating(),
+                _userRating(),
+                _userRatingMessage(),
               ],
             ),
           ),
-          //Star Rating
+          //Rating ICONS
           AnimatedPositioned(
               top: _starPosition,
               left: 0,
@@ -72,136 +125,162 @@ class _RatingViewState extends State<RatingView> {
                           icon: index < _rating
                               ? Icon(
                                   Icons.star,
-                                  size: 32,
+                                  // size: 32,color: Colors.orange,
+                                  size: 32, color: Colors.amber,
                                 )
                               : Icon(
-                                  Icons.star_border,
-                                  size: 32,
+                                  // Icons.star_border,
+                                  Icons.star,
+                                  // size: 32, color: Colors.orange,
+                                  size: 32, color: Colors.black45,
                                 ),
                           color: Theme.of(context).colorScheme.secondary,
                           onPressed: () {
-                            _ratingPageController.nextPage(
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.easeIn);
-                            print(" Rating : ${index + 1}");
                             setState(() {
-                              _starPosition = 20.0;
-                              _rating = index + 1;
+                              _onChanged(value: index + 1);
                             });
                           },
                         )),
               ),
               duration: Duration(milliseconds: 300)),
-          // Done Button
+          //SUBMIT BUTTON
+          // Positioned(
+          //     bottom: 0,
+          //     left: 0,
+          //     right: 0,
+          //     child: Container(
+          //       color: Theme.of(context).colorScheme.secondary,
+          //       child: MaterialButton(
+          //         onPressed: _submit,
+          //         child: Visibility(
+          //           visible: _rating > 0,
+          //           child: Text(
+          //             'Submit',
+          //             style: TextStyle(
+          //                 color: Theme.of(context).primaryColor,
+          //                 fontWeight: FontWeight.bold,
+          //                 fontSize: 20.0),
+          //           ),
+          //         ),
+          //       ),
+          //     )),
           Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: Container(
                 color: Theme.of(context).colorScheme.secondary,
-                child: MaterialButton(
-                  onPressed: _hideDialog,
-                  child: Text(
-                    'Done',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0),
+                child: Visibility(
+                  visible: ratingSubmitted,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    MaterialButton(
+                      onPressed: _continueAction,
+                      child: Visibility(
+                        visible: _rating > 0,
+                        child: Text(
+                          'Exit',
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                        ),
+                      ),
+                    ),
+                      SizedBox(width: 20,),
+                      MaterialButton(
+                        onPressed: _continueAction,
+                        child: Visibility(
+                          visible: _rating > 0,
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0),
+                          ),
+                        ),
+                      ),
+                  ]),
+                  replacement: MaterialButton(
+                    onPressed: _submit,
+                    child: Visibility(
+                      visible: _rating > 0,
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0),
+                      ),
+                    ),
                   ),
-                ),
-              )),
-
+                )
+              )
+          ),
         ],
       ),
     );
   }
 
-  _builderThanksNote() {
+  _userRating() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Thanks for using Smile App',
+          _rating > 0 ? '$emotion' : 'Rate Your Feeling',
           style: Theme.of(context).textTheme.headline4,
           textAlign: TextAlign.center,
         ),
         Text(
-          'We would love to get your feedback',
+          'Let us know how you feel after using this feature.',
           style: TextStyle(color: Colors.black45),
+          textAlign: TextAlign.center,
         ),
-      ],
-    );
-  }
-
-  _causeofRating() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Visibility(
-            visible: !_isMoreDetailsActive,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('What could we do better'),
-                // Cause Selection
-                Wrap(
-                  spacing: 8.0,
-                  alignment: WrapAlignment.center,
-                  children: List.generate(6, (index) => InkWell(
-                    onTap: (){
-                      setState(() {
-                        _selectedChipIndex = index;
-                      });
-                    },
-                    child: Chip(
-                      backgroundColor: _selectedChipIndex == index ? Theme.of(context).colorScheme.secondary : Colors.grey[300],
-                      label: Text('Text ${index + 1}', style: TextStyle(color: _selectedChipIndex == index ? Theme.of(context).primaryColor :  Theme.of(context).colorScheme.secondary ),),
-                    ),
-                  )),
-                ),
-                SizedBox(height: 16,),
-                // More Button
-                InkWell(
-                  onTap: (){
-                    _moreDetailFocuseNode.requestFocus();
-                    setState(() {
-                      _isMoreDetailsActive = true;
-                    });
-                  },
-                  child: Text(
-                    'Want to tell us more',
-                    style: TextStyle(decoration: TextDecoration.underline),
-                  ),
-                )
-              ],
-            ),
-          replacement: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Tell Us More'),
-              Chip(label: Text('Text ${_selectedChipIndex + 1}')),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: TextField(
-                  focusNode: _moreDetailFocuseNode,
-                  decoration: InputDecoration(
-                    hintText: "Write your review here...",
-                    hintStyle: TextStyle(
-                      color: Colors.grey[400],
-                    ),
-                    border: InputBorder.none
-                  ),
-                ),
-              ),
-            ],
-          ),
+        SizedBox(
+          height: 20,
         )
       ],
     );
   }
 
-  _hideDialog(){
-    if(Navigator.canPop(context))  Navigator.pop(context);
+  _userRatingMessage() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Smile Fun Fact!',
+          style: Theme.of(context).textTheme.headline4,
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          '${SmileFactsModel().modelsDictionary()}',
+          style: TextStyle(color: Colors.black45),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+      ],
+    );
+  }
+
+  _hideDialog() {
+    if (Navigator.canPop(context)) Navigator.pop(context);
+  }
+
+  _submit() {
+    _ratingPageController.nextPage(
+        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    setState(() {
+      ratingSubmitted = true;
+    });
+  }
+
+  _continueAction(){
+    if (Navigator.canPop(context)) Navigator.pop(context);
   }
 }
