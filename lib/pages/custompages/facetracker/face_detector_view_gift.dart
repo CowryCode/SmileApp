@@ -126,15 +126,11 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
           } else {
             //double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
             if (prob! > 0.5 && smileGameNofitier.value.targetCaught == false) {
-              //TODO: THE SMILE GAME START
               smileGameNofitier.moveObject(smilesize: prob);
-              //TODO: THE SMILE GAME END
               int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
               smileAppValueNotifier.updateSmileDurationCount();
               if(updatedTokenIndex <= 0){
-                //TODO: THE SMILE GAME START
                 smileGameNofitier.changeTargetObjectPosition();
-                //TODO: THE SMILE GAME END
                 String countryIDstring = smileAppValueNotifier.value.countriesIndexString.value;
                 List<int>? indicesCount = worldmapModel.splitString(countriesIndexString: countryIDstring);
                 if((indicesCount!.length) < worldmapModel.modelsDictionary().length){
@@ -150,7 +146,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               }
             }else{
               if(!soundAllowed){
-                if(activateSpeech){
+                if(activateSpeech && smileGameNofitier.value.targetCaught == false){
                   talker!.speak(text: "Keep Smiling");
                   smileAppValueNotifier.speechActivationCountInitialized();
                 }

@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class RatingView extends StatefulWidget {
-  const RatingView({Key? key}) : super(key: key);
+class RatingView_BACKUP extends StatefulWidget {
+  const RatingView_BACKUP({Key? key}) : super(key: key);
 
   @override
   _RatingViewState createState() => _RatingViewState();
 }
 
-class _RatingViewState extends State<RatingView> {
+class _RatingViewState extends State<RatingView_BACKUP> {
   var _ratingPageController = PageController();
   var _starPosition = 200.0;
   var _rating = 0;

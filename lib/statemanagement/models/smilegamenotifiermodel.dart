@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:math';
 
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 
 class SmileGameVariables {
   bool direction = true;
@@ -32,9 +33,11 @@ class SmileGameVariables {
     if(movingObjectHorrizontalposition == (MaximumHorrizontalLocation + 10)
         || movingObjectHorrizontalposition == MinimumLocation ) direction = !direction;
 
-    if(movingObjectHorrizontalposition == (targetHorrizontalposition + 10) ||
+    if((movingObjectHorrizontalposition == (targetHorrizontalposition + 10) ||
         movingObjectHorrizontalposition == (targetHorrizontalposition + 11) ||
-        movingObjectHorrizontalposition == (targetHorrizontalposition + 9)){
+        movingObjectHorrizontalposition == (targetHorrizontalposition + 9))
+        &&
+        ((smileAppValueNotifier.getSmileCompletedCountriesCount() % Smile_AlertFeedBack_CountryCount_Interval ) == 0)){
       targetCaught = true;
     }else{
       targetCaught = false;
@@ -62,5 +65,9 @@ class SmileGameVariables {
         : (targetHorrizontalposition + TargetObjectDistance);
 
     _updateDirection();
+  }
+
+  void updateTargetCaught({required bool holdtargetObject}){
+    targetCaught = holdtargetObject;
   }
 }

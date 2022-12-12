@@ -6,6 +6,7 @@ import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/rating_view_BackUp.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smilegramfeedbackwidget.dart';
 import 'package:SmileApp/pages/custompages/tribe_messages.dart';
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
       //   showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
       //     builder: (context) => _showRatingAlert(context),
       //   );
-        //show Rating dialog
+       // show Rating dialog
           showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
             builder: (context) => Dialog( child: RatingView(checkinitialEmotion: true),),
           );
@@ -114,6 +115,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             SizedBox(height: 1,),
+            //SMILE GRAM
             TextButton(
               onPressed: (){
                 showDialog<String>(
@@ -178,6 +180,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 1,),
+            //POCKET BUDDY
             TextButton(
               onPressed: (){
                 // Navigator.of(context).pushNamed('/doctorProfil');
@@ -239,6 +242,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 1,),
+            //TRIBE MESSAGES
             TextButton(
               onPressed: (){
                 Navigator.of(context).pushNamed('/tribemessages');
@@ -320,7 +324,8 @@ class _HomeState extends State<Home> {
             MaterialButton(
               child: Text('Done'),
                 onPressed: (){
-                  _openRatingDialog(context);
+                  print('CLICK 111');
+                   _openRatingDialog(context);
                 }
             ),
 
@@ -483,7 +488,6 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (context) => Dialog(
             child: RatingView(),
-           // child: SmileGramFeedBackWidget(),
           )
        );
   }

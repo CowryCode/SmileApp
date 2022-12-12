@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/models/smilefactmodel.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/ratingcontroller.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
@@ -10,9 +11,10 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class RatingView extends StatefulWidget {
-  final bool readmessage;
+  final bool readmessage ;
   final bool checkinitialEmotion;
   const RatingView({Key? key, this.readmessage = false, this.checkinitialEmotion = false, }) : super(key: key);
+ // const RatingView({Key? key,}) : super(key: key);
 
   @override
   _RatingViewState createState() => _RatingViewState();
@@ -149,58 +151,27 @@ class _RatingViewState extends State<RatingView> {
                         )),
               ),
               duration: Duration(milliseconds: 300)),
-          //SUBMIT BUTTON
-          // Positioned(
-          //     bottom: 0,
-          //     left: 0,
-          //     right: 0,
-          //     child: Container(
-          //       color: Theme.of(context).colorScheme.secondary,
-          //       child: MaterialButton(
-          //         onPressed: _submit,
-          //         child: Visibility(
-          //           visible: _rating > 0,
-          //           child: Text(
-          //             'Submit',
-          //             style: TextStyle(
-          //                 color: Theme.of(context).primaryColor,
-          //                 fontWeight: FontWeight.bold,
-          //                 fontSize: 20.0),
-          //           ),
-          //         ),
-          //       ),
-          //     )),
+
           Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: Container(
-                color: Theme.of(context).colorScheme.secondary,
+               // color: Theme.of(context).colorScheme.secondary,
+                color: (widget.checkinitialEmotion == true && _rating < 1) ? Colors.white : Theme.of(context).colorScheme.secondary,
                 child: Visibility(
                   visible: ratingSubmitted,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                    MaterialButton(
-                      onPressed: _continueAction,
-                      child: Visibility(
-                        visible: _rating > 0,
-                        child: Text(
-                          'Exit',
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0),
-                        ),
-                      ),
-                    ),
-                      SizedBox(width: 20,),
                       MaterialButton(
-                        onPressed: _continueAction,
+                        onPressed: () {
+                            _continueAction(exit: true);
+                           } ,
                         child: Visibility(
                           visible: _rating > 0,
                           child: Text(
-                            'Continue',
+                            'Exit',
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
@@ -208,6 +179,22 @@ class _RatingViewState extends State<RatingView> {
                           ),
                         ),
                       ),
+                      SizedBox(width: 20,),
+                      MaterialButton(
+                          onPressed: () {
+                             _continueAction(exit: false);
+                          } ,
+                          child: Visibility(
+                            visible: _rating > 0,
+                            child: Text(
+                              'Continue',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0),
+                            ),
+                          ),
+                        ),
                   ]),
                   replacement: MaterialButton(
                     onPressed: _submit,
@@ -280,7 +267,7 @@ class _RatingViewState extends State<RatingView> {
 
   _submit() {
     if(widget.checkinitialEmotion == true){
-      _continueAction();
+      _continueAction(exit: true);
     }else{
       _ratingPageController.nextPage(
           duration: Duration(milliseconds: 300), curve: Curves.easeIn);
@@ -290,12 +277,22 @@ class _RatingViewState extends State<RatingView> {
     }
   }
 
-  _continueAction(){
-    MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-    mood.captureMood(rating: _rating, countrycount: smileAppValueNotifier.getSmileDurationCounter());
-    ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
+  _continueAction({required bool exit}){
+    if  ( _rating < 1)  return;
 
-    if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
+    MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+    mood.captureMood(rating: _rating, countrycount: smileAppValueNotifier.getSmileCompletedCountriesCount());
+    ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
+    smileGameNofitier.updateTargetCaught(holdTarget: false);
+    if(exit == true){
+      if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
+    }else{
+
+
+      Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
+    //  if (Navigator.canPop(context)) Navigator.pop(context);
+    }
+
   //  if (Navigator.canPop(context)) Navigator.pop(context);
   }
 }

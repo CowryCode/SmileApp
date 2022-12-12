@@ -29,6 +29,7 @@ import 'package:SmileApp/models/globemodel.dart';
  final int Smile_Count_Initial = 35; // 20 counts = 5 Seconds
  final int Speech_Activation_Count = 8;
  final int Target_Countries_COUNT = 12;
+ final int Smile_AlertFeedBack_CountryCount_Interval = 3;
 
  //SMILE GAME: DISTANCE BETWEEN TARGET AND MOVING OBJECT
 final double TargetObjectHorrizontalInitializer = 150;

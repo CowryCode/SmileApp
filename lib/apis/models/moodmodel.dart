@@ -53,7 +53,9 @@ class MoodModel {
     this.endTime = utilities.getTimeFromDevice();
     this.endMood = rating;
    // this.smileduration = utilities.calculateDurationInSeconds(smileStartTime, DateTime.now());
-    this.smileduration = countrycount * 5;
+   // this.smileduration = countrycount * 5;
+    // 20 COUNTS = Seconds
+    this.smileduration = (countrycount/20) * 5;
   }
 
   void resetMood(){

@@ -45,6 +45,6 @@ class SmileFactsModel{
 
    ];
 
-    return smilefacts.elementAt(index);
+    return smilefacts.elementAt(0);
   }
 }

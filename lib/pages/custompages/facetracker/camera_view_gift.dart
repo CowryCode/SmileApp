@@ -625,6 +625,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ValueListenableBuilder(
               valueListenable: smileGameNofitier,
               builder: (context, SmileGameVariables gamevariables, child) {
+                // WE WANT THE ALERT TO SHOW AFTER 3 COUNTRIES ARE PAINTED
                 if(gamevariables.targetCaught){
                  // return _openRatingDialog(context);
                   return Dialog(
@@ -705,7 +706,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
         MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-        mood.captureMood(rating: response.rating.round(), countrycount: smileAppValueNotifier.getSmileDurationCounter());
+        mood.captureMood(rating: response.rating.round(), countrycount: smileAppValueNotifier.getSmileCompletedCountriesCount());
         ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
 
         Navigator.of(context).popAndPushNamed('/home',);
