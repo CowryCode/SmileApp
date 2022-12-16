@@ -17,8 +17,6 @@ import 'package:SmileApp/config/app_config.dart' as config;
 
 
 
-// ORIGINAL CODE START HERE, PLEASE REVERT TO IT AFTER ADDING FLUTTER_REDUX
-
  List<CameraDescription> cameras = [];
 
 Future<void> main() async {  // The code before I added Flutter_redux

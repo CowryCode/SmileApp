@@ -26,4 +26,5 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
     value.updateTargetCaught(holdtargetObject: holdTarget);
     notifyListeners();
   }
+
 }

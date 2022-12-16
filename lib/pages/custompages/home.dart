@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
       //   );
        // show Rating dialog
           showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
-            builder: (context) => Dialog( child: RatingView(checkinitialEmotion: true),),
+            builder: (context) => Dialog( child: RatingView(ratingonly: true),),
           );
        }
       await Firebase.initializeApp();

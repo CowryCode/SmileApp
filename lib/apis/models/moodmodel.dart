@@ -56,6 +56,8 @@ class MoodModel {
    // this.smileduration = countrycount * 5;
     // 20 COUNTS = Seconds
     this.smileduration = (countrycount/20) * 5;
+
+    print('SMILE DURATION IN SECONDS : ${this.smileduration}');
   }
 
   void resetMood(){

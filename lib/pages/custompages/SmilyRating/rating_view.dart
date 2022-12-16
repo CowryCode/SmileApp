@@ -6,14 +6,16 @@ import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/models/smilefactmodel.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/ratingcontroller.dart';
+import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:wakelock/wakelock.dart';
 
 class RatingView extends StatefulWidget {
   final bool readmessage ;
-  final bool checkinitialEmotion;
-  const RatingView({Key? key, this.readmessage = false, this.checkinitialEmotion = false, }) : super(key: key);
+  final bool ratingonly;
+  const RatingView({Key? key, this.readmessage = false, this.ratingonly = false, }) : super(key: key);
  // const RatingView({Key? key,}) : super(key: key);
 
   @override
@@ -28,7 +30,9 @@ class _RatingViewState extends State<RatingView> {
   bool ratingSubmitted = false;
   String emotion = "";
   String _currentAnimation = "";
-  RatingController _controller = RatingController();
+  RatingController _ratingcontroller = RatingController();
+
+  String fact = SmileFactsModel().modelsDictionary();
 
   void _onChanged({required double value}) {
     if (_rating == value) return;
@@ -81,7 +85,7 @@ class _RatingViewState extends State<RatingView> {
                       'assets/happiness_emoji.flr',
                       alignment: Alignment.center,
                       fit: BoxFit.contain,
-                      controller: _controller,
+                      controller: _ratingcontroller,
                       animation: _currentAnimation,
                     )),
               ),
@@ -116,7 +120,7 @@ class _RatingViewState extends State<RatingView> {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 _userRating(),
-                _userRatingMessage(),
+                _userRatingMessage(funcFact: fact),
               ],
             ),
           ),
@@ -158,7 +162,7 @@ class _RatingViewState extends State<RatingView> {
               right: 0,
               child: Container(
                // color: Theme.of(context).colorScheme.secondary,
-                color: (widget.checkinitialEmotion == true && _rating < 1) ? Colors.white : Theme.of(context).colorScheme.secondary,
+                color: (widget.ratingonly == true && _rating < 1) ? Colors.white : Theme.of(context).colorScheme.secondary,
                 child: Visibility(
                   visible: ratingSubmitted,
                   child: Row(
@@ -218,6 +222,7 @@ class _RatingViewState extends State<RatingView> {
   }
 
   _userRating() {
+    print('What to do  : $emotion because ${_rating > 0 }');
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -239,7 +244,8 @@ class _RatingViewState extends State<RatingView> {
     );
   }
 
-  _userRatingMessage() {
+  _userRatingMessage({required String funcFact}) {
+    print('THE FUN FACT IS : $funcFact');
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -250,7 +256,7 @@ class _RatingViewState extends State<RatingView> {
           textAlign: TextAlign.center,
         ),
         Text(
-          '${SmileFactsModel().modelsDictionary()}',
+          '$funcFact',
           style: TextStyle(color: Colors.black45),
           textAlign: TextAlign.center,
         ),
@@ -266,7 +272,7 @@ class _RatingViewState extends State<RatingView> {
   }
 
   _submit() {
-    if(widget.checkinitialEmotion == true){
+    if(widget.ratingonly == true){
       _continueAction(exit: true);
     }else{
       _ratingPageController.nextPage(
@@ -287,12 +293,13 @@ class _RatingViewState extends State<RatingView> {
     if(exit == true){
       if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
     }else{
-
-
       Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
     //  if (Navigator.canPop(context)) Navigator.pop(context);
     }
 
   //  if (Navigator.canPop(context)) Navigator.pop(context);
   }
+
+
+
 }

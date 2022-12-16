@@ -33,16 +33,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   );
   bool _canProcess = true;
   bool _isBusy = false;
-  // CustomPaint _customPaint;
-  // String _text;
-  //TODO: COMMENTED OUT TODAY 20-09-2022
-  //CustomPaint customPaint;
 
-  // Start
-  //int _count = 0; // My Code
   String _msg = ""; // My Code
-  // List<String> _tokenArray ;
-  // int _tokenArrayLength;
+
   List<String>? _tokenArray ;
   int? _tokenArrayLength;
 
@@ -70,6 +63,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     _faceDetector.close();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +123,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               smileGameNofitier.moveObject(smilesize: prob);
               int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
               smileAppValueNotifier.updateSmileDurationCount();
-              if(updatedTokenIndex <= 0){
+              if(updatedTokenIndex <= 0 || smileGameNofitier.value.targetCaught == true){
+                talker!.speak(text: "Great!");
                 smileGameNofitier.changeTargetObjectPosition();
                 String countryIDstring = smileAppValueNotifier.value.countriesIndexString.value;
                 List<int>? indicesCount = worldmapModel.splitString(countriesIndexString: countryIDstring);

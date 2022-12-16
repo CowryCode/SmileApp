@@ -70,4 +70,5 @@ class SmileGameVariables {
   void updateTargetCaught({required bool holdtargetObject}){
     targetCaught = holdtargetObject;
   }
+
 }

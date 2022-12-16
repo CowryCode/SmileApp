@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/chat/chatWidget.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddyconversation.dart';
@@ -33,12 +34,20 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 
   Future<bool> _onWillPop() async {
-    return (await showDialog(
-      context: context,
-      barrierDismissible: true,
-      // set to false if you want to force a rating
-      builder: (context) => _showRatingAlert(context),
-    )) ?? false;
+    // return (await showDialog(
+    //   context: context,
+    //   barrierDismissible: true,
+    //   // set to false if you want to force a rating
+    //   builder: (context) => _showRatingAlert(context),
+    // )) ?? false;
+    return (
+        await showDialog(
+          context: context,
+          barrierDismissible: true,
+          // set to false if you want to force a rating
+          builder: (context) => Dialog(child: RatingView(ratingonly: true,),),
+        )
+    ) ?? false;
   }
 
   @override
@@ -56,7 +65,8 @@ class _ChatWidgetState extends State<ChatWidget> {
                   context: context,
                   barrierDismissible: true,
                   // set to false if you want to force a rating
-                  builder: (context) => _showRatingAlert(context),
+                 // builder: (context) => _showRatingAlert(context),
+                  builder: (context) => Dialog(child: RatingView(ratingonly: true,),),
                 );
                 // Navigator.of(context).popAndPushNamed('/home');
               },
@@ -68,7 +78,6 @@ class _ChatWidgetState extends State<ChatWidget> {
             ),
             backgroundColor: Theme.of(context).accentColor,
             title: Text(
-              ""
                   "Baby AI Speaks!",
               style: TextStyle(
                 fontSize: 22.0,
