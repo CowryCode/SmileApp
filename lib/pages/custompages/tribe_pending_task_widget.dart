@@ -98,7 +98,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                     border: OutlineInputBorder(),
                     hintText: '200 Character empathic messsage',
                   ),
-                  maxLines: 2,
+                  maxLines: 4,
                   maxLength: 250,
                   cursorColor: Theme.of(context).colorScheme.secondary ,
                   controller: textEditingController,

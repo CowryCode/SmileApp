@@ -54,9 +54,12 @@ class _TribePageState extends State<TribePage> {
             builder: (BuildContext context) => AlertDialog(
               title: const Text(
                 'My Tribe',
+                style: TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),
               ),
               content: const Text(
-                  'Get beautiful messages from across the world. Will you want to continue ?'),
+                  'Get beautiful messages from other users. Will you want to continue ?',
+                style: TextStyle(color: Colors.black),
+              ),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'Cancel'),

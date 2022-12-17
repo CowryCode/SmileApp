@@ -183,7 +183,7 @@ class _EmotionsState extends State<Emotions> {
                                   width: 10,
                                 ),
                                 Text(
-                                  " Happy ",
+                                  " Not \n Happy ",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,
@@ -602,7 +602,7 @@ class _EmotionsState extends State<Emotions> {
   String? getOptions(){
     String options = "" ;
     if(Clicked0 == true){
-      options = options + "happy,";
+      options = options + "Not happy,";
     }
     if(Clicked1 == true){
       options = options + "surprised,";

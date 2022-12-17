@@ -135,7 +135,9 @@ class ApiAccess {
   }
 
   void saveMood({required MoodModel moodModel, required String url}) async {
-    // String? token = "100";
+    print('MOOD SAVE START ::::::: ');
+    if(moodModel.startMood == null || moodModel.endMood == null) return;
+    print('MOOD SAVE END ::::::: ');
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});

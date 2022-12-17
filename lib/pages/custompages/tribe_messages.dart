@@ -12,7 +12,7 @@ import 'package:SmileApp/models/mymodels/user.dart';
 
 
 class TribeMessageList extends StatefulWidget {
-  final User currentUser=User.init().getCurrentUser();
+  final User currentUser_ = User.init().getCurrentUser();
   @override
   _TribeMessageListState createState() => _TribeMessageListState();
 }
@@ -26,7 +26,8 @@ class _TribeMessageListState extends State<TribeMessageList> {
      random = new Random();
   }
 
-  User currentUser = new User.init().getCurrentUser();
+  User currentUser_ = new User.init().getCurrentUser();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,8 +60,8 @@ class _TribeMessageListState extends State<TribeMessageList> {
                showDialog<String>(
                  context: context,
                  builder: (BuildContext context) => AlertDialog(
-                   title: const Text('My Tribe', style: TextStyle(color: Colors.black45),),
-                   content: const Text('Get beautiful messages from across the world. Will you want to continue ?', style: TextStyle(color: Colors.black45),),
+                   title: const Text('My Tribe', style: TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),),
+                   content: const Text('Get beautiful messages from other users. Will you want to continue ?', style: TextStyle(color: Colors.black),),
                    actions: <Widget>[
                      TextButton(
                        onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -124,7 +125,7 @@ class MessageCard extends StatelessWidget {
  // final TribeMessageModel measageModel;
   final TribeMessage measageModel;
   final int colorID;
- // const MessageCard({Key? key, required this.measageModel, required this.colorID }) : super(key: key);
+
   const MessageCard({Key? key, required this.measageModel, required this.colorID }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -144,7 +145,6 @@ class MessageCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                     //"${measageModel.source}",
                      "${measageModel.sourceCountry}",
                       style: TextStyle(
                         fontSize:12.0,
