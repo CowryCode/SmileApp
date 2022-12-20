@@ -57,6 +57,7 @@ dependencies:
   # Setup Icon
   flutter_launcher_icons: "^0.10.0"
   flare_flutter: ^3.0.2
+  web_socket_channel: ^2.2.0
 flutter_icons:
   android: "launcher_icon"
   ios: true

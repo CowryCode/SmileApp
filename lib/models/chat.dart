@@ -13,7 +13,7 @@ class Chat {
   Chat(this.text, this.time, this.user, this.messageType);
   List<Chat> getChat() {
     return [
-      new Chat("Hey, How can I help you Do you have any problem?  ", "32 min ago", _currentUser, "Recieved"),
+      new Chat("Hey, How are you today? ", "32 min ago", _currentUser, "Recieved"),
     ];
   }
 }

@@ -79,20 +79,15 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   final Duration timerTastoPremuto = Duration(seconds: 20);
 
-  //Todo: Add real value
-  // int highestpoint = 20;
-  // int progressBarvalue = 20;
 
 
   // VARIABLES FOR THE MAP
-  // late List<Model> data;
   late MapShapeSource sublayerDataSource;
   late MapShapeSource shapeDataSource;
 
   @override
   void initState() {
     super.initState();
-
     Wakelock.enable();
         try {
           if (cameras.any(
@@ -115,7 +110,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           SystemChrome.setPreferredOrientations(
               [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
           _startLiveFeed();
-        } catch (e) {
+    } catch (e) {
           print("Error : ${e.toString()}");
         }
 
@@ -157,15 +152,16 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     Wakelock.disable();
     super.dispose();
   }
+
   Future<bool> _onWillPop() async {
-    // return (
-    //     await showDialog(
-    //   context: context,
-    //   barrierDismissible: true,
-    //   // set to false if you want to force a rating
-    //   builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
-    // )) ?? false;
-    _stopLiveFeed();
+    return (
+        await showDialog(
+      context: context,
+      barrierDismissible: true,
+      // set to false if you want to force a rating
+      builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
+      )) ?? false;
+
     return (
         await showDialog(
           context: context,
@@ -177,7 +173,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   @override
   Widget build(BuildContext context) {
-
    // WidgetsBinding.instance.addPostFrameCallback((_)=> refreshCamera());
 
     return WillPopScope(
@@ -187,12 +182,17 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
             onPressed: () {
-              _stopLiveFeed();
               showDialog(
-                context: context,
-                barrierDismissible: true,
-                builder: (context) => Dialog(child: RatingView(),),
+                  context: context,
+                  barrierDismissible: true,
+                  // set to false if you want to force a rating
+                  builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
               );
+              // showDialog(
+              //   context: context,
+              //   barrierDismissible: true,
+              //   builder: (context) => Dialog(child: RatingView(),),
+              // );
               },
           ),
           backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -280,29 +280,26 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   Future _startLiveFeed() async {
+    print('STARTING LIVE FEED :::::::::::::');
     final camera = cameras[_cameraIndex];
-   // _controller = CameraController(
     _controller = CameraController(
       camera,
-      // ResolutionPreset.high,
       ResolutionPreset.low,
       enableAudio: false,
     );
-   // _controller?.initialize().then((_) {
     _controller?.initialize().then((_) {
+      print('STARTING LIVE FEED_B :::::::::::::');
       if (!mounted) {
+        print('STARTING LIVE FEED_C :::::::::::::');
         return;
       }
-     // _controller?.getMinZoomLevel().then((value) {
       _controller?.getMinZoomLevel().then((value) {
         zoomLevel = value;
         minZoomLevel = value;
       });
-     // _controller?.getMaxZoomLevel().then((value) {
       _controller?.getMaxZoomLevel().then((value) {
         maxZoomLevel = value;
       });
-     // _controller?.startImageStream(_processCameraImage);
       _controller?.startImageStream(_processCameraImage);
       setState(() {});
     });
@@ -364,11 +361,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   // MY CODE
   Widget _cameraDisplay({required bool smilestartCountdown}) {
-    //if (_controller != null) {
     if (_controller != null) {
-     // if (_controller?.value != null) {
       if (_controller?.value != null) {
-       // if (_controller?.value.isInitialized == false) {
         if (_controller?.value.isInitialized == false) {
           print("CONTROLLER  VALUE IS NOT INITIALIZED");
           return SizedBox(
@@ -516,10 +510,11 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               builder: (context, SmileGameVariables gamevariables, child) {
                 // WE WANT THE ALERT TO SHOW AFTER 3 COUNTRIES ARE PAINTED
                 if(gamevariables.targetCaught){
-                 // return _openRatingDialog(context);
-                  return Dialog(
-                    child: RatingView(),
-                    // child: SmileGramFeedBackWidget(),
+                  // return Dialog(
+                  //   child: RatingView(),
+                  // );
+                  return SizedBox(
+                    height: 3.0,
                   );
                 }else{
                   return SizedBox(

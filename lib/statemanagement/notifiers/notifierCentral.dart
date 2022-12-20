@@ -90,3 +90,5 @@ final SmileGameNofitier smileGameNofitier = SmileGameNofitier(value: SmileGameVa
     targetHorrizontalposition: TargetObjectHorrizontalInitializer,
     movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance));
 
+
+

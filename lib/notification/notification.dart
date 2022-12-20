@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -54,7 +55,10 @@ class FCM  {
               }
               if (message.notification!.body != null) {
                 msg = message.notification!.body!;
-              } else {
+                print('CollapseKey :  ${message.collapseKey}');
+                print('My Title :  ${message.notification!.title!}');
+                print('Body :  ${message.notification!.body!}');
+            } else {
                 msg = "message.notification.body is null";
               }
             } else {

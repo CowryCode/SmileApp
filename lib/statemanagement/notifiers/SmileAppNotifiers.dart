@@ -70,7 +70,8 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
   }
 
   void updateShowCountDown({required bool showCoundown}) {
-    value.showCountDown.value = !value.showCountDown.value;
+    value.showCountDown.value = showCoundown;
+   // value.showCountDown.value = !value.showCountDown.value;
     notifyListeners();
   }
 

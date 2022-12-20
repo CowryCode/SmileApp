@@ -267,6 +267,7 @@ class ApiAccess {
   }
 
   Future<UnreadTribeMessage?> getAllReadSmilePacks() async {
+    print('GET A');
     try {
      // String? token = "100";
       String? token;

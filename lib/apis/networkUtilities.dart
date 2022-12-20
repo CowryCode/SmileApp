@@ -19,6 +19,8 @@ import 'package:SmileApp/models/globemodel.dart';
  final getProfile_URL = "${baseURL}/smile/get-user";
  final Save_Device_Identtifier_URL = "${baseURL}/smile/add-device";
 
+ final CHAT_URL = "${baseURL}/smile/chat";
+
 // GLOBAL VIARIABLES
  final int timeout_duration = 10;
  final String key_phone_number = "phonenumber";

@@ -122,8 +122,8 @@ class _HomeState extends State<Home> {
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     title: const Text('SmileGram'),
-                    content: const Text('Beat the highest smile score to win redeemable points! ',
-                      style: TextStyle(color: Colors.black45),
+                    content: const Text('To play the SmileGram, when the counter finishes. \n Maintain a smile until the big and small stars meet. ',
+                      style: TextStyle(color: Colors.black),
                     ),
                     actions: <Widget>[
                       TextButton(
@@ -135,8 +135,10 @@ class _HomeState extends State<Home> {
                       ),
                       TextButton(
                         onPressed: (){
-                          smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-                          Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
+                          //smileAppValueNotifier.updateShowCountDown(showCoundown: true);
+                          print('CLICKED ON CONTINUE: : : : : ');
+                          GiftVariableObject variables = new GiftVariableObject(readmessage: false);
+                            Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: variables);
                          },
                         child: const Text('Continue'),
                       ),

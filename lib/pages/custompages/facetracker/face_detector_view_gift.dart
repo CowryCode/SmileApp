@@ -43,6 +43,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
   String? _fulltext;
 
   SmileAppVoice? talker;
+
+
+
   @override
   void initState() {
     super.initState();
@@ -55,7 +58,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
     }
     talker = SmileAppVoice();
   }
-  //  End
 
   @override
   void dispose() {
@@ -78,7 +80,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
       readmessage: widget.giftVariableObject.readmessage!,
      // readmessage: readmessage,
     );
-
   }
 
   Future<void> processImage(InputImage inputImage) async {

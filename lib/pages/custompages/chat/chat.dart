@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/chat/chatWidget.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
@@ -12,6 +13,7 @@ import 'package:SmileApp/statemanagement/notifiers/chatnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class ChatWidget extends StatefulWidget {
   @override
@@ -26,11 +28,17 @@ class _ChatWidgetState extends State<ChatWidget> {
   final _myListKey = GlobalKey<AnimatedListState>();
   final myController = TextEditingController();
 
+
+  //final _channel = WebSocketChannel.connect(Uri.parse(CHAT_URL),);
+  final _channel = WebSocketChannel.connect(Uri.parse("wss://echo.websocket.events"),);
+
   @override
   void dispose() {
-    super.dispose();
+    _channel.sink.close();
     // Clean up the controller when the widget is disposed.
     myController.dispose();
+    super.dispose();
+
   }
 
   Future<bool> _onWillPop() async {
@@ -78,7 +86,7 @@ class _ChatWidgetState extends State<ChatWidget> {
             ),
             backgroundColor: Theme.of(context).accentColor,
             title: Text(
-                  "Baby AI Speaks!",
+                  "AI Speaks!",
               style: TextStyle(
                 fontSize: 22.0,
                 fontFamily: 'Poppins',
@@ -87,26 +95,56 @@ class _ChatWidgetState extends State<ChatWidget> {
             ),
           ),
           body: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+            // Expanded(
+            //   child: ValueListenableBuilder(
+            //       valueListenable: chatcentralnotifier,
+            //       builder: (context, List<BuddyChat> value, child) {
+            //         return AnimatedList(
+            //           key: _myListKey,
+            //           reverse: true,
+            //           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+            //           initialItemCount: value.length,
+            //           // Latest
+            //           itemBuilder: (context, index, Animation<double> animation) {
+            //             return ChatMessageListItem(
+            //              // chat: _buddyconversationList.conversation[0].buddychats![index],
+            //               chat: value[index],
+            //               animation: animation,
+            //             );
+            //           },
+            //         );
+            //       }),
+            // ),
             Expanded(
-              child: ValueListenableBuilder(
-                  valueListenable: chatcentralnotifier,
-                  builder: (context, List<BuddyChat> value, child) {
-                    return AnimatedList(
-                      key: _myListKey,
-                      reverse: true,
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                      initialItemCount: value.length,
-                      // Latest
-                      itemBuilder: (context, index, Animation<double> animation) {
-                        return ChatMessageListItem(
-                         // chat: _buddyconversationList.conversation[0].buddychats![index],
-                          chat: value[index],
-                          animation: animation,
+              //Todo Socket integretion
+              child: StreamBuilder(
+                stream: _channel.stream,
+                builder: (context, snapshot){
+                 // print('API RESPONSE : ${snapshot.data}');
+                  print('API RESPONSE : ${snapshot.requireData}');
+                  chatcentralnotifier.updateComment(chat: '${snapshot.data}', isbot: true);
+                  return  ValueListenableBuilder(
+                      valueListenable: chatcentralnotifier,
+                      builder: (context, List<BuddyChat> value, child) {
+                        print('DISCUSIION LENGTH : ${value.length}');
+                        return AnimatedList(
+                          key: _myListKey,
+                          reverse: true,
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                          initialItemCount: value.length,
+                          // Latest
+                          itemBuilder: (context, index, Animation<double> animation) {
+                            return ChatMessageListItem(
+                              chat: value[index],
+                              animation: animation,
+                            );
+                          },
                         );
-                      },
-                    );
-                  }),
+                      });
+               },
+             ),
             ),
+
             Container(
               margin: const EdgeInsets.only(bottom: 12.0, right: 6.0, left: 6.0),
               decoration: BoxDecoration(
@@ -130,6 +168,9 @@ class _ChatWidgetState extends State<ChatWidget> {
                     onPressed: () {
                       chatcentralnotifier.updateComment(
                           chat: myController.text, isbot: false);
+                      //TODO Socket Integration
+                      _channel.sink.add(myController.text);
+
                       setState(() {
                         _myListKey.currentState!.insertItem(0);
                       });
@@ -316,4 +357,5 @@ class _ChatWidgetState extends State<ChatWidget> {
           fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
     );
   }
+
 }
