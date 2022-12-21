@@ -95,14 +95,32 @@ class _HomeState extends State<Home> {
                               color: Theme.of(context).primaryColor.withOpacity(0.8),
                             ),
                           ),
-                          Text(
-                            "Cowrycode",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 16.0,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Cowrycode",
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: (){
+                                    Navigator.of(context).popAndPushNamed('/setting');
+                                  },
+                                  icon: Icon(Icons.settings),color: Theme.of(context).primaryColor, ),
+                            ],
                           ),
+                          // Text(
+                          //   "Cowrycode",
+                          //   style: TextStyle(
+                          //     fontFamily: 'Poppins',
+                          //     fontSize: 16.0,
+                          //     color: Theme.of(context).primaryColor,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],

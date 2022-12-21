@@ -340,7 +340,7 @@ class ApiAccess {
       body: jsonEncode(
           <String, dynamic>{
             "senderID" : token,
-            "content" : " Hi, someone in $location is feeling $emotions, please reply with an empathic message to encourage this person",
+            "content" : " Hi, someone in $location is feeling $emotions. Please reply with an empathic message to encourage this person",
             "sourceCountry" : location,
             "responded" : false,
           }),

@@ -1,4 +1,5 @@
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/setting.dart';
 import 'package:SmileApp/pages/custompages/smilegramLogin.dart';
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:SmileApp/pages/instructions/Welcome.dart';
@@ -27,6 +28,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginProcessing(justLoggedin: true, giftVariableObject: args as GiftVariableObject,));
       case '/welcome' :
         return MaterialPageRoute(builder: (_) => Welcome());
+      case '/setting' :
+        return MaterialPageRoute(builder: (_) => Setting());
       case '/home_with_alert' :
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: true,));
       case '/home' :
@@ -35,8 +38,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ChatWidget());
       case '/emotions':
         return MaterialPageRoute(builder: (_) => Emotions());
-      // case '/smilegram':
-      //   return MaterialPageRoute(builder: (_) => FaceDetectorView());
       case '/smilegramgift':
         return MaterialPageRoute(builder: (_) => FaceDetectorGiftView(giftVariableObject: args as GiftVariableObject,));
       case '/leaderboard':
