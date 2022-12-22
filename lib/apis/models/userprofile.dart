@@ -5,6 +5,7 @@ class UserProfile {
   bool? isconsented;
   double? smilegrampoint;
   double? accumulatedValue;
+  String? smilegrammappoints;
   String? deviceId;
 
   UserProfile(
@@ -13,7 +14,9 @@ class UserProfile {
         this.phonenumber,
         this.isconsented,
         this.smilegrampoint,
-        this.deviceId});
+        this.smilegrammappoints,
+        this.deviceId
+      });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -22,6 +25,7 @@ class UserProfile {
     isconsented = json['isconsented'];
     smilegrampoint = json['smilegrampoint'];
     accumulatedValue = json['accumulatedValue'];
+    smilegrammappoints = json['smilegrammappoints'];
     deviceId = json['deviceId'];
   }
 
@@ -33,6 +37,7 @@ class UserProfile {
     data['isconsented'] = this.isconsented;
     data['smilegrampoint'] = this.smilegrampoint;
     data['accumulatedValue'] = this.accumulatedValue;
+    data['smilegrammappoints'] = this.smilegrammappoints;
     data['deviceId'] = this.deviceId;
     return data;
   }

@@ -48,15 +48,16 @@ class _LeadderBoardState extends State<LeadderBoard> {
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
-              Tab(icon: Icon(FontAwesomeIcons.barsProgress,color: Colors.white,semanticLabel: "Progress",)),
-              Tab(icon: Icon(FontAwesomeIcons.faceSmileBeam,color: Colors.white,semanticLabel: "LeaderBoard",)),
+              Tab(icon: Icon(FontAwesomeIcons.thumbsUp,color: Colors.white,semanticLabel: "Progress",)),
+             // Tab(icon: Icon(FontAwesomeIcons.barsProgress,color: Colors.white,semanticLabel: "Progress",)),
+              Tab(icon: Icon(FontAwesomeIcons.trophy,color: Colors.white,semanticLabel: "LeaderBoard",)),
             ],
           ),
         ),
 
         body:TabBarView(
           children: [
-            _map(),
+            _map1(),
             PerformanceTable(),
             GlobalPerformanceTable(),
           ],
@@ -68,6 +69,92 @@ class _LeadderBoardState extends State<LeadderBoard> {
   Widget _map(){
     return Column(
       children: <Widget>[
+
+        HappinessMap(),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              ValueListenableBuilder(
+                // valueListenable: counterNotifier,
+                valueListenable: smileAppValueNotifier.value.nextCountry,
+                builder: (context, String value, child) {
+                  return Text(
+                    '   $value',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
+                  );
+                },
+              ),
+              Text(
+                'Needs your smile to be GREEN ',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                  fontFamily: 'Poppins',
+                  fontSize: 16.0,
+                ),
+              ),
+              IconButton(
+                  onPressed: (){
+                    smileAppValueNotifier.updateShowCountDown(showCoundown: true);
+                    Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
+                  },
+                  icon: Icon(FontAwesomeIcons.play,color: Colors.green,)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _map1(){
+    return Column(
+      children: <Widget>[
+        Stack(
+          children: <Widget>[
+            Container(
+              height: 50,
+              padding: const EdgeInsets.only(top:5,left:12.0,right: 12.0, bottom: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              child:   Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Your Smile Map',
+                        // textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontFamily: 'Poppins',
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
         HappinessMap(),
         Align(
           alignment: Alignment.bottomCenter,

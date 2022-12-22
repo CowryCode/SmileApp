@@ -61,7 +61,6 @@ class _GlassmorphicSmilegramDisplayState
               width: MediaQuery.of(context).size.width,
               // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
               decoration: BoxDecoration(
-                // color:  Colors.black12,
                 color: Theme.of(context).primaryColor,
                 border:
                     Border.all(width: 1.0, color: Colors.grey.withOpacity(0.5)),

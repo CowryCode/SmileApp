@@ -1,10 +1,9 @@
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/Questionnaire_Codes/MoodScale.dart';
 import 'package:SmileApp/pages/custompages/setting.dart';
 import 'package:SmileApp/pages/custompages/smilegramLogin.dart';
 import 'package:SmileApp/pages/custompages/tribes/tribe_page.dart';
 import 'package:SmileApp/pages/instructions/Welcome.dart';
-import 'package:SmileApp/pages/instructions/getStarted.dart';
-import 'package:SmileApp/pages/instructions/getStarted1.dart';
 import 'package:SmileApp/pages/login/login.dart';
 import 'package:SmileApp/pages/login/loginprocessing.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +29,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Welcome());
       case '/setting' :
         return MaterialPageRoute(builder: (_) => Setting());
+      case '/questionnaire' :
+        return MaterialPageRoute(builder: (_) => MoodScale());
       case '/home_with_alert' :
         return MaterialPageRoute(builder: (_) => NavigateTabsWidget(showEmotionalert: true,));
       case '/home' :

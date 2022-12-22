@@ -66,6 +66,7 @@ class ApiAccess {
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
         print('Login Code : $logincode');
         if (profile != null )  print('Profile Detail : ${profile.toJson()}');
+        smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
         Localstorage().saveString(key_login_token, logincode);
         Localstorage().saveBoolean(key_login_status, true);
         return profile;
@@ -76,6 +77,10 @@ class ApiAccess {
       throw Exception("Error, status code ${e.toString()}");
     }
  }
+
+  void Logout() async{
+    Localstorage().saveBoolean(key_login_status, false);
+  }
 
   Future<TribeMessage?> sendTribeMessage({required TribeMessage message}) async {
     String? token;

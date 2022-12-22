@@ -19,6 +19,8 @@ class _LoginProcessingState extends State<LoginProcessing> {
   //bool justLoggedin = false;
   Future<UserProfile>? profile;
 
+  Timer? _timer;
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async{
@@ -26,6 +28,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
       profile!.then((value) => {
         if(value != null){
           print('Logged in Successfully Initialized'),
+          _timer!.cancel(),
           Navigator.of(context).popAndPushNamed('/home_with_alert')
         }
       });
@@ -47,7 +50,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
        child:   FutureBuilder<UserProfile>(
             future: profile,
             builder: (BuildContext context, AsyncSnapshot<UserProfile> snapshot){
-              Timer.periodic(Duration(seconds: 10), (timer){
+              _timer = Timer.periodic(Duration(seconds: 10), (timer){
                 //if (timer.tick == 1) {
                   if (snapshot.hasData) {
                     timer.cancel();
@@ -55,7 +58,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
                       return Navigator.of(context).popAndPushNamed('/home_with_alert');
                     }());
                   } else {
-                    if(widget.justLoggedin == true && !snapshot.hasData ){
+                    if(widget.justLoggedin == true && !snapshot.hasData){
                       timer.cancel();
                       print("Timer tick is ${timer.tick}");
                       widget.justLoggedin = false;
