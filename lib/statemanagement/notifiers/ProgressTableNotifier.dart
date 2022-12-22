@@ -3,20 +3,20 @@ import 'package:flutter/cupertino.dart';
 
 class ProgressTableNotifier extends ValueNotifier<List<PersonalProgresses>> {
   List<PersonalProgresses> progressetable = [
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
-    PersonalProgresses(targetValue: 170, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
+    PersonalProgresses(targetValue: 13, scoredValue: 0),
   ];
   ProgressTableNotifier({required List<PersonalProgresses> value }) : super(value);
 

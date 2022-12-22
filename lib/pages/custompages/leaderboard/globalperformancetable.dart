@@ -87,7 +87,7 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
              // Icon(FontAwesomeIcons.solidStar, color: Colors.orange, size: 12,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children:  _getStars(globalRank: rank),
+                children:  _getGlobalTableStars(globalRank: rank),
               ),
               SizedBox(width: 20,),
               Text("${globalscoresTable.value[index].globalpercent}%"),
@@ -99,7 +99,7 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
 
   }
 
-  List<Widget> _getStars({required double globalRank}){
+  List<Widget> _getGlobalTableStars({required double globalRank}){
     int starcount = globalRank.round();
     if(starcount < 1){
       return [Icon(FontAwesomeIcons.solidStar, color: Colors.red, size: 12,),];

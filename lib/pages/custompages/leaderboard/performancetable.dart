@@ -190,43 +190,54 @@ class _PerformanceTableState extends State<PerformanceTable> {
   }
 
   List<Widget> _getStars({required int score, required int target}){
-    int starcount = Utilities().getPercentage(value: score, total: target);
-    if(starcount < 1){
+    //int starcount = Utilities().getPercentage(value: score, total: target);
+    if(score < 1){
       return [Icon(FontAwesomeIcons.solidStar, color: Colors.red, size: 12,),];
     } else{
-      if(starcount <= 20){
+      if(score > 0 && score <= 3){
         return[
           Icon(FontAwesomeIcons.solidStar, color: Colors.orange, size: 12,),
         ];
-      }else if(starcount > 20 && starcount <= 40 ){
+      }else if(score > 3 && score <= 6 ){
         return[
           Icon(FontAwesomeIcons.solidStar, color: Colors.orange, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.orange, size: 12,),
         ];
-      }else if(starcount > 40 && starcount <= 60 ){
+      }else if(score > 6 && score <= 8 ){
         return[
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
         ];
-      }else if(starcount > 60 && starcount <= 80 ){
+      }else if(score > 8 && score <= 10 ){
         return[
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
         ];
-      }else if(starcount > 80){
+      }else if(score > 10 && score <= 13 ){
         return[
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
           Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
+        ];
+      } else if(score > 13){
+        print('START COUNT VALUE IS : $score');
+        return[
+          Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
+          Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
+          Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
+          Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
+          Icon(FontAwesomeIcons.solidStar, color: Colors.green, size: 12,),
+          Icon(FontAwesomeIcons.trophy, color: Colors.blueGrey, size: 12,),
         ];
       }else{
         return [Icon(FontAwesomeIcons.solidStar, color: Colors.red, size: 12,),];
       }
     }
   }
+
 }

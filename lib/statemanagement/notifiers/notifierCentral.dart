@@ -53,20 +53,20 @@ final SmileAppValueNotifier smileAppValueNotifier = SmileAppValueNotifier(
 final SGmessageNotifier messageNotifier = SGmessageNotifier(value: SGmessageModel(msg: "", index: 0));
 
 final ProgressTableNotifier progressTable = ProgressTableNotifier(value: [
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
-  PersonalProgresses(targetValue: 170, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
+  PersonalProgresses(targetValue: 13, scoredValue: 0),
 ]);
 
 final LeaderBoardNotifier globalscoresTable = LeaderBoardNotifier(value: [
