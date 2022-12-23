@@ -11,9 +11,6 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
 
   void moveObject({required double smilesize}){
      value.move(smileProb: smilesize);
-     print('Target X Position : ${value.targetHorrizontalposition}');
-     print('Object X Position : ${value.movingObjectHorrizontalposition}');
-     print('Target Caught : ${value.targetCaught}');
     notifyListeners();
   }
 
@@ -25,6 +22,10 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
   void updateTargetCaught({required bool holdTarget}){
     value.updateTargetCaught(holdtargetObject: holdTarget);
     notifyListeners();
+  }
+
+  double getSmileDurationInSecound(){
+    return value.getSmileDurationInSeconds();
   }
 
 }

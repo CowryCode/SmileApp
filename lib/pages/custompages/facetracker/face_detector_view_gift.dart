@@ -123,6 +123,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             if (prob! > 0.5 && smileGameNofitier.value.targetCaught == false) {
               smileGameNofitier.moveObject(smilesize: prob);
               int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
+              // This reduces the count down on the smile screan
               smileAppValueNotifier.updateSmileDurationCount();
               if(updatedTokenIndex <= 0 || smileGameNofitier.value.targetCaught == true){
                 talker!.speak(text: "Great!");
@@ -167,9 +168,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
       // setState(() {});
     }
   }
-
-
-
 
   // Future<void> processImage(InputImage inputImage) async {
   //

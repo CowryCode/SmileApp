@@ -107,9 +107,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               ),
             );
           }
+          _startLiveFeed();
           SystemChrome.setPreferredOrientations(
               [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-          _startLiveFeed();
+
     } catch (e) {
           print("Error : ${e.toString()}");
         }
@@ -661,7 +662,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
         MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-        mood.captureMood(rating: response.rating.round(), countrycount: smileAppValueNotifier.getSmileCompletedCountriesCount());
+        mood.captureMood(rating: response.rating.round(), smileduration: smileGameNofitier.getSmileDurationInSecound());
         ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
 
         Navigator.of(context).popAndPushNamed('/home',);

@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
+import 'package:flutter/material.dart';
 
 class SmileGameVariables {
+  int smileDurationCounter = 0;
   bool direction = true;
   bool targetCaught = false;
   double targetVerticalposition = 0.0;
@@ -14,6 +16,9 @@ class SmileGameVariables {
   SmileGameVariables({required this.targetHorrizontalposition , required this.movingObjectHorrizontalposition});
 
   void move({required double smileProb}) {
+    // Update this count each time user is smiling
+    smileDurationCounter++;
+
     double speedInterval = smileProb < 0.6 ? 1.0 : smileProb < 0.75 ? 2.0 : 3.0;
     //MOVE THE OBJECT RIGHT TO LEFT
     if (!direction) {
@@ -71,4 +76,8 @@ class SmileGameVariables {
     targetCaught = holdtargetObject;
   }
 
+  double getSmileDurationInSeconds(){
+    /* 4.5 counts == 1sec*/
+    return double.parse((smileDurationCounter/4.5).toStringAsFixed(2));
+  }
 }

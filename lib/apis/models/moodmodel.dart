@@ -47,15 +47,12 @@ class MoodModel {
     this.startMood = rating;
   }
 
-  void captureMood({required int rating, required int countrycount}){
+  void captureMood({required int rating, required double smileduration}){
     Utilities utilities = Utilities();
     this.endDate = utilities.getDateFromDevice();
     this.endTime = utilities.getTimeFromDevice();
     this.endMood = rating;
-   // this.smileduration = utilities.calculateDurationInSeconds(smileStartTime, DateTime.now());
-   // this.smileduration = countrycount * 5;
-    // 20 COUNTS = Seconds
-    this.smileduration = (countrycount/20) * 5;
+    this.smileduration = smileduration;
 
     print('SMILE DURATION IN SECONDS : ${this.smileduration}');
   }

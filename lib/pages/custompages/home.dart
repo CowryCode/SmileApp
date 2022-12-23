@@ -153,8 +153,7 @@ class _HomeState extends State<Home> {
                       ),
                       TextButton(
                         onPressed: (){
-                          //smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-                          print('CLICKED ON CONTINUE: : : : : ');
+                          smileAppValueNotifier.updateShowCountDown(showCoundown: true);
                           GiftVariableObject variables = new GiftVariableObject(readmessage: false);
                             Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: variables);
                          },
@@ -502,6 +501,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
 
   _openRatingDialog(BuildContext context) {
     showDialog(
