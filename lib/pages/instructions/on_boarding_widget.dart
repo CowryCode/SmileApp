@@ -1,3 +1,4 @@
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/instructions/on_boarding_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,15 +30,9 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CarouselSlider(
-              // height: 500,
-              // viewportFraction: 1.0,
-              // onPageChanged: (index) {
-              //   setState(() {
-              //     _current = index;
-              //   });
-              // },
               options: CarouselOptions(
-                height: 500,
+                //height: MediaQuery.of(context).size.height * 0.9,
+                height: 1200,
                 viewportFraction: 1.0,
                 onPageChanged: (index, other) {
                   setState(() {
@@ -49,14 +44,13 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                 return Builder(
                   builder: (BuildContext context) {
                     return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(20),
                           child: Image.asset(
                             boarding.image!,
-                            width: 500,
+                            width: 200,
                           ),
                         ),
                         Column(
@@ -76,22 +70,24 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 30,),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              //width: 200,
-                              padding: const EdgeInsets.only(left: 20,right: 20),
-                              child: Text(
-                                boarding.description!,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color:Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                  fontFamily: "Poppins"
-                                ),
-                              ),
-                            ),
+                            SizedBox(height: 10,),
+                            (boarding.featureID! == 1)? _smileGraminstructions() : (boarding.featureID! == 2)? _pocketBuddyinstructions() : _myTribeInstructions() ,
+                            SizedBox(height: 10,),
+                            // Container(
+                            //   width: MediaQuery.of(context).size.width * 0.9,
+                            //   //width: 200,
+                            //   padding: const EdgeInsets.only(left: 20,right: 20),
+                            //   child: Text(
+                            //     boarding.description!,
+                            //     textAlign: TextAlign.justify,
+                            //     style: TextStyle(
+                            //       color:Colors.grey,
+                            //       fontWeight: FontWeight.bold,
+                            //       fontSize: 18.0,
+                            //       fontFamily: "Poppins"
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
@@ -114,6 +110,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
               FlatButton(
                 onPressed: (){
                    Navigator.of(context).pushNamed('/home_with_alert');
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: true,)));
                 },
                 child: Text(
                   "Skip",
@@ -149,6 +146,87 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
           ),
         ), 
       ),
+    );
+  }
+
+  Widget _smileGraminstructions(){
+    return Column(
+      children: <Widget>[
+        steps(step: "", content: "To play the SmileGram Game. \n Follow the steps below.",isHeader: true),
+        steps(step: "Step 1:", content: "Click on the SmileGram feature \n from the home screen", isHeader: false),
+        steps(step: "Step 2:", content: "Wait for the count-down to complete", isHeader: false),
+        steps(step: "Step 3:", content: "Maintain a smily face until \n the two moving stars meet", isHeader: false),
+        steps(step: "**", content: "Each time these stars meet, a portion of \n the map is painted green",isHeader: false),
+        steps(step: "**", content: "You can exit at any point by clicking \n the back-arrow button", isHeader: true),
+        steps(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
+      ],
+    );
+  }
+
+  Widget _pocketBuddyinstructions(){
+    return Column(
+      children: <Widget>[
+        steps(step: "", content: "To interact with the Pocketbuddy. \n Follow the steps below.", isHeader: true),
+        steps(step: "Step 1:", content: "Click on the Pocketbuddy feature \n from the home screen",isHeader: false),
+        steps(step: "Step 2:", content: "Chat with the buddy",isHeader: false),
+        steps(step: "**", content: "You can exit at any point by clicking \n the back-arrow button", isHeader: true),
+        steps(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
+      ],
+    );
+  }
+
+  Widget _myTribeInstructions(){
+    return Column(
+      children: <Widget>[
+        steps(step: "", content: "To request for supportive message(s) from \n other users, follow the steps below.", isHeader: true),
+        steps(step: "Step 1:", content: "Click on the myTribe feature \n from the home screen.", isHeader: false),
+        steps(step: "Step 2:", content: "Select the emotion(s) to best \n describe how you feel.", isHeader: false),
+        steps(step: "Step 3:", content: "Click on 'OK' to notify other users \n  of how you are feeling.", isHeader: false),
+        steps(step: "", content: "To reply to supportive message request \n from other users, follow the steps below.", isHeader: true),
+        steps(step: "Step 1:", content: "Click on the 'Group Icon' \n at bottom center of the navigation bar \n in the home screen.", isHeader: false),
+        steps(step: "Step 2:", content: "Click on 'Reply' to any of \n the request(s), type your \n message then click on 'Send'.", isHeader: false),
+        steps(step: "", content: "To read supportive message from other users, \n follow the steps below.", isHeader: true),
+        steps(step: "Step 1:", content: "Click on the 'closed envelope' \n icon on the home screen.", isHeader: false),
+        steps(step: "Step 2:", content: "Smile to show the content of \n the supportive message", isHeader: false),
+        steps(step: "**", content: "You can exit at any point by clicking \n the back-arrow button.",isHeader: true),
+        steps(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
+      ],
+    );
+  }
+
+  Widget steps({required String step, required String content, required bool isHeader}){
+    return Stack(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: 75,
+          padding: EdgeInsets.all(7.0),
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: Theme.of(context).primaryColor,
+            ),
+            color: (isHeader)? Colors.orange :  Theme.of(context).colorScheme.secondary,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(""),
+
+        ),
+        Positioned(
+          left: 10.0,
+          top: 7.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget> [
+              SizedBox(width: 5,),
+              Text("$step"),
+              SizedBox(width: 10,),
+              Text("$content", softWrap: false, overflow: TextOverflow.ellipsis,),
+              SizedBox(width: 5,),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

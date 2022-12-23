@@ -96,7 +96,6 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
         )
       ],
     );
-
   }
 
   List<Widget> _getGlobalTableStars({required double globalRank}){

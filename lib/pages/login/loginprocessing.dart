@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/instructions/Welcome.dart';
 import 'package:flutter/material.dart';
 class LoginProcessing extends StatefulWidget {
   bool justLoggedin;
@@ -29,7 +30,8 @@ class _LoginProcessingState extends State<LoginProcessing> {
         if(value != null){
           print('Logged in Successfully Initialized'),
           _timer!.cancel(),
-          Navigator.of(context).popAndPushNamed('/home_with_alert')
+        //  Navigator.of(context).popAndPushNamed('/home_with_alert')
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()))
         }
       });
     });
@@ -55,7 +57,8 @@ class _LoginProcessingState extends State<LoginProcessing> {
                   if (snapshot.hasData) {
                     timer.cancel();
                     ((){
-                      return Navigator.of(context).popAndPushNamed('/home_with_alert');
+                     // return Navigator.of(context).popAndPushNamed('/home_with_alert');
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
                     }());
                   } else {
                     if(widget.justLoggedin == true && !snapshot.hasData){
