@@ -37,7 +37,7 @@ class NotifiersSection {
   ValueNotifier<bool> activatespeech = ValueNotifier<bool>(false);
   ValueNotifier<bool> deactivetSound = ValueNotifier<bool>(false);
   ValueNotifier<MoodModel> moodmodel = ValueNotifier<MoodModel>(MoodModel());
-  ValueNotifier<int> smileCompletedCountryCounter = ValueNotifier<int>(0);
+ // ValueNotifier<int> smileCompletedCountryCounter = ValueNotifier<int>(0);
   NotifiersSection({
     required this.smileDurationCount,
     required this.smileDurationCompleted,
@@ -60,7 +60,7 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
 
   void refreshSmileDurationCount() {
     value.smileDurationCount.value = Smile_Count_Initial;
-    updateSmileDurationCounter();
+   // updateSmileDurationCounter();
     notifyListeners();
   }
 
@@ -145,21 +145,24 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
     notifyListeners();
   }
 
-  void resetMoodObject(){
-    value.moodmodel.value.resetMood();
+  void resetMoodObject({required MoodModel savedmood}){
+    value.moodmodel.value.resetMood(savedMood: savedmood);
     notifyListeners();
   }
+
+  // void resetMoodObject(){
+  //   value.moodmodel.value.resetMood();
+  //   notifyListeners();
+  // }
 
   //JUST ADDED
-  void updateSmileDurationCounter(){
-    value.smileCompletedCountryCounter.value++;
-    notifyListeners();
-  }
+  // void updateSmileDurationCounter(){
+  //   value.smileCompletedCountryCounter.value++;
+  //   notifyListeners();
+  // }
 
-  int getSmileCompletedCountriesCount(){
-    /* The Value represent number of countries that have bean painted green
-     Each country count = 5secs of Smile */
-    return  value.smileCompletedCountryCounter.value;
-  }
+  // int getSmileCompletedCountriesCount(){
+  //   return  value.smileCompletedCountryCounter.value;
+  // }
 }
 

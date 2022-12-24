@@ -8,6 +8,7 @@ class MoodModel {
   String? endTime;
   int? endMood;
   double? smileduration;
+  int? countrycount;
 
   MoodModel(
       {this.startDate,
@@ -16,7 +17,9 @@ class MoodModel {
         this.endDate,
         this.endTime,
         this.endMood,
-        this.smileduration});
+        this.smileduration,
+        this.countrycount
+      });
 
   MoodModel.fromJson(Map<String, dynamic> json) {
     startDate = json['startDate'];
@@ -26,6 +29,7 @@ class MoodModel {
     endTime = json['endTime'];
     endMood = json['endMood'];
     smileduration = json['smileduration'];
+    countrycount = json['countrycount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,6 +41,7 @@ class MoodModel {
     data['endTime'] = this.endTime;
     data['endMood'] = this.endMood;
     data['smileduration'] = this.smileduration;
+    data['countrycount'] = this.countrycount;
     return data;
   }
 
@@ -47,30 +52,39 @@ class MoodModel {
     this.startMood = rating;
   }
 
-  void captureMood({required int rating, required double smileduration}){
+  void captureMood({required int rating, required double smileduration, required int countrycount}){
     Utilities utilities = Utilities();
     this.endDate = utilities.getDateFromDevice();
     this.endTime = utilities.getTimeFromDevice();
     this.endMood = rating;
     this.smileduration = smileduration;
+    this.countrycount = countrycount;
 
     print('SMILE DURATION IN SECONDS : ${this.smileduration}');
   }
-
-  void resetMood(){
-    Utilities utilities = Utilities();
-    DateTime date1 = DateTime.parse("$startDate 00:00:00");
-    DateTime date2 = DateTime.parse("$endDate 00:00:00");
-    if(date1.compareTo(date2) == 0){
-      this.endDate = null;
-      this.endTime = null;
-      this.endMood = null;
-    }else{
-      this.startDate = utilities.getDateFromDevice();
-      this.startTime = utilities.getTimeFromDevice();
+  void resetMood({required MoodModel savedMood}){
+      this.startDate = savedMood.startDate;
+      this.startTime = savedMood.startTime;
+      this.startMood = savedMood.startMood;
       this.endDate = null;
       this.endTime = null;
       this.endMood = null;
     }
-  }
+
+  // void resetMood(){
+  //   Utilities utilities = Utilities();
+  //   DateTime date1 = DateTime.parse("$startDate 00:00:00");
+  //   DateTime date2 = DateTime.parse("$endDate 00:00:00");
+  //   if(date1.compareTo(date2) == 0){
+  //     this.endDate = null;
+  //     this.endTime = null;
+  //     this.endMood = null;
+  //   }else{
+  //     this.startDate = utilities.getDateFromDevice();
+  //     this.startTime = utilities.getTimeFromDevice();
+  //     this.endDate = null;
+  //     this.endTime = null;
+  //     this.endMood = null;
+  //   }
+  // }
 }

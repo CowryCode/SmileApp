@@ -164,11 +164,14 @@ class ApiAccess {
             "endTime" : moodModel.endTime,
             "endMood" : moodModel.endMood,
             "smileduration" : moodModel.smileduration,
+            "countrycount" : moodModel.countrycount,
           }),
     );
 
     if (response.statusCode == 200) {
-      smileAppValueNotifier.resetMoodObject();
+      MoodModel svdMood = MoodModel.fromJson(jsonDecode(response.body));
+      smileAppValueNotifier.resetMoodObject(savedmood: svdMood);
+      smileGameNofitier.resetGameVariables();
     }
   }
 

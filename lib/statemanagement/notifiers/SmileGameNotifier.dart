@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import '../../apis/networkUtilities.dart';
 
 class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
-  SmileGameVariables smileGameVariables = SmileGameVariables(
-      targetHorrizontalposition: TargetObjectHorrizontalInitializer,
-      movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance);
+  // SmileGameVariables smileGameVariables = SmileGameVariables(
+  //     targetHorrizontalposition: TargetObjectHorrizontalInitializer,
+  //     movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance);
   SmileGameNofitier({required SmileGameVariables  value}) : super(value);
 
   void moveObject({required double smilesize}){
@@ -24,8 +24,19 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
     notifyListeners();
   }
 
-  double getSmileDurationInSecound(){
-    return value.getSmileDurationInSeconds();
+  void resetGameVariables(){
+    value.refresh();
+    notifyListeners();
   }
 
+  double getSmileDurationInSecound() {
+    return value.getSmileDurationInSeconds();
+  }
+  double getSmileDurationCounter(){
+    return value.getSmileDurationCounter();
+  }
+
+  int getNumberofCountriesPainted(){
+    return value.getSmileNumberofCountriesPainted();
+  }
 }

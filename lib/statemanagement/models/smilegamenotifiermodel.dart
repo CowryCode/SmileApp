@@ -13,6 +13,7 @@ class SmileGameVariables {
   double movingObjectVerticalposition = 10.0; // ORIGINAL CODE
   double targetHorrizontalposition;
   double movingObjectHorrizontalposition;
+  int numberOfStarMeetings = 0; // EACH TIME THE STARS MEET, A COUNTRY IS PAINTED
   SmileGameVariables({required this.targetHorrizontalposition , required this.movingObjectHorrizontalposition});
 
   void move({required double smileProb}) {
@@ -38,12 +39,9 @@ class SmileGameVariables {
     if(movingObjectHorrizontalposition == (MaximumHorrizontalLocation + 10)
         || movingObjectHorrizontalposition == MinimumLocation ) direction = !direction;
 
-    if((movingObjectHorrizontalposition == (targetHorrizontalposition + 10) ||
-        movingObjectHorrizontalposition == (targetHorrizontalposition + 11) ||
-        movingObjectHorrizontalposition == (targetHorrizontalposition + 9))
-        &&
-        ((smileAppValueNotifier.getSmileCompletedCountriesCount() % Smile_AlertFeedBack_CountryCount_Interval ) == 0)){
+    if(movingObjectHorrizontalposition == (targetHorrizontalposition + 10) || movingObjectHorrizontalposition == (targetHorrizontalposition - 10)){
       targetCaught = true;
+      numberOfStarMeetings++;
     }else{
       targetCaught = false;
     }
@@ -79,5 +77,19 @@ class SmileGameVariables {
   double getSmileDurationInSeconds(){
     /* 4.5 counts == 1sec*/
     return double.parse((smileDurationCounter/4.5).toStringAsFixed(2));
+  }
+
+  double getSmileDurationCounter(){
+    return double.parse((smileDurationCounter).toStringAsFixed(2));
+  }
+  int getSmileNumberofCountriesPainted(){
+    return numberOfStarMeetings;
+  }
+
+  void refresh(){
+    this.targetHorrizontalposition = TargetObjectHorrizontalInitializer;
+    this.movingObjectHorrizontalposition = TargetObjectHorrizontalInitializer - TargetObjectDistance;
+    this.numberOfStarMeetings = 0;
+    this.smileDurationCounter = 0;
   }
 }

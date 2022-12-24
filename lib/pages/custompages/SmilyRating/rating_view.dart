@@ -285,11 +285,6 @@ class _RatingViewState extends State<RatingView> {
 
   _continueAction({required bool exit}){
     if  ( _rating < 1)  return;
-
-    MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-    mood.captureMood(rating: _rating, countrycount: smileAppValueNotifier.getSmileCompletedCountriesCount());
-    ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
-    smileGameNofitier.updateTargetCaught(holdTarget: false);
     if(exit == true){
       if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
     }else{

@@ -119,26 +119,43 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               return ;
             }
           } else {
-            //double roundedProb = changeDecimalplaces(value: prob!, decimalplaces: 2);
-            if (prob! > 0.5 && smileGameNofitier.value.targetCaught == false) {
+           // if (prob! > 0.5 && smileGameNofitier.value.targetCaught == false) {
+            if (prob! > 0.5 ) {
               smileGameNofitier.moveObject(smilesize: prob);
               int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
               // This reduces the count down on the smile screan
               smileAppValueNotifier.updateSmileDurationCount();
-              if(updatedTokenIndex <= 0 || smileGameNofitier.value.targetCaught == true){
+
+              if(smileGameNofitier.value.targetCaught == true){
                 talker!.speak(text: "Great!");
-                smileGameNofitier.changeTargetObjectPosition();
                 String countryIDstring = smileAppValueNotifier.value.countriesIndexString.value;
                 List<int>? indicesCount = worldmapModel.splitString(countriesIndexString: countryIDstring);
                 if((indicesCount!.length) < worldmapModel.modelsDictionary().length){
-                 // List<Model>? data = worldmapModel.getProcessedcountries(userCountriesIndexString: countryIDstring);
                   String updatedIDs =  countryIDstring + ",${indicesCount.length}";
                   int nextCountryID = indicesCount.length + 1;
                   smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs, nextID: nextCountryID);
                 }else{
                   smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0", nextID: 0);
                 }
+                smileGameNofitier.updateTargetCaught(holdTarget: false);
+              }
+
+              if(updatedTokenIndex <= 0 ){
+                smileGameNofitier.changeTargetObjectPosition();
                 smileAppValueNotifier.refreshSmileDurationCount();
+               // if(updatedTokenIndex <= 0 || smileGameNofitier.value.targetCaught == true){
+                // talker!.speak(text: "Great!");
+                // smileGameNofitier.changeTargetObjectPosition();
+                // String countryIDstring = smileAppValueNotifier.value.countriesIndexString.value;
+                // List<int>? indicesCount = worldmapModel.splitString(countriesIndexString: countryIDstring);
+                // if((indicesCount!.length) < worldmapModel.modelsDictionary().length){
+                //   String updatedIDs =  countryIDstring + ",${indicesCount.length}";
+                //   int nextCountryID = indicesCount.length + 1;
+                //   smileAppValueNotifier.updateCountriesIndexString(countriesIndex: updatedIDs, nextID: nextCountryID);
+                // }else{
+                //   smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0", nextID: 0);
+                // }
+                // smileAppValueNotifier.refreshSmileDurationCount();
               }else{
               }
             }else{

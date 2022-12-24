@@ -45,14 +45,14 @@ class _HomeState extends State<Home> {
 
     WidgetsBinding.instance.addPostFrameCallback((_)  async{
       if(widget.checkEmotion == true){
-      // show Rating dialog
-      //   showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
-      //     builder: (context) => _showRatingAlert(context),
-      //   );
+      //show Rating dialog
+        showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
+          builder: (context) => _showRatingAlert(context),
+        );
        // show Rating dialog
-          showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
-            builder: (context) => Dialog( child: RatingView(ratingonly: true),),
-          );
+       //    showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
+       //      builder: (context) => Dialog( child: RatingView(ratingonly: true),),
+       //    );
        }
       await Firebase.initializeApp();
       await FirebaseMessaging.instance.getToken().then((token){

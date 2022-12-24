@@ -30,7 +30,8 @@ class _SmileGameState extends State<SmileGame> {
             valueListenable: smileGameNofitier,
             builder: (context, SmileGameVariables gamevariables, child){
              return Visibility(
-               visible: !gamevariables.targetCaught,
+              // visible: !gamevariables.targetCaught,
+               visible: true,
                child: AnimatedPositioned(
                           //    top: 27.0,
                           //    left: 310.0,
@@ -50,7 +51,9 @@ class _SmileGameState extends State<SmileGame> {
               valueListenable: smileGameNofitier,
               builder: (context, SmileGameVariables gamevariables, child) {
                return Visibility(
-                 visible: !gamevariables.targetCaught,
+                 //TODO: IMPLEMENT HOW TO MAKE THIS INVISIBLE AFTER SOME "CAUGHTS" TO HELP USER STAY MOTIVATED
+                // visible: !gamevariables.targetCaught,
+                 visible: true,
                  child: AnimatedPositioned(
                     // top: 17.0,
                     // left: 300.0,
