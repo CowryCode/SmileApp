@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:SmileApp/apis/models/moodmodel.dart';
+import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/chat/chatWidget.dart';
@@ -42,12 +44,12 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 
   Future<bool> _onWillPop() async {
-    // return (await showDialog(
-    //   context: context,
-    //   barrierDismissible: true,
-    //   // set to false if you want to force a rating
-    //   builder: (context) => _showRatingAlert(context),
-    // )) ?? false;
+    return (await showDialog(
+      context: context,
+      barrierDismissible: true,
+      // set to false if you want to force a rating
+      builder: (context) => _showRatingAlert(context),
+    )) ?? false;
     return (
         await showDialog(
           context: context,
@@ -73,8 +75,8 @@ class _ChatWidgetState extends State<ChatWidget> {
                   context: context,
                   barrierDismissible: true,
                   // set to false if you want to force a rating
-                 // builder: (context) => _showRatingAlert(context),
-                  builder: (context) => Dialog(child: RatingView(ratingonly: true,),),
+                  builder: (context) => _showRatingAlert(context),
+                 // builder: (context) => Dialog(child: RatingView(ratingonly: true,),),
                 );
                 // Navigator.of(context).popAndPushNamed('/home');
               },
@@ -346,12 +348,21 @@ class _ChatWidgetState extends State<ChatWidget> {
       commentHint: 'Set your custom comment hint',
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
-        //TODO: REMOVE THIS ON PRODUCTION
-        chatcentralnotifier.updateComment(
-            chat: "I respond as a bot", isbot: true);
-        Navigator.of(context).popAndPushNamed(
-          '/home',
+        MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+        mood.captureMood(
+            rating: response.rating.round(),
+            smileduration: 0.0,
+            countrycount: 0
         );
+        ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
+        Navigator.of(context).popAndPushNamed('/home',);
+
+        //TODO: REMOVE THIS ON PRODUCTION
+        // chatcentralnotifier.updateComment(
+        //     chat: "I respond as a bot", isbot: true);
+        // Navigator.of(context).popAndPushNamed(
+        //   '/home',
+        // );
       },
       submitButtonTextStyle: const TextStyle(
           fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
