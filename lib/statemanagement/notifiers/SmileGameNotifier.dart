@@ -9,8 +9,8 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
   //     movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance);
   SmileGameNofitier({required SmileGameVariables  value}) : super(value);
 
-  void moveObject({required double smilesize}){
-     value.move(smileProb: smilesize);
+  void moveObject({required double smilesize, required isSmileGram}){
+     value.move(smileProb: smilesize, isSmilegram: isSmileGram);
     notifyListeners();
   }
 

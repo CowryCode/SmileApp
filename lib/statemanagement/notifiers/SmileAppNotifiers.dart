@@ -60,7 +60,6 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
 
   void refreshSmileDurationCount() {
     value.smileDurationCount.value = Smile_Count_Initial;
-   // updateSmileDurationCounter();
     notifyListeners();
   }
 

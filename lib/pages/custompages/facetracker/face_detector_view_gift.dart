@@ -100,6 +100,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             //if(sgMessage.tokenIndex < _tokenArrayLength! ){
             if(messageNotifier.value.index < _tokenArrayLength! ){
               if (prob! > 0.5) {
+                smileGameNofitier.moveObject(smilesize: prob, isSmileGram: false);
                 _msg = messageNotifier.value.msg + " " + _tokenArray![messageNotifier.value.index];
                 (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? _msg = _msg + " *** End" : _msg = _msg;
                 (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? ApiAccess().readTribeMessage(messageID: widget.giftVariableObject.id!):"";
@@ -121,7 +122,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
           } else {
            // if (prob! > 0.5 && smileGameNofitier.value.targetCaught == false) {
             if (prob! > 0.5 ) {
-              smileGameNofitier.moveObject(smilesize: prob);
+              smileGameNofitier.moveObject(smilesize: prob, isSmileGram: true);
               int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
               // This reduces the count down on the smile screan
               smileAppValueNotifier.updateSmileDurationCount();

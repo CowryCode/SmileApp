@@ -16,9 +16,11 @@ class SmileGameVariables {
   int numberOfStarMeetings = 0; // EACH TIME THE STARS MEET, A COUNTRY IS PAINTED
   SmileGameVariables({required this.targetHorrizontalposition , required this.movingObjectHorrizontalposition});
 
-  void move({required double smileProb}) {
+  void move({required double smileProb, required bool isSmilegram}) {
     // Update this count each time user is smiling
     smileDurationCounter++;
+
+    if(!isSmilegram) return;
 
     double speedInterval = smileProb < 0.6 ? 1.0 : smileProb < 0.75 ? 2.0 : 3.0;
     //MOVE THE OBJECT RIGHT TO LEFT
