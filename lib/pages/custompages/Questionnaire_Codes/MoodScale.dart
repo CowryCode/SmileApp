@@ -4,6 +4,7 @@ import 'package:SmileApp/pages/custompages/Questionnaire_Codes/ConstantWidget.da
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/Constants.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/DataFile.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/MoodQModel.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -83,10 +84,27 @@ class _MoodScale extends State<MoodScale> {
                           child: Stack(
                             children: [
                               Container(
-                                height: firstSize,
-                                child: Image.asset(Constants.assetsImagePath+
-                                    moodModelList[position].image!,fit: BoxFit.scaleDown,),
+                                // height: 400.0,
+                                height: MediaQuery.of(context).size.height * 0.4,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0)),
+                                  image: DecorationImage(
+                                    image:AssetImage('assets/logo1.jpeg'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0)),
+                                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+                                  ),
+                                ),
                               ),
+                              // Container(
+                              //   height: firstSize,
+                              //   child: Image.asset(Constants.assetsImagePath+
+                              //       moodModelList[position].image!,fit: BoxFit.scaleDown,),
+                              // ),
 
                               Container(
                                 width: double.infinity,
@@ -110,26 +128,19 @@ class _MoodScale extends State<MoodScale> {
                                       padding: EdgeInsets.only(
                                           top: (defMargin ),
                                           bottom: defMargin ),
-                                      child:
-                                      ConstantWidget.getCustomTextFont(
-                                          moodModelList[position]
-                                              .name!,
-                                          Colors.black,
-                                          // Colors.black87,
-                                          2,
-                                          TextAlign.center,
-                                          FontWeight.bold,
-                                          ConstantWidget.getPercentSize(
-                                              remainSize, 5),
-                                          meriendaOneFont),
+                                      child: Text(moodModelList[position]
+                                                .name!,
+                                        style: Theme.of(context).textTheme.subtitle2,
+                                        textAlign: TextAlign.center,
+                                      )
                                     ),
 
                                     SizedBox(height: 20,),
 
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         ConstantWidget.getCustomTextFont(
-                                          // "introModelList[position].desc!",
                                             moodModelList[position].start!,
                                             Colors.black87,
                                             // Colors.black45,
@@ -138,9 +149,6 @@ class _MoodScale extends State<MoodScale> {
                                             FontWeight.w700,
                                             ConstantWidget.getScreenPercentSize(context,2),
                                             Constants.fontsFamily),
-
-                                        Spacer(),
-
                                         ConstantWidget.getCustomTextFont(
                                             moodModelList[position].end!,
                                             Colors.black87,
@@ -151,6 +159,31 @@ class _MoodScale extends State<MoodScale> {
                                             Constants.fontsFamily),
                                       ],
                                     ),
+
+                                    // Row(
+                                    //   children: [
+                                    //     ConstantWidget.getCustomTextFont(
+                                    //         moodModelList[position].start!,
+                                    //         Colors.black87,
+                                    //         // Colors.black45,
+                                    //         5,
+                                    //         TextAlign.center,
+                                    //         FontWeight.w700,
+                                    //         ConstantWidget.getScreenPercentSize(context,2),
+                                    //         Constants.fontsFamily),
+                                    //
+                                    //     Spacer(),
+                                    //
+                                    //     ConstantWidget.getCustomTextFont(
+                                    //         moodModelList[position].end!,
+                                    //         Colors.black87,
+                                    //         5,
+                                    //         TextAlign.center,
+                                    //         FontWeight.w700,
+                                    //         ConstantWidget.getScreenPercentSize(context,2),
+                                    //         Constants.fontsFamily),
+                                    //   ],
+                                    // ),
 
                                     SizedBox(height: 20,),
                                     myRadio(),
@@ -171,11 +204,30 @@ class _MoodScale extends State<MoodScale> {
                 InkWell(
                   onTap: (){
                     if(groupValue == 0){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please select an option to proceed.')),
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   const SnackBar(content: Text('Please select an option to proceed.')),
+                      // );
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Alert'),
+                          content: const Text('Please select an option to proceed.',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              //  onPressed: () => Navigator.pop(context, 'Cancel'),
+                              onPressed: (){
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
                       );
                     }else{
-                      onNext();
+                     // onNext();
+                      onNext(positionID: _position);
                     }
                   },
                   child: Container(
@@ -201,8 +253,6 @@ class _MoodScale extends State<MoodScale> {
                         Expanded(child: getCustomText(btnTxt,
                             Colors.black87, 1, TextAlign.start, FontWeight.bold, Constants.getPercentSize(nextHeight,
                                 30))),
-
-
                         Container(
                           height: Constants.getPercentSize(nextHeight, 75),
                           width: Constants.getPercentSize(nextHeight, 75),
@@ -214,8 +264,6 @@ class _MoodScale extends State<MoodScale> {
                             child: Icon(Icons.navigate_next,color: Theme.of(context).colorScheme.secondary,size: Constants.getPercentSize(nextHeight, 50),),
                           ),
                         )
-
-
                       ],
                     ),
                   ),
@@ -223,8 +271,6 @@ class _MoodScale extends State<MoodScale> {
                 Container(height: 0.3,margin: EdgeInsets.only(bottom: defMargin),color: Colors.grey.shade300,),
                 Row(
                   children: [
-
-
                     InkWell(
                       onTap: () {
                         goBack();
@@ -286,7 +332,27 @@ class _MoodScale extends State<MoodScale> {
         ),
         onWillPop: _requestPop);
   }
-  onNext(){
+  // onNext(){
+  //   if (_position <
+  //       (moodModelList.length - 1)) {
+  //     updateRadioVal(_position);
+  //     _position++;
+  //     setRadioVal(_position);
+  //     changeBtnTxtToSubmit();
+  //     controller.jumpToPage(_position);
+  //     setState(() {});
+  //   } else {
+  //     if(btnTxt == "Submit"){
+  //       submit();
+  //     }
+  //   }
+  // }
+
+  onNext({required int positionID}){
+   String start =  moodModelList[positionID].start!;
+   String end =  moodModelList[positionID].end!;
+    print('Position ID : $positionID  Start : $start  End : $end  User Choice : $groupValue');
+
     if (_position <
         (moodModelList.length - 1)) {
       updateRadioVal(_position);

@@ -12,6 +12,7 @@ String bebasneue = "Bebasneue";
 
 
 class Constants {
+  //static String assetsImagePath = "assets/images/";
   static String assetsImagePath = "assets/images/";
   static String assetsbackgroundImagePath = "assets/images/box/";
   static String assetsGifPath = "assets/gifs/";

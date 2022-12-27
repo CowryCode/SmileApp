@@ -22,6 +22,13 @@ class _LoginProcessingState extends State<LoginProcessing> {
 
   Timer? _timer;
 
+
+  @override
+  void dispose() {
+    print('DISPOSED CALLED @ 123');
+    _timer!.cancel();
+  }
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async{
@@ -31,6 +38,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
           print('Logged in Successfully Initialized'),
           _timer!.cancel(),
         //  Navigator.of(context).popAndPushNamed('/home_with_alert')
+          print('WELCOME WAS CALLED HERE 1'),
           Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()))
         }
       });
@@ -54,10 +62,13 @@ class _LoginProcessingState extends State<LoginProcessing> {
             builder: (BuildContext context, AsyncSnapshot<UserProfile> snapshot){
               _timer = Timer.periodic(Duration(seconds: 10), (timer){
                 //if (timer.tick == 1) {
-                  if (snapshot.hasData) {
+                print('TIME IS ACTIVE AT TICK ${timer.tick}');
+              if (snapshot.hasData) {
                     timer.cancel();
+                    _timer!.cancel();
                     ((){
                      // return Navigator.of(context).popAndPushNamed('/home_with_alert');
+                      print('WELCOME WAS CALLED HERE 2');
                       Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
                     }());
                   } else {
