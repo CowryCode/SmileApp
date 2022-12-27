@@ -26,18 +26,17 @@ class MoodScale extends StatefulWidget {
 class _MoodScale extends State<MoodScale> {
   int _position = 0;
   int groupValue = 0;
-  List<int> moods = [0,0,0,0,0,0,0,0,0,0,0,0];
+  List<int> moods = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   String btnTxt = "Next";
+
   // final ValueChanged<bool> onChanged;
 
   // _IntroPage(this.onChanged);
 
   Future<bool> _requestPop() {
-
-
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       exit(0);
-    }else{
+    } else {
       SystemNavigator.pop();
     }
     return new Future.value(false);
@@ -48,19 +47,20 @@ class _MoodScale extends State<MoodScale> {
   List<MoodQModel> moodModelList = [];
 
 
-  void submit(){
+  void submit() {
     // PrefData.setIsIntro(false);
-   // Navigator.of(context).pop(true);
-   // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeWidget(1)));
+    // Navigator.of(context).pop(true);
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeWidget(1)));
     Navigator.of(context).pushNamed('/home');
   }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     moodModelList = DataFile.getMoodModel(context).cast<MoodQModel>();
 
     double firstSize = ConstantWidget.getScreenPercentSize(context, 55);
-    double secondSize = ConstantWidget.getScreenPercentSize(context,45);
+    double secondSize = ConstantWidget.getScreenPercentSize(context, 45);
     double remainSize =
         ConstantWidget.getScreenPercentSize(context, 100) - firstSize;
     double defMargin = ConstantWidget.getScreenPercentSize(context, 2);
@@ -85,18 +85,29 @@ class _MoodScale extends State<MoodScale> {
                             children: [
                               Container(
                                 // height: 400.0,
-                                height: MediaQuery.of(context).size.height * 0.4,
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.4,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0)),
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                   image: DecorationImage(
-                                    image:AssetImage('assets/logo1.jpeg'),
+                                    image: AssetImage('assets/logo1.jpeg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0)),
-                                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    color: Theme
+                                        .of(context)
+                                        .colorScheme
+                                        .secondary
+                                        .withOpacity(0.4),
                                   ),
                                 ),
                               ),
@@ -109,8 +120,12 @@ class _MoodScale extends State<MoodScale> {
                               Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.only(top: secondSize),
-                                padding: EdgeInsets.symmetric(vertical:
-                                ConstantWidget.getScreenPercentSize(context, 2),horizontal: (defMargin)),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 10),
+                                // padding: EdgeInsets.symmetric(vertical:
+                                // ConstantWidget.getScreenPercentSize(context, 2),horizontal: (defMargin)),
+
+
                                 // decoration: BoxDecoration(
                                 //     color: accentColor,
                                 //     // color: Colors.white,
@@ -119,48 +134,53 @@ class _MoodScale extends State<MoodScale> {
                                 //             ConstantWidget.getPercentSize(
                                 //                 secondSize, 17)))),
                                 child: Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.start,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(
-                                          top: (defMargin ),
-                                          bottom: defMargin ),
-                                      child: Text(moodModelList[position]
+                                        padding: EdgeInsets.only(
+                                            top: (defMargin),
+                                            bottom: defMargin),
+                                        child: Text(
+                                          "How do you feel after using this app today?",
+                                          style: Theme
+                                              .of(context)
+                                              .textTheme
+                                              .subtitle2,
+                                          textAlign: TextAlign.center,
+                                        )
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            top: (0),
+                                            bottom: 1),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .center,
+                                          children: [
+                                            Text("I feel ",
+                                              style: Theme
+                                                  .of(context)
+                                                  .textTheme
+                                                  .headline6,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            Text(moodModelList[position]
                                                 .name!,
-                                        style: Theme.of(context).textTheme.subtitle2,
-                                        textAlign: TextAlign.center,
-                                      )
+                                              style: Theme
+                                                  .of(context)
+                                                  .textTheme
+                                                  .subtitle2,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        )
                                     ),
-
-                                    SizedBox(height: 20,),
-
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ConstantWidget.getCustomTextFont(
-                                            moodModelList[position].start!,
-                                            Colors.black87,
-                                            // Colors.black45,
-                                            5,
-                                            TextAlign.center,
-                                            FontWeight.w700,
-                                            ConstantWidget.getScreenPercentSize(context,2),
-                                            Constants.fontsFamily),
-                                        ConstantWidget.getCustomTextFont(
-                                            moodModelList[position].end!,
-                                            Colors.black87,
-                                            5,
-                                            TextAlign.center,
-                                            FontWeight.w700,
-                                            ConstantWidget.getScreenPercentSize(context,2),
-                                            Constants.fontsFamily),
-                                      ],
-                                    ),
-
+                                    // SizedBox(height: 20,),
+                                    //
                                     // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment
+                                    //       .spaceBetween,
                                     //   children: [
                                     //     ConstantWidget.getCustomTextFont(
                                     //         moodModelList[position].start!,
@@ -169,25 +189,24 @@ class _MoodScale extends State<MoodScale> {
                                     //         5,
                                     //         TextAlign.center,
                                     //         FontWeight.w700,
-                                    //         ConstantWidget.getScreenPercentSize(context,2),
+                                    //         ConstantWidget.getScreenPercentSize(
+                                    //             context, 2),
                                     //         Constants.fontsFamily),
-                                    //
-                                    //     Spacer(),
-                                    //
                                     //     ConstantWidget.getCustomTextFont(
                                     //         moodModelList[position].end!,
                                     //         Colors.black87,
                                     //         5,
                                     //         TextAlign.center,
                                     //         FontWeight.w700,
-                                    //         ConstantWidget.getScreenPercentSize(context,2),
+                                    //         ConstantWidget.getScreenPercentSize(
+                                    //             context, 2),
                                     //         Constants.fontsFamily),
                                     //   ],
                                     // ),
-
+                                    //
                                     SizedBox(height: 20,),
                                     myRadio(),
-                                    
+                                    SizedBox(height: 10,),
                                   ],
                                 ),
                               )
@@ -202,39 +221,42 @@ class _MoodScale extends State<MoodScale> {
                 ),
 
                 InkWell(
-                  onTap: (){
-                    if(groupValue == 0){
+                  onTap: () {
+                    if (groupValue == 0) {
                       // ScaffoldMessenger.of(context).showSnackBar(
                       //   const SnackBar(content: Text('Please select an option to proceed.')),
                       // );
                       showDialog<String>(
                         context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Alert'),
-                          content: const Text('Please select an option to proceed.',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              //  onPressed: () => Navigator.pop(context, 'Cancel'),
-                              onPressed: (){
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('OK'),
+                        builder: (BuildContext context) =>
+                            AlertDialog(
+                              title: const Text('Alert'),
+                              content: const Text(
+                                'Please select an option to proceed.',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  //  onPressed: () => Navigator.pop(context, 'Cancel'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
                       );
-                    }else{
-                     // onNext();
+                    } else {
+                      // onNext();
                       onNext(positionID: _position);
                     }
                   },
                   child: Container(
-                    width:Constants.getWidthPercentSize(context, 40),
-                    height:nextHeight,
-                    margin: EdgeInsets.only(bottom: defMargin*2),
-                    padding: EdgeInsets.symmetric(horizontal:(defMargin/1.3)),
+                    width: Constants.getWidthPercentSize(context, 40),
+                    height: nextHeight,
+                    margin: EdgeInsets.only(bottom: defMargin * 2),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: (defMargin / 1.3)),
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -244,31 +266,44 @@ class _MoodScale extends State<MoodScale> {
                           ),
                         ],
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(Constants.getWidthPercentSize(context, 40)))
+                        borderRadius: BorderRadius.all(Radius.circular(
+                            Constants.getWidthPercentSize(context, 40)))
                     ),
 
                     child: Row(
                       children: [
-                        SizedBox(width:Constants.getWidthPercentSize(context, 3) ,),
+                        SizedBox(
+                          width: Constants.getWidthPercentSize(context, 3),),
                         Expanded(child: getCustomText(btnTxt,
-                            Colors.black87, 1, TextAlign.start, FontWeight.bold, Constants.getPercentSize(nextHeight,
+                            Colors.black87, 1, TextAlign.start, FontWeight.bold,
+                            Constants.getPercentSize(nextHeight,
                                 30))),
                         Container(
                           height: Constants.getPercentSize(nextHeight, 75),
                           width: Constants.getPercentSize(nextHeight, 75),
                           decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                              color: Theme
+                                  .of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.2),
                               shape: BoxShape.circle
                           ),
                           child: Center(
-                            child: Icon(Icons.navigate_next,color: Theme.of(context).colorScheme.secondary,size: Constants.getPercentSize(nextHeight, 50),),
+                            child: Icon(Icons.navigate_next, color: Theme
+                                .of(context)
+                                .colorScheme
+                                .secondary,
+                              size: Constants.getPercentSize(nextHeight, 50),),
                           ),
                         )
                       ],
                     ),
                   ),
                 ),
-                Container(height: 0.3,margin: EdgeInsets.only(bottom: defMargin),color: Colors.grey.shade300,),
+                Container(height: 0.3,
+                  margin: EdgeInsets.only(bottom: defMargin),
+                  color: Colors.grey.shade300,),
                 Row(
                   children: [
                     InkWell(
@@ -293,7 +328,8 @@ class _MoodScale extends State<MoodScale> {
                         alignment: Alignment.centerRight,
                         child: Container(
                           margin: EdgeInsets.only(right: defMargin),
-                          height: ConstantWidget.getScreenPercentSize(context, 5),
+                          height: ConstantWidget.getScreenPercentSize(
+                              context, 5),
                           child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: moodModelList.length,
@@ -313,8 +349,15 @@ class _MoodScale extends State<MoodScale> {
                                     right: (size / 1.2)),
                                 decoration: BoxDecoration(
                                   color: (index == _position)
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                                      ? Theme
+                                      .of(context)
+                                      .colorScheme
+                                      .secondary
+                                      : Theme
+                                      .of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withOpacity(0.2),
                                   shape: BoxShape.circle,
                                 ),
                               );
@@ -325,13 +368,13 @@ class _MoodScale extends State<MoodScale> {
                     )
                   ],
                 )
-
               ],
             ),
           ),
         ),
         onWillPop: _requestPop);
   }
+
   // onNext(){
   //   if (_position <
   //       (moodModelList.length - 1)) {
@@ -348,10 +391,12 @@ class _MoodScale extends State<MoodScale> {
   //   }
   // }
 
-  onNext({required int positionID}){
-   String start =  moodModelList[positionID].start!;
-   String end =  moodModelList[positionID].end!;
-    print('Position ID : $positionID  Start : $start  End : $end  User Choice : $groupValue');
+  onNext({required int positionID}) {
+    print('LIST SIZE IS : ${moodModelList.length}');
+    String start = moodModelList[positionID].start!;
+    String end = moodModelList[positionID].end!;
+    print(
+        'Position ID : $positionID  Start : $start  End : $end  User Choice : $groupValue');
 
     if (_position <
         (moodModelList.length - 1)) {
@@ -362,13 +407,13 @@ class _MoodScale extends State<MoodScale> {
       controller.jumpToPage(_position);
       setState(() {});
     } else {
-      if(btnTxt == "Submit"){
+      if (btnTxt == "Submit") {
         submit();
       }
     }
   }
 
-  goBack(){
+  goBack() {
     if (_position <=
         (moodModelList.length - 1) && _position > 0) {
       // print("The position is $_position");
@@ -380,20 +425,21 @@ class _MoodScale extends State<MoodScale> {
       setState(() {});
     }
   }
+
   void changeBtnTxtToSubmit() {
-    if(_position == 11 && moods[_position] > 0){
+    if (_position == 15 && moods[_position] > 0) {
       btnTxt = "Submit";
     }
   }
 
   void changeBtnTxtToNext() {
-    if(_position < 11){
+    if (_position < 15) {
       btnTxt = "Next";
     }
   }
 
-  changeBtnStatus(int pos){
-    if(moods[pos] == 0){
+  changeBtnStatus(int pos) {
+    if (moods[pos] == 0) {
 
     }
   }
@@ -403,55 +449,124 @@ class _MoodScale extends State<MoodScale> {
     setState(() {});
   }
 
-  Row myRadio(){
-    return Row(
+  // Row myRadio(){
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     children: [
+  //       Radio(value: 1, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+  //         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  //       ),
+  //       Radio(value: 2, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+  //         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  //       ),
+  //       Radio(value: 3, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+  //         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  //       ),
+  //       Radio(value: 4, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+  //         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  //       ),
+  //       Radio(value: 5, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+  //         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  Column myRadio() {
+    return Column(
+      children: [
+      Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Radio(value: 1, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+        Radio(
+          value: 1,
+          groupValue: groupValue,
+          activeColor: Theme
+              .of(context)
+              .colorScheme
+              .secondary,
+          onChanged: _valueChangedHandler(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        Radio(value: 2, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+
+        Radio(
+          value: 2,
+          groupValue: groupValue,
+          activeColor: Theme
+              .of(context)
+              .colorScheme
+              .secondary,
+          onChanged: _valueChangedHandler(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        Radio(value: 3, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+        Radio(
+          value: 3,
+          groupValue: groupValue,
+          activeColor: Theme
+              .of(context)
+              .colorScheme
+              .secondary,
+          onChanged: _valueChangedHandler(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        Radio(value: 4, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+        Radio(
+          value: 4,
+          groupValue: groupValue,
+          activeColor: Theme
+              .of(context)
+              .colorScheme
+              .secondary,
+          onChanged: _valueChangedHandler(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        Radio(value: 5, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        ),
-        Radio(value: 6, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        ),
-        Radio(value: 7, groupValue: groupValue, activeColor: Theme.of(context).colorScheme.secondary, onChanged: _valueChangedHandler(),
+        Radio(
+          value: 5,
+          groupValue: groupValue,
+          activeColor: Theme
+              .of(context)
+              .colorScheme
+              .secondary,
+          onChanged: _valueChangedHandler(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
       ],
+    ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ConstantWidget.getCustomTextFont("definitely \n do not feel", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
+            ConstantWidget.getCustomTextFont("do not \n feel", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
+            ConstantWidget.getCustomTextFont("slightly \n feel", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
+            ConstantWidget.getCustomTextFont("definitely \n feel", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
+            ConstantWidget.getCustomTextFont("not \n applicable", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
+          ],
+        )
+    ]
     );
   }
 
   ValueChanged<int?> _valueChangedHandler() {
-    return (value) => setState(() {
-      groupValue = value!;
-      if(_position == 11){
-        updateRadioVal(_position);
-        btnTxt = "Submit";
-      }
-    });
+    return (value) =>
+        setState(() {
+          groupValue = value!;
+          if (_position == 15) {
+            updateRadioVal(_position);
+            btnTxt = "Submit";
+          }
+        });
   }
 
-  updateRadioVal(int pos){
+  updateRadioVal(int pos) {
     moods[pos] = groupValue;
   }
 
-  setRadioVal(int pos){
+  setRadioVal(int pos) {
     groupValue = moods[pos];
   }
 
-  Widget getCustomText(String text, Color color, int maxLine, TextAlign textAlign,
+  Widget getCustomText(String text, Color color, int maxLine,
+      TextAlign textAlign,
       FontWeight fontWeight, double textSizes) {
     return Text(
       text,

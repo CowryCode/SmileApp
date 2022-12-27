@@ -31,8 +31,16 @@ class _LoginProcessingState extends State<LoginProcessing> {
 
   @override
   void initState() {
+
+   // _timer = Timer.periodic(Duration(seconds: 10), (timer) { });
+
+
     WidgetsBinding.instance.addPostFrameCallback((_) async{
-      profile  = ApiAccess().login(logincode: widget.giftVariableObject.msg!);
+
+      _timer = Timer.periodic(Duration(seconds: 10), (timer) { });
+
+
+     profile  =  ApiAccess().login(logincode: widget.giftVariableObject.msg!);
       profile!.then((value) => {
         if(value != null){
           print('Logged in Successfully Initialized'),
@@ -60,32 +68,38 @@ class _LoginProcessingState extends State<LoginProcessing> {
        child:   FutureBuilder<UserProfile>(
             future: profile,
             builder: (BuildContext context, AsyncSnapshot<UserProfile> snapshot){
-              _timer = Timer.periodic(Duration(seconds: 10), (timer){
-                //if (timer.tick == 1) {
-                print('TIME IS ACTIVE AT TICK ${timer.tick}');
-              if (snapshot.hasData) {
-                    timer.cancel();
-                    _timer!.cancel();
-                    ((){
-                     // return Navigator.of(context).popAndPushNamed('/home_with_alert');
-                      print('WELCOME WAS CALLED HERE 2');
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
-                    }());
-                  } else {
-                    if(widget.justLoggedin == true && !snapshot.hasData){
-                      timer.cancel();
-                      print("Timer tick is ${timer.tick}");
-                      widget.justLoggedin = false;
-                      showAlertDialog(context: context,
-                          title: "Failed Login",
-                          message: "Couldn't login at this point, kindly wait for few minutes and try again",
-                          gotTologin: true);
-                    }else{
-                      timer.cancel();
-                    }
-                  }
-               // }
-              });
+
+              if(snapshot.hasData && _timer!.isActive == true){
+                _timer!.cancel();
+                print('WELCOME WAS CALLED HERE 2');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
+              }
+
+              // _timer = Timer.periodic(Duration(seconds: 10), (timer){
+              //   //if (timer.tick == 1) {
+              //   print('TIME IS ACTIVE AT TICK ${timer.tick}');
+              // if (snapshot.hasData) {
+              //       timer.cancel();
+              //       _timer!.cancel();
+              //       ((){
+              //         print('WELCOME WAS CALLED HERE 2');
+              //         Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
+              //       }());
+              //     } else {
+              //       if(widget.justLoggedin == true && !snapshot.hasData){
+              //         timer.cancel();
+              //         print("Timer tick is ${timer.tick}");
+              //         widget.justLoggedin = false;
+              //         showAlertDialog(context: context,
+              //             title: "Failed Login",
+              //             message: "Couldn't login at this point, kindly wait for few minutes and try again",
+              //             gotTologin: true);
+              //       }else{
+              //         timer.cancel();
+              //       }
+              //     }
+              //  // }
+              // });
               return Container(
                 child: Center(child: CircularProgressIndicator(),),
               );
