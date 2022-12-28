@@ -32,11 +32,11 @@ class _ChatWidgetState extends State<ChatWidget> {
 
 
   //final _channel = WebSocketChannel.connect(Uri.parse(CHAT_URL),);
-  final _channel = WebSocketChannel.connect(Uri.parse("wss://echo.websocket.events"),);
+ // final _channel = WebSocketChannel.connect(Uri.parse("wss://echo.websocket.events"),);
 
   @override
   void dispose() {
-    _channel.sink.close();
+  //  _channel.sink.close();
     // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
@@ -119,16 +119,17 @@ class _ChatWidgetState extends State<ChatWidget> {
             // ),
             Expanded(
               //Todo Socket integretion
-              child: StreamBuilder(
-                stream: _channel.stream,
-                builder: (context, snapshot){
-                 // print('API RESPONSE : ${snapshot.data}');
-                  print('API RESPONSE : ${snapshot.requireData}');
-                  chatcentralnotifier.updateComment(chat: '${snapshot.data}', isbot: true);
-                  return  ValueListenableBuilder(
+              // child: StreamBuilder(
+              //   stream: _channel.stream,
+              //   builder: (context, snapshot){
+              //    // print('API RESPONSE : ${snapshot.data}');
+              //     print('API RESPONSE : ${snapshot.requireData}');
+              //     chatcentralnotifier.updateComment(chat: '${snapshot.data}', isbot: true);
+              //     return
+              //
+                  child:  ValueListenableBuilder(
                       valueListenable: chatcentralnotifier,
                       builder: (context, List<BuddyChat> value, child) {
-                        print('DISCUSIION LENGTH : ${value.length}');
                         return AnimatedList(
                           key: _myListKey,
                           reverse: true,
@@ -142,10 +143,10 @@ class _ChatWidgetState extends State<ChatWidget> {
                             );
                           },
                         );
-                      });
-               },
+                      }),
+             //  },
+            // ),
              ),
-            ),
 
             Container(
               margin: const EdgeInsets.only(bottom: 12.0, right: 6.0, left: 6.0),
@@ -168,15 +169,13 @@ class _ChatWidgetState extends State<ChatWidget> {
                   suffixIcon: IconButton(
                     padding: EdgeInsets.only(right: 30),
                     onPressed: () {
-                      chatcentralnotifier.updateComment(
-                          chat: myController.text, isbot: false);
+                      if(myController.text.isNotEmpty) chatcentralnotifier.updateComment(chat: myController.text, isbot: false);
                       //TODO Socket Integration
-                      _channel.sink.add(myController.text);
-
+                    //  _channel.sink.add(myController.text);
                       setState(() {
                         _myListKey.currentState!.insertItem(0);
                       });
-
+                     if(myController.text.isNotEmpty) ApiAccess().sendChat(chat: myController.text.trim());
                       Timer(Duration(milliseconds: 100), () {
                         myController.clear();
                       });

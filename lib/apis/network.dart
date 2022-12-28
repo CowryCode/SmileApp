@@ -399,6 +399,34 @@ class ApiAccess {
     }
   }
 
+  Future<bool?> sendChat({required String chat}) async {
+    String? token;
+    Future<String?> tk = Localstorage().getString(key_login_token);
+    await tk.then((value) => {token = value!});
+
+    final response = await http.post(
+      Uri.parse(CHAT_URL),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Origin': '$MobileURL',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(
+          <String, dynamic>{
+            "value" : chat,
+          }),
+    );
+
+    if (response.statusCode == 200) {
+       chatcentralnotifier.updateComment(chat: response.body, isbot: true);
+      return true;
+    } else {
+      return null;
+    }
+  }
+
+
   void saveQuestionnaire({required QuesionnaireBMIScale questionnaire}) async {
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
@@ -434,8 +462,7 @@ class ApiAccess {
     );
 
     if (response.statusCode == 200) {
-      QuesionnaireBMIScale savedQuestionnaire = QuesionnaireBMIScale.fromJson(jsonDecode(response.body));
-      print('ID ${savedQuestionnaire.id}');
+     // QuesionnaireBMIScale savedQuestionnaire = QuesionnaireBMIScale.fromJson(jsonDecode(response.body));
     }
   }
 }
