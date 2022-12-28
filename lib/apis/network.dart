@@ -419,7 +419,14 @@ class ApiAccess {
     );
 
     if (response.statusCode == 200) {
-       chatcentralnotifier.updateComment(chat: response.body, isbot: true);
+      print('LOCAL TIME START : ${DateTime.now()}');
+      Timer _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+        print('LOCAL TIME WITHIN : ${DateTime.now()}');
+        chatcentralnotifier.updateComment(chat: response.body, isbot: true, isPlaceholder: false);
+        timer.cancel();
+      });
+      print('LOCAL TIME END : ${DateTime.now()}');
+
       return true;
     } else {
       return null;

@@ -169,9 +169,11 @@ class _ChatWidgetState extends State<ChatWidget> {
                   suffixIcon: IconButton(
                     padding: EdgeInsets.only(right: 30),
                     onPressed: () {
-                      if(myController.text.isNotEmpty) chatcentralnotifier.updateComment(chat: myController.text, isbot: false);
-                      //TODO Socket Integration
-                    //  _channel.sink.add(myController.text);
+                      if(myController.text.isNotEmpty){
+                        chatcentralnotifier.updateComment(chat: myController.text, isbot: false, isPlaceholder: false);
+                        chatcentralnotifier.updateComment(chat: "typing . . .", isbot: true, isPlaceholder: true);
+                      }
+
                       setState(() {
                         _myListKey.currentState!.insertItem(0);
                       });
