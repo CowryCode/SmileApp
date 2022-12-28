@@ -523,16 +523,16 @@ class _MoodScale extends State<MoodScale> {
           onChanged: _valueChangedHandler(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        Radio(
-          value: 5,
-          groupValue: groupValue,
-          activeColor: Theme
-              .of(context)
-              .colorScheme
-              .secondary,
-          onChanged: _valueChangedHandler(),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        ),
+        // Radio(
+        //   value: 5,
+        //   groupValue: groupValue,
+        //   activeColor: Theme
+        //       .of(context)
+        //       .colorScheme
+        //       .secondary,
+        //   onChanged: _valueChangedHandler(),
+        //   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        // ),
       ],
     ),
         Row(
@@ -542,7 +542,6 @@ class _MoodScale extends State<MoodScale> {
             ConstantWidget.getCustomTextFont("do not \n feel", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
             ConstantWidget.getCustomTextFont("slightly \n feel", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
             ConstantWidget.getCustomTextFont("definitely \n feel", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
-            ConstantWidget.getCustomTextFont("not \n applicable", Colors.black87, 5, TextAlign.center, FontWeight.w700, ConstantWidget.getScreenPercentSize(context, 2), Constants.fontsFamily),
           ],
         )
     ]
