@@ -31,8 +31,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
           children: <Widget>[
             CarouselSlider(
               options: CarouselOptions(
-                //height: MediaQuery.of(context).size.height * 0.9,
-                height: 1200,
+                height: double.maxFinite,
                 viewportFraction: 1.0,
                 onPageChanged: (index, other) {
                   setState(() {
@@ -152,13 +151,13 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
   Widget _smileGraminstructions(){
     return Column(
       children: <Widget>[
-        steps(step: "", content: "To play the SmileGram Game. \n Follow the steps below.",isHeader: true),
-        steps(step: "Step 1:", content: "Click on the SmileGram feature \n from the home screen", isHeader: false),
-        steps(step: "Step 2:", content: "Wait for the count-down to complete", isHeader: false),
-        steps(step: "Step 3:", content: "Maintain a smily face until \n the two moving stars meet", isHeader: false),
-        steps(step: "**", content: "Each time these stars meet, a portion of \n the map is painted green",isHeader: false),
-        steps(step: "**", content: "You can exit at any point by clicking \n the back-arrow button", isHeader: true),
-        steps(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
+        step(step: "", content: "To play the SmileGram Game. \n Follow the steps below.",isHeader: true),
+        step(step: "Step 1:", content: "Click on the SmileGram feature \n from the home screen", isHeader: false),
+        step(step: "Step 2:", content: "Wait for the count-down to complete", isHeader: false),
+        step(step: "Step 3:", content: "Maintain a smily face until \n the two moving stars meet", isHeader: false),
+        step(step: "**", content: "Each time these stars meet, a portion of \n the map is painted green",isHeader: false),
+        step(step: "**", content: "You can exit at any point by clicking \n the back-arrow button", isHeader: true),
+        step(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
       ],
     );
   }
@@ -166,11 +165,11 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
   Widget _pocketBuddyinstructions(){
     return Column(
       children: <Widget>[
-        steps(step: "", content: "To interact with the Pocketbuddy. \n Follow the steps below.", isHeader: true),
-        steps(step: "Step 1:", content: "Click on the Pocketbuddy feature \n from the home screen",isHeader: false),
-        steps(step: "Step 2:", content: "Chat with the buddy",isHeader: false),
-        steps(step: "**", content: "You can exit at any point by clicking \n the back-arrow button", isHeader: true),
-        steps(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
+        step(step: "", content: "To interact with the Pocketbuddy. \n Follow the steps below.", isHeader: true),
+        step(step: "Step 1:", content: "Click on the Pocketbuddy feature \n from the home screen",isHeader: false),
+        step(step: "Step 2:", content: "Chat with the buddy",isHeader: false),
+        step(step: "**", content: "You can exit at any point by clicking \n the back-arrow button", isHeader: true),
+        step(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
       ],
     );
   }
@@ -178,55 +177,50 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
   Widget _myTribeInstructions(){
     return Column(
       children: <Widget>[
-        steps(step: "", content: "To request for supportive message(s) from \n other users, follow the steps below.", isHeader: true),
-        steps(step: "Step 1:", content: "Click on the myTribe feature \n from the home screen.", isHeader: false),
-        steps(step: "Step 2:", content: "Select the emotion(s) to best \n describe how you feel.", isHeader: false),
-        steps(step: "Step 3:", content: "Click on 'OK' to notify other users \n  of how you are feeling.", isHeader: false),
-        steps(step: "", content: "To reply to supportive message request \n from other users, follow the steps below.", isHeader: true),
-        steps(step: "Step 1:", content: "Click on the 'Group Icon' \n at bottom center of the navigation bar \n in the home screen.", isHeader: false),
-        steps(step: "Step 2:", content: "Click on 'Reply' to any of \n the request(s), type your \n message then click on 'Send'.", isHeader: false),
-        steps(step: "", content: "To read supportive message from other users, \n follow the steps below.", isHeader: true),
-        steps(step: "Step 1:", content: "Click on the 'closed envelope' \n icon on the home screen.", isHeader: false),
-        steps(step: "Step 2:", content: "Smile to show the content of \n the supportive message", isHeader: false),
-        steps(step: "**", content: "You can exit at any point by clicking \n the back-arrow button.",isHeader: true),
-        steps(step: "**", content: "Before exiting, rate how you feel \n  after using the feature.", isHeader: true),
+        step(step: "", content: "To request for supportive message(s) from  mdkj dhjd jdlhk dhkdjdkvh vkjwv  gjhggjhfh DGDS other users, follow the steps below.", isHeader: true),
+        step(step: "", content: "To request for supportive message(s) from other users, follow the steps below.", isHeader: true),
+        step(step: "Step 1:", content: "Click on the myTribe feature from the home screen.", isHeader: false),
+        step(step: "Step 2:", content: "Select the emotion(s) to best describe how you feel.", isHeader: false),
+        step(step: "Step 3:", content: "Click on 'OK' to notify other users of how you are feeling.", isHeader: false),
+        step(step: "", content: "To reply to supportive message request from other users, follow the steps below.", isHeader: true),
+        step(step: "Step 1:", content: "Click on the 'Group Icon' at bottom center of the navigation bar in the home screen.", isHeader: false),
+        step(step: "Step 2:", content: "Click on 'Reply' to any of the request(s), type your message then click on 'Send'.", isHeader: false),
+        step(step: "", content: "To read supportive message from other users, follow the steps below.", isHeader: true),
+        step(step: "Step 1:", content: "Click on the 'closed envelope' icon on the home screen.", isHeader: false),
+        step(step: "Step 2:", content: "Smile to show the content of the supportive message", isHeader: false),
+        step(step: "**", content: "You can exit at any point by clicking the back-arrow button.",isHeader: true),
+        step(step: "**", content: "Before exiting, rate how you feel after using the feature.", isHeader: true),
       ],
     );
   }
 
-  Widget steps({required String step, required String content, required bool isHeader}){
-    return Stack(
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: 75,
-          padding: EdgeInsets.all(7.0),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: Theme.of(context).primaryColor,
+  Widget step({required String step, required String content, required bool isHeader}){
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+          //color: Theme.of(context).accentColor.withOpacity(0.8),
+          color: (isHeader)? Colors.orange :  Theme.of(context).colorScheme.secondary,
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15), topLeft: Radius.circular(15) , bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
+      padding: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+      margin: EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new Flexible(
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+              if(!isHeader) new Text('$step', style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),),
+                new Container(
+                  margin: const EdgeInsets.only(top: 5.0),
+                  child: new Text('$content', style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).primaryColor),),
+                ),
+              ],
             ),
-            color: (isHeader)? Colors.orange :  Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.circular(12),
           ),
-          child: Text(""),
-
-        ),
-        Positioned(
-          left: 10.0,
-          top: 7.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget> [
-              SizedBox(width: 5,),
-              Text("$step"),
-              SizedBox(width: 10,),
-              Text("$content", softWrap: false, overflow: TextOverflow.ellipsis,),
-              SizedBox(width: 5,),
-            ],
-          ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }
