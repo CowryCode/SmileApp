@@ -14,6 +14,7 @@ import 'package:SmileApp/models/globemodel.dart';
  final Empathy_Request_URL = "${baseURL}/smile/empathyrequest";
  final Unreplied_Requests_URL = "${baseURL}/smile/get-pending-requests";
  final Reply_Requests_URL = "${baseURL}/smile/sendTribemessage";
+ final Save_Questionnaire_URL = "${baseURL}/smile/savequestionnaire";
 
  final CreateProfile_URL = "${baseURL}/smile/create-user";
  final getProfile_URL = "${baseURL}/smile/get-user";

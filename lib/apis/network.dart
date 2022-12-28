@@ -6,6 +6,7 @@ import 'package:SmileApp/apis/models/globalprogressmodel.dart';
 import 'package:SmileApp/apis/models/leaderboard.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
+import 'package:SmileApp/apis/models/questionnaireBMIScale.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/triberequest.dart';
 import 'package:SmileApp/apis/models/unreadtribemessages.dart';
@@ -140,9 +141,7 @@ class ApiAccess {
   }
 
   void saveMood({required MoodModel moodModel, required String url}) async {
-    print('MOOD SAVE START ::::::: ');
     if(moodModel.startMood == null || moodModel.endMood == null) return;
-    print('MOOD SAVE END ::::::: ');
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});
@@ -397,6 +396,46 @@ class ApiAccess {
       return msges;
     } else {
       return null;
+    }
+  }
+
+  void saveQuestionnaire({required QuesionnaireBMIScale questionnaire}) async {
+    String? token;
+    Future<String?> tk = Localstorage().getString(key_login_token);
+    await tk.then((value) => {token = value!});
+
+    final response = await http.post(
+      Uri.parse(Save_Questionnaire_URL),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Origin': '$MobileURL',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(
+          <String, dynamic>{
+            "lively" : questionnaire.lively,
+            "happy" : questionnaire.happy,
+            "sad" : questionnaire.sad,
+            "tired" : questionnaire.tired,
+            "caring" : questionnaire.caring,
+            "content" : questionnaire.content,
+            "gloomy" : questionnaire.gloomy,
+            "jittery" : questionnaire.jittery,
+            "drowsy" : questionnaire.drowsy,
+            "grouchy" : questionnaire.grouchy,
+            "peppy" : questionnaire.peppy,
+            "nervous" : questionnaire.nervous,
+            "calm" : questionnaire.calm,
+            "loving" : questionnaire.loving,
+            "fedup" : questionnaire.fedup,
+            "active" : questionnaire.active,
+          }),
+    );
+
+    if (response.statusCode == 200) {
+      QuesionnaireBMIScale savedQuestionnaire = QuesionnaireBMIScale.fromJson(jsonDecode(response.body));
+      print('ID ${savedQuestionnaire.id}');
     }
   }
 }

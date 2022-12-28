@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:SmileApp/apis/models/questionnaireBMIScale.dart';
+import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/ConstantWidget.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/Constants.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/DataFile.dart';
@@ -33,6 +35,8 @@ class _MoodScale extends State<MoodScale> {
 
   // _IntroPage(this.onChanged);
 
+  QuesionnaireBMIScale quesionnaireBMIScale = QuesionnaireBMIScale();
+
   Future<bool> _requestPop() {
     if (Platform.isIOS) {
       exit(0);
@@ -51,6 +55,7 @@ class _MoodScale extends State<MoodScale> {
     // PrefData.setIsIntro(false);
     // Navigator.of(context).pop(true);
     // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeWidget(1)));
+    ApiAccess().saveQuestionnaire(questionnaire: quesionnaireBMIScale);
     Navigator.of(context).pushNamed('/home');
   }
 
@@ -392,11 +397,9 @@ class _MoodScale extends State<MoodScale> {
   // }
 
   onNext({required int positionID}) {
-    print('LIST SIZE IS : ${moodModelList.length}');
-    String start = moodModelList[positionID].start!;
-    String end = moodModelList[positionID].end!;
-    print(
-        'Position ID : $positionID  Start : $start  End : $end  User Choice : $groupValue');
+    String name = moodModelList[positionID].name!;
+    quesionnaireBMIScale.updatedQuestionnare(position: positionID, userchoice: groupValue);
+    print('Position ID : $positionID  Name : $name  User Choice : $groupValue');
 
     if (_position <
         (moodModelList.length - 1)) {
