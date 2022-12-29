@@ -25,7 +25,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
 
   @override
   void dispose() {
-    print('DISPOSED CALLED @ 123');
+   // print('DISPOSED CALLED @ 123');
     _timer!.cancel();
     super.dispose();
   }
@@ -33,22 +33,20 @@ class _LoginProcessingState extends State<LoginProcessing> {
   @override
   void initState() {
 
-    _timer = Timer.periodic(Duration(seconds: 10), (timer) { });
-
+    _timer = Timer.periodic(Duration(seconds: 10), (timer) {
+      timer.cancel();
+      Future.delayed(Duration.zero, () => showAlertDialog(context: context,
+      title: "Failed Login",
+      message: "Couldn't login at this point, kindly wait for few minutes and try again",
+      gotTologin: true));
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) async{
-      //
-      // _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      //
-      // });
-
      profile  =  ApiAccess().login(logincode: widget.giftVariableObject.msg!);
       profile!.then((value) => {
         if(value != null){
-          print('Logged in Successfully Initialized'),
           _timer!.cancel(),
         //  Navigator.of(context).popAndPushNamed('/home_with_alert')
-          print('WELCOME WAS CALLED HERE 1'),
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()))
         }
       });
@@ -73,21 +71,13 @@ class _LoginProcessingState extends State<LoginProcessing> {
               if(_timer!.isActive){
                   if (snapshot.hasData) {
                     _timer!.cancel();
-                   // ((){
-                      print('WELCOME WAS CALLED HERE 2');
                       Future.delayed(Duration.zero, () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome())));
-                  //  }());
                   } else {
-                    //((){
-                      _timer!.cancel();
                     if(_timer!.tick >= 1)  Future.delayed(Duration.zero, () => showAlertDialog(context: context,
                           title: "Failed Login",
                           message: "Couldn't login at this point, kindly wait for few minutes and try again",
                           gotTologin: true));
-                    //}());
                   }
-                  // }
-               // }
               }
               return Container(
                 child: Center(child: CircularProgressIndicator(),),
@@ -105,6 +95,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: (){
+        _timer!.cancel();
         Navigator.of(context).popAndPushNamed('/');
       },
     );

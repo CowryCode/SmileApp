@@ -7,6 +7,8 @@ import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/models/smilefactmodel.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/ratingcontroller.dart';
 import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
+import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,9 @@ class RatingView extends StatefulWidget {
   final bool readmessage ;
   final bool ratingonly;
   const RatingView({Key? key, this.readmessage = false, this.ratingonly = false, }) : super(key: key);
- // const RatingView({Key? key,}) : super(key: key);
+
+  /// Returns a RatingDialogResponse with user's rating and comment values
+  //final Function(RatingDialogResponse) onSubmitted;
 
   @override
   _RatingViewState createState() => _RatingViewState();
@@ -245,7 +249,6 @@ class _RatingViewState extends State<RatingView> {
   }
 
   _userRatingMessage({required String funcFact}) {
-    print('THE FUN FACT IS : $funcFact');
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -286,10 +289,11 @@ class _RatingViewState extends State<RatingView> {
   _continueAction({required bool exit}){
     if  ( _rating < 1)  return;
     if(exit == true){
-      if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
+     // if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
+      if (Navigator.canPop(context)) Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
     }else{
-      Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
-    //  if (Navigator.canPop(context)) Navigator.pop(context);
+     // Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
+      if (Navigator.canPop(context)) Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FaceDetectorGiftView(giftVariableObject: new GiftVariableObject(readmessage: false))));
     }
 
   //  if (Navigator.canPop(context)) Navigator.pop(context);
@@ -297,4 +301,9 @@ class _RatingViewState extends State<RatingView> {
 
 
 
+}
+
+class RatingDialogResponse {
+  int userrating;
+  RatingDialogResponse({this.userrating = 0,});
 }

@@ -339,10 +339,28 @@ class _HomeState extends State<Home> {
                   }
               ),
             MaterialButton(
-              child: Text('Done'),
+              child: Text('NEW ALERT'),
                 onPressed: (){
                   print('CLICK 111');
                    _openRatingDialog(context);
+                }
+            ),
+
+            MaterialButton(
+                child: Text('Old ALERT'),
+                onPressed: (){
+                  print('CLICK 111');
+                  _showAlert(context: context, message: "Test alert message", msgID: 1);
+                 // _openRatingDialog(context);
+                }
+            ),
+
+            MaterialButton(
+                child: Text('UPDATED ALERT'),
+                onPressed: (){
+                  print('CLICK 111');
+                  _showUpdatedAlert(context: context, message: "Test alert message", msgID: 1);
+                  // _openRatingDialog(context);
                 }
             ),
 
@@ -500,7 +518,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-
   _openRatingDialog(BuildContext context) {
     showDialog(
         context: context,
@@ -509,4 +526,15 @@ class _HomeState extends State<Home> {
           )
        );
   }
+
+
+  _showUpdatedAlert({required BuildContext context, required String message, required int msgID}){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => Dialog(
+          child: RatingView(),
+        )
+    );
+  }
+
 }

@@ -676,4 +676,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
+  _openRatingDialog(BuildContext context) {
+   return showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: RatingView(),
+        )
+    );
+  }
+
 }

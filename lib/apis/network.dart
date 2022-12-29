@@ -65,17 +65,16 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
-        print('Login Code : $logincode');
-        if (profile != null )  print('Profile Detail : ${profile.toJson()}');
+
         smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
         Localstorage().saveString(key_login_token, logincode);
         Localstorage().saveBoolean(key_login_status, true);
         return profile;
       } else {
-        throw Exception("`Couldn't pull the profile ");
+         throw Exception("`Couldn't pull the profile ");
       }
     } catch (e) {
-      throw Exception("Error, status code ${e.toString()}");
+       throw Exception("Error, status code ${e.toString()}");
     }
  }
 
@@ -97,7 +96,7 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
-        if (profile != null )  print('Profile Detail : ${profile.toJson()}');
+        // if (profile != null )  print('Profile Detail : ${profile.toJson()}');
         smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
 
         //LEADER BOARD
