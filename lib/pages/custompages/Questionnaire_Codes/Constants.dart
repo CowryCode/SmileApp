@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 
@@ -149,16 +148,16 @@ static  double getWidthPercentSize(BuildContext context, double percent) {
   }
 
 
-  static showToast(String s) {
-  Fluttertoast.showToast(
-      msg: s,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      textColor: Colors.white,
-      fontSize: 16.0);
-  // Custom Toast Position
-}
+//   static showToast(String s) {
+//   Fluttertoast.showToast(
+//       msg: s,
+//       toastLength: Toast.LENGTH_SHORT,
+//       gravity: ToastGravity.BOTTOM,
+//       timeInSecForIosWeb: 1,
+//       textColor: Colors.white,
+//       fontSize: 16.0);
+//   // Custom Toast Position
+// }
 
   //
   // static String getMinuteFromSec(int seconds) {

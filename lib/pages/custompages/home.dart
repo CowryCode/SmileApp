@@ -32,13 +32,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
-    //TODO: CREATE DATA STRUCTURE TO GET THIS WITH ONE CALL
-    //Load the leaderboard
-    ApiAccess().getLeaderBoard();
-    // Load Unread SmilePack
-    ApiAccess().getSmilePacks();
-    // Load Un-replied Tribe Calls
-    ApiAccess().getUnrepliedTribeCalls();
+    // ApiAccess().getLeaderBoard();
+    // ApiAccess().getSmilePacks();
+    // ApiAccess().getUnrepliedTribeCalls();
+    //
+    ApiAccess().refreshData();
     // TRAP NOTIFICATIONS
     final firebaseMessaging = FCM();
     firebaseMessaging.setNotifications();

@@ -7,15 +7,12 @@ import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/chat/chatWidget.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddyconversation.dart';
-import 'package:SmileApp/pages/custompages/chat/model/chat.dart';
-import 'package:SmileApp/pages/custompages/chat/model/conversation.dart';
 import 'package:SmileApp/pages/custompages/chat/model/doctor.dart';
 import 'package:SmileApp/pages/custompages/chat/model/user.dart';
 import 'package:SmileApp/statemanagement/notifiers/chatnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 class ChatWidget extends StatefulWidget {
   @override

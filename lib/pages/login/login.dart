@@ -1,5 +1,6 @@
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -102,14 +103,28 @@ class _LoginPageState extends State<LoginPage> {
                               child:Center(
                                 child: FormBuilderTextField(
                                 //  initialValue: "",
-                                  // attribute: 'phoneNumber',
                                   name: 'useid',
-                                  autovalidateMode: AutovalidateMode.always,
+                                 // autovalidateMode: AutovalidateMode.always,
                                   controller: textEditingController,
-                                  // validators: [
-                                  //   FormBuilderValidators.required()
-                                  // ],
-                                  //keyboardType: TextInputType.number,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: "Please enter a valid email."),
+                                    FormBuilderValidators.email(),
+                                    FormBuilderValidators.min(0),
+                                  ]),
+                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                                  // validator: (textValue) {
+                                  //   if(textValue == null || textValue.isEmpty) {
+                                  //     return 'Email is required!';
+                                  //   }
+                                  //   if(!EmailValidator.validate(textValue)) {
+                                  //     return 'Please enter a valid email';
+                                  //   }
+                                  //  // controllerEmail.text = textValue;
+                                  //   return null;
+                                  // },
+                                  keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.only(top: 6,left:12,right: 12),
                                     border: InputBorder.none,

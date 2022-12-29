@@ -79,6 +79,56 @@ class ApiAccess {
     }
  }
 
+
+  Future<UserProfile> refreshData() async {
+    String? token;
+    Future<String?> tk = Localstorage().getString(key_login_token);
+    await tk.then((value) => {token = value!});
+
+    try {
+      final response = await http.get(Uri.parse(getProfile_URL),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Origin': '$MobileURL',
+          'Authorization': 'Bearer $token'
+        },
+      );
+
+      if (response.statusCode == 200) {
+        UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
+        if (profile != null )  print('Profile Detail : ${profile.toJson()}');
+        smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
+
+        //LEADER BOARD
+        LeaderBoard? lb = profile.leaderBoard;
+        if(lb != null) _populateProgressTable(progress: lb.personalProgresses!);
+        if(lb != null) _populateGlobalLeaderBoard(gloableranking: lb.globalProgresses!);
+
+        // SMILE PACK
+        UnreadTribeMessage? unreadsmilePacks = profile.unreadTribeMessage;
+        if(unreadsmilePacks != null) tribeMessagesNotifier.updateTribeMessageList(requestlist: unreadsmilePacks.messages!);
+
+        // READ SMILE PACKS
+        UnreadTribeMessage? readsmilePacks = profile.readTribeMessages;
+        if(readsmilePacks != null) readtribeMessageNotifier.updateMessageList(requestlist: readsmilePacks.messages!);
+
+        // UNREPLIED TRIBE CALL
+        UnrepliedTribeCalls? unrepliedTribecalls = profile.unrepliedTribeCalls;
+        if(unrepliedTribecalls != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls.msgcalls!);
+
+
+        return profile;
+      } else {
+        throw Exception("`Couldn't pull the profile ");
+      }
+    } catch (e) {
+      throw Exception("Error, status code ${e.toString()}");
+    }
+  }
+
+
+
   void Logout() async{
     Localstorage().saveBoolean(key_login_status, false);
   }

@@ -27,6 +27,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
   void dispose() {
     print('DISPOSED CALLED @ 123');
     _timer!.cancel();
+    super.dispose();
   }
 
   @override
