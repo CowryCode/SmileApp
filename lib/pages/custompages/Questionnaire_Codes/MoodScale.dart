@@ -37,14 +37,14 @@ class _MoodScale extends State<MoodScale> {
 
   QuesionnaireBMIScale quesionnaireBMIScale = QuesionnaireBMIScale();
 
-  Future<bool> _requestPop() {
-    if (Platform.isIOS) {
-      exit(0);
-    } else {
-      SystemNavigator.pop();
-    }
-    return new Future.value(false);
-  }
+  // Future<bool> _requestPop() {
+  //   if (Platform.isIOS) {
+  //     exit(0);
+  //   } else {
+  //     SystemNavigator.pop();
+  //   }
+  //   return new Future.value(false);
+  // }
 
   final controller = PageController();
 
@@ -57,6 +57,12 @@ class _MoodScale extends State<MoodScale> {
     // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeWidget(1)));
     ApiAccess().saveQuestionnaire(questionnaire: quesionnaireBMIScale);
     Navigator.of(context).pushNamed('/home');
+  }
+
+  Future<bool> _onWillPop() async {
+
+   Navigator.of(context).popAndPushNamed('/home',);
+   return false;
   }
 
   @override
@@ -73,6 +79,7 @@ class _MoodScale extends State<MoodScale> {
     setState(() {});
 
     return WillPopScope(
+        onWillPop: _onWillPop,
         child: Scaffold(
           backgroundColor: Colors.white,
           body: SafeArea(
@@ -116,28 +123,13 @@ class _MoodScale extends State<MoodScale> {
                                   ),
                                 ),
                               ),
-                              // Container(
-                              //   height: firstSize,
-                              //   child: Image.asset(Constants.assetsImagePath+
-                              //       moodModelList[position].image!,fit: BoxFit.scaleDown,),
-                              // ),
 
                               Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.only(top: secondSize),
                                 padding: EdgeInsets.symmetric(
                                     vertical: 0, horizontal: 10),
-                                // padding: EdgeInsets.symmetric(vertical:
-                                // ConstantWidget.getScreenPercentSize(context, 2),horizontal: (defMargin)),
 
-
-                                // decoration: BoxDecoration(
-                                //     color: accentColor,
-                                //     // color: Colors.white,
-                                //     borderRadius: BorderRadius.only(
-                                //         topRight: Radius.circular(
-                                //             ConstantWidget.getPercentSize(
-                                //                 secondSize, 17)))),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -181,34 +173,7 @@ class _MoodScale extends State<MoodScale> {
                                           ],
                                         )
                                     ),
-                                    // SizedBox(height: 20,),
-                                    //
-                                    // Row(
-                                    //   mainAxisAlignment: MainAxisAlignment
-                                    //       .spaceBetween,
-                                    //   children: [
-                                    //     ConstantWidget.getCustomTextFont(
-                                    //         moodModelList[position].start!,
-                                    //         Colors.black87,
-                                    //         // Colors.black45,
-                                    //         5,
-                                    //         TextAlign.center,
-                                    //         FontWeight.w700,
-                                    //         ConstantWidget.getScreenPercentSize(
-                                    //             context, 2),
-                                    //         Constants.fontsFamily),
-                                    //     ConstantWidget.getCustomTextFont(
-                                    //         moodModelList[position].end!,
-                                    //         Colors.black87,
-                                    //         5,
-                                    //         TextAlign.center,
-                                    //         FontWeight.w700,
-                                    //         ConstantWidget.getScreenPercentSize(
-                                    //             context, 2),
-                                    //         Constants.fontsFamily),
-                                    //   ],
-                                    // ),
-                                    //
+
                                     SizedBox(height: 20,),
                                     myRadio(),
                                     SizedBox(height: 10,),
@@ -377,24 +342,11 @@ class _MoodScale extends State<MoodScale> {
             ),
           ),
         ),
-        onWillPop: _requestPop);
+       // onWillPop: _requestPop
+    );
   }
 
-  // onNext(){
-  //   if (_position <
-  //       (moodModelList.length - 1)) {
-  //     updateRadioVal(_position);
-  //     _position++;
-  //     setRadioVal(_position);
-  //     changeBtnTxtToSubmit();
-  //     controller.jumpToPage(_position);
-  //     setState(() {});
-  //   } else {
-  //     if(btnTxt == "Submit"){
-  //       submit();
-  //     }
-  //   }
-  // }
+
 
   onNext({required int positionID}) {
     String name = moodModelList[positionID].name!;

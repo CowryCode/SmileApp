@@ -32,13 +32,14 @@ class _LoginProcessingState extends State<LoginProcessing> {
   @override
   void initState() {
 
-   // _timer = Timer.periodic(Duration(seconds: 10), (timer) { });
+    _timer = Timer.periodic(Duration(seconds: 10), (timer) { });
 
 
     WidgetsBinding.instance.addPostFrameCallback((_) async{
-
-      _timer = Timer.periodic(Duration(seconds: 10), (timer) { });
-
+      //
+      // _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      //
+      // });
 
      profile  =  ApiAccess().login(logincode: widget.giftVariableObject.msg!);
       profile!.then((value) => {
@@ -47,7 +48,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
           _timer!.cancel(),
         //  Navigator.of(context).popAndPushNamed('/home_with_alert')
           print('WELCOME WAS CALLED HERE 1'),
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()))
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()))
         }
       });
     });
@@ -65,73 +66,33 @@ class _LoginProcessingState extends State<LoginProcessing> {
             fit: BoxFit.fitWidth,
             ),
         ),
-       child:   FutureBuilder<UserProfile>(
+       child: FutureBuilder<UserProfile>(
             future: profile,
             builder: (BuildContext context, AsyncSnapshot<UserProfile> snapshot){
-
-              if(snapshot.hasData && _timer!.isActive == true){
-                _timer!.cancel();
-                print('WELCOME WAS CALLED HERE 2');
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
+              if(_timer!.isActive){
+                  if (snapshot.hasData) {
+                    _timer!.cancel();
+                   // ((){
+                      print('WELCOME WAS CALLED HERE 2');
+                      Future.delayed(Duration.zero, () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome())));
+                  //  }());
+                  } else {
+                    //((){
+                      _timer!.cancel();
+                    if(_timer!.tick >= 1)  Future.delayed(Duration.zero, () => showAlertDialog(context: context,
+                          title: "Failed Login",
+                          message: "Couldn't login at this point, kindly wait for few minutes and try again",
+                          gotTologin: true));
+                    //}());
+                  }
+                  // }
+               // }
               }
-
-              // _timer = Timer.periodic(Duration(seconds: 10), (timer){
-              //   //if (timer.tick == 1) {
-              //   print('TIME IS ACTIVE AT TICK ${timer.tick}');
-              // if (snapshot.hasData) {
-              //       timer.cancel();
-              //       _timer!.cancel();
-              //       ((){
-              //         print('WELCOME WAS CALLED HERE 2');
-              //         Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
-              //       }());
-              //     } else {
-              //       if(widget.justLoggedin == true && !snapshot.hasData){
-              //         timer.cancel();
-              //         print("Timer tick is ${timer.tick}");
-              //         widget.justLoggedin = false;
-              //         showAlertDialog(context: context,
-              //             title: "Failed Login",
-              //             message: "Couldn't login at this point, kindly wait for few minutes and try again",
-              //             gotTologin: true);
-              //       }else{
-              //         timer.cancel();
-              //       }
-              //     }
-              //  // }
-              // });
               return Container(
                 child: Center(child: CircularProgressIndicator(),),
               );
             },
           ) ,
-        // child: Container(
-        //   decoration: BoxDecoration(
-        //    // color: Theme.of(context).accentColor.withOpacity(0.8), // Original code
-        //     color: Theme.of(context).colorScheme.secondary.withOpacity(0.7), // My code
-        //   ),
-        //   child: Center(
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: <Widget>[
-        //         Container(
-        //           margin: EdgeInsets.all(12.0),
-        //           child: Text(
-        //             // 'Welcome To \n healthconsult',
-        //             'Welcome to the SmileApp \n \n Swipe left to continue. . .',
-        //             textAlign: TextAlign.center,
-        //             style: TextStyle(
-        //               color:Theme.of(context).primaryColor.withOpacity(0.8),
-        //               fontWeight: FontWeight.bold,
-        //               fontSize: 30.0,
-        //               fontFamily: "Poppins"
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
       ),
     );
   }
@@ -143,10 +104,6 @@ class _LoginProcessingState extends State<LoginProcessing> {
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: (){
-       // Navigator.of(context).pushNamed('/');
-        setState(() {
-          widget.justLoggedin == false;
-        });
         Navigator.of(context).popAndPushNamed('/');
       },
     );
@@ -169,4 +126,5 @@ class _LoginProcessingState extends State<LoginProcessing> {
       },
     );
   }
+
 }

@@ -667,15 +667,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             smileduration: smileGameNofitier.getSmileDurationInSecound(),
             countrycount: smileGameNofitier.getNumberofCountriesPainted()
         );
-        print('Start Mood:  ${mood.startMood}');
-        print('Start Time: ${mood.startTime}');
-        print('Start Date: ${mood.startDate}');
-        print('End Mood: ${mood.endMood}');
-        print('End Time: ${mood.endTime}');
-        print('End Date: ${mood.endDate}');
-        print('Smile Duration seconds: ${mood.smileduration}');
-        print('Smile Duration Counter  : ${smileGameNofitier.getSmileDurationCounter()}');
-        print('Achieved painted Country : ${smileGameNofitier.getNumberofCountriesPainted()}');
+
         ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
         Navigator.of(context).popAndPushNamed('/home',);
       },

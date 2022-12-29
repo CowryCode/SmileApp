@@ -8,6 +8,10 @@ class UserProfile {
   String? smilegrammappoints;
   String? deviceId;
 
+  // LeaderBoard?
+  // UnreadTribeMessage?
+  // UnrepliedTribeCalls?
+
   UserProfile(
       {this.id,
         this.name,
