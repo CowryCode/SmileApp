@@ -19,7 +19,7 @@ class RatingView extends StatefulWidget {
   final bool ratingonly;
   const RatingView({Key? key, this.readmessage = false, this.ratingonly = false, }) : super(key: key);
 
-  /// Returns a RatingDialogResponse with user's rating and comment values
+  /// Returns a RatingDialogResponse with user's rating and comment values.
   //final Function(RatingDialogResponse) onSubmitted;
 
   @override
