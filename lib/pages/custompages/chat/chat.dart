@@ -61,14 +61,13 @@ class _ChatWidgetState extends State<ChatWidget> {
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  // set to false if you want to force a rating
-                  builder: (context) => _showRatingAlert(context),
-                 // builder: (context) => Dialog(child: RatingView(ratingonly: true,),),
-                );
-                // Navigator.of(context).popAndPushNamed('/home');
+                // showDialog(
+                //   context: context,
+                //   barrierDismissible: true,
+                //   // set to false if you want to force a rating
+                //   builder: (context) => _showRatingAlert(context),
+                // );
+                _openRatingDialog();
               },
             ),
             shape: RoundedRectangleBorder(

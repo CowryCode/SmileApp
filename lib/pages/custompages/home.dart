@@ -9,6 +9,7 @@ import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view_BackUp.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smilegramfeedbackwidget.dart';
+import 'package:SmileApp/pages/custompages/setting.dart';
 import 'package:SmileApp/pages/custompages/tribe_messages.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -106,7 +107,7 @@ class _HomeState extends State<Home> {
                               ),
                               IconButton(
                                   onPressed: (){
-                                    Navigator.of(context).popAndPushNamed('/setting');
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Setting()));
                                   },
                                   icon: Icon(Icons.settings),color: Theme.of(context).primaryColor, ),
                             ],

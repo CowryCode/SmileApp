@@ -378,9 +378,9 @@ class ApiAccess {
   }
 
   Future<bool?> requestEmpatheticMessage({required String emotions}) async {
+    print(" Hi, someone is $emotions. Please reply with an empathic message to encourage this person");
     //String? token = "100";
-    //TODO: PICK LOCATION DYNAMICALLY
-    String location = "Lagos Nigeria";
+    String location = "Anonymous";
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});
@@ -396,7 +396,7 @@ class ApiAccess {
       body: jsonEncode(
           <String, dynamic>{
             "senderID" : token,
-            "content" : " Hi, someone in $location is feeling $emotions. Please reply with an empathic message to encourage this person",
+            "content" : " Hi, someone is $emotions. Please reply with an empathic message to encourage this person",
             "sourceCountry" : location,
             "responded" : false,
           }),

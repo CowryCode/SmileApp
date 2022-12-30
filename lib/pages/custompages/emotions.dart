@@ -40,6 +40,8 @@ class _EmotionsState extends State<Emotions> {
   Color? color5;
   Color? color6;
 
+
+
   @override
   initState() {
     super.initState();
@@ -108,16 +110,7 @@ class _EmotionsState extends State<Emotions> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          "Monday 26th April ",
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            fontFamily: 'Poppins',
-                            color:
-                                Theme.of(context).primaryColor.withOpacity(0.8),
-                          ),
-                        ),
-                        Text(
-                          "Wednsday 28th April",
+                          "We care about you ",
                           style: TextStyle(
                             fontSize: 12.0,
                             fontFamily: 'Poppins',
@@ -142,343 +135,344 @@ class _EmotionsState extends State<Emotions> {
                     SizedBox(height: 20),
                     Row(
                       children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            print('Clicked on 0');
-                            // changeColor();
-                            setState(() {
-                              if (Clicked0 == true) {
-                                Clicked0 = false;
-                              } else {
-                                Clicked0 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            decoration: BoxDecoration(
-                              color: Clicked0 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.squarePersonConfined,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Not \n Happy ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            print('Clicked on 1');
-                            // changeColor();
-                            setState(() {
-                              if (Clicked1 == true) {
-                                Clicked1 = false;
-                              } else {
-                                Clicked1 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                            decoration: BoxDecoration(
-                              color: Clicked1 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.faceTired,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Surprised ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        buttonAction(clicked: Clicked0, index: 0, label: "Not \n Happy", buttonicon:FontAwesomeIcons.squarePersonConfined ),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     // changeColor();
+                        //     setState(() {
+                        //       if (Clicked0 == true) {
+                        //         Clicked0 = false;
+                        //       } else {
+                        //         Clicked0 = true;
+                        //       }
+                        //     });
+                        //   },
+                        //   child: Container(
+                        //     height: MediaQuery.of(context).size.height * 0.10,
+                        //     width: MediaQuery.of(context).size.width * 0.40,
+                        //     decoration: BoxDecoration(
+                        //       color: Clicked0 == true
+                        //           ? Colors.green
+                        //           : Colors.white,
+                        //       // color: Theme.of(context).primaryColor,
+                        //       border: Border.all(
+                        //           width: 1.0,
+                        //           color: Colors.grey.withOpacity(0.2)),
+                        //       borderRadius: BorderRadius.circular(16.0),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       children: <Widget>[
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Icon(
+                        //           FontAwesomeIcons.squarePersonConfined,
+                        //           color:
+                        //           Theme.of(context).colorScheme.secondary,
+                        //           size: 20,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Text(
+                        //           " Not \n Happy ",
+                        //           style: TextStyle(
+                        //               fontFamily: 'Poppins',
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .secondary),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        buttonAction(clicked: Clicked1, index: 1, label: "Surprised", buttonicon:FontAwesomeIcons.faceTired ),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     // changeColor();
+                        //     setState(() {
+                        //       if (Clicked1 == true) {
+                        //         Clicked1 = false;
+                        //       } else {
+                        //         Clicked1 = true;
+                        //       }
+                        //     });
+                        //   },
+                        //   child: Container(
+                        //     height: MediaQuery.of(context).size.height * 0.10,
+                        //     width: MediaQuery.of(context).size.width * 0.40,
+                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+                        //     decoration: BoxDecoration(
+                        //       color: Clicked1 == true
+                        //           ? Colors.green
+                        //           : Colors.white,
+                        //       // color: Theme.of(context).primaryColor,
+                        //       border: Border.all(
+                        //           width: 1.0,
+                        //           color: Colors.grey.withOpacity(0.2)),
+                        //       borderRadius: BorderRadius.circular(16.0),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       children: <Widget>[
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Icon(
+                        //           FontAwesomeIcons.faceTired,
+                        //           color:
+                        //           Theme.of(context).colorScheme.secondary,
+                        //           size: 20,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Text(
+                        //           " Surprised ",
+                        //           style: TextStyle(
+                        //               fontFamily: 'Poppins',
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .secondary),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            print('Clicked on 2');
-                            // changeColor();
-                            setState(() {
-                              if (Clicked2 == true) {
-                                Clicked2 = false;
-                              } else {
-                                Clicked2 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                            decoration: BoxDecoration(
-                              color: Clicked2 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.faceSmileBeam,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Fearful ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            print('Clicked on 3');
-                            // changeColor();
-                            setState(() {
-                              if (Clicked3 == true) {
-                                Clicked3 = false;
-                              } else {
-                                Clicked3 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                            decoration: BoxDecoration(
-                              color: Clicked3 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.faceDizzy,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Sad ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        buttonAction(clicked: Clicked2, index: 2, label: "Fearful", buttonicon: FontAwesomeIcons.faceSmileBeam),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     print('Clicked on 2');
+                        //     // changeColor();
+                        //     setState(() {
+                        //       if (Clicked2 == true) {
+                        //         Clicked2 = false;
+                        //       } else {
+                        //         Clicked2 = true;
+                        //       }
+                        //     });
+                        //   },
+                        //   child: Container(
+                        //     height: MediaQuery.of(context).size.height * 0.10,
+                        //     width: MediaQuery.of(context).size.width * 0.40,
+                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+                        //     decoration: BoxDecoration(
+                        //       color: Clicked2 == true
+                        //           ? Colors.green
+                        //           : Colors.white,
+                        //       // color: Theme.of(context).primaryColor,
+                        //       border: Border.all(
+                        //           width: 1.0,
+                        //           color: Colors.grey.withOpacity(0.2)),
+                        //       borderRadius: BorderRadius.circular(16.0),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       children: <Widget>[
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Icon(
+                        //           FontAwesomeIcons.faceSmileBeam,
+                        //           color:
+                        //           Theme.of(context).colorScheme.secondary,
+                        //           size: 20,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Text(
+                        //           " Fearful ",
+                        //           style: TextStyle(
+                        //               fontFamily: 'Poppins',
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .secondary),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        buttonAction(clicked: Clicked3, index: 3, label: "Sad", buttonicon: FontAwesomeIcons.faceDizzy),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     // changeColor();
+                        //     setState(() {
+                        //       if (Clicked3 == true) {
+                        //         Clicked3 = false;
+                        //       } else {
+                        //         Clicked3 = true;
+                        //       }
+                        //     });
+                        //   },
+                        //   child: Container(
+                        //     height: MediaQuery.of(context).size.height * 0.10,
+                        //     width: MediaQuery.of(context).size.width * 0.40,
+                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+                        //     decoration: BoxDecoration(
+                        //       color: Clicked3 == true
+                        //           ? Colors.green
+                        //           : Colors.white,
+                        //       // color: Theme.of(context).primaryColor,
+                        //       border: Border.all(
+                        //           width: 1.0,
+                        //           color: Colors.grey.withOpacity(0.2)),
+                        //       borderRadius: BorderRadius.circular(16.0),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       children: <Widget>[
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Icon(
+                        //           FontAwesomeIcons.faceDizzy,
+                        //           color:
+                        //           Theme.of(context).colorScheme.secondary,
+                        //           size: 20,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Text(
+                        //           " Sad ",
+                        //           style: TextStyle(
+                        //               fontFamily: 'Poppins',
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .secondary),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            print('Clicked on 4');
-                            // changeColor();
-                            setState(() {
-                              if (Clicked4 == true) {
-                                Clicked4 = false;
-                              } else {
-                                Clicked4 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                            decoration: BoxDecoration(
-                              color: Clicked4 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.faceFrown,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Angry ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            print('Clicked on 5');
-                            // changeColor();
-                            setState(() {
-                              if (Clicked5 == true) {
-                                Clicked5 = false;
-                              } else {
-                                Clicked5 = true;
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.10,
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                            decoration: BoxDecoration(
-                              color: Clicked5 == true
-                                  ? Colors.green
-                                  : Colors.white,
-                              // color: Theme.of(context).primaryColor,
-                              border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.faceFlushed,
-                                  color:
-                                  Theme.of(context).colorScheme.secondary,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  " Disgusted ",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        buttonAction(clicked: Clicked4, index: 4, label: "Angry" , buttonicon: FontAwesomeIcons.faceFrown),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     // changeColor();
+                        //     setState(() {
+                        //       if (Clicked4 == true) {
+                        //         Clicked4 = false;
+                        //       } else {
+                        //         Clicked4 = true;
+                        //       }
+                        //     });
+                        //   },
+                        //   child: Container(
+                        //     height: MediaQuery.of(context).size.height * 0.10,
+                        //     width: MediaQuery.of(context).size.width * 0.40,
+                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+                        //     decoration: BoxDecoration(
+                        //       color: Clicked4 == true
+                        //           ? Colors.green
+                        //           : Colors.white,
+                        //       // color: Theme.of(context).primaryColor,
+                        //       border: Border.all(
+                        //           width: 1.0,
+                        //           color: Colors.grey.withOpacity(0.2)),
+                        //       borderRadius: BorderRadius.circular(16.0),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       children: <Widget>[
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Icon(
+                        //           FontAwesomeIcons.faceFrown,
+                        //           color:
+                        //           Theme.of(context).colorScheme.secondary,
+                        //           size: 20,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Text(
+                        //           " Angry ",
+                        //           style: TextStyle(
+                        //               fontFamily: 'Poppins',
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .secondary),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                        buttonAction(clicked: Clicked5, index: 5, label: "Disgusted", buttonicon: FontAwesomeIcons.faceFlushed),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     // changeColor();
+                        //     setState(() {
+                        //       if (Clicked5 == true) {
+                        //         Clicked5 = false;
+                        //       } else {
+                        //         Clicked5 = true;
+                        //       }
+                        //     });
+                        //   },
+                        //   child: Container(
+                        //     height: MediaQuery.of(context).size.height * 0.10,
+                        //     width: MediaQuery.of(context).size.width * 0.40,
+                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
+                        //     decoration: BoxDecoration(
+                        //       color: Clicked5 == true
+                        //           ? Colors.green
+                        //           : Colors.white,
+                        //       // color: Theme.of(context).primaryColor,
+                        //       border: Border.all(
+                        //           width: 1.0,
+                        //           color: Colors.grey.withOpacity(0.2)),
+                        //       borderRadius: BorderRadius.circular(16.0),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       children: <Widget>[
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Icon(
+                        //           FontAwesomeIcons.faceFlushed,
+                        //           color:
+                        //           Theme.of(context).colorScheme.secondary,
+                        //           size: 20,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 10,
+                        //         ),
+                        //         Text(
+                        //           " Disgusted ",
+                        //           style: TextStyle(
+                        //               fontFamily: 'Poppins',
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .secondary),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ]),
@@ -514,6 +508,67 @@ class _EmotionsState extends State<Emotions> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  TextButton buttonAction({required bool clicked, required int index, required String label, required IconData buttonicon}){
+    print('CLICKED ON : $index ?  $clicked');
+
+    return TextButton(
+     key: Key("$index"),
+      onPressed: () {
+        clickedButton(index: index);
+        // setState(() {
+        //   if (clicked == true) {
+        //     clicked = false;
+        //   } else {
+        //     clicked = true;
+        //   }
+        // });
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.10,
+        width: MediaQuery.of(context).size.width * 0.40,
+        decoration: BoxDecoration(
+         // color: Clicked0 == true
+          color: clicked == true
+              ? Colors.green
+              : Colors.white,
+          // color: Theme.of(context).primaryColor,
+          border: Border.all(
+              width: 1.0,
+              color: Colors.grey.withOpacity(0.2)),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              width: 10,
+            ),
+            Icon(
+              buttonicon,
+             // FontAwesomeIcons.squarePersonConfined,
+              color:
+              Theme.of(context).colorScheme.secondary,
+              size: 25,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+             "$label",
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .secondary),
+            ),
+          ],
         ),
       ),
     );
@@ -599,26 +654,69 @@ class _EmotionsState extends State<Emotions> {
     );
   }
 
+  void clickedButton({required int index}){
+    if(index == 0){
+      setState(() {
+        Clicked0 = !Clicked0;
+      });
+    }
+    if(index == 1){
+      setState(() { Clicked1 = !Clicked1;});
+    }
+    if(index == 2){
+      setState(() { Clicked2 = !Clicked2;});
+    }
+    if(index == 3){
+      setState(() { Clicked3 = !Clicked3;});
+    }
+    if(index == 4){
+      setState(() { Clicked4 = !Clicked4;});
+    }
+    if(index == 5){
+      setState(() { Clicked5 = !Clicked5;});
+    }
+  }
+
   String? getOptions(){
+    try{
     String options = "" ;
     if(Clicked0 == true){
-      options = options + "Not happy,";
+      options = options + "not happy888";
     }
     if(Clicked1 == true){
-      options = options + "surprised,";
+      options = options + "surprised888";
     }
     if(Clicked2 == true){
-      options = options + "fearful,";
+      options = options + "fearful888";
     }
     if(Clicked3 == true){
-      options = options + "sad,";
+      options = options + "sad888";
     }
     if(Clicked4 == true){
-      options = options + "angry,";
+      options = options + "angry888";
     }
     if(Clicked5 == true){
-      options = options + "disgusted";
+      options = options + "disgusted888";
     }
-    return options;
+
+    List<String> strArray = options.split("888");
+
+    print('ARRAY SIZE : ${strArray.length}');
+
+      if(strArray.length < 2) return null;
+    if(strArray.length == 2) return strArray[0];
+
+    String result = strArray[0];
+    for(int x = 1; x < strArray.length - 2; x++){
+      result = result + ",${strArray[x]}";
+    }
+    result = result + " and ${strArray[strArray.length - 2]}";
+
+    return result;
+    }catch(e){
+      return null;
+    }
+
+   // return options;
   }
 }
