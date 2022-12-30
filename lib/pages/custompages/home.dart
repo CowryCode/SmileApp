@@ -522,7 +522,10 @@ class _HomeState extends State<Home> {
     showDialog(
         context: context,
         builder: (context) => Dialog(
-            child: RatingView(),
+            child: RatingView(
+              onExit: (){},
+              onContinue: (){},
+            ),
           )
        );
   }
@@ -532,7 +535,10 @@ class _HomeState extends State<Home> {
     showDialog(
         context: context,
         builder: (BuildContext context) => Dialog(
-          child: RatingView(),
+          child: RatingView(
+            onExit: (){},
+            onContinue: (){},
+          ),
         )
     );
   }

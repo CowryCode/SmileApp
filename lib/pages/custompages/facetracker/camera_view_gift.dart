@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
+import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -27,7 +30,6 @@ enum ScreenMode { liveFeed, gallery }
 enum Actions { Increment }
 
 late String likes, gotpoints, popularity, totalPoints, details, pac, date;
-
 
 class CameraViewGift extends StatefulWidget {
   CameraViewGift(
@@ -65,21 +67,16 @@ class CameraViewGift extends StatefulWidget {
 class _CameraViewGiftState extends State<CameraViewGift> {
   ScreenMode _mode = ScreenMode.liveFeed;
 
-
   CameraController? _controller; // Moved to centralized place on 13-12-2022
-
 
   int _cameraIndex = 1;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
   bool _changingCameraLens = false;
 
-
   late int _tokenArrayLength;
 
   final Duration timerTastoPremuto = Duration(seconds: 20);
-
-
 
   // VARIABLES FOR THE MAP
   late MapShapeSource sublayerDataSource;
@@ -89,34 +86,31 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   void initState() {
     super.initState();
     Wakelock.enable();
-        try {
-          if (cameras.any(
-                (element) =>
+    try {
+      if (cameras.any(
+        (element) =>
             element.lensDirection == widget.initialDirection &&
-                element.sensorOrientation == 90,
-          )) {
-            _cameraIndex = cameras.indexOf(
-              cameras.firstWhere((element) =>
+            element.sensorOrientation == 90,
+      )) {
+        _cameraIndex = cameras.indexOf(
+          cameras.firstWhere((element) =>
               element.lensDirection == widget.initialDirection &&
-                  element.sensorOrientation == 90),
-            );
-          } else {
-            _cameraIndex = cameras.indexOf(
-              cameras.firstWhere(
-                    (element) => element.lensDirection == widget.initialDirection,
-              ),
-            );
-          }
-          _startLiveFeed();
-          SystemChrome.setPreferredOrientations(
-              [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
+              element.sensorOrientation == 90),
+        );
+      } else {
+        _cameraIndex = cameras.indexOf(
+          cameras.firstWhere(
+            (element) => element.lensDirection == widget.initialDirection,
+          ),
+        );
+      }
+      _startLiveFeed();
+      SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     } catch (e) {
-          print("Error : ${e.toString()}");
-        }
-
+      print("Error : ${e.toString()}");
+    }
   }
-
 
   void refreshCamera() {
     try {
@@ -141,7 +135,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       // SET PREFERRED ORIENTATION
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
     } catch (e) {
       debugPrint("CAMERA ERROR : ${e.toString()}");
     }
@@ -155,26 +148,20 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   Future<bool> _onWillPop() async {
-    return (
-        await showDialog(
-      context: context,
-      barrierDismissible: true,
-      // set to false if you want to force a rating
-      builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
-      )) ?? false;
-
-    return (
-        await showDialog(
-          context: context,
-          barrierDismissible: true,
-          // set to false if you want to force a rating
-          builder: (context) => Dialog(child: RatingView(ratingonly: widget.readmessage,),),
-        )) ?? false;
+    // return (await showDialog(
+    //       context: context,
+    //       barrierDismissible: true,
+    //       // set to false if you want to force a rating
+    //       builder: (context) =>
+    //           _showRatingAlert(context, justreadmessage: widget.readmessage),
+    //     )) ??
+    //     false;
+    return _openRatingDialog() ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
-   // WidgetsBinding.instance.addPostFrameCallback((_)=> refreshCamera());
+    // WidgetsBinding.instance.addPostFrameCallback((_)=> refreshCamera());
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -183,18 +170,15 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
             onPressed: () {
-              showDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  // set to false if you want to force a rating
-                  builder: (context) => _showRatingAlert(context, justreadmessage: widget.readmessage),
-              );
               // showDialog(
               //   context: context,
               //   barrierDismissible: true,
-              //   builder: (context) => Dialog(child: RatingView(),),
+              //   // set to false if you want to force a rating
+              //   builder: (context) => _showRatingAlert(context,
+              //       justreadmessage: widget.readmessage),
               // );
-              },
+              _openRatingDialog();
+            },
           ),
           backgroundColor: Theme.of(context).colorScheme.secondary,
           title: Text(widget.title),
@@ -231,41 +215,39 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    (value == false && !widget.readmessage) ? ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).colorScheme.secondary),
-                      child: const Text(
-                        'Refresh',
-                      ),
-                      onPressed: () {
-                        refreshCamera(); // Refresh
-                      },
-                    ) : SizedBox( height: 1,),
+                    (value == false && !widget.readmessage)
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary:
+                                    Theme.of(context).colorScheme.secondary),
+                            child: const Text(
+                              'Refresh',
+                            ),
+                            onPressed: () {
+                              refreshCamera(); // Refresh
+                            },
+                          )
+                        : SizedBox(
+                            height: 1,
+                          ),
                     SizedBox(
                       width: 3,
                     ),
-                    (value == false) ? ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).colorScheme.secondary),
-                      child: const Text(
-                        'Done',
-                      ),
-                      onPressed: () {
-                        // showDialog(
-                        //   context: context,
-                        //   barrierDismissible: true,
-                        //   // set to false if you want to force a rating
-                        //   builder: (context) =>
-                        //       _showRatingAlert(context, justreadmessage: true),
-                        // );
-                        showDialog(
-                          context: context,
-                          barrierDismissible: true,
-                          // set to false if you want to force a rating
-                          builder: (context) => Dialog(child: RatingView(),),
-                        );
-                      },
-                    ) : SizedBox( height: 1,),
+                    (value == false)
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary:
+                                    Theme.of(context).colorScheme.secondary),
+                            child: const Text(
+                              'Done',
+                            ),
+                            onPressed: () {
+                              _openRatingDialog();
+                            },
+                          )
+                        : SizedBox(
+                            height: 1,
+                          ),
                   ],
                 );
               } else {
@@ -316,7 +298,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // await _controller?.dispose();
     // _controller = null;
   }
-
 
   Future _processCameraImage(CameraImage image) async {
     final WriteBuffer allBytes = WriteBuffer();
@@ -376,7 +357,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           height: MediaQuery.of(context).size.height * 0.6,
         );
       }
-     } else {
+    } else {
       print("CONTROLLER IS NULL");
       print("CONTROLLER IS NULL 1");
 
@@ -435,7 +416,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ValueListenableBuilder(
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
-             // if (_controller != null && value == false) {
+              // if (_controller != null && value == false) {
               if (_controller != null && value == false) {
                 return Align(
                     alignment: Alignment.bottomLeft,
@@ -443,10 +424,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                         height: MediaQuery.of(context).size.height * 0.1,
                         width: MediaQuery.of(context).size.width * 0.2,
                         margin: EdgeInsets.only(left: 15.0),
-                       // child: CameraPreview(_controller!)
-                        child: CameraPreview(_controller!)
-                    )
-                );
+                        // child: CameraPreview(_controller!)
+                        child: CameraPreview(_controller!)));
               } else {
                 return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.6);
@@ -510,24 +489,22 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               valueListenable: smileGameNofitier,
               builder: (context, SmileGameVariables gamevariables, child) {
                 // WE WANT THE ALERT TO SHOW AFTER 3 COUNTRIES ARE PAINTED
-                if(gamevariables.targetCaught){
+                if (gamevariables.targetCaught) {
                   // return Dialog(
                   //   child: RatingView(),
                   // );
                   return SizedBox(
                     height: 3.0,
                   );
-                }else{
+                } else {
                   return SizedBox(
                     height: 3.0,
                   );
                 }
-              }
-          ),
+              }),
         ],
       ),
     );
-
   }
 
   ScaleAnimatedText scaleValue({required String val}) {
@@ -539,7 +516,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           fontSize: 35.0,
         ));
   }
-
 
   Widget weatherMap() {
     return Padding(
@@ -559,7 +535,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-
   Widget _liveFeedBody() {
     //if (_controller != null) {
     if (_controller != null) {
@@ -575,7 +550,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     } else {
       return Container();
     }
-
 
     final size = MediaQuery.of(context).size;
     /* calculate scale depending on screen and camera ratios
@@ -598,14 +572,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             child: Center(
               child: _changingCameraLens
                   ? Center(
-                child: const Text('Changing camera lens'),
-              )
-              //  : CameraPreview(_controller!),
+                      child: const Text('Changing camera lens'),
+                    )
+                  //  : CameraPreview(_controller!),
                   : CameraPreview(_controller!),
             ),
           ),
-          //TODO: COMMENTED OUT TODAY 20-09-2022
-          //if (widget.customPaint != null) widget.customPaint,
+
           Positioned(
             bottom: 100,
             left: 50,
@@ -630,7 +603,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       ),
     );
   }
-  RatingDialog _showRatingAlert(BuildContext context, {required bool justreadmessage}) {
+
+  RatingDialog _showRatingAlert(BuildContext context,
+      {required bool justreadmessage}) {
     return RatingDialog(
       showCloseButton: false,
       initialRating: 0.0,
@@ -665,22 +640,38 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         mood.captureMood(
             rating: response.rating.round(),
             smileduration: smileGameNofitier.getSmileDurationInSecound(),
-            countrycount: smileGameNofitier.getNumberofCountriesPainted()
-        );
+            countrycount: smileGameNofitier.getNumberofCountriesPainted());
 
-        ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
-        Navigator.of(context).popAndPushNamed('/home',);
+        ApiAccess().saveMood(
+            moodModel: mood,
+            url: (widget.readmessage == true)
+                ? Tribe_Mood_URL
+                : SmileGram_Mood_URL);
+        Navigator.of(context).popAndPushNamed(
+          '/home',
+        );
       },
       submitButtonTextStyle: const TextStyle(
           fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
     );
   }
 
-  _openRatingDialog(BuildContext context) {
-   return showDialog(
+
+  _openRatingDialog() {
+    showDialog(
         context: context,
         builder: (context) => Dialog(
-          child: RatingView(),
+          child: RatingView(
+            onExit: (){
+              print('CLICKED ON EXIT OOOO');
+              dispose();
+              Navigator.of(context).popAndPushNamed('/home');
+            },
+            onContinue: (){
+              print('CLICKED ON CONTINUE');
+              Navigator.pop(context);
+            },
+          ),
         )
     );
   }

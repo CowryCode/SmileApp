@@ -33,28 +33,21 @@ class _ChatWidgetState extends State<ChatWidget> {
 
   @override
   void dispose() {
-  //  _channel.sink.close();
-    // Clean up the controller when the widget is disposed.
+    print('CHAT DISPOSED CALLED');
     myController.dispose();
     super.dispose();
 
   }
 
   Future<bool> _onWillPop() async {
-    return (await showDialog(
-      context: context,
-      barrierDismissible: true,
-      // set to false if you want to force a rating
-      builder: (context) => _showRatingAlert(context),
-    )) ?? false;
-    return (
-        await showDialog(
-          context: context,
-          barrierDismissible: true,
-          // set to false if you want to force a rating
-          builder: (context) => Dialog(child: RatingView(ratingonly: true,),),
-        )
-    ) ?? false;
+    // return (await showDialog(
+    //   context: context,
+    //   barrierDismissible: true,
+    //   // set to false if you want to force a rating
+    //   builder: (context) => _showRatingAlert(context),
+    // )) ?? false;
+
+    return _openRatingDialog() ?? false;
   }
 
   @override
@@ -354,16 +347,29 @@ class _ChatWidgetState extends State<ChatWidget> {
         );
         ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
         Navigator.of(context).popAndPushNamed('/home',);
-
-        //TODO: REMOVE THIS ON PRODUCTION
-        // chatcentralnotifier.updateComment(
-        //     chat: "I respond as a bot", isbot: true);
-        // Navigator.of(context).popAndPushNamed(
-        //   '/home',
-        // );
       },
       submitButtonTextStyle: const TextStyle(
           fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
+    );
+  }
+
+  //_openRatingDialog(BuildContext context1) {
+  _openRatingDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: RatingView(
+            onExit: (){
+              print('CLICKED ON EXIT OOOO');
+              dispose();
+              Navigator.of(context).popAndPushNamed('/home');
+            },
+            onContinue: (){
+              print('CLICKED ON CONTINUE');
+              Navigator.pop(context);
+            },
+          ),
+        )
     );
   }
 

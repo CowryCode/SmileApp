@@ -188,8 +188,7 @@ class _RatingViewState extends State<RatingView> {
                     children: [
                       MaterialButton(
                         onPressed: () {
-                          print('EXIT STAGE 0');
-                              _continueAction(exit: true);
+                            _continueAction(exit: true);
                            } ,
                         child: Visibility(
                           visible: _rating > 0,
@@ -238,15 +237,6 @@ class _RatingViewState extends State<RatingView> {
         ],
       ),
     );
-
-    // return AlertDialog(
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.circular(15.0),
-    //   ),
-    //   titlePadding: EdgeInsets.zero,
-    //   scrollable: true,
-    //   title: _content,
-    // );
   }
 
   _userRating() {
@@ -298,7 +288,8 @@ class _RatingViewState extends State<RatingView> {
     if(widget.ratingonly == true){
       _continueAction(exit: true);
     }else{
-      _ratingPageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+      _ratingPageController.nextPage(
+          duration: Duration(milliseconds: 300), curve: Curves.easeIn);
       setState(() {
         ratingSubmitted = true;
       });
@@ -306,16 +297,13 @@ class _RatingViewState extends State<RatingView> {
   }
 
   _continueAction({required bool exit}){
-    print('EXIT STAGE 1');
     if  ( _rating < 1)  return;
 
     if(exit == true){
-      print('EXIT STAGE 2');
       widget.onExit.call();
      // if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
      // if (Navigator.canPop(context)) Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
     }else{
-      print('EXIT STAGE 3');
       widget.onContinue.call();
      // Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
      // if (Navigator.canPop(context)) Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FaceDetectorGiftView(giftVariableObject: new GiftVariableObject(readmessage: false))));
