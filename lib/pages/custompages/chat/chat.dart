@@ -358,7 +358,7 @@ class _ChatWidgetState extends State<ChatWidget> {
         context: context,
         builder: (context) => Dialog(
           child: RatingView(
-            onExit: (){
+            onExit: (respomse){
               print('CLICKED ON EXIT OOOO');
               dispose();
               Navigator.of(context).popAndPushNamed('/home');

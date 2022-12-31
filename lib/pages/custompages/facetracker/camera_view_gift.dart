@@ -662,8 +662,24 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         context: context,
         builder: (context) => Dialog(
           child: RatingView(
-            onExit: (){
+            onExit: (response){
               print('CLICKED ON EXIT OOOO');
+
+              MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+              mood.captureMood(
+                  rating: response.userrating.round(),
+                  smileduration: smileGameNofitier.getSmileDurationInSecound(),
+                  countrycount: smileGameNofitier.getNumberofCountriesPainted());
+
+              ApiAccess().saveMood(
+                  moodModel: mood,
+                  url: (widget.readmessage == true)
+                      ? Tribe_Mood_URL
+                      : SmileGram_Mood_URL);
+              Navigator.of(context).popAndPushNamed(
+                '/home',
+              );
+
               dispose();
               Navigator.of(context).popAndPushNamed('/home');
             },

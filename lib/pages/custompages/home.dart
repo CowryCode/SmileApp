@@ -1,6 +1,7 @@
 
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
+import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
@@ -33,11 +34,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
-    // ApiAccess().getLeaderBoard();
-    // ApiAccess().getSmilePacks();
-    // ApiAccess().getUnrepliedTribeCalls();
-    //
-    ApiAccess().refreshData();
+
+   if(widget.checkEmotion == false) ApiAccess().refreshData();
     // TRAP NOTIFICATIONS
     final firebaseMessaging = FCM();
     firebaseMessaging.setNotifications();
@@ -97,14 +95,32 @@ class _HomeState extends State<Home> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                "Cowrycode",
-                                style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 16.0,
-                                  color: Theme.of(context).primaryColor,
-                                ),
+                              ValueListenableBuilder(
+                                valueListenable: userProfileNotifier,
+                                builder: (context, UserProfile userfile, child) {
+                                  return Text(
+                                  //  "Cowrycode",
+                                    (userfile.name != null) ? "${userfile.name}" :"",
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 16.0,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  );
+                                }
+                                // child: Text(
+                                //   "Cowrycode",
+                                //   style: TextStyle(
+                                //     fontFamily: 'Poppins',
+                                //     fontSize: 16.0,
+                                //     color: Theme.of(context).primaryColor,
+                                //   ),
+                                // ),
                               ),
+
+
+
+
                               IconButton(
                                   onPressed: (){
                                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Setting()));
@@ -524,7 +540,7 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (context) => Dialog(
             child: RatingView(
-              onExit: (){},
+              onExit: (response){},
               onContinue: (){},
             ),
           )
@@ -537,7 +553,7 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (BuildContext context) => Dialog(
           child: RatingView(
-            onExit: (){},
+            onExit: (response){},
             onContinue: (){},
           ),
         )

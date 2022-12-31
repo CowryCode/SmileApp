@@ -38,7 +38,7 @@ class ApiAccess {
             "name" : profile.name,
             "phonenumber" : profile.phonenumber,
             "isconsented" : profile.isconsented,
-            "smilegrampoint" : profile.smilegrampoint,
+            "smilegrampoint" : profile.smilegrampoints,
             "deviceId" : profile.deviceId,
           }),
     );
@@ -65,8 +65,32 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
+        // UPDATE USERPROFILE NOTIFIER
+        userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
 
         smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
+
+        //LEADER BOARD
+        LeaderBoard? lb = profile.leaderBoard;
+        if(lb != null) _populateProgressTable(progress: lb.personalProgresses!);
+        if(lb != null) _populateGlobalLeaderBoard(gloableranking: lb.globalProgresses!);
+
+        // SMILE PACK
+        UnreadTribeMessage? unreadsmilePacks = profile.unreadTribeMessage;
+        if(unreadsmilePacks != null) tribeMessagesNotifier.updateTribeMessageList(requestlist: unreadsmilePacks.messages!);
+
+        // READ SMILE PACKS
+        UnreadTribeMessage? readsmilePacks = profile.readTribeMessages;
+        if(readsmilePacks != null) readtribeMessageNotifier.updateMessageList(requestlist: readsmilePacks.messages!);
+
+        // UNREPLIED TRIBE CALL
+        UnrepliedTribeCalls? unrepliedTribecalls = profile.unrepliedTribeCalls;
+        if(unrepliedTribecalls != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls.msgcalls!);
+
+        // UPDATE USERPROFILE NOTIFIER
+        userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
+
+
         Localstorage().saveString(key_login_token, logincode);
         Localstorage().saveBoolean(key_login_status, true);
         return profile;
@@ -116,6 +140,8 @@ class ApiAccess {
         UnrepliedTribeCalls? unrepliedTribecalls = profile.unrepliedTribeCalls;
         if(unrepliedTribecalls != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls.msgcalls!);
 
+        // UPDATE USERPROFILE NOTIFIER
+        userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
 
         return profile;
       } else {

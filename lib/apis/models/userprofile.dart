@@ -7,7 +7,7 @@ class UserProfile {
   String? name;
   String? phonenumber;
   bool? isconsented;
-  double? smilegrampoint;
+  double? smilegrampoints;
   double? accumulatedValue;
   String? smilegrammappoints;
   String? deviceId;
@@ -17,18 +17,23 @@ class UserProfile {
   UnreadTribeMessage? readTribeMessages;
   UnrepliedTribeCalls? unrepliedTribeCalls;
 
+  int? todayTargetValue;
+  int? todayAchievedValue;
+
   UserProfile(
       {this.id,
         this.name,
         this.phonenumber,
         this.isconsented,
-        this.smilegrampoint,
+        this.smilegrampoints,
         this.smilegrammappoints,
         this.deviceId,
         this.leaderBoard,
         this.unreadTribeMessage,
         this.readTribeMessages,
         this.unrepliedTribeCalls,
+        this.todayTargetValue,
+        this.todayAchievedValue
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -36,10 +41,12 @@ class UserProfile {
     name = json['name'];
     phonenumber = json['phonenumber'];
     isconsented = json['isconsented'];
-    smilegrampoint = json['smilegrampoint'];
+    smilegrampoints = json['smilegrampoints'];
     accumulatedValue = json['accumulatedValue'];
     smilegrammappoints = json['smilegrammappoints'];
     deviceId = json['deviceId'];
+    todayTargetValue = json['todayTargetValue'];
+    todayAchievedValue = json['todayAchievedValue'];
 
     leaderBoard = json['leaderBoard'] != null ? new LeaderBoard.fromJson(json['leaderBoard']) : null;
     unreadTribeMessage = json['unreadTribeMessage'] != null ? new UnreadTribeMessage.fromJson(json['unreadTribeMessage']) : null;
@@ -53,10 +60,12 @@ class UserProfile {
     data['name'] = this.name;
     data['phonenumber'] = this.phonenumber;
     data['isconsented'] = this.isconsented;
-    data['smilegrampoint'] = this.smilegrampoint;
+    data['smilegrampoints'] = this.smilegrampoints;
     data['accumulatedValue'] = this.accumulatedValue;
     data['smilegrammappoints'] = this.smilegrammappoints;
     data['deviceId'] = this.deviceId;
+    data['todayTargetValue'] = this.todayTargetValue;
+    data['todayAchievedValue'] = this.todayAchievedValue;
 
     if (this.leaderBoard != null) {
       data['leaderBoard'] = this.leaderBoard!.toJson();

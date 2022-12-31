@@ -28,7 +28,7 @@ class RatingView extends StatefulWidget {
 
   /// Returns a RatingDialogResponse with user's rating and comment values.
   final Function() onContinue;
-  final Function() onExit;
+  final Function(RatingDialogResponse) onExit;
 
   @override
   _RatingViewState createState() => _RatingViewState();
@@ -72,9 +72,12 @@ class _RatingViewState extends State<RatingView> {
     });
   }
 
+  RatingDialogResponse? _response;
+
   @override
   void initState() {
     super.initState();
+    _response = RatingDialogResponse(ratingOnly: widget.ratingonly, userrating: _rating);
   }
 
 
@@ -311,7 +314,8 @@ class _RatingViewState extends State<RatingView> {
 
     if(exit == true){
       print('EXIT STAGE 2');
-      widget.onExit.call();
+      _response!.userrating = _rating;
+      widget.onExit.call(_response!);
      // if (Navigator.canPop(context))  Navigator.of(context).popAndPushNamed('/home',);
      // if (Navigator.canPop(context)) Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
     }else{

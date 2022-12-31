@@ -1,3 +1,4 @@
+import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
@@ -95,76 +96,57 @@ class _GlassmorphicSmilegramDisplayState
                     color: Colors.grey.withOpacity(0.5)),
                 borderRadius: BorderRadius.circular(16.0),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Completed:  ',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black45,
-                      fontFamily: 'Poppins',
-                      fontSize: 12.0,
-                    ),
-                  ),
-                  Icon(FontAwesomeIcons.solidCircle,color: Colors.green, size: 12 ,),
-                  Text(
-                    "  Today's Target:  ",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black45,
-                      fontFamily: 'Poppins',
-                      fontSize: 12.0,
-                    ),
-                  ),
-                  Icon(FontAwesomeIcons.solidCircle,color: Colors.red, size: 12 ,),
-                  Text(
-                    '  Now:  ',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black45,
-                      fontFamily: 'Poppins',
-                      fontSize: 12.0,
-                    ),
-                  ),
-                  Icon(FontAwesomeIcons.solidCircle,color: Colors.orange, size: 12 ,)
-                ],
+              child: ValueListenableBuilder(
+                valueListenable: userProfileNotifier,
+                builder: (context, UserProfile userfile, child) {
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      // Icon(FontAwesomeIcons.solidCircle,color: Colors.green, size: 12 ,),
+                      // Text(
+                      //  // 'Completed:  ',
+                      //   (userfile.smilegrampoints != null ) ? "Total Score: ${userfile.smilegrampoints}" : "",
+                      //   style: const TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     color: Colors.black45,
+                      //     fontFamily: 'Poppins',
+                      //     fontSize: 12.0,
+                      //   ),
+                      // ),
+
+                      Icon(FontAwesomeIcons.solidCircle,color: Colors.black45, size: 12 ,),
+                      SizedBox(width: 2,),
+                      Text(
+                        " Today'sTarget:  ${userfile.todayTargetValue}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontFamily: 'Poppins',
+                          fontSize: 12.0,
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Icon(FontAwesomeIcons.solidCircle,color: Theme.of(context).colorScheme.secondary, size: 12 ,),
+                      SizedBox(width: 2,),
+                      Text(
+                        " Today's Score:  ${userfile.todayAchievedValue}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontFamily: 'Poppins',
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+
               ),
             )
           ],
         ),
-        // Align(
-        //   alignment: Alignment.bottomCenter,
-        //   child: Container(
-        //     width: MediaQuery.of(context).size.width ,
-        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-        //     decoration: BoxDecoration(
-        //       // color:  Colors.black12,
-        //       color: Theme.of(context).primaryColor,
-        //       border: Border.all(
-        //           width: 1.0,
-        //           color: Colors.grey.withOpacity(0.5)),
-        //       borderRadius: BorderRadius.circular(16.0),
-        //     ),
-        //     child: ValueListenableBuilder(
-        //       // valueListenable: counterNotifier,
-        //       valueListenable: smileAppValueNotifier.value.nextCountry,
-        //       builder: (context, String value, child) {
-        //         return Text(
-        //           '   $value',
-        //           textAlign: TextAlign.center,
-        //           overflow: TextOverflow.ellipsis,
-        //           style: const TextStyle(
-        //             fontWeight: FontWeight.bold,
-        //             color: Colors.orange,
-        //             fontFamily: 'Poppins',
-        //             fontSize: 14.0,
-        //           ),
-        //         );
-        //       },
-        //     ),
-        //   ),
-        // ),
+
         Align(alignment: Alignment.center, child: HappinessMap()),
       ],
     ));

@@ -1,6 +1,7 @@
 import 'package:SmileApp/apis/models/globalprogressmodel.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/personalprogressmodel.dart';
+import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
 import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
@@ -14,6 +15,7 @@ import 'package:SmileApp/statemanagement/notifiers/chatnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/readtribemessagenotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/tribeempathyrequestnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/tribemessagenotifier.dart';
+import 'package:SmileApp/statemanagement/notifiers/userprofileNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
@@ -90,5 +92,6 @@ final SmileGameNofitier smileGameNofitier = SmileGameNofitier(value: SmileGameVa
     targetHorrizontalposition: TargetObjectHorrizontalInitializer,
     movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance));
 
+final UserProfileNotifier userProfileNotifier = UserProfileNotifier(value: UserProfile());
 
 
