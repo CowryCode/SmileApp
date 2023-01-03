@@ -1,6 +1,5 @@
 import 'package:SmileApp/apis/models/triberequest.dart';
 import 'package:SmileApp/apis/network.dart';
-import 'package:SmileApp/config/custom_design.dart';
 import 'package:dart_sentiment/dart_sentiment.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -63,7 +62,13 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                        // '${widget.leader.name}',
                         '${widget.msg.content}',
                         textAlign: TextAlign.left,
-                        style: CustomeStyling().customContenttext(),
+                       // style: CustomeStyling().customContenttext(),
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black45,
+                      ),
                       ),
                     SizedBox(height: 10,),
                     //TODO: Color this button

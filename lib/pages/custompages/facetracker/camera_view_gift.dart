@@ -156,13 +156,12 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     //           _showRatingAlert(context, justreadmessage: widget.readmessage),
     //     )) ??
     //     false;
-    return _openRatingDialog() ?? false;
+    return _openRatingDialog(ratingOnly: widget.readmessage) ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
     // WidgetsBinding.instance.addPostFrameCallback((_)=> refreshCamera());
-
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -177,7 +176,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               //   builder: (context) => _showRatingAlert(context,
               //       justreadmessage: widget.readmessage),
               // );
-              _openRatingDialog();
+              _openRatingDialog(ratingOnly: widget.readmessage);
             },
           ),
           backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -221,28 +220,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                                 primary:
                                     Theme.of(context).colorScheme.secondary),
                             child: const Text(
-                              'Refresh',
+                              'Refresh Camera',
                             ),
                             onPressed: () {
                               refreshCamera(); // Refresh
-                            },
-                          )
-                        : SizedBox(
-                            height: 1,
-                          ),
-                    SizedBox(
-                      width: 3,
-                    ),
-                    (value == false)
-                        ? ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary:
-                                    Theme.of(context).colorScheme.secondary),
-                            child: const Text(
-                              'Done',
-                            ),
-                            onPressed: () {
-                              _openRatingDialog();
                             },
                           )
                         : SizedBox(
@@ -263,7 +244,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   Future _startLiveFeed() async {
-    print('STARTING LIVE FEED :::::::::::::');
     final camera = cameras[_cameraIndex];
     _controller = CameraController(
       camera,
@@ -271,9 +251,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       enableAudio: false,
     );
     _controller?.initialize().then((_) {
-      print('STARTING LIVE FEED_B :::::::::::::');
       if (!mounted) {
-        print('STARTING LIVE FEED_C :::::::::::::');
         return;
       }
       _controller?.getMinZoomLevel().then((value) {
@@ -346,21 +324,16 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     if (_controller != null) {
       if (_controller?.value != null) {
         if (_controller?.value.isInitialized == false) {
-          print("CONTROLLER  VALUE IS NOT INITIALIZED");
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
           );
         }
       } else {
-        print("CONTROLLER VALUE IS NOT NULL");
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.6,
         );
       }
     } else {
-      print("CONTROLLER IS NULL");
-      print("CONTROLLER IS NULL 1");
-
       return SizedBox(
         height: MediaQuery.of(context).size.height * 0.6,
       );
@@ -657,14 +630,15 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
 
-  _openRatingDialog() {
+  _openRatingDialog({required bool ratingOnly}) {
+    smileAppValueNotifier.updateSoundDeactivation(deactivateSound: true);
     showDialog(
         context: context,
         builder: (context) => Dialog(
           child: RatingView(
+            ratingonly: ratingOnly,
             onExit: (response){
-              print('CLICKED ON EXIT OOOO');
-
+              smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
               MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
               mood.captureMood(
                   rating: response.userrating.round(),
@@ -684,7 +658,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               Navigator.of(context).popAndPushNamed('/home');
             },
             onContinue: (){
-              print('CLICKED ON CONTINUE');
+              smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
               Navigator.pop(context);
             },
           ),

@@ -167,9 +167,10 @@ class _ChatWidgetState extends State<ChatWidget> {
                         _myListKey.currentState!.insertItem(0);
                       });
                      if(myController.text.isNotEmpty) ApiAccess().sendChat(chat: myController.text.trim());
-                      Timer(Duration(milliseconds: 100), () {
-                        myController.clear();
-                      });
+                      myController.clear();
+                      // Timer(Duration(milliseconds: 100), () {
+                      //   myController.clear();
+                      // });
                     },
                     icon: Icon(
                       Icons.send,
@@ -358,8 +359,14 @@ class _ChatWidgetState extends State<ChatWidget> {
         context: context,
         builder: (context) => Dialog(
           child: RatingView(
-            onExit: (respomse){
-              print('CLICKED ON EXIT OOOO');
+            onExit: (response){
+              MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+              mood.captureMood(
+                  rating: response.userrating,
+                  smileduration: 0.0,
+                  countrycount: 0
+              );
+              ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
               dispose();
               Navigator.of(context).popAndPushNamed('/home');
             },

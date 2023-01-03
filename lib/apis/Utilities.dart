@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Utilities{
   final String AppName = "SmileApp";
   final String Provider_App_Name = "Provider App";
@@ -6,13 +8,17 @@ class Utilities{
   // GET DATE AND TIME FROM DEVICE
   String getDateFromDevice() {
     DateTime now = DateTime.now();
-    String date = "${now.year}-${now.month}-${now.day}";
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String date = formatter.format(now);
+    //String date = "${now.year}-${now.month}-${now.day}";
     return date;
   }
 
   String getTimeFromDevice() {
     DateTime now = DateTime.now();
-    String time = "${now.hour}:${now.minute}:00";
+    var formatter = new DateFormat.Hms();
+    String time = formatter.format(now);
+    //String time = "${now.hour}:${now.minute}:00";
     return time;
   }
 

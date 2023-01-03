@@ -216,6 +216,12 @@ class ApiAccess {
   }
 
   void saveMood({required MoodModel moodModel, required String url}) async {
+
+    print('THE URL CALLED $url');
+    print('START DATE ${moodModel.startDate}');
+    print('END DATE ${moodModel.endDate}');
+    print('START TIME ${moodModel.startTime}');
+    print('END TIME ${moodModel.endTime}');
     if(moodModel.startMood == null || moodModel.endMood == null) return;
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
@@ -494,14 +500,7 @@ class ApiAccess {
     );
 
     if (response.statusCode == 200) {
-      print('LOCAL TIME START : ${DateTime.now()}');
-      Timer _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-        print('LOCAL TIME WITHIN : ${DateTime.now()}');
-        chatcentralnotifier.updateComment(chat: response.body, isbot: true, isPlaceholder: false);
-        timer.cancel();
-      });
-      print('LOCAL TIME END : ${DateTime.now()}');
-
+      chatcentralnotifier.updateComment(chat: response.body, isbot: true, isPlaceholder: false);
       return true;
     } else {
       return null;

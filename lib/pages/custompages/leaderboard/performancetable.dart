@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:SmileApp/apis/Utilities.dart';
-import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

@@ -3,7 +3,6 @@ import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
-import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
@@ -42,14 +41,11 @@ class _HomeState extends State<Home> {
 
     WidgetsBinding.instance.addPostFrameCallback((_)  async{
       if(widget.checkEmotion == true){
-      //show Rating dialog
-        showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
-          builder: (context) => _showRatingAlert(context),
-        );
-       // show Rating dialog
-       //    showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
-       //      builder: (context) => Dialog( child: RatingView(ratingonly: true),),
-       //    );
+        // showDialog(context: context, barrierDismissible: true, // set to false if you want to force a rating
+        //  builder: (context) => _showRatingAlert(context),
+        // );
+        _openRatingDialog(ratingOnly: true);
+
        }
       await Firebase.initializeApp();
       await FirebaseMessaging.instance.getToken().then((token){
@@ -223,7 +219,13 @@ class _HomeState extends State<Home> {
                   builder: (BuildContext context) => AlertDialog(
                     title: const Text('Pocket Buddy'),
                     content: Text('Do you want to chat with the AI bot ?',
-                      style: CustomeStyling().customContenttext(),
+                      //style: CustomeStyling().customContenttext(),
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black45,
+                      ),
                     ),
                     actions: <Widget>[
                       TextButton(
@@ -355,32 +357,6 @@ class _HomeState extends State<Home> {
                     );
                   }
               ),
-            MaterialButton(
-              child: Text('NEW ALERT'),
-                onPressed: (){
-                  print('CLICK 111');
-                   _openRatingDialog(context);
-                }
-            ),
-
-            MaterialButton(
-                child: Text('Old ALERT'),
-                onPressed: (){
-                  print('CLICK 111');
-                  _showAlert(context: context, message: "Test alert message", msgID: 1);
-                 // _openRatingDialog(context);
-                }
-            ),
-
-            MaterialButton(
-                child: Text('UPDATED ALERT'),
-                onPressed: (){
-                  print('CLICK 111');
-                  _showUpdatedAlert(context: context, message: "Test alert message", msgID: 1);
-                  // _openRatingDialog(context);
-                }
-            ),
-
             SmileGame(),
 
             ],),
@@ -472,14 +448,7 @@ class _HomeState extends State<Home> {
       starSize: 30.0,
       initialRating: 0.0,
       // your app's name?
-      title: Text(
-        'Rate Your Mood',
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      title: Text('Rate Your Mood', textAlign: TextAlign.center, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold,),),
       message: Text(
         'How happy do you feel now?',
         textAlign: TextAlign.center,
@@ -525,7 +494,6 @@ class _HomeState extends State<Home> {
             onPressed: (){
               messageNotifier.update(message: "", index: 0);
               smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-            //  GiftVariableObject giftobject = GiftVariableObject(id:msgID, msg: message, readmessage: true);
               Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(id:msgID, msg: message, readmessage: true));
             },
             child: const Text('Continue'),
@@ -535,26 +503,22 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _openRatingDialog(BuildContext context) {
+
+  _openRatingDialog({required bool ratingOnly}) {
     showDialog(
         context: context,
         builder: (context) => Dialog(
-            child: RatingView(
-              onExit: (response){},
-              onContinue: (){},
-            ),
-          )
-       );
-  }
-
-
-  _showUpdatedAlert({required BuildContext context, required String message, required int msgID}){
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => Dialog(
           child: RatingView(
-            onExit: (response){},
-            onContinue: (){},
+            ratingonly: ratingOnly,
+            onExit: (response){
+              Navigator.of(context).popAndPushNamed('/home',);
+              print('rating: , comment: ${response.userrating}');
+              MoodModel mood = MoodModel();
+              mood.initializeMood(rating: response.userrating.round());
+              smileAppValueNotifier.initializeMoodNotifier(mood: mood);
+            },
+            onContinue: (){
+            },
           ),
         )
     );

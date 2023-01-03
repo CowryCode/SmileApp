@@ -1,8 +1,8 @@
-import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
+
 
 
 
@@ -58,14 +58,14 @@ class _TribePageWidgetState extends State<TribePageWidget> {
                       child: Text(
                         'Message from Someone in Australia ${widget.leader.name}',
                         textAlign: TextAlign.left,
-                        style: CustomeStyling().customContenttext(),
+                       // style: CustomeStyling().customContenttext(),
 
-                        // TextStyle(
-                        //   fontFamily: 'Poppins',
-                        //   fontSize: 12.0,
-                        //   fontWeight: FontWeight.bold,
-                        //   color: Colors.black45,
-                        // ),
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black45,
+                        ),
                       ),
                     ),
                     //TODO: Color this button
