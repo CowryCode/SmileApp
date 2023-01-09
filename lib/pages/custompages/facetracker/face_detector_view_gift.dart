@@ -101,11 +101,14 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
             if(messageNotifier.value.index < _tokenArrayLength! ){
               if (prob! > 0.5) {
                 smileGameNofitier.moveObject(smilesize: prob, isSmileGram: false);
-                _msg = messageNotifier.value.msg + " " + _tokenArray![messageNotifier.value.index];
-                (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? _msg = _msg + " *** End" : _msg = _msg;
-                (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? ApiAccess().readTribeMessage(messageID: widget.giftVariableObject.id!):"";
-                int updatedTokenIndex = messageNotifier.value.index + 1;
-                messageNotifier.update(message: _msg, index: updatedTokenIndex);
+                // This condition is to make the image drop gradually
+                if(smileGameNofitier.getSmileDurationCounter() % 3 == 0 ){
+                  _msg = messageNotifier.value.msg + " " + _tokenArray![messageNotifier.value.index];
+                  (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? _msg = _msg + " *** End" : _msg = _msg;
+                  (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? ApiAccess().readTribeMessage(messageID: widget.giftVariableObject.id!):"";
+                  int updatedTokenIndex = messageNotifier.value.index + 1;
+                  messageNotifier.update(message: _msg, index: updatedTokenIndex);
+                }
               }else{
                 if(!soundAllowed){
                   if(activateSpeech){

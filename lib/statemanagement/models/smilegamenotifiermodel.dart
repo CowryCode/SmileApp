@@ -81,9 +81,11 @@ class SmileGameVariables {
     return double.parse((smileDurationCounter/4.5).toStringAsFixed(2));
   }
 
-  double getSmileDurationCounter(){
-    return double.parse((smileDurationCounter).toStringAsFixed(2));
+  int getSmileDurationCounter(){
+   // return double.parse((smileDurationCounter).toStringAsFixed(2));
+    return smileDurationCounter;
   }
+
   int getSmileNumberofCountriesPainted(){
     return numberOfStarMeetings;
   }

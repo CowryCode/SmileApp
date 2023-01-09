@@ -371,7 +371,6 @@ class _ChatWidgetState extends State<ChatWidget> {
               Navigator.of(context).popAndPushNamed('/home');
             },
             onContinue: (){
-              print('CLICKED ON CONTINUE');
               Navigator.pop(context);
             },
           ),

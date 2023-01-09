@@ -357,7 +357,7 @@ class _HomeState extends State<Home> {
                     );
                   }
               ),
-            SmileGame(),
+           // SmileGame(),
 
             ],),
         ),

@@ -32,7 +32,8 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
   double getSmileDurationInSecound() {
     return value.getSmileDurationInSeconds();
   }
-  double getSmileDurationCounter(){
+
+  int getSmileDurationCounter(){
     return value.getSmileDurationCounter();
   }
 

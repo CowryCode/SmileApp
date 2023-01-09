@@ -1,10 +1,15 @@
 import 'package:SmileApp/apis/models/triberequest.dart';
 import 'package:SmileApp/apis/network.dart';
+import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
+import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:dart_sentiment/dart_sentiment.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
 import 'package:rating_dialog/rating_dialog.dart';
+
+import '../../apis/models/moodmodel.dart';
 
 
 
@@ -118,11 +123,12 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                       double sentimentScore = sentiment.analysis(textEditingController.value.text).entries.elementAt(1).value;
                       if(sentimentScore > 0){
                         ApiAccess().replyTribeCall(tribeRequest: widget.msg, reply: textEditingController.value.text);
-                        showDialog(
-                          context: context,
-                          barrierDismissible: true, // set to false if you want to force a rating
-                          builder: (context) => _showRatingAlert(context, justreadmessage: true),
-                        );
+                        // showDialog(
+                        //   context: context,
+                        //   barrierDismissible: true, // set to false if you want to force a rating
+                        //   builder: (context) => _showRatingAlert(context, justreadmessage: true),
+                        // );
+                        _openRatingDialog(ratingOnly: true);
                       }else {
                         showDialog<String>(
                           context: context,
@@ -171,7 +177,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
     );
   }
 
-  RatingDialog _showRatingAlert(BuildContext context, {required bool justreadmessage}){
+  RatingDialog _showRatingAlert_1(BuildContext context, {required bool justreadmessage}){
     return RatingDialog(
       showCloseButton: false,
       initialRating: 0.0,
@@ -207,4 +213,35 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
       ),
     );
   }
+
+
+  _openRatingDialog({required bool ratingOnly}) {
+    smileAppValueNotifier.updateSoundDeactivation(deactivateSound: true);
+    showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: RatingView(
+            ratingonly: ratingOnly,
+            msg: "How good do you feel now for making another person smile?",
+            onExit: (response){
+              smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
+              MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+              mood.captureMood(
+                  rating: response.userrating.round(),
+                  smileduration: smileGameNofitier.getSmileDurationInSecound(),
+                  countrycount: smileGameNofitier.getNumberofCountriesPainted());
+
+              ApiAccess().saveMood(moodModel: mood, url: Tribe_Mood_URL);
+
+              Navigator.of(context).popAndPushNamed('/home');
+            },
+            onContinue: (){
+              smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
+              Navigator.pop(context);
+            },
+          ),
+        )
+    );
+  }
+
 }

@@ -17,11 +17,13 @@ import 'package:wakelock/wakelock.dart';
 class RatingView extends StatefulWidget {
   final bool readmessage ;
   final bool ratingonly;
+  final String? msg;
   // const RatingView({Key? key, this.readmessage = false, this.ratingonly = false, }) : super(key: key); // Stable version 29-12-2022
   const RatingView({
     Key? key,
     this.readmessage = false,
     this.ratingonly = false,
+    this.msg,
     required this.onContinue,
     required this.onExit,
   });
@@ -45,6 +47,7 @@ class _RatingViewState extends State<RatingView> {
   RatingController _ratingcontroller = RatingController();
 
   String fact = SmileFactsModel().modelsDictionary();
+
 
   void _onChanged({required double value}) {
     if (_rating == value) return;
@@ -140,7 +143,7 @@ class _RatingViewState extends State<RatingView> {
               controller: _ratingPageController,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                _userRating(),
+                _userRating(msg: widget.msg),
                 _userRatingMessage(funcFact: fact),
               ],
             ),
@@ -252,7 +255,7 @@ class _RatingViewState extends State<RatingView> {
     // );
   }
 
-  _userRating() {
+  _userRating({String? msg}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -263,7 +266,7 @@ class _RatingViewState extends State<RatingView> {
           textAlign: TextAlign.center,
         ),
         Text(
-          'Let us know how you feel after using this feature.',
+         (msg == null) ? 'Let us know how you feel after using this feature.' : msg,
           style: TextStyle(color: Colors.black45),
           textAlign: TextAlign.center,
         ),

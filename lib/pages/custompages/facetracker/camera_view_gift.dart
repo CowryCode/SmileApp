@@ -76,7 +76,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   late int _tokenArrayLength;
 
-  final Duration timerTastoPremuto = Duration(seconds: 20);
+  //final Duration timerTastoPremuto_ = Duration(seconds: 20);
 
   // VARIABLES FOR THE MAP
   late MapShapeSource sublayerDataSource;
@@ -338,8 +338,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         height: MediaQuery.of(context).size.height * 0.6,
       );
     }
-    print("Built Completely ::::::");
-
     final size = MediaQuery.of(context).size;
     /* calculate scale depending on screen and camera ratios
      this is actually size.aspectRatio / (1 / camera.aspectRatio)

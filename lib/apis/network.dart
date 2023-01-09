@@ -53,6 +53,8 @@ class ApiAccess {
 
 
   Future<UserProfile> login({required String logincode}) async {
+    print('LOGIN GOT HERE 1');
+    print('URL IS : $getProfile_URL');
     try {
       final response = await http.get(Uri.parse(getProfile_URL),
         headers: <String, String>{
@@ -64,6 +66,7 @@ class ApiAccess {
       );
 
       if (response.statusCode == 200) {
+        print('LOGIN GOT HERE 2');
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
         // UPDATE USERPROFILE NOTIFIER
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
@@ -95,6 +98,7 @@ class ApiAccess {
         Localstorage().saveBoolean(key_login_status, true);
         return profile;
       } else {
+        print('LOGIN GOT HERE 3');
          throw Exception("`Couldn't pull the profile ");
       }
     } catch (e) {
@@ -217,11 +221,6 @@ class ApiAccess {
 
   void saveMood({required MoodModel moodModel, required String url}) async {
 
-    print('THE URL CALLED $url');
-    print('START DATE ${moodModel.startDate}');
-    print('END DATE ${moodModel.endDate}');
-    print('START TIME ${moodModel.startTime}');
-    print('END TIME ${moodModel.endTime}');
     if(moodModel.startMood == null || moodModel.endMood == null) return;
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
@@ -485,17 +484,34 @@ class ApiAccess {
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});
 
+    // final response = await http.post(
+    //   Uri.parse(CHAT_URL),
+    //   headers: <String, String>{
+    //     'Content-Type': 'application/json; charset=UTF-8',
+    //     'Accept': 'application/json',
+    //     'Origin': '$MobileURL',
+    //     'Authorization': 'Bearer $token'
+    //   },
+    //   body: jsonEncode(
+    //       <String, dynamic>{
+    //         "value" : chat,
+    //       }),
+    // );
+
     final response = await http.post(
-      Uri.parse(CHAT_URL),
+      Uri.parse("https://api.openai.com/v1/completions"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
         'Origin': '$MobileURL',
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer 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'
       },
       body: jsonEncode(
           <String, dynamic>{
-            "value" : chat,
+            "model" : "text-davinci-003",
+            "prompt" : chat,
+            "max_tokens" : 1000,
+            "temperature" : 1.0,
           }),
     );
 
