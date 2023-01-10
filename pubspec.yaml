@@ -12,7 +12,7 @@ description: SmileApp
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   #sdk: ">=2.2.0 <3.0.0"
@@ -58,15 +58,27 @@ dependencies:
   flutter_launcher_icons: "^0.10.0"
   flare_flutter: ^3.0.2
   email_validator: ^2.1.16
+  #SLASH SCREEN
+  flutter_native_splash: ^2.2.5
+
 flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/logo1.jpeg"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
+flutter_native_splash:
+  #  color: "#2087c8"
+  #  image: assets/images/launcher_img.png
+  color: "#ffffff"
+  image: assets/logo1.PNG
+  android: true
+  ios: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 
 
