@@ -28,7 +28,7 @@ class _SettingState extends State<Setting> {
           child: Column(
             children: <Widget>[
               Container(
-                height: 280.0,
+                height: 180.0,
                 padding:EdgeInsets.all(12.0),
                 margin:EdgeInsets.only(top: 40.0,left: 12.0,right: 12.0),
                 decoration: BoxDecoration(
@@ -52,11 +52,10 @@ class _SettingState extends State<Setting> {
                           //ball("images/imageuser.png", Colors.transparent),
                           Column(
                             children: <Widget>[
-                              Text("John Doe",style:TextStyle(color:Theme.of(context).primaryColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
-                              Text("+12345678",style:TextStyle(color:Theme.of(context).primaryColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
+                              Text("SmileGram",style:TextStyle(color:Theme.of(context).primaryColor,fontFamily: 'Poppins', fontSize:30, fontWeight: FontWeight.bold),),
                             ],
                           ),
-                          Text("25%",style:TextStyle(color:Theme.of(context).primaryColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
+                          Text("Kindly complete your daily tracker to help us improve the SmileApp",style:TextStyle(color:Theme.of(context).primaryColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
                           Row(
                             children: <Widget>[
                               Container(
@@ -79,35 +78,7 @@ class _SettingState extends State<Setting> {
                               ),
                             ],
                           ),
-                          Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 2,color: Theme.of(context).primaryColor),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: RaisedButton(
-                              color: Theme.of(context).colorScheme.secondary,
-                              onPressed: (){
-                                Navigator.of(context).pushNamed('/completeprofile');
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child: Container(
-                                child:  Center(
-                                  child:Text(
-                                    'Complete your profile',
-                                    style:  TextStyle(
-                                      fontSize: 10.0,
-                                      color: Theme.of(context).primaryColor,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              ),
-                            ),
+
                         ],
                       ),
                     ),
@@ -129,12 +100,12 @@ class _SettingState extends State<Setting> {
                 ),
                 child: Column(
                   children: <Widget>[
-                    _dropDownListe(Icon(Icons.bubble_chart,color: Theme.of(context).colorScheme.secondary,),'Questionnaire',1,'/questionnaire',context),
-                    _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).colorScheme.secondary,),'Appointments',1,'/appointment',context),
-                    _dropDownListe(Icon(Icons.card_giftcard,color: Theme.of(context).colorScheme.secondary,),'Health Tips',1,'/health',context),
-                    _dropDownListe(Icon(Icons.local_offer,color: Theme.of(context).colorScheme.secondary,),'Services',1,'/services',context),
-                    _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Support',1,'',context),
-                    _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Payment Methods',1,'',context),
+                    _dropDownListe(Icon(Icons.bubble_chart,color: Theme.of(context).colorScheme.secondary,),'Daily Questionnaire',1,'/questionnaire',context),
+                    // _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).colorScheme.secondary,),'Appointments',1,'/appointment',context),
+                    // _dropDownListe(Icon(Icons.card_giftcard,color: Theme.of(context).colorScheme.secondary,),'Health Tips',1,'/health',context),
+                    // _dropDownListe(Icon(Icons.local_offer,color: Theme.of(context).colorScheme.secondary,),'Services',1,'/services',context),
+                    // _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Support',1,'',context),
+                    // _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Payment Methods',1,'',context),
                     _dropDownListe(Icon(Icons.arrow_upward,color: Theme.of(context).colorScheme.secondary,),'Logout',0,'/',context, logout: true),
                   ],
                 ),

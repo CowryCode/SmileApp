@@ -40,13 +40,6 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 
   Future<bool> _onWillPop() async {
-    // return (await showDialog(
-    //   context: context,
-    //   barrierDismissible: true,
-    //   // set to false if you want to force a rating
-    //   builder: (context) => _showRatingAlert(context),
-    // )) ?? false;
-
     return _openRatingDialog() ?? false;
   }
 
@@ -107,15 +100,6 @@ class _ChatWidgetState extends State<ChatWidget> {
             //       }),
             // ),
             Expanded(
-              //Todo Socket integretion
-              // child: StreamBuilder(
-              //   stream: _channel.stream,
-              //   builder: (context, snapshot){
-              //    // print('API RESPONSE : ${snapshot.data}');
-              //     print('API RESPONSE : ${snapshot.requireData}');
-              //     chatcentralnotifier.updateComment(chat: '${snapshot.data}', isbot: true);
-              //     return
-              //
                   child:  ValueListenableBuilder(
                       valueListenable: chatcentralnotifier,
                       builder: (context, List<BuddyChat> value, child) {

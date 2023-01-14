@@ -39,8 +39,8 @@ class _TribeMessageListState extends State<TribeMessageList> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color:Theme.of(context).primaryColor ),
           onPressed: (){
-            // Navigator.of(context).pushNamed('/home', arguments:[currentUser.name,currentUser.phoneNumber]);
-            Navigator.of(context).pop();
+             Navigator.of(context).pushNamed('/home', arguments:["currentUser.name","currentUser.phoneNumber"]);
+           // Navigator.of(context).pop();
           },
         ),
         backgroundColor: Theme.of(context).accentColor,

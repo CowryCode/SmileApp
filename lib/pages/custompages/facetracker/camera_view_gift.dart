@@ -169,13 +169,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
             onPressed: () {
-              // showDialog(
-              //   context: context,
-              //   barrierDismissible: true,
-              //   // set to false if you want to force a rating
-              //   builder: (context) => _showRatingAlert(context,
-              //       justreadmessage: widget.readmessage),
-              // );
               _openRatingDialog(ratingOnly: widget.readmessage);
             },
           ),
@@ -183,8 +176,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           title: Text(widget.title),
         ),
         body: _body(),
-        // floatingActionButton: _floatingActionButton(), // I removed the floating button
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, // I removed the floating Button
       ),
     );
   }
@@ -210,11 +201,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             // valueListenable: counterNotifier,
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
-              if (value == false && !widget.readmessage) {
+             // if (value == false && !widget.readmessage) {
+              if (value == false) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    (value == false && !widget.readmessage)
+                    //(value == false && !widget.readmessage)
+                    (value == false)
                         ? ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 primary:
@@ -268,8 +261,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   Future _stopLiveFeed() async {
     //ORIGINAL
-    await _controller?.stopImageStream();
-    await _controller?.dispose();
+    // await _controller?.stopImageStream();
+    // await _controller?.dispose();
+    await _controller!.stopImageStream();
+    await _controller!.dispose();
     _controller = null;
 
     // await _controller?.stopImageStream();
@@ -642,16 +637,16 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   rating: response.userrating.round(),
                   smileduration: smileGameNofitier.getSmileDurationInSecound(),
                   countrycount: smileGameNofitier.getNumberofCountriesPainted());
-
-              ApiAccess().saveMood(
-                  moodModel: mood,
-                  url: (widget.readmessage == true)
-                      ? Tribe_Mood_URL
-                      : SmileGram_Mood_URL);
-              Navigator.of(context).popAndPushNamed(
-                '/home',
-              );
-
+              if(mood.smileduration! > 0){
+                ApiAccess().saveMood(
+                    moodModel: mood,
+                    url: (widget.readmessage == true)
+                        ? Tribe_Mood_URL
+                        : SmileGram_Mood_URL);
+                Navigator.of(context).popAndPushNamed(
+                  '/home',
+                );
+              }
               dispose();
               Navigator.of(context).popAndPushNamed('/home');
             },
