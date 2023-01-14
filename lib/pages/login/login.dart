@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:email_validator/email_validator.dart';
@@ -27,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
       return Scaffold(
         backgroundColor: Color(0xeeffffff),
         // appBar: AppBar(
@@ -80,7 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                height: 180.0,
+               // height: 180.0,
+                height: 220.0,
                 margin: EdgeInsets.only(top:12.0,right:12.0,left:12.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
@@ -88,56 +92,110 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: Column(
                   children:[
+                    // Form(
+                    //   key: _formKey,
+                    //   child: Row(
+                    //     children: <Widget>[
+                    //       Expanded(
+                    //         child: Container(
+                    //           height: 40.0,
+                    //           margin: EdgeInsets.only(top: 20.0 ,left: 12.0,right: 12.0),
+                    //           decoration: BoxDecoration(
+                    //             border: Border.all(width: 1.0,color: Color(0xdddddddd)),
+                    //             borderRadius: BorderRadius.circular(12.0),
+                    //           ),
+                    //           child:Center(
+                    //             child: FormBuilderTextField(
+                    //               name: 'useid',
+                    //               controller: textEditingController,
+                    //               validator: FormBuilderValidators.compose([
+                    //                 FormBuilderValidators.required(
+                    //                     errorText: "Please enter a valid email."),
+                    //                 FormBuilderValidators.email(),
+                    //                 FormBuilderValidators.min(0),
+                    //               ]),
+                    //               autovalidateMode: AutovalidateMode.onUserInteraction,
+                    //               keyboardType: TextInputType.emailAddress,
+                    //               decoration: InputDecoration(
+                    //                 contentPadding: EdgeInsets.only(top: 6,left:12,right: 12),
+                    //                 border: InputBorder.none,
+                    //                 suffixIcon:Icon(Icons.verified_user),
+                    //                 // prefixText: "",
+                    //                 prefixStyle: TextStyle(
+                    //                     color: Colors.black
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     Form(
                       key: _formKey,
                       child: Row(
                         children: <Widget>[
                           Expanded(
-                            child: Container(
-                              height: 40.0,
-                              margin: EdgeInsets.only(top: 20.0 ,left: 12.0,right: 12.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 1.0,color: Color(0xdddddddd)),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child:Center(
-                                child: FormBuilderTextField(
-                                //  initialValue: "",
-                                  name: 'useid',
-                                 // autovalidateMode: AutovalidateMode.always,
-                                  controller: textEditingController,
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(
-                                        errorText: "Please enter a valid email."),
-                                    FormBuilderValidators.email(),
-                                    FormBuilderValidators.min(0),
-                                  ]),
-                                  autovalidateMode: AutovalidateMode.onUserInteraction,
-
-                                  // validator: (textValue) {
-                                  //   if(textValue == null || textValue.isEmpty) {
-                                  //     return 'Email is required!';
-                                  //   }
-                                  //   if(!EmailValidator.validate(textValue)) {
-                                  //     return 'Please enter a valid email';
-                                  //   }
-                                  //  // controllerEmail.text = textValue;
-                                  //   return null;
-                                  // },
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.only(top: 6,left:12,right: 12),
-                                    border: InputBorder.none,
-                                    suffixIcon:Icon(Icons.verified_user),
-                                    // prefixText: "",
-                                    prefixStyle: TextStyle(
-                                        color: Colors.black
-                                    ),
+                              child: FormBuilderTextField(
+                                name: 'useid',
+                                controller: textEditingController,
+                                validator: FormBuilderValidators.compose([
+                                  FormBuilderValidators.required(
+                                      errorText: "Please enter a valid email."),
+                                  FormBuilderValidators.email(),
+                                  FormBuilderValidators.min(0),
+                                ]),
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(top: 16,left:12,right: 12),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(12.0))
+                                  ),
+                                 // border: InputBorder.none,
+                                  suffixIcon:Icon(Icons.verified_user),
+                                  // prefixText: "",
+                                  prefixStyle: TextStyle(
+                                      color: Colors.black
                                   ),
                                 ),
                               ),
-                            ),
                           ),
+
+                          // Expanded(
+                          //   child: Container(
+                          //     height: 40.0,
+                          //     margin: EdgeInsets.only(top: 20.0 ,left: 12.0,right: 12.0),
+                          //     decoration: BoxDecoration(
+                          //       border: Border.all(width: 1.0,color: Color(0xdddddddd)),
+                          //       borderRadius: BorderRadius.circular(12.0),
+                          //     ),
+                          //     child:Center(
+                          //       child: FormBuilderTextField(
+                          //         name: 'useid',
+                          //         controller: textEditingController,
+                          //         validator: FormBuilderValidators.compose([
+                          //           FormBuilderValidators.required(
+                          //               errorText: "Please enter a valid email."),
+                          //           FormBuilderValidators.email(),
+                          //           FormBuilderValidators.min(0),
+                          //         ]),
+                          //         autovalidateMode: AutovalidateMode.onUserInteraction,
+                          //         keyboardType: TextInputType.emailAddress,
+                          //         decoration: InputDecoration(
+                          //           contentPadding: EdgeInsets.only(top: 6,left:12,right: 12),
+                          //           border: InputBorder.none,
+                          //           suffixIcon:Icon(Icons.verified_user),
+                          //           // prefixText: "",
+                          //           prefixStyle: TextStyle(
+                          //               color: Colors.black
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
