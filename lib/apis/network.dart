@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'package:SmileApp/apis/diskstorage.dart';
+import 'package:SmileApp/apis/models/chatbotPodo.dart';
 import 'package:SmileApp/apis/models/globalprogressmodel.dart';
 import 'package:SmileApp/apis/models/leaderboard.dart';
 import 'package:SmileApp/apis/models/moodmodel.dart';
@@ -13,6 +14,7 @@ import 'package:SmileApp/apis/models/unreadtribemessages.dart';
 import 'package:SmileApp/apis/models/unrepliedtribecalls.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/apis/secret.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:http/http.dart' as http;
 
@@ -482,7 +484,6 @@ class ApiAccess {
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});
-
     // final response = await http.post(
     //   Uri.parse(CHAT_URL),
     //   headers: <String, String>{
@@ -497,13 +498,12 @@ class ApiAccess {
     //       }),
     // );
 
-    final response = await http.post(
-      Uri.parse("https://api.openai.com/v1/completions"),
+    final response = await http.post(Uri.parse("$chaturl"),
+   // final response = await http.post(Uri.parse("https://api.openai.com/v1/completions"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
-        'Origin': '$MobileURL',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer $chatapi'
       },
       body: jsonEncode(
           <String, dynamic>{
@@ -515,7 +515,10 @@ class ApiAccess {
     );
 
     if (response.statusCode == 200) {
-      chatcentralnotifier.updateComment(chat: response.body, isbot: true, isPlaceholder: false);
+      chatbotPODO botmessage = chatbotPODO.fromJson(jsonDecode(response.body));
+     //chatcentralnotifier.updateComment(chat: response.body, isbot: true, isPlaceholder: false);
+      String chat = botmessage.choices![0].text!.trim();
+      chatcentralnotifier.updateComment(chat: '$chat', isbot: true, isPlaceholder: false);
       return true;
     } else {
       return null;

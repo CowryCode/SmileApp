@@ -21,9 +21,9 @@ class ChatWidget extends StatefulWidget {
 
 class _ChatWidgetState extends State<ChatWidget> {
   //ConversationList _conversationList = new ConversationList();
-  BuddyConversationList _buddyconversationList = new BuddyConversationList();
-  User _currentUser = new User.init().getCurrentUser();
-  Doctor _currentDoctor = new Doctor.init().getCurrentDoctor();
+  //BuddyConversationList _buddyconversationList = new BuddyConversationList();
+  //User _currentUser = new User.init().getCurrentUser();
+  //Doctor _currentDoctor = new Doctor.init().getCurrentDoctor();
   final _myListKey = GlobalKey<AnimatedListState>();
   final myController = TextEditingController();
 
@@ -70,7 +70,7 @@ class _ChatWidgetState extends State<ChatWidget> {
             ),
             backgroundColor: Theme.of(context).accentColor,
             title: Text(
-                  "AI Speaks!",
+                  "Your PocketBuddy",
               style: TextStyle(
                 fontSize: 22.0,
                 fontFamily: 'Poppins',

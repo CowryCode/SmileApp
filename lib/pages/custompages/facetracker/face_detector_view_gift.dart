@@ -91,7 +91,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         inputImage.inputImageData?.imageRotation != null) {
 
       for (final face in faces) {
-        print(" SMILE Probability is :  ${face.smilingProbability}");
+       // print(" SMILE Probability is :  ${face.smilingProbability}");
         bool soundAllowed = smileAppValueNotifier.value.deactivetSound.value;
         bool activateSpeech = smileAppValueNotifier.value.activatespeech.value;
         double? prob = face.smilingProbability;
