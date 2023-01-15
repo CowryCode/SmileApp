@@ -638,14 +638,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   smileduration: smileGameNofitier.getSmileDurationInSecound(),
                   countrycount: smileGameNofitier.getNumberofCountriesPainted());
               if(mood.smileduration! > 0){
-                ApiAccess().saveMood(
-                    moodModel: mood,
-                    url: (widget.readmessage == true)
-                        ? Tribe_Mood_URL
-                        : SmileGram_Mood_URL);
-                Navigator.of(context).popAndPushNamed(
-                  '/home',
-                );
+                ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
+                Navigator.of(context).popAndPushNamed('/home',);
               }
               dispose();
               Navigator.of(context).popAndPushNamed('/home');

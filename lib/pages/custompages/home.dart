@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
     super.initState();
     // bool result = await InternetConnectionChecker().hasConnection;
 
-    if (widget.checkEmotion == false) ApiAccess().refreshData();
+   // if (widget.checkEmotion == false) ApiAccess().refreshData();
 
     if(userProfileNotifier.value.name == null ){
 
@@ -51,6 +51,8 @@ class _HomeState extends State<Home> {
       if (result == true) {
         if (widget.checkEmotion == true) {
           _openRatingDialog(ratingOnly: true);
+        }else{
+          ApiAccess().refreshData();
         }
         await Firebase.initializeApp();
         await FirebaseMessaging.instance.getToken().then((token) {
@@ -60,37 +62,6 @@ class _HomeState extends State<Home> {
         _showNetworkAlert(
             context: context,
             message: "It seems your device is not connected to \n the internet. Kindly check and login again.");
-        // showDialog<String>(
-        //   context: context,
-        //   builder: (BuildContext context) => AlertDialog(
-        //     title: Center(
-        //         child: const Icon(
-        //       FontAwesomeIcons.triangleExclamation,
-        //       color: Colors.red,
-        //       size: 26,
-        //     )),
-        //     content: Text(
-        //       'It seems your device is not connected to \n the internet. Kindly connect and login again.',
-        //       style: const TextStyle(
-        //         fontWeight: FontWeight.bold,
-        //         color: Colors.black45,
-        //         fontFamily: 'Poppins',
-        //         fontSize: 18.0,
-        //       ),
-        //       textAlign: TextAlign.center,
-        //     ),
-        //     actions: <Widget>[
-        //       // TextButton( onPressed: () => Navigator.pop(context, 'OK'), child: const Text('OK'),),
-        //       TextButton(
-        //         onPressed: () {
-        //           ApiAccess().Logout();
-        //           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-        //         },
-        //         child: const Text('OK'),
-        //       ),
-        //     ],
-        //   ),
-        // );
       }
     });
   }
@@ -99,12 +70,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
 
     // WidgetsBinding.instance.addPostFrameCallback((_)=> {
-    //   if(userProfileNotifier.value.leaderBoard == null){
-    //     _showNetworkAlert(
-    //         context: context,
-    //         message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
-    //   }
-    // });
+    // if(ApiAccess().hasPayLoad() == false) {
+    //     _showNetworkAlert(context: context,
+    //     message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+    //      }
+    //  });
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -151,7 +121,6 @@ class _HomeState extends State<Home> {
                                     builder:
                                         (context, UserProfile userfile, child) {
                                       return Text(
-                                        //  "Cowrycode",
                                         (userfile.name != null)
                                             ? "${userfile.name}"
                                             : "",
@@ -161,18 +130,12 @@ class _HomeState extends State<Home> {
                                           color: Theme.of(context).primaryColor,
                                         ),
                                       );
-                                    }
-                                    // child: Text(
-                                    //   "Cowrycode",
-                                    //   style: TextStyle(
-                                    //     fontFamily: 'Poppins',
-                                    //     fontSize: 16.0,
-                                    //     color: Theme.of(context).primaryColor,
-                                    //   ),
-                                    // ),
-                                    ),
+                                    }),
                                 IconButton(
                                   onPressed: () {
+                                    (ApiAccess().hasPayLoad() == false) ?
+                                    _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                                        :
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -183,14 +146,6 @@ class _HomeState extends State<Home> {
                                 ),
                               ],
                             ),
-                            // Text(
-                            //   "Cowrycode",
-                            //   style: TextStyle(
-                            //     fontFamily: 'Poppins',
-                            //     fontSize: 16.0,
-                            //     color: Theme.of(context).primaryColor,
-                            //   ),
-                            // ),
                           ],
                         ),
                       ],
@@ -208,6 +163,9 @@ class _HomeState extends State<Home> {
               //SMILE GRAM
               TextButton(
                 onPressed: () {
+                  (ApiAccess().hasPayLoad() == false) ?
+                  _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                  :
                   showDialog<String>(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
@@ -294,7 +252,9 @@ class _HomeState extends State<Home> {
               //POCKET BUDDY
               TextButton(
                 onPressed: () {
-                  // Navigator.of(context).pushNamed('/doctorProfil');
+                  (ApiAccess().hasPayLoad() == false) ?
+                  _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                      :
                   showDialog<String>(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
@@ -377,6 +337,9 @@ class _HomeState extends State<Home> {
               //TRIBE MESSAGES
               TextButton(
                 onPressed: () {
+                  (ApiAccess().hasPayLoad() == false) ?
+                  _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                      :
                   Navigator.of(context).pushNamed('/tribemessages');
                 },
                 child: Container(
@@ -389,10 +352,6 @@ class _HomeState extends State<Home> {
                     border: Border.all(
                         width: 1.0, color: Colors.grey.withOpacity(0.2)),
                     borderRadius: BorderRadius.circular(16.0),
-                    // image: DecorationImage(
-                    //   image:AssetImage('images/custom/smilegram.jpg'),
-                    //   fit: BoxFit.cover,
-                    // ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

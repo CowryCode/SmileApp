@@ -1,15 +1,7 @@
 import 'dart:math';
 
-import 'package:SmileApp/apis/models/moodmodel.dart';
-import 'package:SmileApp/apis/network.dart';
-import 'package:SmileApp/apis/networkUtilities.dart';
-import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/models/smilefactmodel.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/ratingcontroller.dart';
-import 'package:SmileApp/pages/custompages/facetracker/camera_view_gift.dart';
-import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';
-import 'package:SmileApp/pages/custompages/navigationtabs.dart';
-import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:wakelock/wakelock.dart';

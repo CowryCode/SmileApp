@@ -446,7 +446,7 @@ class ApiAccess {
   Future<UnrepliedTribeCalls?> replyTribeCall({required TribeRequest tribeRequest, required String reply}) async {
   //  String? token = "101";
     //TODO: PICK THIS LOCATION AUTOMATICALLY
-    String location = "Lagos Nigeria";
+    String location = "Anonymous";
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});
@@ -563,6 +563,11 @@ class ApiAccess {
     if (response.statusCode == 200) {
      // QuesionnaireBMIScale savedQuestionnaire = QuesionnaireBMIScale.fromJson(jsonDecode(response.body));
     }
+  }
+
+  bool hasPayLoad(){
+   int? payloadTester =  userProfileNotifier.value.todayTargetValue;
+   return payloadTester != null;
   }
 }
 

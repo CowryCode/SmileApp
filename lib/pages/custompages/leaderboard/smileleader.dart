@@ -1,7 +1,9 @@
+import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
 import 'package:SmileApp/pages/custompages/leaderboard/globalperformancetable.dart';
 import 'package:SmileApp/pages/custompages/leaderboard/performancetable.dart';
+import 'package:SmileApp/pages/login/login.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,6 +24,14 @@ class _LeadderBoardState extends State<LeadderBoard> {
   }
   @override
   Widget build(BuildContext context) {
+
+    WidgetsBinding.instance.addPostFrameCallback((_)=> {
+    if(ApiAccess().hasPayLoad() == false) {
+        _showNetworkAlert(context: context,
+        message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+         }
+     });
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -202,5 +212,39 @@ class _LeadderBoardState extends State<LeadderBoard> {
     );
   }
 
+
+  _showNetworkAlert({required BuildContext context, required String message,}) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Center(
+            child: const Icon(
+              FontAwesomeIcons.triangleExclamation,
+              color: Colors.red,
+              size: 26,
+            )),
+        content: Text(
+          '$message',
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black45,
+            fontFamily: 'Poppins',
+            fontSize: 18.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          // TextButton( onPressed: () => Navigator.pop(context, 'OK'), child: const Text('OK'),),
+          TextButton(
+            onPressed: () {
+              ApiAccess().Logout();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
 }

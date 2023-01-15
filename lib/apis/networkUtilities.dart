@@ -1,9 +1,9 @@
 import 'package:SmileApp/models/globemodel.dart';
 
-//final baseURL = "http://smileapp.ca-central-1.elasticbeanstalk.com";
-final baseURL = "http://192.168.4.47:8080";
+final baseURL = "http://smileapp.ca-central-1.elasticbeanstalk.com";
+//final baseURL = "http://192.168.4.47:8080";
 // final baseURL = "http://10.0.2.2:8080";
-final MobileURL = "https://com.cowrycode.healthensuite";
+final MobileURL = "https://com.cowrycode.smileapp";
 
  final SmileGram_Mood_URL = "${baseURL}/smile/smilegram-mood";
  final PocketBuddy_Mood_URL = "${baseURL}/smile/pocketbuddy-mood";

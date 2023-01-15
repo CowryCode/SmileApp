@@ -99,7 +99,7 @@ class ChatMessageListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                  // new Text(currentDoctor.name!, style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),),
-                  new Text('AI Buddy', style: TextStyle(fontFamily: 'Poppins',color: Colors.yellowAccent,fontWeight: FontWeight.bold),),
+                  new Text('Adamma', style: TextStyle(fontFamily: 'Poppins',color: Colors.yellowAccent,fontWeight: FontWeight.bold),),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(chat.text!,  style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).primaryColor),),

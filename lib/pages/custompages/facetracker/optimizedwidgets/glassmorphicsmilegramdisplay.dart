@@ -118,7 +118,7 @@ class _GlassmorphicSmilegramDisplayState
                       Icon(FontAwesomeIcons.solidCircle,color: Colors.black45, size: 12 ,),
                       SizedBox(width: 2,),
                       Text(
-                        " Today'sTarget:  ${userfile.todayTargetValue}",
+                        (userfile.todayTargetValue == null) ? " Today'sTarget:" : " Today'sTarget:  ${userfile.todayTargetValue}",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -130,7 +130,7 @@ class _GlassmorphicSmilegramDisplayState
                       Icon(FontAwesomeIcons.solidCircle,color: Theme.of(context).colorScheme.secondary, size: 12 ,),
                       SizedBox(width: 2,),
                       Text(
-                        " Today's Score:  ${userfile.todayAchievedValue}",
+                        (userfile.todayAchievedValue == null)? "Today's Score:" : " Today's Score:  ${userfile.todayAchievedValue}",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
