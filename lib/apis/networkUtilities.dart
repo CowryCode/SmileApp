@@ -24,7 +24,7 @@ final MobileURL = "https://com.cowrycode.smileapp";
 
  final CHAT_URL = "${baseURL}/smile/chat";
 
-// GLOBAL VIARIABLES
+// GLOBAL VIARIABLES for the game
  final int timeout_duration = 10;
  final String key_phone_number = "phonenumber";
  final String key_login_token = "token";

@@ -99,7 +99,6 @@ class ApiAccess {
         Localstorage().saveBoolean(key_login_status, true);
         return profile;
       } else {
-        print('LOGIN GOT HERE 3');
          throw Exception("`Couldn't pull the profile ");
       }
     } catch (e) {
@@ -221,37 +220,44 @@ class ApiAccess {
   }
 
   void saveMood({required MoodModel moodModel, required String url}) async {
+    try{
+      print('THE RECORDED START : ${moodModel.startMood}');
+      print('THE RECORDED END : ${moodModel.endMood }');
+      if(moodModel.startMood == null || moodModel.endMood == null) return;
+      String? token;
+      Future<String?> tk = Localstorage().getString(key_login_token);
+      await tk.then((value) => {token = value!});
+      print("URL : $url");
+      final response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Origin': '$MobileURL',
+          'Authorization': 'Bearer $token'
+        },
+        body: jsonEncode(
+            <String, dynamic>{
+              "startDate" : moodModel.startDate,
+              "startTime" : moodModel.startTime,
+              "startMood" : moodModel.startMood,
+              "endDate" : moodModel.endDate,
+              "endTime" : moodModel.endTime,
+              "endMood" : moodModel.endMood,
+              "smileduration" : moodModel.smileduration,
+              "countrycount" : moodModel.countrycount,
+            }),
+      );
 
-    if(moodModel.startMood == null || moodModel.endMood == null) return;
-    String? token;
-    Future<String?> tk = Localstorage().getString(key_login_token);
-    await tk.then((value) => {token = value!});
-    print("URL : $url");
-    final response = await http.post(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': 'application/json',
-        'Origin': '$MobileURL',
-        'Authorization': 'Bearer $token'
-      },
-      body: jsonEncode(
-          <String, dynamic>{
-            "startDate" : moodModel.startDate,
-            "startTime" : moodModel.startTime,
-            "startMood" : moodModel.startMood,
-            "endDate" : moodModel.endDate,
-            "endTime" : moodModel.endTime,
-            "endMood" : moodModel.endMood,
-            "smileduration" : moodModel.smileduration,
-            "countrycount" : moodModel.countrycount,
-          }),
-    );
-
-    if (response.statusCode == 200) {
-      MoodModel svdMood = MoodModel.fromJson(jsonDecode(response.body));
-      smileAppValueNotifier.resetMoodObject(savedmood: svdMood);
-      smileGameNofitier.resetGameVariables();
+      if (response.statusCode == 200) {
+        MoodModel svdMood = MoodModel.fromJson(jsonDecode(response.body));
+        print('THE RECORDED SMILE DURATION ${svdMood.toJson()}');
+        smileAppValueNotifier.resetMoodObject(savedmood: svdMood);
+        smileGameNofitier.resetGameVariables();
+        refreshData(); // Just implemented while pilot was going on
+      }
+    }catch(e){
+      print('Error: ${e.toString()}');
     }
   }
 
