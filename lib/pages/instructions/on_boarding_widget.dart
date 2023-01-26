@@ -114,7 +114,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                 child: Text(
                   "Skip",
                   style: TextStyle(
-                    color:Theme.of(context).accentColor,
+                    color:Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                     fontSize: 24.0,
                     fontFamily: "Poppins"
@@ -126,7 +126,19 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: _onBoardingList!.list.map((OnBoarding boarding) {
-                  return Container(
+
+                  return Text(
+                    (_current == 0) ? "1/3" : (_current == 1) ? "2/3" : "3/3",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        fontFamily: "Poppins",
+                        color: _current == _onBoardingList!.list.indexOf(boarding)
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(context).hintColor.withOpacity(0.2)),
+                    );
+
+                 return Container(
                     width: 30.0,
                     height: 3.0,
                     margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
@@ -135,9 +147,23 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                           Radius.circular(8),
                         ),
                         color: _current == _onBoardingList!.list.indexOf(boarding)
-                            ? Theme.of(context).accentColor
+                            ? Theme.of(context).colorScheme.secondary
                             : Theme.of(context).hintColor.withOpacity(0.2)),
                   );
+
+                 return Container(
+                   width: 30.0,
+                   height: 3.0,
+                   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                   decoration: BoxDecoration(
+                       borderRadius: BorderRadius.all(
+                         Radius.circular(8),
+                       ),
+                       color: _current == _onBoardingList!.list.indexOf(boarding)
+                           ? Theme.of(context).colorScheme.secondary
+                           : Theme.of(context).hintColor.withOpacity(0.2)),
+                 );
+
                 }).toList(),
               ),
             ),
@@ -177,7 +203,6 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
   Widget _myTribeInstructions(){
     return Column(
       children: <Widget>[
-        step(step: "", content: "To request for supportive message(s) from  mdkj dhjd jdlhk dhkdjdkvh vkjwv  gjhggjhfh DGDS other users, follow the steps below.", isHeader: true),
         step(step: "", content: "To request for supportive message(s) from other users, follow the steps below.", isHeader: true),
         step(step: "Step 1:", content: "Click on the myTribe feature from the home screen.", isHeader: false),
         step(step: "Step 2:", content: "Select the emotion(s) to best describe how you feel.", isHeader: false),

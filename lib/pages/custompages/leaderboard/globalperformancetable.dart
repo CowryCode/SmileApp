@@ -14,7 +14,6 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: <Widget>[
         Stack(
@@ -60,41 +59,57 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
 
 
   Widget progress({required int index, required double rank}){
-    return Stack(
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width * (1 - (index + 1)/(index + 3)),
-          padding: EdgeInsets.all(7.0),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: Theme.of(context).primaryColor,
-            ),
-            color: Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Text(""),
-        ),
-        Positioned(
-          left: 10.0,
-          top: 7.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget> [
-              SizedBox(width: 5,),
-              Text("${globalscoresTable.value[index].username}"),
-              SizedBox(width: 10,),
-             // Icon(FontAwesomeIcons.solidStar, color: Colors.orange, size: 12,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children:  _getGlobalTableStars(globalRank: rank),
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width ,
+            padding: EdgeInsets.all(7.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 0,
+                color: Theme.of(context).primaryColor,
               ),
-              SizedBox(width: 20,),
-              Text("${globalscoresTable.value[index].globalpercent}%"),
-            ],
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(""),
           ),
-        )
-      ],
+          Container(
+            width: MediaQuery.of(context).size.width * (1 - (index + 1)/(index + 3)),
+            padding: EdgeInsets.all(7.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 0,
+                color: Theme.of(context).primaryColor,
+              ),
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(""),
+          ),
+          Positioned(
+            left: 10.0,
+            top: 7.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget> [
+                SizedBox(width: 5,),
+                Text("${globalscoresTable.value[index].username}"),
+                SizedBox(width: 10,),
+               // Icon(FontAwesomeIcons.solidStar, color: Colors.orange, size: 12,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children:  _getGlobalTableStars(globalRank: rank),
+                ),
+                SizedBox(width: 20,),
+                Text("${globalscoresTable.value[index].globalpercent}%"),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
