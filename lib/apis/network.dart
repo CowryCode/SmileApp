@@ -490,19 +490,15 @@ class ApiAccess {
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});
-    // final response = await http.post(
-    //   Uri.parse(CHAT_URL),
-    //   headers: <String, String>{
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //     'Accept': 'application/json',
-    //     'Origin': '$MobileURL',
-    //     'Authorization': 'Bearer $token'
-    //   },
-    //   body: jsonEncode(
-    //       <String, dynamic>{
-    //         "value" : chat,
-    //       }),
-    // );
+
+    String chatcontent = "";
+    List<String> chatarray = chat.split(" ");
+
+    if(chatarray.length < 2){
+      chatcontent = "I am $chat";
+    }else{
+      chatcontent = chat;
+    }
 
     final response = await http.post(Uri.parse("$chaturl"),
    // final response = await http.post(Uri.parse("https://api.openai.com/v1/completions"),
@@ -514,7 +510,7 @@ class ApiAccess {
       body: jsonEncode(
           <String, dynamic>{
             "model" : "text-davinci-003",
-            "prompt" : chat,
+            "prompt" : chatcontent,
             "max_tokens" : 1000,
             "temperature" : 1.0,
           }),
