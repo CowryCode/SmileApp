@@ -11,6 +11,11 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
     notifyListeners();
   }
 
+  void setTodayScore({required int countryCount}){
+    value.setNumberOfMeetings(numberOfCountries: countryCount);
+    notifyListeners();
+  }
+
   void changeTargetObjectPosition(){
     value.changeTargeObjectPositon();
     notifyListeners();

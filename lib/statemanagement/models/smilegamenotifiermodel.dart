@@ -86,6 +86,10 @@ class SmileGameVariables {
     return smileDurationCounter;
   }
 
+  void setNumberOfMeetings({required int numberOfCountries}){
+    this.numberOfStarMeetings = numberOfCountries;
+  }
+
   int getSmileNumberofCountriesPainted(){
     return numberOfStarMeetings;
   }

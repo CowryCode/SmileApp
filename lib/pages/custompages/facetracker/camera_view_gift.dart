@@ -637,7 +637,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   rating: response.userrating.round(),
                   smileduration: smileGameNofitier.getSmileDurationInSecound(),
                   countrycount: smileGameNofitier.getNumberofCountriesPainted());
-              print('THE RECORDED SMILE DURATION ${mood.smileduration!}');
+                  print('THE RECORDED SMILE DURATION : ${mood.smileduration!}');
+                  print('THE NUMBER OF COUNTRY PAINTED :  ${smileGameNofitier.getNumberofCountriesPainted()}');
                   if(mood.smileduration! > 0){
                     print('CALLED ON SAVE');
                     ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);

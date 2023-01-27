@@ -94,6 +94,8 @@ class ApiAccess {
         // UPDATE USERPROFILE NOTIFIER
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
 
+        // UPDATE NUMBER OF COUNTRIES PAINTED
+        smileGameNofitier.setTodayScore(countryCount: profile.todayAchievedValue!);
 
         Localstorage().saveString(key_login_token, logincode);
         Localstorage().saveBoolean(key_login_status, true);
@@ -146,6 +148,9 @@ class ApiAccess {
 
         // UPDATE USERPROFILE NOTIFIER
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
+
+        // UPDATE NUMBER OF COUNTRIES PAINTED
+        smileGameNofitier.setTodayScore(countryCount: profile.todayAchievedValue!);
 
         return profile;
       } else {
