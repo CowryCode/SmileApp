@@ -126,15 +126,6 @@ class _GlassmorphicSmilegramDisplayState
                           ),
                         );
                       }),
-                  // Text(
-                  //   (userfile.todayTargetValue == null) ? " Today'sTarget:" : " Today'sTarget:  ${userfile.todayTargetValue}",
-                  //   style: const TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Colors.black,
-                  //     fontFamily: 'Poppins',
-                  //     fontSize: 12.0,
-                  //   ),
-                  // ),
                   SizedBox(
                     width: 10,
                   ),
@@ -159,17 +150,6 @@ class _GlassmorphicSmilegramDisplayState
                           ),
                         );
                       }),
-                  // Text(
-                  //   (userfile.todayAchievedValue == null)
-                  //       ? "Today's Score:"
-                  //       : " Today's Score:  ${userfile.todayAchievedValue}",
-                  //   style: const TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Colors.black,
-                  //     fontFamily: 'Poppins',
-                  //     fontSize: 12.0,
-                  //   ),
-                  // ),
                 ],
                 //  );
                 //   },

@@ -9,6 +9,7 @@ import 'package:SmileApp/notification/notification.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/setting.dart';
 import 'package:SmileApp/pages/login/login.dart';
+import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -230,11 +231,64 @@ class _HomeState extends State<Home> {
                                   color: Theme.of(context).primaryColor),
                               textAlign: TextAlign.center),
                           Text(
-                            "Your Smile is Powerful,  \n "
-                            "Play the Smile Game!\n ",
+                            "Your Smile is Powerful, \n"
+                            "Play the Smile Game! ",
                             style: Theme.of(context).textTheme.bodyMedium,
                             textAlign: TextAlign.center,
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Icon(
+                                FontAwesomeIcons.solidCircle,
+                                color: Colors.black45,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              ValueListenableBuilder(
+                                  valueListenable: userProfileNotifier,
+                                  builder: (context, UserProfile userfile, child) {
+                                    return Text(
+                                      (userfile.todayTargetValue == null)
+                                          ? " Target:"
+                                          : " Target:  ${userfile.todayTargetValue}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins',
+                                        fontSize: 12.0,
+                                      ),
+                                    );
+                                  }),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon(
+                                FontAwesomeIcons.solidCircle,
+                                color: Theme.of(context).colorScheme.secondary,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              ValueListenableBuilder(
+                                  valueListenable: smileGameNofitier,
+                                  builder: (context, SmileGameVariables smilegramvariables, child) {
+                                    return Text(
+                                      " Today's Score:  ${smilegramvariables.numberOfStarMeetings}", //Number of meetings represents number of countires painted
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins',
+                                        fontSize: 12.0,
+                                      ),
+                                    );
+                                  }),
+                            ],
+                          ),
+                          SizedBox(height: 5,)
                         ],
                       ),
                       Icon(
