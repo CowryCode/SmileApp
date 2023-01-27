@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import '../../apis/networkUtilities.dart';
 
 class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
-  // SmileGameVariables smileGameVariables = SmileGameVariables(
-  //     targetHorrizontalposition: TargetObjectHorrizontalInitializer,
-  //     movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance);
   SmileGameNofitier({required SmileGameVariables  value}) : super(value);
 
   void moveObject({required double smilesize, required isSmileGram}){

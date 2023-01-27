@@ -317,7 +317,7 @@ class _HomeState extends State<Home> {
                               textAlign: TextAlign.center),
                           Text(
                               "Chat with our AI bot \n "
-                              "Adamma !\n ",
+                              "Adaeze !\n ",
                               style: Theme.of(context).textTheme.bodyMedium,
                               textAlign: TextAlign.center),
                         ],

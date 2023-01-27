@@ -1,5 +1,6 @@
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
+import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -86,67 +87,96 @@ class _GlassmorphicSmilegramDisplayState
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width ,
+              width: MediaQuery.of(context).size.width,
               // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
               decoration: BoxDecoration(
                 // color:  Colors.black12,
                 color: Theme.of(context).primaryColor,
-                border: Border.all(
-                    width: 1.0,
-                    color: Colors.grey.withOpacity(0.5)),
+                border:
+                    Border.all(width: 1.0, color: Colors.grey.withOpacity(0.5)),
                 borderRadius: BorderRadius.circular(16.0),
               ),
-              child: ValueListenableBuilder(
-                valueListenable: userProfileNotifier,
-                builder: (context, UserProfile userfile, child) {
-
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      // Icon(FontAwesomeIcons.solidCircle,color: Colors.green, size: 12 ,),
-                      // Text(
-                      //  // 'Completed:  ',
-                      //   (userfile.smilegrampoints != null ) ? "Total Score: ${userfile.smilegrampoints}" : "",
-                      //   style: const TextStyle(
-                      //     fontWeight: FontWeight.bold,
-                      //     color: Colors.black45,
-                      //     fontFamily: 'Poppins',
-                      //     fontSize: 12.0,
-                      //   ),
-                      // ),
-
-                      Icon(FontAwesomeIcons.solidCircle,color: Colors.black45, size: 12 ,),
-                      SizedBox(width: 2,),
-                      Text(
-                        (userfile.todayTargetValue == null) ? " Today'sTarget:" : " Today'sTarget:  ${userfile.todayTargetValue}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontFamily: 'Poppins',
-                          fontSize: 12.0,
-                        ),
-                      ),
-                      SizedBox(width: 10,),
-                      Icon(FontAwesomeIcons.solidCircle,color: Theme.of(context).colorScheme.secondary, size: 12 ,),
-                      SizedBox(width: 2,),
-                      Text(
-                        (userfile.todayAchievedValue == null)? "Today's Score:" : " Today's Score:  ${userfile.todayAchievedValue}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontFamily: 'Poppins',
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-
+              // child: ValueListenableBuilder(
+              //   valueListenable: userProfileNotifier,
+              //   builder: (context, UserProfile userfile, child) {
+              //     return Row(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    FontAwesomeIcons.solidCircle,
+                    color: Colors.black45,
+                    size: 12,
+                  ),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  ValueListenableBuilder(
+                      valueListenable: userProfileNotifier,
+                      builder: (context, UserProfile userfile, child) {
+                        return Text(
+                          (userfile.todayTargetValue == null)
+                              ? " Today'sTarget:"
+                              : " Today'sTarget:  ${userfile.todayTargetValue}",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontFamily: 'Poppins',
+                            fontSize: 12.0,
+                          ),
+                        );
+                      }),
+                  // Text(
+                  //   (userfile.todayTargetValue == null) ? " Today'sTarget:" : " Today'sTarget:  ${userfile.todayTargetValue}",
+                  //   style: const TextStyle(
+                  //     fontWeight: FontWeight.bold,
+                  //     color: Colors.black,
+                  //     fontFamily: 'Poppins',
+                  //     fontSize: 12.0,
+                  //   ),
+                  // ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    FontAwesomeIcons.solidCircle,
+                    color: Theme.of(context).colorScheme.secondary,
+                    size: 12,
+                  ),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  ValueListenableBuilder(
+                      valueListenable: smileGameNofitier,
+                      builder: (context, SmileGameVariables smilegramvariables, child) {
+                        return Text(
+                         " Today's Score:  ${smilegramvariables.numberOfStarMeetings}", //Number of meetings represents number of countires painted
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontFamily: 'Poppins',
+                            fontSize: 12.0,
+                          ),
+                        );
+                      }),
+                  // Text(
+                  //   (userfile.todayAchievedValue == null)
+                  //       ? "Today's Score:"
+                  //       : " Today's Score:  ${userfile.todayAchievedValue}",
+                  //   style: const TextStyle(
+                  //     fontWeight: FontWeight.bold,
+                  //     color: Colors.black,
+                  //     fontFamily: 'Poppins',
+                  //     fontSize: 12.0,
+                  //   ),
+                  // ),
+                ],
+                //  );
+                //   },
               ),
-            )
+            ),
           ],
         ),
-
         Align(alignment: Alignment.center, child: HappinessMap()),
       ],
     ));
