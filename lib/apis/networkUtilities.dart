@@ -47,6 +47,9 @@ final double MinimumLocation = 0.0;
 //SMILE GAME: MAXIMUM POSITION FROM THE TOP FOR ALL OBJECTS
 final int MaximumVerticalLocation = 170;
 
+//SMILE GAME: NUMBER OF COUNTRIES TO PAINT BEFORE POP-UP
+final int COUNTRIES_BEFORE_POPUP = 1;
+
 
 
 // WORLD MAP Json

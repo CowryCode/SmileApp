@@ -149,6 +149,11 @@ class SmileAppValueNotifier extends ValueNotifier<NotifiersSection> {
     notifyListeners();
   }
 
+  void showMoodRating({required bool show_pop_up}){
+    value.showShowMoodRating.value = show_pop_up;
+    notifyListeners();
+  }
+
   // void resetMoodObject(){
   //   value.moodmodel.value.resetMood();
   //   notifyListeners();

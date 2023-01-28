@@ -95,9 +95,10 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         bool soundAllowed = smileAppValueNotifier.value.deactivetSound.value;
         bool activateSpeech = smileAppValueNotifier.value.activatespeech.value;
         double? prob = face.smilingProbability;
-        if(smileAppValueNotifier.value.showCountDown.value == false){
+        if(smileAppValueNotifier.value.showCountDown.value == false && smileAppValueNotifier.value.showShowMoodRating.value == false){
+          print('THE COUNTER NUMBER IS : ${smileGameNofitier.getSmileDurationCounter()}');
+
           if (widget.giftVariableObject.readmessage!) {
-            //if(sgMessage.tokenIndex < _tokenArrayLength! ){
             if(messageNotifier.value.index < _tokenArrayLength! ){
               if (prob! > 0.5) {
                 smileGameNofitier.moveObject(smilesize: prob, isSmileGram: false);

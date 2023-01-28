@@ -1,12 +1,13 @@
 import 'dart:async';
-
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/models/tribemessage.dart';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/SmileGram_Achievement_Alert.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/custompages/setting.dart';
 import 'package:SmileApp/pages/login/login.dart';
 import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
@@ -241,7 +242,8 @@ class _HomeState extends State<Home> {
                             children: <Widget>[
                               Icon(
                                 FontAwesomeIcons.solidCircle,
-                                color: Colors.black45,
+                              //  color: Colors.white,
+                                color: Theme.of(context).primaryColor,
                                 size: 12,
                               ),
                               SizedBox(
@@ -267,7 +269,7 @@ class _HomeState extends State<Home> {
                               ),
                               Icon(
                                 FontAwesomeIcons.solidCircle,
-                                color: Theme.of(context).colorScheme.secondary,
+                                color: Theme.of(context).primaryColor,
                                 size: 12,
                               ),
                               SizedBox(
@@ -474,7 +476,7 @@ class _HomeState extends State<Home> {
                       ),
                     );
                   }),
-              // SmileGame(),
+
             ],
           ),
         ),
@@ -668,7 +670,7 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (context) => Dialog(
               child: RatingView(
-                msg: "Select any emotion that best describes how you feel now",
+                msg: "Select any emotion that best describes your feeling now",
                 ratingonly: ratingOnly,
                 onExit: (response) {
                   Navigator.of(context).popAndPushNamed(
@@ -717,4 +719,6 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+
 }

@@ -133,6 +133,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                 ],
               ),
               child: TextField(
+                style: TextStyle(color: Colors.black),
                 controller: myController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(

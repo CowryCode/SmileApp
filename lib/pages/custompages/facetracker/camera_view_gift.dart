@@ -1,16 +1,13 @@
 import 'dart:async';
-
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
-import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/SmileGram_Achievement_Alert.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
-import 'package:SmileApp/pages/custompages/facetracker/face_detector_view_gift.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
-import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -231,6 +228,27 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
+
+          ValueListenableBuilder(
+              valueListenable: smileGameNofitier,
+              builder: (context, SmileGameVariables smilegramvariables, child) {
+                if(smilegramvariables.numberOfStarMeetings % COUNTRIES_BEFORE_POPUP == 0
+                    && smilegramvariables.numberOfStarMeetings > 0
+                    && smileAppValueNotifier.value.showShowMoodRating.value == false
+                    && smileGameNofitier.getSmileDurationCounter() % 65 == 0
+
+                ){
+                  print('THE COUNTER NUMBER IS : ${smileGameNofitier.getSmileDurationCounter()}');
+                  print('ACTIVATION COUNT : ${smileGameNofitier.getSmileDurationCounter()}');
+                  smileAppValueNotifier.showMoodRating(show_pop_up: true);
+                  Future.delayed(Duration(seconds: 1),(){
+                    return _achievementAlert(ratingOnly: true);
+                  });
+                  return SizedBox(height: 1,);
+                }else{
+                  return SizedBox(height: 1,);
+                }
+              }),
         ],
       ),
     );
@@ -651,6 +669,26 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ),
         )
     );
+  }
+
+
+  _achievementAlert({required bool ratingOnly}) {
+    showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: SmileGramAchievement(
+            msg: "This is a Sample Dummy Text",
+            ratingonly: ratingOnly,
+            onExit: (response) {
+              smileAppValueNotifier.showMoodRating(show_pop_up: false);
+              Navigator.pop(context);
+            },
+            onContinue: () {
+              smileAppValueNotifier.showMoodRating(show_pop_up: false);
+              Navigator.pop(context);
+            },
+          ),
+        ));
   }
 
 }
