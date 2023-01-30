@@ -1,4 +1,7 @@
 import 'package:SmileApp/pages/custompages/navigationtabs.dart';
+import 'package:SmileApp/pages/instructions/getStarted1.dart';
+import 'package:SmileApp/pages/instructions/getStarted2.dart';
+import 'package:SmileApp/pages/instructions/getStarted3.dart';
 import 'package:SmileApp/pages/instructions/on_boarding_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,7 +34,9 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
           children: <Widget>[
             CarouselSlider(
               options: CarouselOptions(
-                height: double.maxFinite,
+               // height: double.maxFinite,
+                height: 1300,
+                enableInfiniteScroll: false,
                 viewportFraction: 1.0,
                 onPageChanged: (index, other) {
                   setState(() {
@@ -72,21 +77,6 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                             SizedBox(height: 10,),
                             (boarding.featureID! == 1)? _smileGraminstructions() : (boarding.featureID! == 2)? _pocketBuddyinstructions() : _myTribeInstructions() ,
                             SizedBox(height: 10,),
-                            // Container(
-                            //   width: MediaQuery.of(context).size.width * 0.9,
-                            //   //width: 200,
-                            //   padding: const EdgeInsets.only(left: 20,right: 20),
-                            //   child: Text(
-                            //     boarding.description!,
-                            //     textAlign: TextAlign.justify,
-                            //     style: TextStyle(
-                            //       color:Colors.grey,
-                            //       fontWeight: FontWeight.bold,
-                            //       fontSize: 18.0,
-                            //       fontFamily: "Poppins"
-                            //     ),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ],

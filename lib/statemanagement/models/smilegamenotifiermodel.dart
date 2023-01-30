@@ -22,7 +22,8 @@ class SmileGameVariables {
 
     if(!isSmilegram) return;
 
-    double speedInterval = smileProb < 0.6 ? 1.0 : smileProb < 0.75 ? 2.0 : 3.0;
+   // double speedInterval = smileProb < 0.6 ? 1.0 : smileProb < 0.75 ? 2.0 : 3.0; //This condition was to manipulate speed with smile
+    double speedInterval = 2.0;
     //MOVE THE OBJECT RIGHT TO LEFT
     if (!direction) {
       movingObjectHorrizontalposition = (movingObjectHorrizontalposition >= speedInterval)
@@ -47,6 +48,9 @@ class SmileGameVariables {
     }else{
       targetCaught = false;
     }
+    print('MOVING OBJECT IS : $movingObjectHorrizontalposition');
+    print('TAGRT OBJECT IS : $targetHorrizontalposition');
+    print('IS CAUGHT : $targetCaught');
   }
 
   /* WHEN DIRECTION IS TRUE, OBJECGT IS MOVING FROM LEFT TO RIGHT

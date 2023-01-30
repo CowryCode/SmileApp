@@ -31,7 +31,7 @@ final MobileURL = "https://com.cowrycode.smileapp";
  final String key_login_status = "loginstatus";
 
  // NOTIFIER VARIABLES
- final int Smile_Count_Initial = 35; // 20 counts = 5 Seconds
+ final int Smile_Count_Initial = 45; // 20 counts = 5 Seconds
  final int Speech_Activation_Count = 20; //formerly 8
  final int Target_Countries_COUNT = 12;
  final int Smile_AlertFeedBack_CountryCount_Interval = 4;
@@ -48,7 +48,7 @@ final double MinimumLocation = 0.0;
 final int MaximumVerticalLocation = 170;
 
 //SMILE GAME: NUMBER OF COUNTRIES TO PAINT BEFORE POP-UP
-final int COUNTRIES_BEFORE_POPUP = 1;
+final int COUNTRIES_BEFORE_POPUP = 4;
 
 
 

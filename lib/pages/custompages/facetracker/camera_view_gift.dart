@@ -235,11 +235,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 if(smilegramvariables.numberOfStarMeetings % COUNTRIES_BEFORE_POPUP == 0
                     && smilegramvariables.numberOfStarMeetings > 0
                     && smileAppValueNotifier.value.showShowMoodRating.value == false
-                    && smileGameNofitier.getSmileDurationCounter() % 65 == 0
-
+                    && smileGameNofitier.getSmileDurationCounter() % 2 == 0
+                && smileGameNofitier.getSmileDurationCounter() > 0
                 ){
                   print('THE COUNTER NUMBER IS : ${smileGameNofitier.getSmileDurationCounter()}');
-                  print('ACTIVATION COUNT : ${smileGameNofitier.getSmileDurationCounter()}');
                   smileAppValueNotifier.showMoodRating(show_pop_up: true);
                   Future.delayed(Duration(seconds: 1),(){
                     return _achievementAlert(ratingOnly: true);
@@ -681,10 +680,22 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             ratingonly: ratingOnly,
             onExit: (response) {
               smileAppValueNotifier.showMoodRating(show_pop_up: false);
-              Navigator.pop(context);
+              smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
+              MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+              mood.captureMood(
+                  rating: response.userrating.round(),
+                  smileduration: smileGameNofitier.getSmileDurationInSecound(),
+                  countrycount: smileGameNofitier.getNumberofCountriesPainted());
+              if(mood.smileduration! > 0){
+                ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
+                Navigator.of(context).popAndPushNamed('/home',);
+              }
+              dispose();
+              Navigator.of(context).popAndPushNamed('/home');
             },
             onContinue: () {
               smileAppValueNotifier.showMoodRating(show_pop_up: false);
+              smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
               Navigator.pop(context);
             },
           ),

@@ -97,12 +97,11 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         double? prob = face.smilingProbability;
         if(smileAppValueNotifier.value.showCountDown.value == false && smileAppValueNotifier.value.showShowMoodRating.value == false){
           print('THE COUNTER NUMBER IS : ${smileGameNofitier.getSmileDurationCounter()}');
-
           if (widget.giftVariableObject.readmessage!) {
             if(messageNotifier.value.index < _tokenArrayLength! ){
               if (prob! > 0.5) {
                 smileGameNofitier.moveObject(smilesize: prob, isSmileGram: false);
-                // This condition is to make the image drop gradually
+                // This condition is to make the text drop gradually
                 if(smileGameNofitier.getSmileDurationCounter() % 4 == 0 ){
                   _msg = messageNotifier.value.msg + " " + _tokenArray![messageNotifier.value.index];
                   (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? _msg = _msg + " *** End" : _msg = _msg;
