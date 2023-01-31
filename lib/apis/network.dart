@@ -54,7 +54,7 @@ class ApiAccess {
 
 
   Future<UserProfile> login({required String logincode}) async {
-    print('LOGIN GOT HERE 1');
+    print('LOGIN GOT HERE 1 with $logincode');
     print('URL IS : $getProfile_URL');
     try {
       final response = await http.get(Uri.parse(getProfile_URL),

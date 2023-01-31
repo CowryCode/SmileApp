@@ -42,15 +42,12 @@ class SmileGameVariables {
     if(movingObjectHorrizontalposition == (MaximumHorrizontalLocation + 10)
         || movingObjectHorrizontalposition == MinimumLocation ) direction = !direction;
 
-    if(movingObjectHorrizontalposition == (targetHorrizontalposition + 10) || movingObjectHorrizontalposition == (targetHorrizontalposition - 10)){
+    if(movingObjectHorrizontalposition == (targetHorrizontalposition + 8) || movingObjectHorrizontalposition == (targetHorrizontalposition - 10)){
       targetCaught = true;
       numberOfStarMeetings++;
     }else{
       targetCaught = false;
     }
-    print('MOVING OBJECT IS : $movingObjectHorrizontalposition');
-    print('TAGRT OBJECT IS : $targetHorrizontalposition');
-    print('IS CAUGHT : $targetCaught');
   }
 
   /* WHEN DIRECTION IS TRUE, OBJECGT IS MOVING FROM LEFT TO RIGHT
@@ -62,7 +59,6 @@ class SmileGameVariables {
   }
 
   void changeTargeObjectPositon() {
-
     targetVerticalposition = Random().nextInt(MaximumVerticalLocation).roundToDouble();
     // This 10 was added to align the height of the  target Object and the moving object (which is smaller)
     movingObjectVerticalposition = targetVerticalposition + 10;

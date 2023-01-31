@@ -96,7 +96,6 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
         bool activateSpeech = smileAppValueNotifier.value.activatespeech.value;
         double? prob = face.smilingProbability;
         if(smileAppValueNotifier.value.showCountDown.value == false && smileAppValueNotifier.value.showShowMoodRating.value == false){
-          print('THE COUNTER NUMBER IS : ${smileGameNofitier.getSmileDurationCounter()}');
           if (widget.giftVariableObject.readmessage!) {
             if(messageNotifier.value.index < _tokenArrayLength! ){
               if (prob! > 0.5) {
@@ -146,6 +145,10 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                   smileAppValueNotifier.updateCountriesIndexString(countriesIndex: "0", nextID: 0);
                 }
                 smileGameNofitier.updateTargetCaught(holdTarget: false);
+
+                if(smileGameNofitier.value.numberOfStarMeetings % COUNTRIES_BEFORE_POPUP == 0 && smileGameNofitier.value.numberOfStarMeetings > 0){
+                  smileAppValueNotifier.showMoodRating(show_pop_up: true);
+                }
               }
 
               if(updatedTokenIndex <= 0 ){

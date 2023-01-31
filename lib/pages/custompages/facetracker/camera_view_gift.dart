@@ -230,16 +230,21 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ),
 
           ValueListenableBuilder(
-              valueListenable: smileGameNofitier,
-              builder: (context, SmileGameVariables smilegramvariables, child) {
-                if(smilegramvariables.numberOfStarMeetings % COUNTRIES_BEFORE_POPUP == 0
-                    && smilegramvariables.numberOfStarMeetings > 0
-                    && smileAppValueNotifier.value.showShowMoodRating.value == false
-                    && smileGameNofitier.getSmileDurationCounter() % 2 == 0
-                && smileGameNofitier.getSmileDurationCounter() > 0
-                ){
-                  print('THE COUNTER NUMBER IS : ${smileGameNofitier.getSmileDurationCounter()}');
-                  smileAppValueNotifier.showMoodRating(show_pop_up: true);
+              // valueListenable: smileGameNofitier,
+              // builder: (context, SmileGameVariables smilegramvariables, child) {
+
+              valueListenable: smileAppValueNotifier.value.showShowMoodRating,
+              builder: (context, bool showmoodalert, child) {
+
+                // if(smilegramvariables.numberOfStarMeetings % COUNTRIES_BEFORE_POPUP == 0
+                //     && smilegramvariables.numberOfStarMeetings > 0
+                //     && smileAppValueNotifier.value.showShowMoodRating.value == false
+                //     && smileGameNofitier.getSmileDurationCounter() % 2 == 0
+                // && smileGameNofitier.getSmileDurationCounter() > 0
+                // ){
+
+                if(showmoodalert == true){
+                 // smileAppValueNotifier.showMoodRating(show_pop_up: true);
                   Future.delayed(Duration(seconds: 1),(){
                     return _achievementAlert(ratingOnly: true);
                   });

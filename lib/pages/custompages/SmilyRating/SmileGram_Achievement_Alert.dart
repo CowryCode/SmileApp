@@ -265,7 +265,7 @@ class _SmileGramAchievementState extends State<SmileGramAchievement>{
                   );
                 }),
             Text(
-              " Countries Painted Today.",
+              " Countries Achieved.",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
