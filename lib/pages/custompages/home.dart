@@ -7,6 +7,7 @@ import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/SmileGram_Achievement_Alert.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/smile_game2_view.dart';
 import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/custompages/setting.dart';
 import 'package:SmileApp/pages/login/login.dart';
@@ -476,6 +477,7 @@ class _HomeState extends State<Home> {
                       ),
                     );
                   }),
+              SmileGame2(),
             ],
           ),
         ),

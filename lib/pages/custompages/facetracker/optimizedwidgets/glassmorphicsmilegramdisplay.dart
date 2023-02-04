@@ -96,10 +96,6 @@ class _GlassmorphicSmilegramDisplayState
                     Border.all(width: 1.0, color: Colors.grey.withOpacity(0.5)),
                 borderRadius: BorderRadius.circular(16.0),
               ),
-              // child: ValueListenableBuilder(
-              //   valueListenable: userProfileNotifier,
-              //   builder: (context, UserProfile userfile, child) {
-              //     return Row(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

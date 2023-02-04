@@ -51,8 +51,6 @@ class _SmileGameState extends State<SmileGame> {
               valueListenable: smileGameNofitier,
               builder: (context, SmileGameVariables gamevariables, child) {
                return Visibility(
-                 //TODO: IMPLEMENT HOW TO MAKE THIS INVISIBLE AFTER SOME "CAUGHTS" TO HELP USER STAY MOTIVATED
-                // visible: !gamevariables.targetCaught,
                  visible: true,
                  child: AnimatedPositioned(
                     // top: 17.0,

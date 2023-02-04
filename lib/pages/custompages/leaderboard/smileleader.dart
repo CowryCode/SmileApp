@@ -32,45 +32,49 @@ class _LeadderBoardState extends State<LeadderBoard> {
          }
      });
 
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color:Theme.of(context).primaryColor )
-            ,
-            onPressed: (){
-             Navigator.of(context).pop();
-            },
-          ),
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          title: Text(
-            'Achievements',
-            style: TextStyle(
-              fontSize:22.0,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            // leading: IconButton(
+            //   icon: Icon(Icons.arrow_back, color:Theme.of(context).primaryColor )
+            //   ,
+            //   onPressed: (){
+            //    Navigator.of(context).pop();
+            //   },
+            // ),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            title: Text(
+              'Achievements',
+              style: TextStyle(
+                fontSize:22.0,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
+                Tab(icon: Icon(FontAwesomeIcons.thumbsUp,color: Colors.white,semanticLabel: "Progress",)),
+               // Tab(icon: Icon(FontAwesomeIcons.barsProgress,color: Colors.white,semanticLabel: "Progress",)),
+                Tab(icon: Icon(FontAwesomeIcons.trophy,color: Colors.white,semanticLabel: "LeaderBoard",)),
+              ],
+            ),
           ),
-          bottom: const TabBar(
-            tabs: [
-              Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
-              Tab(icon: Icon(FontAwesomeIcons.thumbsUp,color: Colors.white,semanticLabel: "Progress",)),
-             // Tab(icon: Icon(FontAwesomeIcons.barsProgress,color: Colors.white,semanticLabel: "Progress",)),
-              Tab(icon: Icon(FontAwesomeIcons.trophy,color: Colors.white,semanticLabel: "LeaderBoard",)),
+
+          body:TabBarView(
+            children: [
+              _map1(),
+              PerformanceTable(),
+              GlobalPerformanceTable(),
             ],
           ),
-        ),
-
-        body:TabBarView(
-          children: [
-            _map1(),
-            PerformanceTable(),
-            GlobalPerformanceTable(),
-          ],
         ),
       ),
     );

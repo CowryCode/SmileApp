@@ -351,7 +351,6 @@ class _MoodScale extends State<MoodScale> {
   onNext({required int positionID}) {
     String name = moodModelList[positionID].name!;
     quesionnaireBMIScale.updatedQuestionnare(position: positionID, userchoice: groupValue);
-    print('Position ID : $positionID  Name : $name  User Choice : $groupValue');
 
     if (_position <
         (moodModelList.length - 1)) {
