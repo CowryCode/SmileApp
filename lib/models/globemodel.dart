@@ -38,6 +38,7 @@ class GlobeModel {
   }
 
 
+
   List<Model> loadModels({List<int>? indices}){
     try{
       if(indices != null){
@@ -86,8 +87,8 @@ class GlobeModel {
 
   List<Model> modelsDictionary(){
     return <Model>[
-      Model(state:   "Afghanistan", storage: "High"),
       Model(state:   "Angola", storage: "High"),
+      Model(state:   "Afghanistan", storage: "High"),
       Model(state:   "Albania", storage: "High"),
       Model(state:   "United Arab Emirates", storage: "High"),
       Model(state:   "Argentina", storage: "High"),

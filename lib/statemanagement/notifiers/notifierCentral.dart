@@ -72,16 +72,6 @@ final ProgressTableNotifier progressTable = ProgressTableNotifier(value: [
 ]);
 
 final LeaderBoardNotifier globalscoresTable = LeaderBoardNotifier(value: [
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
-  // GlobalProgresses(username: "Pikin", acumulatedValue: 120),
 ]);
 
 final TribeMessagesNotifier tribeMessagesNotifier = TribeMessagesNotifier(value: []);

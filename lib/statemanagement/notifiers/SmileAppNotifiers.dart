@@ -31,6 +31,8 @@ class NotifiersSection {
       MapColorMapper(value: "High", color: Colors.green)
     ],
   ));
+
+
   // ValueNotifier<String> nextCountry = ValueNotifier<String>("Afghanistan");
   ValueNotifier<String> nextCountry = ValueNotifier<String>(worldmapModel.modelsDictionary().first.state);
   ValueNotifier<int> speechActivationCount = ValueNotifier<int>(0);
