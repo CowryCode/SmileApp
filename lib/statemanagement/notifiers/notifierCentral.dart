@@ -78,9 +78,12 @@ final TribeMessagesNotifier tribeMessagesNotifier = TribeMessagesNotifier(value:
 final ReadTribeMessagesNotifier readtribeMessageNotifier = ReadTribeMessagesNotifier(value: []);
 final TribeEmpathyRequestNotifier tribeEmpathyRequestNotifier = TribeEmpathyRequestNotifier(value: []);
 final ChatHistoryValueNotifier chatcentralnotifier = ChatHistoryValueNotifier();
+// final SmileGameNofitier smileGameNofitier = SmileGameNofitier(value: SmileGameVariables(
+//     targetHorrizontalposition: TargetObjectHorrizontalInitializer,
+//     movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance));
 final SmileGameNofitier smileGameNofitier = SmileGameNofitier(value: SmileGameVariables(
     targetHorrizontalposition: TargetObjectHorrizontalInitializer,
-    movingObjectHorrizontalposition: TargetObjectHorrizontalInitializer - TargetObjectDistance));
+    movingObjectHorrizontalposition: MaximumHorrizontalLocation));
 
 final UserProfileNotifier userProfileNotifier = UserProfileNotifier(value: UserProfile());
 

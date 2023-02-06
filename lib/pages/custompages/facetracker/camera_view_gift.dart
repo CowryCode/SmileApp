@@ -5,6 +5,7 @@ import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/SmileGram_Achievement_Alert.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/smile_gram_game.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
@@ -235,14 +236,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
               valueListenable: smileAppValueNotifier.value.showShowMoodRating,
               builder: (context, bool showmoodalert, child) {
-
-                // if(smilegramvariables.numberOfStarMeetings % COUNTRIES_BEFORE_POPUP == 0
-                //     && smilegramvariables.numberOfStarMeetings > 0
-                //     && smileAppValueNotifier.value.showShowMoodRating.value == false
-                //     && smileGameNofitier.getSmileDurationCounter() % 2 == 0
-                // && smileGameNofitier.getSmileDurationCounter() > 0
-                // ){
-
                 if(showmoodalert == true){
                  // smileAppValueNotifier.showMoodRating(show_pop_up: true);
                   Future.delayed(Duration(seconds: 1),(){
@@ -283,10 +276,10 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
   Future _stopLiveFeed() async {
     //ORIGINAL
-    // await _controller?.stopImageStream();
-    // await _controller?.dispose();
-    await _controller!.stopImageStream();
-    await _controller!.dispose();
+    await _controller?.stopImageStream();
+    await _controller?.dispose();
+    // await _controller!.stopImageStream();
+    // await _controller!.dispose();
     _controller = null;
 
     // await _controller?.stopImageStream();
@@ -451,7 +444,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             valueListenable: smileAppValueNotifier.value.showCountDown,
             builder: (context, value, child) {
               if (value == false && !widget.readmessage) {
-                return Center(child: SmileGame());
+               // return Center(child: SmileGame());
+                return Center(child: SmileGramGame());
               } else {
                 return SizedBox(
                   height: 3.0,

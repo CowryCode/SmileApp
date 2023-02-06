@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/models/countrymodel.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
@@ -8,15 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-class SmileGame3 extends StatefulWidget {
-  const SmileGame3({Key? key}) : super(key: key);
+class SmileGramGame extends StatefulWidget {
+  const SmileGramGame({Key? key}) : super(key: key);
 
   @override
-  _SmileGame3State createState() => _SmileGame3State();
+  _SmileGramGameState createState() => _SmileGramGameState();
 
 }
 
-class _SmileGame3State extends State<SmileGame3> {
+class _SmileGramGameState extends State<SmileGramGame> {
 
   @override
   void initState() {
@@ -44,7 +45,7 @@ class _SmileGame3State extends State<SmileGame3> {
                     top: gamevariables.targetVerticalposition,
                     left: gamevariables.targetHorrizontalposition,
                     child: Icon(
-                      FontAwesomeIcons.personRunning,
+                      getFontAweSomeIcon(iconIndex: gamevariables.numberOfStarMeetings),
                       size: 60,
                       color: Colors.grey,
                     ),
@@ -60,9 +61,10 @@ class _SmileGame3State extends State<SmileGame3> {
                   visible: true,
                   child: AnimatedPositioned(
                     top: gamevariables.targetVerticalposition ,
-                    left: gamevariables.targetHorrizontalposition + 20,
+                    left: gamevariables.movingObjectHorrizontalposition,
                     child: Icon(
-                      FontAwesomeIcons.personRunning,
+                      //The condition here is to ensure the an Icon is reused for Level 2
+                      getFontAweSomeIcon(iconIndex: gamevariables.numberOfStarMeetings ),
                       size: 60,
                       color: Colors.orange,
                     ) ,
@@ -77,7 +79,10 @@ class _SmileGame3State extends State<SmileGame3> {
   }
 
   IconData getFontAweSomeIcon({required int iconIndex}){
+
     switch(iconIndex){
+      case 0:
+        return FontAwesomeIcons.pepperHot;
       case 1:
         return FontAwesomeIcons.personRunning;
       case 2:
@@ -98,6 +103,8 @@ class _SmileGame3State extends State<SmileGame3> {
         return FontAwesomeIcons.key;
       case 10:
         return FontAwesomeIcons.truck;
+      case 11:
+        return FontAwesomeIcons.piggyBank;
       case 12:
         return FontAwesomeIcons.bicycle;
       case 13:
@@ -216,62 +223,46 @@ class _SmileGame3State extends State<SmileGame3> {
         return FontAwesomeIcons.reply;
       case 70:
         return FontAwesomeIcons.chair;
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
-      case 29:
-        return FontAwesomeIcons
+      case 71:
+        return FontAwesomeIcons.dragon;
+      case 72:
+        return FontAwesomeIcons.userTie;
+      case 73:
+        return FontAwesomeIcons.puzzlePiece;
+      case 74:
+        return FontAwesomeIcons.wineBottle;
+      case 75:
+        return FontAwesomeIcons.peopleArrows;
+      case 76:
+        return FontAwesomeIcons.glasses;
+      case 77:
+        return FontAwesomeIcons.kiwiBird;
+      case 78:
+        return FontAwesomeIcons.umbrellaBeach;
+      case 79:
+        return FontAwesomeIcons.microphone;
+      case 80:
+        return FontAwesomeIcons.dumbbell;
+      case 81:
+        return FontAwesomeIcons.vihara;
+      case 82:
+        return FontAwesomeIcons.usersLine;
+      case 83:
+        return FontAwesomeIcons.userGear;
+      case 84:
+        return FontAwesomeIcons.truckPlane;
+      case 85:
+        return FontAwesomeIcons.spa;
+      case 86:
+        return FontAwesomeIcons.socks;
+      case 87:
+        return FontAwesomeIcons.radiation;
+      case 88:
+        return FontAwesomeIcons.plateWheat;
+      case 89:
+        return FontAwesomeIcons.piggyBank;
       default:
-        return FontAwesomeIcons.star;
+        return FontAwesomeIcons.solidStar;
     }
   }
 

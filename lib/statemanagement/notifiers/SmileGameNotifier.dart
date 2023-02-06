@@ -6,18 +6,29 @@ import '../../apis/networkUtilities.dart';
 class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
   SmileGameNofitier({required SmileGameVariables  value}) : super(value);
 
-  void moveObject({required double smilesize, required isSmileGram}){
-     value.move(smileProb: smilesize, isSmilegram: isSmileGram);
+  void moveSmileGramGame({required bool isSmileGram}){
+    //value.move(smileProb: smilesize, isSmilegram: isSmileGram); //
+    value.moveSmileGramGame(isSmilegram: isSmileGram);
     notifyListeners();
+  }
+
+  void checkIfObjectsMet(){
+    value.checkIfObjectsAligned();
+    notifyListeners();
+  }
+
+  // void moveObject({required double smilesize, required isSmileGram}){
+  //    //value.move(smileProb: smilesize, isSmilegram: isSmileGram); //
+  //   notifyListeners();
+  // }
+
+  void changeTargetObjectPosition(){
+    //value.changeTargeObjectPositon(); // Uncomment if you want to revert to the previous game
+   // notifyListeners();
   }
 
   void setTodayScore({required int countryCount}){
     value.setNumberOfMeetings(numberOfCountries: countryCount);
-    notifyListeners();
-  }
-
-  void changeTargetObjectPosition(){
-    value.changeTargeObjectPositon();
     notifyListeners();
   }
 
@@ -41,5 +52,11 @@ class SmileGameNofitier extends ValueNotifier<SmileGameVariables>{
 
   int getNumberofCountriesPainted(){
     return value.getSmileNumberofCountriesPainted();
+  }
+
+  //TODO: REMOVE THIS METHOD,IT WAS JUST USED FOR SIMULATION
+  updateMeetingCount(){
+    value.updateMeetingCount();
+    notifyListeners();
   }
 }

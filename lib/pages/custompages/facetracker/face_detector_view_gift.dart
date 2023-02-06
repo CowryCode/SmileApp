@@ -99,7 +99,8 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
           if (widget.giftVariableObject.readmessage!) {
             if(messageNotifier.value.index < _tokenArrayLength! ){
               if (prob! > 0.5) {
-                smileGameNofitier.moveObject(smilesize: prob, isSmileGram: false);
+               // smileGameNofitier.moveObject(smilesize: prob, isSmileGram: false);
+                smileGameNofitier.moveSmileGramGame(isSmileGram: false);
                 // This condition is to make the text drop gradually
                 if(smileGameNofitier.getSmileDurationCounter() % 4 == 0 ){
                   _msg = messageNotifier.value.msg + " " + _tokenArray![messageNotifier.value.index];
@@ -124,7 +125,9 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
           } else {
            // if (prob! > 0.5 && smileGameNofitier.value.targetCaught == false) {
             if (prob! > 0.5 ) {
-              smileGameNofitier.moveObject(smilesize: prob, isSmileGram: true);
+              smileGameNofitier.moveSmileGramGame(
+                  isSmileGram: true);
+              // smileGameNofitier.moveObject(smilesize: prob, isSmileGram: true);
               int updatedTokenIndex = smileAppValueNotifier.value.smileDurationCount.value;
               // This reduces the count down on the smile screan
               smileAppValueNotifier.updateSmileDurationCount();
@@ -157,6 +160,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
               }else{
               }
             }else{
+              smileGameNofitier.checkIfObjectsMet();
               if(!soundAllowed){
                 if(activateSpeech && smileGameNofitier.value.targetCaught == false){
                   talker!.speak(text: "Keep Smiling");

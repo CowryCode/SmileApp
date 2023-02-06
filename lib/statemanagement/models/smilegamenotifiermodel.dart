@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:SmileApp/apis/networkUtilities.dart';
@@ -9,14 +8,47 @@ class SmileGameVariables {
   int smileDurationCounter = 0;
   bool direction = true;
   bool targetCaught = false;
-  double targetVerticalposition = 0.0;
+  double targetVerticalposition = 20.0;
   double movingObjectVerticalposition = 10.0; // ORIGINAL CODE
   double targetHorrizontalposition;
   double movingObjectHorrizontalposition;
   int numberOfStarMeetings = 0; // EACH TIME THE STARS MEET, A COUNTRY IS PAINTED
   SmileGameVariables({required this.targetHorrizontalposition , required this.movingObjectHorrizontalposition});
 
+
+  void moveSmileGramGame({required bool isSmilegram}){
+
+    // Update this count each time user is smiling
+    smileDurationCounter++;
+
+    if(!isSmilegram) return;
+
+
+    double speedInterval = 2.0; // With this the moving object can lap with the Target object of horizontal 152
+
+    if(movingObjectHorrizontalposition < targetHorrizontalposition){ // This is to speed up the moving object when user misses it.
+      speedInterval = 10;
+    }
+
+    movingObjectHorrizontalposition = (movingObjectHorrizontalposition <= speedInterval)
+        ? MaximumHorrizontalLocation : (movingObjectHorrizontalposition - speedInterval);
+  }
+
+  void checkIfObjectsAligned(){
+    if(targetCaught == true) return; // This method should only run when TargetCaught is false
+    if(movingObjectHorrizontalposition == targetHorrizontalposition){
+      targetCaught = true;
+      movingObjectHorrizontalposition = MaximumHorrizontalLocation;
+      numberOfStarMeetings++;
+    }else{
+      targetCaught = false;
+    }
+  }
+
+
   void move({required double smileProb, required bool isSmilegram}) {
+
+
     // Update this count each time user is smiling
     smileDurationCounter++;
 
@@ -28,7 +60,7 @@ class SmileGameVariables {
     if (!direction) {
       movingObjectHorrizontalposition = (movingObjectHorrizontalposition >= speedInterval)
           ? (movingObjectHorrizontalposition - speedInterval)
-          : MinimumLocation ;
+          : MinimumLocation;
     }
     //MOVE THE OBJECT LEFT TO RIGHT
     /* 10 was added because of the difference in size between
@@ -99,5 +131,10 @@ class SmileGameVariables {
     this.movingObjectHorrizontalposition = TargetObjectHorrizontalInitializer - TargetObjectDistance;
     this.numberOfStarMeetings = 0;
     this.smileDurationCounter = 0;
+  }
+
+//TODO: REMOVE THIS METHOD,IT WAS JUST USED FOR SIMULATION
+  void updateMeetingCount(){
+     numberOfStarMeetings++;
   }
 }

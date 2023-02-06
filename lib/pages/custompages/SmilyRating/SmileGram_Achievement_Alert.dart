@@ -322,15 +322,12 @@ class _SmileGramAchievementState extends State<SmileGramAchievement>{
   }
 
   _continueAction({required bool exit}){
-    print('EXIT STAGE 1');
     if  ( _rating < 1)  return;
 
     if(exit == true){
-      print('EXIT STAGE 2');
       _response!.userrating = _rating;
       widget.onExit.call(_response!);
     }else{
-      print('EXIT STAGE 3');
       widget.onContinue.call();
     }
 

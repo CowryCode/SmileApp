@@ -37,11 +37,11 @@ final MobileURL = "https://com.cowrycode.smileapp";
  final int Smile_AlertFeedBack_CountryCount_Interval = 4;
 
  //SMILE GAME: DISTANCE BETWEEN TARGET AND MOVING OBJECT
-final double TargetObjectHorrizontalInitializer = 150;
+final double TargetObjectHorrizontalInitializer = 152;
 //SMILE GAME: DISTANCE BETWEEN TARGET AND MOVING OBJECT
 final double TargetObjectDistance = 100;
 //SMILE GAME: MAXIMUM POSITION FROM THE LEFT FOR ALL OBJECTS
-final double MaximumHorrizontalLocation = 280;
+final double MaximumHorrizontalLocation = 300;
 //SMILE GAME: MINIMUM POSITION FROM THE LEFT FOR ALL OBJECTS
 final double MinimumLocation = 0.0;
 //SMILE GAME: MAXIMUM POSITION FROM THE TOP FOR ALL OBJECTS
