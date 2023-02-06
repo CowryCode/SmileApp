@@ -7,7 +7,7 @@ class UserProfile {
   String? name;
   String? phonenumber;
   bool? isconsented;
-  double? smilegrampoints;
+  int? smilegrampoints;
   double? accumulatedValue;
   String? smilegrammappoints;
   String? deviceId;

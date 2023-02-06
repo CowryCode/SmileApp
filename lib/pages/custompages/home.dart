@@ -477,16 +477,6 @@ class _HomeState extends State<Home> {
                       ),
                     );
                   }),
-              //SmileGame3(),
-              SmileGramGame(),
-              TextButton(
-                  onPressed: (){
-                    print('CLICKED');
-                    //smileGameNofitier.moveSmileGramGame(isSmileGram: true);
-                    smileGameNofitier.updateMeetingCount();
-                  },
-                  child: Text("NEXT", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)
-              ),
 
             ],
           ),

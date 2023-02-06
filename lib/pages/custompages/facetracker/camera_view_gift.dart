@@ -80,9 +80,14 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   late MapShapeSource sublayerDataSource;
   late MapShapeSource shapeDataSource;
 
+  Stopwatch? stopwatch;
+
   @override
   void initState() {
     super.initState();
+    stopwatch = Stopwatch();
+    stopwatch!.start();
+
     Wakelock.enable();
     try {
       if (cameras.any(
@@ -143,6 +148,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     _stopLiveFeed();
     Wakelock.disable();
     super.dispose();
+    stopwatch?.stop();
   }
 
   Future<bool> _onWillPop() async {
@@ -622,7 +628,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         mood.captureMood(
             rating: response.rating.round(),
             smileduration: smileGameNofitier.getSmileDurationInSecound(),
-            countrycount: smileGameNofitier.getNumberofCountriesPainted());
+            countrycount: smileGameNofitier.getNumberofCountriesPainted(),
+          timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+        );
 
         ApiAccess().saveMood(
             moodModel: mood,
@@ -638,7 +646,6 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-
   _openRatingDialog({required bool ratingOnly}) {
     smileAppValueNotifier.updateSoundDeactivation(deactivateSound: true);
     showDialog(
@@ -652,7 +659,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               mood.captureMood(
                   rating: response.userrating.round(),
                   smileduration: smileGameNofitier.getSmileDurationInSecound(),
-                  countrycount: smileGameNofitier.getNumberofCountriesPainted());
+                  countrycount: smileGameNofitier.getNumberofCountriesPainted(),
+                timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+              );
                   if(mood.smileduration! > 0){
                     ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
                 Navigator.of(context).popAndPushNamed('/home',);
@@ -684,7 +693,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               mood.captureMood(
                   rating: response.userrating.round(),
                   smileduration: smileGameNofitier.getSmileDurationInSecound(),
-                  countrycount: smileGameNofitier.getNumberofCountriesPainted());
+                  countrycount: smileGameNofitier.getNumberofCountriesPainted(),
+                timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+              );
               if(mood.smileduration! > 0){
                 ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
                 Navigator.of(context).popAndPushNamed('/home',);

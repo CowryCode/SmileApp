@@ -20,23 +20,23 @@ class ChatWidget extends StatefulWidget {
 }
 
 class _ChatWidgetState extends State<ChatWidget> {
-  //ConversationList _conversationList = new ConversationList();
-  //BuddyConversationList _buddyconversationList = new BuddyConversationList();
-  //User _currentUser = new User.init().getCurrentUser();
-  //Doctor _currentDoctor = new Doctor.init().getCurrentDoctor();
+
   final _myListKey = GlobalKey<AnimatedListState>();
   final myController = TextEditingController();
 
+  Stopwatch? stopwatch;
 
-  //final _channel = WebSocketChannel.connect(Uri.parse(CHAT_URL),);
- // final _channel = WebSocketChannel.connect(Uri.parse("wss://echo.websocket.events"),);
+  @override
+  void initState() {
+    stopwatch = Stopwatch();
+    stopwatch!.start();
+  }
 
   @override
   void dispose() {
-    print('CHAT DISPOSED CALLED');
-    myController.dispose();
     super.dispose();
-
+    myController.dispose();
+    stopwatch?.stop();
   }
 
   Future<bool> _onWillPop() async {
@@ -328,7 +328,8 @@ class _ChatWidgetState extends State<ChatWidget> {
         mood.captureMood(
             rating: response.rating.round(),
             smileduration: 0.0,
-            countrycount: 0
+            countrycount: 0,
+          timeSpent: stopwatch!.elapsedMilliseconds / 1000,
         );
         ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
         Navigator.of(context).popAndPushNamed('/home',);
@@ -345,11 +346,12 @@ class _ChatWidgetState extends State<ChatWidget> {
         builder: (context) => Dialog(
           child: RatingView(
             onExit: (response){
-              MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+                  MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
               mood.captureMood(
                   rating: response.userrating,
                   smileduration: 0.0,
-                  countrycount: 0
+                  countrycount: 0,
+                timeSpent: stopwatch!.elapsedMilliseconds / 1000,
               );
               ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
               dispose();

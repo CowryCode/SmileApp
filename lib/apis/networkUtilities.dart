@@ -48,7 +48,7 @@ final double MinimumLocation = 0.0;
 final int MaximumVerticalLocation = 170;
 
 //SMILE GAME: NUMBER OF COUNTRIES TO PAINT BEFORE POP-UP
-final int COUNTRIES_BEFORE_POPUP = 4;
+final int COUNTRIES_BEFORE_POPUP = 3;
 
 
 

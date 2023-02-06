@@ -67,7 +67,6 @@ class ApiAccess {
       );
 
       if (response.statusCode == 200) {
-        print('LOGIN GOT HERE 2');
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
         // UPDATE USERPROFILE NOTIFIER
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
@@ -95,7 +94,8 @@ class ApiAccess {
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
 
         // UPDATE NUMBER OF COUNTRIES PAINTED
-        smileGameNofitier.setTodayScore(countryCount: profile.todayAchievedValue!);
+       // smileGameNofitier.setTodayScore(countryCount: profile.todayAchievedValue!);
+        smileGameNofitier.setTodayScore(countryCount:  profile.smilegrampoints!);
 
         Localstorage().saveString(key_login_token, logincode);
         Localstorage().saveBoolean(key_login_status, true);
@@ -150,7 +150,8 @@ class ApiAccess {
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
 
         // UPDATE NUMBER OF COUNTRIES PAINTED
-        smileGameNofitier.setTodayScore(countryCount: profile.todayAchievedValue!);
+       // smileGameNofitier.setTodayScore(countryCount: profile.todayAchievedValue!);
+        smileGameNofitier.setTodayScore(countryCount: profile.smilegrampoints!);
 
         return profile;
       } else {
@@ -251,6 +252,7 @@ class ApiAccess {
               "endMood" : moodModel.endMood,
               "smileduration" : moodModel.smileduration,
               "countrycount" : moodModel.countrycount,
+              "timeSpentSec" : moodModel.timeSpentSec,
             }),
       );
 

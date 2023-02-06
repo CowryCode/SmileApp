@@ -9,6 +9,7 @@ class MoodModel {
   int? endMood;
   double? smileduration;
   int? countrycount;
+  double? timeSpentSec;
 
   MoodModel(
       {this.startDate,
@@ -18,7 +19,8 @@ class MoodModel {
         this.endTime,
         this.endMood,
         this.smileduration,
-        this.countrycount
+        this.countrycount,
+        this.timeSpentSec
       });
 
   MoodModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class MoodModel {
     endMood = json['endMood'];
     smileduration = json['smileduration'];
     countrycount = json['countrycount'];
+    timeSpentSec = json['timeSpentSec'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +45,7 @@ class MoodModel {
     data['endMood'] = this.endMood;
     data['smileduration'] = this.smileduration;
     data['countrycount'] = this.countrycount;
+    data['timeSpentSec'] = this.timeSpentSec;
     return data;
   }
 
@@ -52,15 +56,14 @@ class MoodModel {
     this.startMood = rating;
   }
 
-  void captureMood({required int rating, required double smileduration, required int countrycount}){
+  void captureMood({required int rating, required double smileduration, required int countrycount, required double timeSpent}){
     Utilities utilities = Utilities();
     this.endDate = utilities.getDateFromDevice();
     this.endTime = utilities.getTimeFromDevice();
     this.endMood = rating;
     this.smileduration = smileduration;
     this.countrycount = countrycount;
-
-    print('SMILE DURATION IN SECONDS : ${this.smileduration}');
+    this.timeSpentSec = timeSpent;
   }
   void resetMood({required MoodModel savedMood}){
       this.startDate = savedMood.startDate;

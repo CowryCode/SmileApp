@@ -28,6 +28,20 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
   TextEditingController textEditingController = TextEditingController();
   final sentiment = Sentiment();
 
+  Stopwatch? stopwatch;
+
+  @override
+  void initState() {
+    stopwatch = Stopwatch();
+    stopwatch!.start();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    stopwatch?.stop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -229,7 +243,9 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
               mood.captureMood(
                   rating: response.userrating.round(),
                   smileduration: smileGameNofitier.getSmileDurationInSecound(),
-                  countrycount: smileGameNofitier.getNumberofCountriesPainted());
+                  countrycount: smileGameNofitier.getNumberofCountriesPainted(),
+                timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+              );
 
               ApiAccess().saveMood(moodModel: mood, url: Tribe_Mood_URL);
 
