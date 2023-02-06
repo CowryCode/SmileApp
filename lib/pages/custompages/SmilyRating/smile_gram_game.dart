@@ -57,6 +57,8 @@ class _SmileGramGameState extends State<SmileGramGame> {
           ValueListenableBuilder(
               valueListenable: smileGameNofitier,
               builder: (context, SmileGameVariables gamevariables, child){
+                print('COUNT IS : ${ gamevariables.numberOfStarMeetings}');
+
                 return Visibility(
                   visible: true,
                   child: AnimatedPositioned(

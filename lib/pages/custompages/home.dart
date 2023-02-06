@@ -482,7 +482,8 @@ class _HomeState extends State<Home> {
               TextButton(
                   onPressed: (){
                     print('CLICKED');
-                    smileGameNofitier.moveSmileGramGame(isSmileGram: true);
+                    //smileGameNofitier.moveSmileGramGame(isSmileGram: true);
+                    smileGameNofitier.updateMeetingCount();
                   },
                   child: Text("NEXT", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)
               ),
