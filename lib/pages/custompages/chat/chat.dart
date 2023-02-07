@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/pages/custompages/Questionnaire_Codes/MoodScale.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/chat/chatWidget.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
@@ -43,7 +44,12 @@ class _ChatWidgetState extends State<ChatWidget> {
   Future<bool> _onWillPop() async {
    // return _openRatingDialog() ?? false;
     _processPageExit();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+    if(userProfileNotifier.value.submittedBMI == false && (stopwatch!.elapsedMilliseconds / 1000 >= 15)){
+      _showBMIkAlert(context: context);
+    }else {
+      Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+    }
     return true;
   }
 
@@ -60,7 +66,11 @@ class _ChatWidgetState extends State<ChatWidget> {
               onPressed: () {
                 // _openRatingDialog();
                 _processPageExit();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+                if(userProfileNotifier.value.submittedBMI == false && (stopwatch!.elapsedMilliseconds / 1000 >= 15)){
+                  _showBMIkAlert(context: context);
+                }{
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+                }
               },
             ),
             shape: RoundedRectangleBorder(
@@ -331,6 +341,65 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
   }
 
+  _showBMIkAlert({required BuildContext context}) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Center(
+            child: Text(
+              'Daily Questionnaire',
+              style:  TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary,
+                fontFamily: 'Poppins',
+                fontSize: 22.0,
+              ),
+              textAlign: TextAlign.center,
+            )),
+        content: Text(
+          "We noticed that you are yet to complete today's questionnaire. \n \n Completing this questionnaire will help us improve the app. \n \n Will you want to complete it now?",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black45,
+            fontFamily: 'Poppins',
+            fontSize: 14.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('No', style:  TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                  fontFamily: 'Poppins',
+                  fontSize: 22.0,
+                ),),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MoodScale()));
+                },
+                child: Text('Yes', style:  TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontFamily: 'Poppins',
+                  fontSize: 22.0,
+                ),
+                ),
+              ),
+            ],
+          )
+
+        ],
+      ),
+    );
+  }
 
   // RatingDialog _showRatingAlert(BuildContext context) {
   //   return RatingDialog(

@@ -258,7 +258,6 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         MoodModel svdMood = MoodModel.fromJson(jsonDecode(response.body));
-        print('THE RECORDED SMILE DURATION ${svdMood.toJson()}');
         smileAppValueNotifier.resetMoodObject(savedmood: svdMood);
         smileGameNofitier.resetGameVariables();
         refreshData(); // Just implemented while pilot was going on

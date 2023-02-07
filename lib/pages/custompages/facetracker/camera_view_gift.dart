@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:SmileApp/apis/models/moodmodel.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
+import 'package:SmileApp/pages/custompages/Questionnaire_Codes/MoodScale.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/SmileGram_Achievement_Alert.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_game_view.dart';
@@ -156,7 +157,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
    // return _openRatingDialog(ratingOnly: widget.readmessage) ?? false;
     smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
     _processPageExit();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+    if(userProfileNotifier.value.submittedBMI == false && (stopwatch!.elapsedMilliseconds / 1000 >= 15)){
+      _showBMIkAlert(context: context);
+    }
+    {
+      Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+    }
     return false;
   }
 
@@ -172,7 +179,14 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             onPressed: () {
               //_openRatingDialog(ratingOnly: widget.readmessage);
               _processPageExit();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+              if(userProfileNotifier.value.submittedBMI == false && (stopwatch!.elapsedMilliseconds / 1000 >= 15)){
+                _showBMIkAlert(context: context);
+              }
+              {
+                Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (context) =>
+                        NavigateTabsWidget(showEmotionalert: false,)));
+              }
             },
           ),
           backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -673,6 +687,66 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             },
           ),
         ));
+  }
+
+  _showBMIkAlert({required BuildContext context}) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Center(
+            child: Text(
+              'Daily Questionnaire',
+              style:  TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary,
+                fontFamily: 'Poppins',
+                fontSize: 22.0,
+              ),
+              textAlign: TextAlign.center,
+            )),
+        content: Text(
+          "We noticed that you are yet to complete today's questionnaire. \n \n Completing this questionnaire will help us improve the app. \n \n Will you want to complete it now?",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black45,
+            fontFamily: 'Poppins',
+            fontSize: 14.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('No', style:  TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                  fontFamily: 'Poppins',
+                  fontSize: 22.0,
+                ),),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MoodScale()));
+                },
+                child: Text('Yes', style:  TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontFamily: 'Poppins',
+                  fontSize: 22.0,
+                ),
+                ),
+              ),
+            ],
+          )
+
+        ],
+      ),
+    );
   }
 
 

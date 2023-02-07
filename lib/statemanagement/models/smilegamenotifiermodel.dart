@@ -128,7 +128,8 @@ class SmileGameVariables {
 
   void refresh(){
     this.targetHorrizontalposition = TargetObjectHorrizontalInitializer;
-    this.movingObjectHorrizontalposition = TargetObjectHorrizontalInitializer - TargetObjectDistance;
+    //this.movingObjectHorrizontalposition = TargetObjectHorrizontalInitializer - TargetObjectDistance;
+    this.movingObjectHorrizontalposition = MaximumHorrizontalLocation;
     this.numberOfStarMeetings = 0;
     this.smileDurationCounter = 0;
   }

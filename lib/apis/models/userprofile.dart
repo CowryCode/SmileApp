@@ -11,6 +11,7 @@ class UserProfile {
   double? accumulatedValue;
   String? smilegrammappoints;
   String? deviceId;
+  bool? submittedBMI;
 
   LeaderBoard? leaderBoard;
   UnreadTribeMessage? unreadTribeMessage;
@@ -28,6 +29,7 @@ class UserProfile {
         this.smilegrampoints,
         this.smilegrammappoints,
         this.deviceId,
+        this.submittedBMI,
         this.leaderBoard,
         this.unreadTribeMessage,
         this.readTribeMessages,
@@ -45,6 +47,7 @@ class UserProfile {
     accumulatedValue = json['accumulatedValue'];
     smilegrammappoints = json['smilegrammappoints'];
     deviceId = json['deviceId'];
+    submittedBMI = json['submittedBMI'];
     todayTargetValue = json['todayTargetValue'];
     todayAchievedValue = json['todayAchievedValue'];
 
@@ -64,6 +67,7 @@ class UserProfile {
     data['accumulatedValue'] = this.accumulatedValue;
     data['smilegrammappoints'] = this.smilegrammappoints;
     data['deviceId'] = this.deviceId;
+    data['submittedBMI'] = this.submittedBMI;
     data['todayTargetValue'] = this.todayTargetValue;
     data['todayAchievedValue'] = this.todayAchievedValue;
 

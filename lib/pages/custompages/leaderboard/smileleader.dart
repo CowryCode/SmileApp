@@ -239,7 +239,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
           // TextButton( onPressed: () => Navigator.pop(context, 'OK'), child: const Text('OK'),),
           TextButton(
             onPressed: () {
-              ApiAccess().Logout();
+              //ApiAccess().Logout();
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
             },
             child: const Text('OK'),

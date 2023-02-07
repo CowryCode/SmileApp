@@ -30,7 +30,7 @@ Future<void> main() async {  // The code before I added Flutter_redux
 
   ((){
     if(loginStatus != null){
-      Future.delayed(const Duration(milliseconds: 100)); //TODO: ADDED THIS AS A HACK TO SOLVE THE Rating PageView Issue (Original)
+     // Future.delayed(const Duration(milliseconds: 100)); //TODO: ADDED THIS AS A HACK TO SOLVE THE Rating PageView Issue (Original)
       if (loginStatus == true){
         runApp(MyApp(landingURL: '/home_with_alert',));
       }else{

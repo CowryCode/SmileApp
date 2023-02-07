@@ -5,6 +5,7 @@ import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
+import 'package:SmileApp/pages/custompages/Questionnaire_Codes/MoodScale.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/SmileGram_Achievement_Alert.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/smile_gram_game.dart';
@@ -38,9 +39,9 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    if(userProfileNotifier.value.name == null ){
-
-    }
+    // if(userProfileNotifier.value.name == null ){
+    //
+    // }
     // TRAP NOTIFICATIONS
     final firebaseMessaging = FCM();
     firebaseMessaging.setNotifications();
@@ -708,11 +709,71 @@ class _HomeState extends State<Home> {
           // TextButton( onPressed: () => Navigator.pop(context, 'OK'), child: const Text('OK'),),
           TextButton(
             onPressed: () {
-              ApiAccess().Logout();
+             // ApiAccess().Logout();
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
             },
             child: const Text('OK'),
           ),
+        ],
+      ),
+    );
+  }
+
+  _showBMIkAlert({required BuildContext context}) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Center(
+            child: Text(
+              'Daily Questionnaire',
+              style:  TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary,
+                fontFamily: 'Poppins',
+                fontSize: 22.0,
+              ),
+              textAlign: TextAlign.center,
+            )),
+        content: Text(
+          "We noticed that you are yet to complete today's questionnaire. \n \n Completing this questionnaire will help us improve the app. \n \n Will you want to complete it now?",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black45,
+            fontFamily: 'Poppins',
+            fontSize: 14.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('No', style:  TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                  fontFamily: 'Poppins',
+                  fontSize: 22.0,
+                ),),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MoodScale()));
+                },
+                child: Text('Yes', style:  TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontFamily: 'Poppins',
+                  fontSize: 22.0,
+                ),
+                ),
+              ),
+            ],
+          )
+
         ],
       ),
     );
