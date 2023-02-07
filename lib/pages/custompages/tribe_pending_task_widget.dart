@@ -132,11 +132,10 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                   ),
                 ),
                 TextButton(
-                  //TODO: IMPLEMENT ML TO FILTER THIS TEXT
                     onPressed: (){
                       double sentimentScore = sentiment.analysis(textEditingController.value.text).entries.elementAt(1).value;
                       if(sentimentScore > 0){
-                        __processPageExit();
+                        _processPageExit();
                         setState(() {
                           showfulltext = !showfulltext;
                         });
@@ -188,7 +187,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
     );
   }
 
-  void __processPageExit() async{
+  void _processPageExit() async{
     ApiAccess().replyTribeCall(tribeRequest: widget.msg, reply: textEditingController.value.text);
     // _openRatingDialog(ratingOnly: true);
     MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
@@ -198,7 +197,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
       countrycount: 0,
       timeSpent: stopwatch!.elapsedMilliseconds / 1000,
     );
-    ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
+    ApiAccess().saveMood(moodModel: mood, url: Tribe_Mood_URL);
   }
 
   RatingDialog _showRatingAlert(BuildContext context, {required bool justreadmessage}){
@@ -239,7 +238,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
   }
 
 
-  _openRatingDialog___________________({required bool ratingOnly}) {
+  _openRatingDialog({required bool ratingOnly}) {
     smileAppValueNotifier.updateSoundDeactivation(deactivateSound: true);
     showDialog(
         context: context,

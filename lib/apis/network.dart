@@ -229,6 +229,7 @@ class ApiAccess {
     try{
       print('THE RECORDED START : ${moodModel.startMood}');
       print('THE RECORDED END : ${moodModel.endMood }');
+      print('THE ENTIRE MODEL : ${moodModel.toJson()}');
       if(moodModel.startMood == null || moodModel.endMood == null) return;
       String? token;
       Future<String?> tk = Localstorage().getString(key_login_token);

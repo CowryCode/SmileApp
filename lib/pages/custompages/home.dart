@@ -52,6 +52,9 @@ class _HomeState extends State<Home> {
       if (result == true) {
         if (widget.checkEmotion == true) {
          // _openRatingDialog(ratingOnly: true);
+          MoodModel mood = MoodModel();
+          mood.initializeMood(rating: 0);
+          smileAppValueNotifier.initializeMoodNotifier(mood: mood);
         }else{
           ApiAccess().refreshData();
         }
@@ -60,9 +63,7 @@ class _HomeState extends State<Home> {
           ApiAccess().uploadDeviceIdentifier(deviceID: token!);
         });
       } else {
-        _showNetworkAlert(
-            context: context,
-            message: "It seems your device is not connected to \n the internet. Kindly check and login again.");
+        _showNetworkAlert(context: context);
       }
     });
   }
@@ -135,7 +136,7 @@ class _HomeState extends State<Home> {
                                 IconButton(
                                   onPressed: () {
                                     (ApiAccess().hasPayLoad() == false) ?
-                                    _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                                    _showNetworkAlert(context: context)
                                         :
                                     Navigator.pushReplacement(
                                         context,
@@ -165,7 +166,7 @@ class _HomeState extends State<Home> {
               TextButton(
                 onPressed: () {
                   (ApiAccess().hasPayLoad() == false) ?
-                  _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                  _showNetworkAlert(context: context)
                   :
                   showDialog<String>(
                     context: context,
@@ -308,7 +309,7 @@ class _HomeState extends State<Home> {
               TextButton(
                 onPressed: () {
                   (ApiAccess().hasPayLoad() == false) ?
-                  _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                  _showNetworkAlert(context: context)
                       :
                   showDialog<String>(
                     context: context,
@@ -393,7 +394,7 @@ class _HomeState extends State<Home> {
               TextButton(
                 onPressed: () {
                   (ApiAccess().hasPayLoad() == false) ?
-                  _showNetworkAlert(context: context, message: "It seems your device is not connected to \n the internet. Kindly check and login again.")
+                  _showNetworkAlert(context: context)
                       :
                   Navigator.of(context).pushNamed('/tribemessages');
                 },
@@ -685,7 +686,7 @@ class _HomeState extends State<Home> {
             ));
   }
 
-  _showNetworkAlert({required BuildContext context, required String message,}) {
+  _showNetworkAlert({required BuildContext context}) {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -696,7 +697,7 @@ class _HomeState extends State<Home> {
               size: 26,
             )),
         content: Text(
-          '$message',
+          "It seems your device is not connected to the internet, Kindly check.",
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black45,

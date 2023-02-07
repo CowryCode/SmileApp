@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:SmileApp/apis/diskstorage.dart';
+import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/apis/networkUtilities.dart';
 import 'package:SmileApp/apis/secret.dart';
 import 'package:SmileApp/firebase_options.dart';
@@ -32,6 +33,7 @@ Future<void> main() async {  // The code before I added Flutter_redux
     if(loginStatus != null){
      // Future.delayed(const Duration(milliseconds: 100)); //TODO: ADDED THIS AS A HACK TO SOLVE THE Rating PageView Issue (Original)
       if (loginStatus == true){
+        ApiAccess().refreshData();
         runApp(MyApp(landingURL: '/home_with_alert',));
       }else{
         runApp(MyApp(landingURL: '/',));

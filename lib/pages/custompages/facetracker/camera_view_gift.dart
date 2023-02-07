@@ -179,7 +179,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             onPressed: () {
               //_openRatingDialog(ratingOnly: widget.readmessage);
               _processPageExit();
-              if(userProfileNotifier.value.submittedBMI == false && (stopwatch!.elapsedMilliseconds / 1000 >= 15)){
+              if(userProfileNotifier.value.submittedBMI == false && userProfileNotifier.value.accumulatedTimeSpentOnApp! > 90){
                 _showBMIkAlert(context: context);
               }
               {

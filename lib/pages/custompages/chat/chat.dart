@@ -66,7 +66,7 @@ class _ChatWidgetState extends State<ChatWidget> {
               onPressed: () {
                 // _openRatingDialog();
                 _processPageExit();
-                if(userProfileNotifier.value.submittedBMI == false && (stopwatch!.elapsedMilliseconds / 1000 >= 15)){
+                if(userProfileNotifier.value.submittedBMI == false && userProfileNotifier.value.accumulatedTimeSpentOnApp! > 90){
                   _showBMIkAlert(context: context);
                 }{
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
