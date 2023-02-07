@@ -9,6 +9,7 @@ import 'package:SmileApp/pages/custompages/chat/model/buddychat.dart';
 import 'package:SmileApp/pages/custompages/chat/model/buddyconversation.dart';
 import 'package:SmileApp/pages/custompages/chat/model/doctor.dart';
 import 'package:SmileApp/pages/custompages/chat/model/user.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/statemanagement/notifiers/chatnotifier.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,10 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 
   Future<bool> _onWillPop() async {
-    return _openRatingDialog() ?? false;
+   // return _openRatingDialog() ?? false;
+    _processPageExit();
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+    return true;
   }
 
   @override
@@ -54,13 +58,9 @@ class _ChatWidgetState extends State<ChatWidget> {
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
               onPressed: () {
-                // showDialog(
-                //   context: context,
-                //   barrierDismissible: true,
-                //   // set to false if you want to force a rating
-                //   builder: (context) => _showRatingAlert(context),
-                // );
-                _openRatingDialog();
+                // _openRatingDialog();
+                _processPageExit();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
               },
             ),
             shape: RoundedRectangleBorder(
@@ -234,6 +234,18 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
   }
 
+  void _processPageExit() async{
+    MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+    mood.captureMood(
+      //rating: response.userrating,
+      rating: 0,
+      smileduration: 0.0,
+      countrycount: 0,
+      timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+    );
+    ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
+  }
+
   Widget _getReceivedMessageLayout1(
       @required String name,
       @required String messageContent,
@@ -293,64 +305,18 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
   }
 
-  RatingDialog _showRatingAlert(BuildContext context) {
-    return RatingDialog(
-      showCloseButton: false,
-      starSize: 30.0,
-      initialRating: 0.0,
-      // your app's name?
-      title: Text(
-        'Rate Your Mood',
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      // encourage your user to leave a high rating?
-      message: Text(
-        'How do you feel chatting with the bot?',
-        textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 15),
-      ),
-      // // your app's logo?
-      //image: const FlutterLogo(size: 100),
-      image: Image.asset(
-        "assets/logo1.jpeg",
-        width: 100,
-        height: 100,
-      ),
-      submitButtonText: 'Submit',
-      commentHint: 'Set your custom comment hint',
-      onCancelled: () => print('cancelled'),
-      onSubmitted: (response) {
-        MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-        mood.captureMood(
-            rating: response.rating.round(),
-            smileduration: 0.0,
-            countrycount: 0,
-          timeSpent: stopwatch!.elapsedMilliseconds / 1000,
-        );
-        ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
-        Navigator.of(context).popAndPushNamed('/home',);
-      },
-      submitButtonTextStyle: const TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
-    );
-  }
-
-  //_openRatingDialog(BuildContext context1) {
   _openRatingDialog() {
     showDialog(
         context: context,
         builder: (context) => Dialog(
           child: RatingView(
+            ratingonly: true,
             onExit: (response){
-                  MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+              MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
               mood.captureMood(
-                  rating: response.userrating,
-                  smileduration: 0.0,
-                  countrycount: 0,
+                rating: response.userrating,
+                smileduration: 0.0,
+                countrycount: 0,
                 timeSpent: stopwatch!.elapsedMilliseconds / 1000,
               );
               ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
@@ -365,4 +331,48 @@ class _ChatWidgetState extends State<ChatWidget> {
     );
   }
 
+
+  // RatingDialog _showRatingAlert(BuildContext context) {
+  //   return RatingDialog(
+  //     showCloseButton: false,
+  //     starSize: 30.0,
+  //     initialRating: 0.0,
+  //     title: Text(
+  //       'Rate Your Mood',
+  //       textAlign: TextAlign.center,
+  //       style: const TextStyle(
+  //         fontSize: 25,
+  //         fontWeight: FontWeight.bold,
+  //       ),
+  //     ),
+  //     message: Text(
+  //       'How do you feel chatting with the bot?',
+  //       textAlign: TextAlign.center,
+  //       style: const TextStyle(fontSize: 15),
+  //     ),
+  //     image: Image.asset(
+  //       "assets/logo1.jpeg",
+  //       width: 100,
+  //       height: 100,
+  //     ),
+  //     submitButtonText: 'Submit',
+  //     commentHint: 'Set your custom comment hint',
+  //     onCancelled: () => print('cancelled'),
+  //     onSubmitted: (response) {
+  //       MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+  //       mood.captureMood(
+  //           rating: response.rating.round(),
+  //           smileduration: 0.0,
+  //           countrycount: 0,
+  //         timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+  //       );
+  //       ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
+  //       Navigator.of(context).popAndPushNamed('/home',);
+  //     },
+  //     submitButtonTextStyle: const TextStyle(
+  //         fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
+  //   );
+  // }
+
+  //_openRatingDialog(BuildContext context1) {
 }

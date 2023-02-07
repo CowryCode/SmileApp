@@ -105,7 +105,7 @@ class _TribePageState extends State<TribePage> {
                   if ((value.length < 1)) {
                     return Container(
                       margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 200),
-                          child: Text(" No Request to reply to yet"),
+                          child: Text(" No Requests yet"),
                         );
                   } else {
                     return Flexible(

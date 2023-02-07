@@ -9,6 +9,7 @@ import 'package:SmileApp/pages/custompages/SmilyRating/smile_gram_game.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/countdowntimer.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicReadMessage.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/glassmorphicsmilegramdisplay.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -152,15 +153,11 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   Future<bool> _onWillPop() async {
-    // return (await showDialog(
-    //       context: context,
-    //       barrierDismissible: true,
-    //       // set to false if you want to force a rating
-    //       builder: (context) =>
-    //           _showRatingAlert(context, justreadmessage: widget.readmessage),
-    //     )) ??
-    //     false;
-    return _openRatingDialog(ratingOnly: widget.readmessage) ?? false;
+   // return _openRatingDialog(ratingOnly: widget.readmessage) ?? false;
+    smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
+    _processPageExit();
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+    return false;
   }
 
   @override
@@ -173,7 +170,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
             onPressed: () {
-              _openRatingDialog(ratingOnly: widget.readmessage);
+              //_openRatingDialog(ratingOnly: widget.readmessage);
+              _processPageExit();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
             },
           ),
           backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -242,7 +241,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
 
               valueListenable: smileAppValueNotifier.value.showShowMoodRating,
               builder: (context, bool showmoodalert, child) {
-                if(showmoodalert == true){
+                if(showmoodalert == true && widget.readmessage == false){
                  // smileAppValueNotifier.showMoodRating(show_pop_up: true);
                   Future.delayed(Duration(seconds: 1),(){
                     return _achievementAlert(ratingOnly: true);
@@ -592,58 +591,21 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  RatingDialog _showRatingAlert(BuildContext context,
-      {required bool justreadmessage}) {
-    return RatingDialog(
-      showCloseButton: false,
-      initialRating: 0.0,
-      starSize: 30.0,
-      // your app's name?
-      title: Text(
-        'Rate Your Mood',
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      // encourage your user to leave a high rating?
-      message: Text(
-        (widget.readmessage == true)
-            ? 'How happy does it feel to unlock your message with a smile?'
-            : 'How happy does it feel to smile this long?',
-        textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 15),
-      ),
-      image: Image.asset(
-        "assets/logo1.jpeg",
-        width: 100,
-        height: 100,
-      ),
-      submitButtonText: 'Submit',
-      commentHint: 'Set your custom comment hint',
-      onCancelled: () => print('cancelled'),
-      onSubmitted: (response) {
-        MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-        mood.captureMood(
-            rating: response.rating.round(),
-            smileduration: smileGameNofitier.getSmileDurationInSecound(),
-            countrycount: smileGameNofitier.getNumberofCountriesPainted(),
-          timeSpent: stopwatch!.elapsedMilliseconds / 1000,
-        );
-
-        ApiAccess().saveMood(
-            moodModel: mood,
-            url: (widget.readmessage == true)
-                ? Tribe_Mood_URL
-                : SmileGram_Mood_URL);
-        Navigator.of(context).popAndPushNamed(
-          '/home',
-        );
-      },
-      submitButtonTextStyle: const TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
+  _processPageExit() async{
+    smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
+    MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+    mood.captureMood(
+      rating: 0,
+      smileduration: smileGameNofitier.getSmileDurationInSecound(),
+      countrycount: smileGameNofitier.getNumberofCountriesPainted(),
+      timeSpent: stopwatch!.elapsedMilliseconds / 1000,
     );
+    if(mood.smileduration! > 0){
+      ApiAccess().saveMood(moodModel: mood, url: (widget.readmessage == true) ? Tribe_Mood_URL : SmileGram_Mood_URL);
+     // Navigator.of(context).popAndPushNamed('/home',);
+    }
+
+    //Navigator.of(context).popAndPushNamed('/home');
   }
 
   _openRatingDialog({required bool ratingOnly}) {
@@ -652,7 +614,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         context: context,
         builder: (context) => Dialog(
           child: RatingView(
-            ratingonly: ratingOnly,
+           // ratingonly: ratingOnly,
+            ratingonly: true,
             onExit: (response){
               smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
               MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
@@ -711,5 +674,60 @@ class _CameraViewGiftState extends State<CameraViewGift> {
           ),
         ));
   }
+
+
+  // RatingDialog _showRatingAlert(BuildContext context,
+  //     {required bool justreadmessage}) {
+  //   return RatingDialog(
+  //     showCloseButton: false,
+  //     initialRating: 0.0,
+  //     starSize: 30.0,
+  //     // your app's name?
+  //     title: Text(
+  //       'Rate Your Mood',
+  //       textAlign: TextAlign.center,
+  //       style: const TextStyle(
+  //         fontSize: 25,
+  //         fontWeight: FontWeight.bold,
+  //       ),
+  //     ),
+  //     message: Text(
+  //       (widget.readmessage == true)
+  //           ? 'How happy does it feel to unlock your message with a smile?'
+  //           : 'How happy does it feel to smile this long?',
+  //       textAlign: TextAlign.center,
+  //       style: const TextStyle(fontSize: 15),
+  //     ),
+  //     image: Image.asset(
+  //       "assets/logo1.jpeg",
+  //       width: 100,
+  //       height: 100,
+  //     ),
+  //     submitButtonText: 'Submit',
+  //     commentHint: 'Set your custom comment hint',
+  //     onCancelled: () => print('cancelled'),
+  //     onSubmitted: (response) {
+  //       MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+  //       mood.captureMood(
+  //         rating: response.rating.round(),
+  //         smileduration: smileGameNofitier.getSmileDurationInSecound(),
+  //         countrycount: smileGameNofitier.getNumberofCountriesPainted(),
+  //         timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+  //       );
+  //
+  //       ApiAccess().saveMood(
+  //           moodModel: mood,
+  //           url: (widget.readmessage == true)
+  //               ? Tribe_Mood_URL
+  //               : SmileGram_Mood_URL);
+  //       Navigator.of(context).popAndPushNamed(
+  //         '/home',
+  //       );
+  //     },
+  //     submitButtonTextStyle: const TextStyle(
+  //         fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
+  //   );
+  // }
+
 
 }

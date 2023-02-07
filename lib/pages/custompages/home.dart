@@ -37,9 +37,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
-    // bool result = await InternetConnectionChecker().hasConnection;
-
-   // if (widget.checkEmotion == false) ApiAccess().refreshData();
 
     if(userProfileNotifier.value.name == null ){
 
@@ -53,7 +50,7 @@ class _HomeState extends State<Home> {
 
       if (result == true) {
         if (widget.checkEmotion == true) {
-          _openRatingDialog(ratingOnly: true);
+         // _openRatingDialog(ratingOnly: true);
         }else{
           ApiAccess().refreshData();
         }
@@ -712,7 +709,7 @@ class _HomeState extends State<Home> {
           TextButton(
             onPressed: () {
               ApiAccess().Logout();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
             },
             child: const Text('OK'),
           ),

@@ -259,7 +259,7 @@ class _RatingViewState extends State<RatingView> {
         ),
         Text(
          (msg == null) ? 'Let us know how you feel after using this feature.' : msg,
-          style: TextStyle(color: Colors.black45),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
         SizedBox(

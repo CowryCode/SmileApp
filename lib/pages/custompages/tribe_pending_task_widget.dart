@@ -136,13 +136,10 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                     onPressed: (){
                       double sentimentScore = sentiment.analysis(textEditingController.value.text).entries.elementAt(1).value;
                       if(sentimentScore > 0){
-                        ApiAccess().replyTribeCall(tribeRequest: widget.msg, reply: textEditingController.value.text);
-                        // showDialog(
-                        //   context: context,
-                        //   barrierDismissible: true, // set to false if you want to force a rating
-                        //   builder: (context) => _showRatingAlert(context, justreadmessage: true),
-                        // );
-                        _openRatingDialog(ratingOnly: true);
+                        __processPageExit();
+                        setState(() {
+                          showfulltext = !showfulltext;
+                        });
                       }else {
                         showDialog<String>(
                           context: context,
@@ -191,7 +188,20 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
     );
   }
 
-  RatingDialog _showRatingAlert_1(BuildContext context, {required bool justreadmessage}){
+  void __processPageExit() async{
+    ApiAccess().replyTribeCall(tribeRequest: widget.msg, reply: textEditingController.value.text);
+    // _openRatingDialog(ratingOnly: true);
+    MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
+    mood.captureMood(
+      rating: 0,
+      smileduration: 0.0,
+      countrycount: 0,
+      timeSpent: stopwatch!.elapsedMilliseconds / 1000,
+    );
+    ApiAccess().saveMood(moodModel: mood, url: PocketBuddy_Mood_URL);
+  }
+
+  RatingDialog _showRatingAlert(BuildContext context, {required bool justreadmessage}){
     return RatingDialog(
       showCloseButton: false,
       initialRating: 0.0,
@@ -229,14 +239,14 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
   }
 
 
-  _openRatingDialog({required bool ratingOnly}) {
+  _openRatingDialog___________________({required bool ratingOnly}) {
     smileAppValueNotifier.updateSoundDeactivation(deactivateSound: true);
     showDialog(
         context: context,
         builder: (context) => Dialog(
           child: RatingView(
             ratingonly: ratingOnly,
-            msg: "How good do you feel now for making another person smile?",
+            msg: "Thank you for making someone else have a better day. \n How goes this action make you feel?",
             onExit: (response){
               smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
               MoodModel mood = smileAppValueNotifier.value.moodmodel.value;

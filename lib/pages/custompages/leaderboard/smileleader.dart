@@ -168,50 +168,48 @@ class _LeadderBoardState extends State<LeadderBoard> {
             ),
           ],
         ),
-        //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
         HappinessMap(),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              ValueListenableBuilder(
-                // valueListenable: counterNotifier,
-                valueListenable: smileAppValueNotifier.value.nextCountry,
-                builder: (context, String value, child) {
-                  return Text(
-                    '   $value',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                      fontFamily: 'Poppins',
-                      fontSize: 16.0,
-                    ),
-                  );
-                },
-              ),
-              Text(
-                'Needs your smile to be GREEN ',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                  fontFamily: 'Poppins',
-                  fontSize: 16.0,
-                ),
-              ),
-              IconButton(
-                  onPressed: (){
-                    smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-                    Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
-                  },
-                  icon: Icon(FontAwesomeIcons.play,color: Colors.green,)),
-            ],
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.start,
+        //     children: <Widget>[
+        //       ValueListenableBuilder(
+        //         valueListenable: smileAppValueNotifier.value.nextCountry,
+        //         builder: (context, String value, child) {
+        //           return Text(
+        //             '   $value',
+        //             textAlign: TextAlign.center,
+        //             overflow: TextOverflow.ellipsis,
+        //             style: const TextStyle(
+        //               fontWeight: FontWeight.bold,
+        //               color: Colors.red,
+        //               fontFamily: 'Poppins',
+        //               fontSize: 16.0,
+        //             ),
+        //           );
+        //         },
+        //       ),
+        //       Text(
+        //         'Needs your smile to be GREEN ',
+        //         textAlign: TextAlign.center,
+        //         overflow: TextOverflow.ellipsis,
+        //         style: const TextStyle(
+        //           fontWeight: FontWeight.bold,
+        //           color: Colors.green,
+        //           fontFamily: 'Poppins',
+        //           fontSize: 16.0,
+        //         ),
+        //       ),
+        //       IconButton(
+        //           onPressed: (){
+        //             smileAppValueNotifier.updateShowCountDown(showCoundown: true);
+        //             Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
+        //           },
+        //           icon: Icon(FontAwesomeIcons.play,color: Colors.green,)),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }
