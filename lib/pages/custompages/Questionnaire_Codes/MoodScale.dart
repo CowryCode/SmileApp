@@ -6,6 +6,7 @@ import 'package:SmileApp/pages/custompages/Questionnaire_Codes/ConstantWidget.da
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/Constants.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/DataFile.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/MoodQModel.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,9 @@ class _MoodScale extends State<MoodScale> {
 
   Future<bool> _onWillPop() async {
 
-   Navigator.of(context).popAndPushNamed('/home',);
+  // Navigator.of(context).popAndPushNamed('/home',);
+   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+
    return false;
   }
 

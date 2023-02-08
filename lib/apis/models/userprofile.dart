@@ -13,6 +13,7 @@ class UserProfile {
   String? deviceId;
   bool? submittedBMI;
   double? accumulatedTimeSpentOnApp;
+  double? todayAccumulatedSpentTime;
 
   LeaderBoard? leaderBoard;
   UnreadTribeMessage? unreadTribeMessage;
@@ -32,6 +33,7 @@ class UserProfile {
         this.deviceId,
         this.submittedBMI,
         this.accumulatedTimeSpentOnApp,
+        this.todayAccumulatedSpentTime,
         this.leaderBoard,
         this.unreadTribeMessage,
         this.readTribeMessages,
@@ -51,6 +53,7 @@ class UserProfile {
     deviceId = json['deviceId'];
     submittedBMI = json['submittedBMI'];
     accumulatedTimeSpentOnApp = json['accumulatedTimeSpentOnApp'];
+    todayAccumulatedSpentTime = json['todayAccumulatedSpentTime'];
     todayTargetValue = json['todayTargetValue'];
     todayAchievedValue = json['todayAchievedValue'];
 
@@ -72,6 +75,7 @@ class UserProfile {
     data['deviceId'] = this.deviceId;
     data['submittedBMI'] = this.submittedBMI;
     data['accumulatedTimeSpentOnApp'] = this.accumulatedTimeSpentOnApp;
+    data['todayAccumulatedSpentTime'] = this.todayAccumulatedSpentTime;
     data['todayTargetValue'] = this.todayTargetValue;
     data['todayAchievedValue'] = this.todayAchievedValue;
 

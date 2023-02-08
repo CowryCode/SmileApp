@@ -126,7 +126,7 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
-        // if (profile != null )  print('Profile Detail : ${profile.toJson()}');
+
         smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
 
         //LEADER BOARD
@@ -227,9 +227,6 @@ class ApiAccess {
 
   void saveMood({required MoodModel moodModel, required String url}) async {
     try{
-      print('THE RECORDED START : ${moodModel.startMood}');
-      print('THE RECORDED END : ${moodModel.endMood }');
-      print('THE ENTIRE MODEL : ${moodModel.toJson()}');
       if(moodModel.startMood == null || moodModel.endMood == null) return;
       String? token;
       Future<String?> tk = Localstorage().getString(key_login_token);

@@ -145,26 +145,27 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     }
   }
 
+
+
   @override
   void dispose() {
     _stopLiveFeed();
     Wakelock.disable();
-    super.dispose();
     stopwatch?.stop();
+    super.dispose();
   }
 
   Future<bool> _onWillPop() async {
    // return _openRatingDialog(ratingOnly: widget.readmessage) ?? false;
     smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
     _processPageExit();
-    if(userProfileNotifier.value.submittedBMI == false && (stopwatch!.elapsedMilliseconds / 1000 >= 15)){
-      _showBMIkAlert(context: context);
-    }
-    {
+    if(userProfileNotifier.value.submittedBMI == false && userProfileNotifier.value.todayAccumulatedSpentTime! > DURATION_BEFORE_BMI_POPUP){
+      _showBMIkAlert();
+    }else{
       Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
     }
-    return false;
+    return true;
   }
 
   @override
@@ -179,10 +180,9 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             onPressed: () {
               //_openRatingDialog(ratingOnly: widget.readmessage);
               _processPageExit();
-              if(userProfileNotifier.value.submittedBMI == false && userProfileNotifier.value.accumulatedTimeSpentOnApp! > 90){
-                _showBMIkAlert(context: context);
-              }
-              {
+              if(userProfileNotifier.value.submittedBMI == false && userProfileNotifier.value.todayAccumulatedSpentTime! > DURATION_BEFORE_BMI_POPUP){
+                _showBMIkAlert();
+              }else{
                 Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (context) =>
                         NavigateTabsWidget(showEmotionalert: false,)));
@@ -689,7 +689,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
         ));
   }
 
-  _showBMIkAlert({required BuildContext context}) {
+  _showBMIkAlert() {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -720,7 +720,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
                 },
                 child: Text('No', style:  TextStyle(
                   fontWeight: FontWeight.bold,
