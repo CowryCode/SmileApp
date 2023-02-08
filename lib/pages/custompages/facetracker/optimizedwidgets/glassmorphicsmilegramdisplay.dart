@@ -115,9 +115,9 @@ class _GlassmorphicSmilegramDisplayState
                           (userfile.smilegrampoints == null)
                               ? " Pending:"
                               : " Pending:  $pending",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.black.withOpacity(0.5),
                             fontFamily: 'Poppins',
                             fontSize: 14.0,
                           ),
@@ -139,9 +139,9 @@ class _GlassmorphicSmilegramDisplayState
                       builder: (context, UserProfile userfile, child) {
                         return Text(
                          " Completed:  ${userfile.smilegrampoints}",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.black.withOpacity(0.5),
                             fontFamily: 'Poppins',
                             fontSize: 14.0,
                           ),

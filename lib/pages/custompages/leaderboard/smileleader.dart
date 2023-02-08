@@ -1,3 +1,4 @@
+import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happinessmap.dart';
@@ -35,7 +36,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
     return WillPopScope(
       onWillPop: () async => false,
       child: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -61,7 +62,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
             bottom: const TabBar(
               tabs: [
                 Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
-                Tab(icon: Icon(FontAwesomeIcons.thumbsUp,color: Colors.white,semanticLabel: "Progress",)),
+               // Tab(icon: Icon(FontAwesomeIcons.thumbsUp,color: Colors.white,semanticLabel: "Progress",)),
                // Tab(icon: Icon(FontAwesomeIcons.barsProgress,color: Colors.white,semanticLabel: "Progress",)),
                 Tab(icon: Icon(FontAwesomeIcons.trophy,color: Colors.white,semanticLabel: "LeaderBoard",)),
               ],
@@ -71,7 +72,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
           body:TabBarView(
             children: [
               _map1(),
-              PerformanceTable(),
+              //PerformanceTable(),
               GlobalPerformanceTable(),
             ],
           ),
@@ -169,47 +170,119 @@ class _LeadderBoardState extends State<LeadderBoard> {
           ],
         ),
         HappinessMap(),
-        // Align(
-        //   alignment: Alignment.bottomCenter,
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.start,
-        //     children: <Widget>[
-        //       ValueListenableBuilder(
-        //         valueListenable: smileAppValueNotifier.value.nextCountry,
-        //         builder: (context, String value, child) {
-        //           return Text(
-        //             '   $value',
-        //             textAlign: TextAlign.center,
-        //             overflow: TextOverflow.ellipsis,
-        //             style: const TextStyle(
-        //               fontWeight: FontWeight.bold,
-        //               color: Colors.red,
-        //               fontFamily: 'Poppins',
-        //               fontSize: 16.0,
-        //             ),
-        //           );
-        //         },
-        //       ),
-        //       Text(
-        //         'Needs your smile to be GREEN ',
-        //         textAlign: TextAlign.center,
-        //         overflow: TextOverflow.ellipsis,
-        //         style: const TextStyle(
-        //           fontWeight: FontWeight.bold,
-        //           color: Colors.green,
-        //           fontFamily: 'Poppins',
-        //           fontSize: 16.0,
-        //         ),
-        //       ),
-        //       IconButton(
-        //           onPressed: (){
-        //             smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-        //             Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
-        //           },
-        //           icon: Icon(FontAwesomeIcons.play,color: Colors.green,)),
-        //     ],
-        //   ),
-        // ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              ValueListenableBuilder(
+                valueListenable: smileAppValueNotifier.value.nextCountry,
+                builder: (context, String value, child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:<Widget> [
+                      Text(
+                        ' Next Country : ',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
+                          fontFamily: 'Poppins',
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      Text(
+                        ' $value',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red.withOpacity(0.5),
+                          fontFamily: 'Poppins',
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    FontAwesomeIcons.solidCircle,
+                    color: Colors.black45,
+                    size: 14,
+                  ),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  ValueListenableBuilder(
+                      valueListenable: userProfileNotifier,
+                      builder: (context, UserProfile userfile, child) {
+                        int pending = 175 - userfile.smilegrampoints!;
+                        return Text(
+                          (userfile.smilegrampoints == null)
+                              ? " Pending:"
+                              : " Pending:  $pending",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black.withOpacity(0.5),
+                            fontFamily: 'Poppins',
+                            fontSize: 18.0,
+                          ),
+                        );
+                      }),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    FontAwesomeIcons.solidCircle,
+                    color: Theme.of(context).colorScheme.secondary,
+                    size: 14,
+                  ),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  ValueListenableBuilder(
+                      valueListenable: userProfileNotifier,
+                      builder: (context, UserProfile userfile, child) {
+                        return Text(
+                          " Completed:  ${userfile.smilegrampoints}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black.withOpacity(0.5),
+                            fontFamily: 'Poppins',
+                            fontSize: 18.0,
+                          ),
+                        );
+                      }),
+                ],
+                //  );
+                //   },
+              ),
+              // Text(
+              //   'Needs your smile to be GREEN ',
+              //   textAlign: TextAlign.center,
+              //   overflow: TextOverflow.ellipsis,
+              //   style: const TextStyle(
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.green,
+              //     fontFamily: 'Poppins',
+              //     fontSize: 16.0,
+              //   ),
+              // ),
+              // IconButton(
+              //     onPressed: (){
+              //       smileAppValueNotifier.updateShowCountDown(showCoundown: true);
+              //       Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
+              //     },
+              //     icon: Icon(FontAwesomeIcons.play,color: Colors.green,)
+              // ),
+            ],
+          ),
+        ),
       ],
     );
   }

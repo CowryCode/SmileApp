@@ -720,6 +720,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             children: [
               TextButton(
                 onPressed: () {
+                  dispose();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
                 },
                 child: Text('No', style:  TextStyle(
@@ -731,6 +732,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               ),
               TextButton(
                 onPressed: () {
+                  dispose();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MoodScale()));
                 },
                 child: Text('Yes', style:  TextStyle(
