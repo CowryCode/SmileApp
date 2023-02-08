@@ -102,7 +102,7 @@ class _GlassmorphicSmilegramDisplayState
                   Icon(
                     FontAwesomeIcons.solidCircle,
                     color: Colors.black45,
-                    size: 12,
+                    size: 14,
                   ),
                   SizedBox(
                     width: 2,
@@ -110,15 +110,16 @@ class _GlassmorphicSmilegramDisplayState
                   ValueListenableBuilder(
                       valueListenable: userProfileNotifier,
                       builder: (context, UserProfile userfile, child) {
+                        int pending = 175 - userfile.smilegrampoints!;
                         return Text(
-                          (userfile.todayTargetValue == null)
-                              ? " Today'sTarget:"
-                              : " Today'sTarget:  ${userfile.todayTargetValue}",
+                          (userfile.smilegrampoints == null)
+                              ? " Pending:"
+                              : " Pending:  $pending",
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontFamily: 'Poppins',
-                            fontSize: 12.0,
+                            fontSize: 14.0,
                           ),
                         );
                       }),
@@ -128,21 +129,21 @@ class _GlassmorphicSmilegramDisplayState
                   Icon(
                     FontAwesomeIcons.solidCircle,
                     color: Theme.of(context).colorScheme.secondary,
-                    size: 12,
+                    size: 14,
                   ),
                   SizedBox(
                     width: 2,
                   ),
                   ValueListenableBuilder(
-                      valueListenable: smileGameNofitier,
-                      builder: (context, SmileGameVariables smilegramvariables, child) {
+                      valueListenable: userProfileNotifier,
+                      builder: (context, UserProfile userfile, child) {
                         return Text(
-                         " Today's Score:  ${smilegramvariables.numberOfStarMeetings}", //Number of meetings represents number of countires painted
+                         " Completed:  ${userfile.smilegrampoints}",
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                             fontFamily: 'Poppins',
-                            fontSize: 12.0,
+                            fontSize: 14.0,
                           ),
                         );
                       }),

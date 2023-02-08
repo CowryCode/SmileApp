@@ -40,15 +40,19 @@ class _TribePageState extends State<TribePage> {
          //   },
          // ),
           backgroundColor: Theme.of(context).colorScheme.secondary,
-          title: Text(
-            'Share Empathy',
-            style: TextStyle(
-              fontSize: 22.0,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
+          title: ValueListenableBuilder(
+              valueListenable: tribeEmpathyRequestNotifier,
+              builder: (context, List<TribeRequest> value, child) {
+                  return Text(
+                    'Pending Requests (${value.length})',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  );
+              }),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -98,7 +102,6 @@ class _TribePageState extends State<TribePage> {
               ],
             ),
 
-            //TODO: WHEN THERE IS NO MESSAGE TO SHOW, SHOW "No message yet click on the + button to trigger messages"
             ValueListenableBuilder(
                 valueListenable: tribeEmpathyRequestNotifier,
                 builder: (context, List<TribeRequest> value, child) {

@@ -110,9 +110,9 @@ class _EmotionsState extends State<Emotions> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          "We care about you ",
+                          "Kindly select all that apply ",
                           style: TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 18.0,
                             fontFamily: 'Poppins',
                             color:
                                 Theme.of(context).primaryColor.withOpacity(0.8),
@@ -122,9 +122,8 @@ class _EmotionsState extends State<Emotions> {
                     ),
                     SizedBox(height: 20),
                     Container(
-                      //TODO: USE PAPER MENTIONED BY OLA TO PICK THE DOMINANT NEGATIVE EMOTIONS
                       child: Text(
-                        "Select your dominant emotion(s).",
+                        "I feel. . .",
                         style: TextStyle(
                             fontSize: 20.0,
                             fontFamily: 'Poppins',

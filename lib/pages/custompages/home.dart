@@ -171,10 +171,27 @@ class _HomeState extends State<Home> {
                   showDialog<String>(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
-                      title: const Text('SmileGram'),
-                      content: const Text(
-                        'To play the SmileGram, when the counter finishes. \n Maintain a smile until the big and small stars meet. ',
-                        style: TextStyle(color: Colors.black),
+                      title: const Text('SmileGram', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),),
+                      content: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                        const Text(
+                          "The world is a bit difficult for people, we want you to paint make the world a better place with your smile \n",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                         const Text(
+                                "How to play: ",
+                            style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                          ),
+                         const Text(
+                                "You will see two icons after the countdown. Maintain a smile until both icons overlap. When you stop smiling the 'moving' icon stops "
+                                "moving. Stop smiling at the point the two icons overlap, this will gain you a point and a country in the underlying map"
+                                " will be painted green. \n\n"
+                                "Continue this until the entire world map is painted green.",
+                            style: TextStyle(color: Colors.black),
+                          ),
+
+                        ],
                       ),
                       actions: <Widget>[
                         TextButton(
@@ -182,7 +199,7 @@ class _HomeState extends State<Home> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text('Cancel'),
+                          child: const Text('Cancel', ),
                         ),
                         TextButton(
                           onPressed: () {
@@ -232,18 +249,18 @@ class _HomeState extends State<Home> {
                                   color: Theme.of(context).primaryColor),
                               textAlign: TextAlign.center),
                           Text(
-                            "Your Smile is Powerful, \n"
-                            "Play the Smile Game! ",
+                            "Your Smile is Powerful, "
+                            "Play the \n Smile Game! ",
                             style: Theme.of(context).textTheme.bodyMedium,
                             textAlign: TextAlign.center,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 FontAwesomeIcons.solidCircle,
                               //  color: Colors.white,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.green,
                                 size: 12,
                               ),
                               SizedBox(
@@ -254,40 +271,22 @@ class _HomeState extends State<Home> {
                                   builder: (context, UserProfile userfile, child) {
                                     return Text(
                                       (userfile.todayTargetValue == null)
-                                          ? " Target:"
-                                          : " Target:  ${userfile.todayTargetValue}",
-                                      style: const TextStyle(
+                                          ? " "
+                                          : " Score : ${userfile.smilegrampoints} / 175 ",
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: Theme.of(context).primaryColor,
                                         fontFamily: 'Poppins',
-                                        fontSize: 12.0,
+                                        fontSize: 18.0,
                                       ),
                                     );
                                   }),
                               SizedBox(
                                 width: 5,
                               ),
-                              Icon(
-                                FontAwesomeIcons.solidCircle,
-                                color: Theme.of(context).primaryColor,
-                                size: 12,
-                              ),
                               SizedBox(
                                 width: 2,
                               ),
-                              ValueListenableBuilder(
-                                  valueListenable: smileGameNofitier,
-                                  builder: (context, SmileGameVariables smilegramvariables, child) {
-                                    return Text(
-                                      " Today's Score:  ${smilegramvariables.numberOfStarMeetings}", //Number of meetings represents number of countires painted
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                        fontFamily: 'Poppins',
-                                        fontSize: 12.0,
-                                      ),
-                                    );
-                                  }),
                             ],
                           ),
                           SizedBox(height: 5,)
@@ -314,16 +313,13 @@ class _HomeState extends State<Home> {
                   showDialog<String>(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Pocket Buddy'),
+                      title: const Text('Pocket Buddy', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
                       content: Text(
-                        'Do you want to chat with the AI bot ?',
+                        'The conversational AI bot keeps you company by holding a conversation with you. You can ask her anything in any field.'
+                            'The bot can compose music, poem, etc. Spend some time with the bot and enjoy the functionality. \n\n'
+                            'Do you want to continue ?',
                         //style: CustomeStyling().customContenttext(),
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black45,
-                        ),
+                          style: TextStyle(color: Colors.black),
                       ),
                       actions: <Widget>[
                         TextButton(
@@ -396,7 +392,32 @@ class _HomeState extends State<Home> {
                   (ApiAccess().hasPayLoad() == false) ?
                   _showNetworkAlert(context: context)
                       :
-                  Navigator.of(context).pushNamed('/tribemessages');
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('My Tribe', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                      content: Text(
+                        "There are many anonymous users willing to lend a helping hand. When you don't feel strong, you can anonymously "
+                            "inform the community members by clicking on the floating button and select the emotion(s) that reflects how you feel \n\n"
+                            "Do you want to continue ?",
+                        //style: CustomeStyling().customContenttext(),
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                           // Navigator.of(context).pushNamed('/tribemessages');
+                            Navigator.popAndPushNamed(context, '/tribemessages');
+                          },
+                          child: const Text('Yes'),
+                        ),
+                      ],
+                    ),
+                  );
                 },
                 child: Container(
                   height: 120.0,
@@ -433,10 +454,10 @@ class _HomeState extends State<Home> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                              "Just click this button to interact \n "
-                              "with our anonymous users \n globally! ",
+                              "Everyone cares about you, \n click on here to enjoy \n the anonymous community support  ",
                               style: Theme.of(context).textTheme.bodyMedium,
-                              textAlign: TextAlign.center),
+                              textAlign: TextAlign.center
+                          ),
                         ],
                       ),
                       Icon(

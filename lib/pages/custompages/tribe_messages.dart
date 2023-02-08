@@ -45,7 +45,7 @@ class _TribeMessageListState extends State<TribeMessageList> {
         ),
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Support Notes',
+          'Opened Notes',
           style: TextStyle(
             fontSize:22.0,
             fontFamily: 'Poppins',
@@ -57,25 +57,26 @@ class _TribeMessageListState extends State<TribeMessageList> {
       ),
       floatingActionButton: FloatingActionButton(
              onPressed: () {
-               showDialog<String>(
-                 context: context,
-                 builder: (BuildContext context) => AlertDialog(
-                   title: const Text('My Tribe', style: TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),),
-                   content: const Text('Get beautiful messages from other users. Will you want to continue ?', style: TextStyle(color: Colors.black),),
-                   actions: <Widget>[
-                     TextButton(
-                       onPressed: () => Navigator.pop(context, 'Cancel'),
-                       child: const Text('Cancel'),
-                     ),
-                     TextButton(
-                       onPressed: (){
-                         Navigator.popAndPushNamed(context, '/emotions');
-                       },
-                       child: const Text('Yes'),
-                     ),
-                   ],
-                 ),
-               );
+               Navigator.popAndPushNamed(context, '/emotions');
+               // showDialog<String>(
+               //   context: context,
+               //   builder: (BuildContext context) => AlertDialog(
+               //     title: const Text('My Tribe', style: TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),),
+               //     content: const Text('Get beautiful messages from other users. Will you want to continue ?', style: TextStyle(color: Colors.black),),
+               //     actions: <Widget>[
+               //       TextButton(
+               //         onPressed: () => Navigator.pop(context, 'Cancel'),
+               //         child: const Text('Cancel'),
+               //       ),
+               //       TextButton(
+               //         onPressed: (){
+               //           Navigator.popAndPushNamed(context, '/emotions');
+               //         },
+               //         child: const Text('Yes'),
+               //       ),
+               //     ],
+               //   ),
+               // );
              },
              backgroundColor: Theme.of(context).colorScheme.secondary,
              child: const Icon(FontAwesomeIcons.peopleGroup),
@@ -84,25 +85,35 @@ class _TribeMessageListState extends State<TribeMessageList> {
         child:ValueListenableBuilder(
           valueListenable: readtribeMessageNotifier,
             builder: (context,  List<TribeMessage> messeges, child){
-            return Container(
-              child:CarouselSlider(
-                options: CarouselOptions(
-                  // height: 100,
-                  height: (MediaQuery.of(context).size.height) * 0.8 ,
-                  aspectRatio: 16/9,
-                  viewportFraction: 0.8, initialPage: 0,
-                  enableInfiniteScroll: true,
-                  reverse: false,
-                  autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: true,
-                  scrollDirection: Axis.horizontal,
-                ),
-                items: messeges.map((e) => MessageCard(measageModel: e, colorID: randomColorSelector(),) ).toList(),
-              ),
-            );
+              if ((messeges.length < 1)) {
+                return Container(
+                margin: const EdgeInsets.only(left: 20.0, right: 20.0,),
+                child: Text('You have no opened messages. \n '
+                    'Check on the Home Screen for "SmilePacks". \n \n'
+                    'You can also click on the button below to get supportive messages',
+                    textAlign: TextAlign.center),
+              );
+              }else{
+                return Container(
+                  child:CarouselSlider(
+                    options: CarouselOptions(
+                      // height: 100,
+                      height: (MediaQuery.of(context).size.height) * 0.8 ,
+                      aspectRatio: 16/9,
+                      viewportFraction: 0.8, initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                    ),
+                    items: messeges.map((e) => MessageCard(measageModel: e, colorID: randomColorSelector(),) ).toList(),
+                  ),
+                );
+              }
             }
         ),
       ),
