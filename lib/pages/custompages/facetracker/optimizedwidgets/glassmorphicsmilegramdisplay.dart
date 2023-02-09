@@ -108,11 +108,11 @@ class _GlassmorphicSmilegramDisplayState
                     width: 2,
                   ),
                   ValueListenableBuilder(
-                      valueListenable: userProfileNotifier,
-                      builder: (context, UserProfile userfile, child) {
-                        int pending = 175 - userfile.smilegrampoints!;
+                      valueListenable: smileGameNofitier,
+                      builder: (context, SmileGameVariables value, child) {
+                        int pending = 175 - value.getSmileNumberofCountriesPainted();
                         return Text(
-                          (userfile.smilegrampoints == null)
+                          (value.getSmileNumberofCountriesPainted() == null)
                               ? " Pending:"
                               : " Pending:  $pending",
                           style: TextStyle(
@@ -135,10 +135,10 @@ class _GlassmorphicSmilegramDisplayState
                     width: 2,
                   ),
                   ValueListenableBuilder(
-                      valueListenable: userProfileNotifier,
-                      builder: (context, UserProfile userfile, child) {
+                      valueListenable: smileGameNofitier,
+                      builder: (context, SmileGameVariables value, child) {
                         return Text(
-                         " Completed:  ${userfile.smilegrampoints}",
+                         " Completed:  ${value.getSmileNumberofCountriesPainted()}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(0.5),

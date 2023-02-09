@@ -65,7 +65,7 @@ dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/logo1.jpeg"
+  image_path: "assets/logo1.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 flutter_native_splash:
@@ -107,7 +107,7 @@ flutter:
     - images/custom/giftopen.png
     - images/custom/giftopen1.png
     - assets/world_map.json
-    - assets/logo1.jpeg
+    - assets/logo1.png
     - images/facebook-fill.png
     - images/google-fill.png
     - images/cellphone-line.png

@@ -63,19 +63,19 @@ class _SettingState extends State<Setting> {
                                   borderRadius: BorderRadius.circular(12.0),
                                    color: Theme.of(context).primaryColor,
                                 ),
-                                width: 70,
+                                width: 260,
                                 height: 4,
 
                               ),
-                              Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    color: Colors.indigo,
-                                  ),
-                                  height: 4,
-                                ),
-                              ),
+                              // Expanded(
+                              //   child: Container(
+                              //     decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(12.0),
+                              //       color: Colors.indigo,
+                              //     ),
+                              //     height: 4,
+                              //   ),
+                              // ),
                             ],
                           ),
 
@@ -101,7 +101,7 @@ class _SettingState extends State<Setting> {
                 child: Column(
                   children: <Widget>[
                     _dropDownListe(Icon(Icons.bubble_chart,color: Theme.of(context).colorScheme.secondary,),'Daily Questionnaire',1,'/questionnaire',context),
-                    // _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).colorScheme.secondary,),'Appointments',1,'/appointment',context),
+                    _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).colorScheme.secondary,),'How to use SmileApp',1,'/welcome',context),
                     // _dropDownListe(Icon(Icons.card_giftcard,color: Theme.of(context).colorScheme.secondary,),'Health Tips',1,'/health',context),
                     // _dropDownListe(Icon(Icons.local_offer,color: Theme.of(context).colorScheme.secondary,),'Services',1,'/services',context),
                     // _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Support',1,'',context),

@@ -11,6 +11,8 @@ class UserProfileNotifier extends ValueNotifier<UserProfile> {
     notifyListeners();
   }
 
+
+
   UserProfile getUserProfile(){
     return value;
   }

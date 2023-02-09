@@ -13,7 +13,7 @@ class Doctor{
   Doctor(this.name,this.description,this.avatar,this.state,this.color);
   Doctor getCurrentDoctor() {
     return Doctor("Dr.Alina james", "B.Sc DDVL Demilitologist",
-                  "assets/logo1.jpeg","Not Available", Colors.red);
+                  "assets/logo1.png","Not Available", Colors.red);
   }
 }
 class DoctorsList{

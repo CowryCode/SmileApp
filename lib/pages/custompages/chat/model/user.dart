@@ -16,7 +16,7 @@ class User {
   User.advanced(this.name, this.gender, this.dateOfBirth, this.avatar,this.phoneNumber);
 
   User getCurrentUser() {
-    return User.advanced('Joseph Orji','Male', DateTime(1993, 12, 31),'assets/logo1.jpeg',"494899650012");
+    return User.advanced('Joseph Orji','Male', DateTime(1993, 12, 31),'assets/logo1.png',"494899650012");
   }
 
   getDateOfBirth() {

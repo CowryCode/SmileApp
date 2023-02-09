@@ -89,7 +89,7 @@ class ChatMessageListItem extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 8.0),
                     child: new CircleAvatar(
                       //backgroundImage: AssetImage(currentDoctor.avatar!),
-                      backgroundImage: AssetImage('assets/logo1.jpeg'),
+                      backgroundImage: AssetImage('assets/logo1.png'),
                     ),
                   )
               ],

@@ -12,7 +12,7 @@ class _GetStartedState extends State<GetStarted> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image:AssetImage('assets/logo1.jpeg'),
+            image:AssetImage('assets/logo1.png'),
             //fit: BoxFit.cover,
             fit: BoxFit.fitWidth,
             ),

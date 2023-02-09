@@ -184,7 +184,7 @@ class _HomeState extends State<Home> {
                             style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
                           ),
                          const Text(
-                                "You will see two icons after the countdown. Maintain a smile until both icons overlap. When you stop smiling the 'moving' icon stops "
+                                "You will see two icons after the countdown. Maintain a smile until both icons overlap. When you stop smiling, the 'moving' icon stops "
                                 "moving. Stop smiling at the point the two icons overlap, this will gain you a point and a country in the underlying map"
                                 " will be painted green. \n\n"
                                 "Continue this until the entire world map is painted green.",
@@ -267,12 +267,12 @@ class _HomeState extends State<Home> {
                                 width: 2,
                               ),
                               ValueListenableBuilder(
-                                  valueListenable: userProfileNotifier,
-                                  builder: (context, UserProfile userfile, child) {
+                                  valueListenable: smileGameNofitier,
+                                  builder: (context, SmileGameVariables value, child) {
                                     return Text(
-                                      (userfile.todayTargetValue == null)
+                                      (value.getSmileNumberofCountriesPainted() == null)
                                           ? " "
-                                          : " Score : ${userfile.smilegrampoints} / 175 ",
+                                          : " Score : ${value.getSmileNumberofCountriesPainted()} / 175 ",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context).primaryColor,
@@ -454,7 +454,7 @@ class _HomeState extends State<Home> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                              "Everyone cares about you, \n click on here to enjoy \n the anonymous community support  ",
+                              "Everyone cares about you, \n click here to enjoy \n the community support.",
                               style: Theme.of(context).textTheme.bodyMedium,
                               textAlign: TextAlign.center
                           ),
@@ -628,7 +628,7 @@ class _HomeState extends State<Home> {
       ),
       // your app's logo?
       image: Image.asset(
-        "assets/logo1.jpeg",
+        "assets/logo1.png",
         width: 100,
         height: 100,
       ),

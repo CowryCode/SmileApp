@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0)),
                   image: DecorationImage(
-                    image:AssetImage('assets/logo1.jpeg'),
+                    image:AssetImage('assets/logo1.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -70,9 +70,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 12.0),
+               // margin: EdgeInsets.only(top: 12.0),
+                margin: EdgeInsets.all(12.0),
                 child: Text(
-                  "Enter the email address you used  \n while signing up for the study",
+                  "Enter the email address you used while signing up for the study or the ID shared with you.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.grey,
@@ -143,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                                 validator: FormBuilderValidators.compose([
                                   FormBuilderValidators.required(
                                       errorText: "Please enter a valid email."),
-                                  FormBuilderValidators.email(),
+                                  //FormBuilderValidators.email(),
                                   FormBuilderValidators.min(0),
                                 ]),
                                 autovalidateMode: AutovalidateMode.onUserInteraction,

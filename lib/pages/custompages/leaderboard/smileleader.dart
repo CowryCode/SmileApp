@@ -5,6 +5,7 @@ import 'package:SmileApp/pages/custompages/facetracker/optimizedwidgets/happines
 import 'package:SmileApp/pages/custompages/leaderboard/globalperformancetable.dart';
 import 'package:SmileApp/pages/custompages/leaderboard/performancetable.dart';
 import 'package:SmileApp/pages/login/login.dart';
+import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -219,11 +220,11 @@ class _LeadderBoardState extends State<LeadderBoard> {
                     width: 2,
                   ),
                   ValueListenableBuilder(
-                      valueListenable: userProfileNotifier,
-                      builder: (context, UserProfile userfile, child) {
-                        int pending = 175 - userfile.smilegrampoints!;
+                      valueListenable: smileGameNofitier,
+                      builder: (context, SmileGameVariables value, child) {
+                        int pending = 175 - value.getSmileNumberofCountriesPainted();
                         return Text(
-                          (userfile.smilegrampoints == null)
+                          (value.getSmileNumberofCountriesPainted() == null)
                               ? " Pending:"
                               : " Pending:  $pending",
                           style: TextStyle(
@@ -246,10 +247,10 @@ class _LeadderBoardState extends State<LeadderBoard> {
                     width: 2,
                   ),
                   ValueListenableBuilder(
-                      valueListenable: userProfileNotifier,
-                      builder: (context, UserProfile userfile, child) {
+                      valueListenable: smileGameNofitier,
+                      builder: (context, SmileGameVariables value, child) {
                         return Text(
-                          " Completed:  ${userfile.smilegrampoints}",
+                          " Completed:  ${value.getSmileNumberofCountriesPainted()}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(0.5),

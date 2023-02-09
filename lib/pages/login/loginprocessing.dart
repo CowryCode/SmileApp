@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:SmileApp/apis/models/userprofile.dart';
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
+import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/instructions/Welcome.dart';
 import 'package:flutter/material.dart';
 class LoginProcessing extends StatefulWidget {
@@ -46,8 +47,12 @@ class _LoginProcessingState extends State<LoginProcessing> {
       profile!.then((value) => {
         if(value != null){
           _timer!.cancel(),
-        //  Navigator.of(context).popAndPushNamed('/home_with_alert')
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()))
+          if(value.smilegrampoints! > 0){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)))
+
+          }else{
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()))
+          }
         }
       });
     });
@@ -60,7 +65,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image:AssetImage('assets/logo1.jpeg'),
+            image:AssetImage('assets/logo1.png'),
             //fit: BoxFit.cover,
             fit: BoxFit.fitWidth,
             ),
@@ -71,7 +76,12 @@ class _LoginProcessingState extends State<LoginProcessing> {
               if(_timer!.isActive){
                   if (snapshot.hasData) {
                     _timer!.cancel();
+                    if(snapshot.data!.smilegrampoints! > 0){
+                      Future.delayed(Duration.zero, () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,))));
+                    }else{
                       Future.delayed(Duration.zero, () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome())));
+                    }
+                     // Future.delayed(Duration.zero, () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome())));
                   } else {
                     if(_timer!.tick >= 1)  Future.delayed(Duration.zero, () => showAlertDialog(context: context,
                           title: "Failed Login",

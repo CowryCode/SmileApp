@@ -54,7 +54,7 @@ class _SmilegramLoginState extends State<SmilegramLogin> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0)),
                 image: DecorationImage(
-                  image:AssetImage('assets/logo1.jpeg'),
+                  image:AssetImage('assets/logo1.png'),
                   fit: BoxFit.cover,
                   ),
               ),
