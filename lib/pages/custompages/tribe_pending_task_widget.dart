@@ -137,6 +137,7 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                       if(sentimentScore > 0){
                         _processPageExit();
                         setState(() {
+                          textEditingController.clear();
                           showfulltext = !showfulltext;
                         });
                       }else {

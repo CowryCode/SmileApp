@@ -9,7 +9,7 @@ import 'package:SmileApp/statemanagement/models/smilegamenotifiermodel.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:SmileApp/models/mymodels/leaderboardmodel.dart';
+import 'package:sizer/sizer.dart';
 
 class LeadderBoard extends StatefulWidget {
   // final User currentUser=User.init().getCurrentUser();
@@ -53,7 +53,7 @@ class _LeadderBoardState extends State<LeadderBoard> {
             title: Text(
               'Achievements',
               style: TextStyle(
-                fontSize:22.0,
+                fontSize:22.0.sp,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).primaryColor,
@@ -63,8 +63,6 @@ class _LeadderBoardState extends State<LeadderBoard> {
             bottom: const TabBar(
               tabs: [
                 Tab(icon: Icon(FontAwesomeIcons.globe,color: Colors.white,semanticLabel: "Smile Gram",)),
-               // Tab(icon: Icon(FontAwesomeIcons.thumbsUp,color: Colors.white,semanticLabel: "Progress",)),
-               // Tab(icon: Icon(FontAwesomeIcons.barsProgress,color: Colors.white,semanticLabel: "Progress",)),
                 Tab(icon: Icon(FontAwesomeIcons.trophy,color: Colors.white,semanticLabel: "LeaderBoard",)),
               ],
             ),
@@ -73,7 +71,6 @@ class _LeadderBoardState extends State<LeadderBoard> {
           body:TabBarView(
             children: [
               _map1(),
-              //PerformanceTable(),
               GlobalPerformanceTable(),
             ],
           ),
@@ -134,157 +131,141 @@ class _LeadderBoardState extends State<LeadderBoard> {
   }
 
   Widget _map1(){
-    return Column(
-      children: <Widget>[
-        Stack(
-          children: <Widget>[
-            Container(
-              height: 50,
-              padding: const EdgeInsets.only(top:5,left:12.0,right: 12.0, bottom: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              child:   Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Your Smile Map',
-                        // textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontFamily: 'Poppins',
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        HappinessMap(),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Stack(
             children: <Widget>[
-              ValueListenableBuilder(
-                valueListenable: smileAppValueNotifier.value.nextCountry,
-                builder: (context, String value, child) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:<Widget> [
-                      Text(
-                        ' Next Country : ',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
-                          fontFamily: 'Poppins',
-                          fontSize: 16.0,
-                        ),
-                      ),
-                      Text(
-                        ' $value',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red.withOpacity(0.5),
-                          fontFamily: 'Poppins',
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    FontAwesomeIcons.solidCircle,
-                    color: Colors.black45,
-                    size: 14,
-                  ),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  ValueListenableBuilder(
-                      valueListenable: smileGameNofitier,
-                      builder: (context, SmileGameVariables value, child) {
-                        int pending = 175 - value.getSmileNumberofCountriesPainted();
-                        return Text(
-                          (value.getSmileNumberofCountriesPainted() == null)
-                              ? " Pending:"
-                              : " Pending:  $pending",
+              Container(
+                height: 8.h,
+                padding: const EdgeInsets.only(top:5,left:12.0,right: 12.0, bottom: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                child:   Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Your Smile Map',
+                          // textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.white,
                             fontFamily: 'Poppins',
-                            fontSize: 18.0,
+                            fontSize: 18.0.sp,
                           ),
-                        );
-                      }),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    FontAwesomeIcons.solidCircle,
-                    color: Theme.of(context).colorScheme.secondary,
-                    size: 14,
-                  ),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  ValueListenableBuilder(
-                      valueListenable: smileGameNofitier,
-                      builder: (context, SmileGameVariables value, child) {
-                        return Text(
-                          " Completed:  ${value.getSmileNumberofCountriesPainted()}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black.withOpacity(0.5),
-                            fontFamily: 'Poppins',
-                            fontSize: 18.0,
-                          ),
-                        );
-                      }),
-                ],
-                //  );
-                //   },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              // Text(
-              //   'Needs your smile to be GREEN ',
-              //   textAlign: TextAlign.center,
-              //   overflow: TextOverflow.ellipsis,
-              //   style: const TextStyle(
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.green,
-              //     fontFamily: 'Poppins',
-              //     fontSize: 16.0,
-              //   ),
-              // ),
-              // IconButton(
-              //     onPressed: (){
-              //       smileAppValueNotifier.updateShowCountDown(showCoundown: true);
-              //       Navigator.of(context).popAndPushNamed('/smilegramgift', arguments: new GiftVariableObject(readmessage: false));
-              //     },
-              //     icon: Icon(FontAwesomeIcons.play,color: Colors.green,)
-              // ),
             ],
           ),
-        ),
-      ],
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                ValueListenableBuilder(
+                  valueListenable: smileAppValueNotifier.value.nextCountry,
+                  builder: (context, String value, child) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:<Widget> [
+                        Text(
+                          ' Next Country : ',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0.sp,
+                          ),
+                        ),
+                        Text(
+                          ' $value',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red.withOpacity(0.5),
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0.sp,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      FontAwesomeIcons.solidCircle,
+                      color: Colors.black45,
+                      size: 14.sp,
+                    ),
+                    // SizedBox(
+                    //   width: 2,
+                    // ),
+                    ValueListenableBuilder(
+                        valueListenable: smileGameNofitier,
+                        builder: (context, SmileGameVariables value, child) {
+                          int pending = 175 - value.getSmileNumberofCountriesPainted();
+                          return Text(
+                            (value.getSmileNumberofCountriesPainted() == null)
+                                ? " Pending:"
+                                : " Pending:  $pending",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black.withOpacity(0.5),
+                              fontFamily: 'Poppins',
+                              fontSize: 14.0.sp,
+                            ),
+                          );
+                        }),
+                   SizedBox(
+                      width: 2.w,
+                    ),
+                    Icon(
+                      FontAwesomeIcons.solidCircle,
+                      color: Theme.of(context).colorScheme.secondary,
+                      size: 14.sp,
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    ValueListenableBuilder(
+                        valueListenable: smileGameNofitier,
+                        builder: (context, SmileGameVariables value, child) {
+                          return Text(
+                            " Completed:  ${value.getSmileNumberofCountriesPainted()}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black.withOpacity(0.5),
+                              fontFamily: 'Poppins',
+                              fontSize: 14.0.sp,
+                            ),
+                          );
+                        }),
+                  ],
+                  //  );
+                  //   },
+                ),
+              ],
+            ),
+          ),
+          HappinessMap(),
+        ],
+      ),
     );
   }
 

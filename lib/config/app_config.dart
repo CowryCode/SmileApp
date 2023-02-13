@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 // class App {
 //   BuildContext _context;
@@ -68,10 +69,10 @@ class Colors {
     return this._accentDarkColor.withOpacity(opacity);
   }
 
-  TextStyle customContenttext(){
+  TextStyle customContenttextBlack(){
     return TextStyle(
       fontFamily: 'Poppins',
-      fontSize: 12.0,
+      fontSize: 12.0.sp,
       fontWeight: FontWeight.bold,
       color:  Color(0x73000000),
     );

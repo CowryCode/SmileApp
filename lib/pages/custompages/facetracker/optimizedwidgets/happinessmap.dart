@@ -34,7 +34,8 @@ class _HappinessMapState extends State<HappinessMap> {
   Widget build(BuildContext context) {
 
     return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15),
+     // padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 5, right: 5),
       child: Column(
         children: <Widget>[
           ValueListenableBuilder(
@@ -56,7 +57,7 @@ class _HappinessMapState extends State<HappinessMap> {
               );
             },
           ),
-          SizedBox(height: 5,),
+          //SizedBox(height: 5,),
         ],
       )
 
