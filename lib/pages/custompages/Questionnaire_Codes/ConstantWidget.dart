@@ -232,7 +232,6 @@ class ConstantWidget {
           color: color,
           fontFamily: font,
           letterSpacing: 1,
-
           fontWeight: fontWeight),
       textAlign: textAlign,
     );
@@ -256,7 +255,6 @@ class ConstantWidget {
           fontSize: textSizes,
           color: color,
           fontFamily: font,
-
           letterSpacing: 1,
           fontWeight: fontWeight),
       textAlign: textAlign,
@@ -273,7 +271,8 @@ class ConstantWidget {
           fontFamily: Constants.fontsFamily,
           fontWeight: fontWeight,
           fontSize: fontSize,
-          color: color),
+          color: color
+      ),
     );
   }
 

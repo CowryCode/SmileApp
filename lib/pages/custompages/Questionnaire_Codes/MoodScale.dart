@@ -10,8 +10,7 @@ import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
+import 'package:sizer/sizer.dart';
 import 'SizeConfig.dart';
 
 class MoodScale extends StatefulWidget {
@@ -75,8 +74,7 @@ class _MoodScale extends State<MoodScale> {
 
     double firstSize = ConstantWidget.getScreenPercentSize(context, 55);
     double secondSize = ConstantWidget.getScreenPercentSize(context, 45);
-    double remainSize =
-        ConstantWidget.getScreenPercentSize(context, 100) - firstSize;
+    double remainSize = ConstantWidget.getScreenPercentSize(context, 100) - firstSize;
     double defMargin = ConstantWidget.getScreenPercentSize(context, 2);
     double nextHeight = Constants.getScreenPercentSize(context, 7.5);
     setState(() {});
@@ -130,56 +128,59 @@ class _MoodScale extends State<MoodScale> {
                               Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.only(top: secondSize),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 0, horizontal: 10),
-
+                                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                        padding: EdgeInsets.only(
-                                            top: (defMargin),
-                                            bottom: defMargin),
+                                       // padding: EdgeInsets.only(top: (defMargin), bottom: defMargin),
+                                        padding: EdgeInsets.only(top: 0, bottom: 4),
                                         child: Text(
                                           "How do you feel after using this app today?",
-                                          style: Theme
-                                              .of(context)
-                                              .textTheme
-                                              .subtitle2,
+                                         // style: Theme.of(context).textTheme.subtitle2,,
+                                          style: TextStyle(
+                                            fontSize:16.0.sp,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.bold,
+                                            color: Theme.of(context).colorScheme.secondary,
+                                          ),
                                           textAlign: TextAlign.center,
                                         )
                                     ),
                                     Padding(
                                         padding: EdgeInsets.only(
-                                            top: (0),
+                                            top: (2.sp),
                                             bottom: 1),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment
                                               .center,
                                           children: [
                                             Text("I feel ",
-                                              style: Theme
-                                                  .of(context)
-                                                  .textTheme
-                                                  .headline6,
-                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize:14.0.sp,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                             Text(moodModelList[position]
                                                 .name!,
-                                              style: Theme
-                                                  .of(context)
-                                                  .textTheme
-                                                  .subtitle2,
+                                              style: TextStyle(
+                                                fontSize:14.0.sp,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
                                               textAlign: TextAlign.center,
                                             ),
                                           ],
                                         )
                                     ),
 
-                                    SizedBox(height: 20,),
+                                  //  SizedBox(height: 20,),
                                     myRadio(),
-                                    SizedBox(height: 10,),
+                                  //  SizedBox(height: 10,),
                                   ],
                                 ),
                               )
