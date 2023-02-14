@@ -2,6 +2,7 @@
 import 'package:SmileApp/apis/network.dart';
 import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Setting extends StatefulWidget {
 
@@ -28,7 +29,7 @@ class _SettingState extends State<Setting> {
           child: Column(
             children: <Widget>[
               Container(
-                height: 180.0,
+                height: 130.0,
                 padding:EdgeInsets.all(12.0),
                 margin:EdgeInsets.only(top: 40.0,left: 12.0,right: 12.0),
                 decoration: BoxDecoration(
@@ -50,32 +51,26 @@ class _SettingState extends State<Setting> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           //ball("images/imageuser.png", Colors.transparent),
-                          Column(
-                            children: <Widget>[
-                              Text("SmileGram",style:TextStyle(color:Theme.of(context).primaryColor,fontFamily: 'Poppins', fontSize:30, fontWeight: FontWeight.bold),),
-                            ],
+                          Text("Smile App",
+                            style:TextStyle(
+                                color:Theme.of(context).primaryColor,
+                                fontFamily: 'Poppins',
+                                fontSize:22.sp,
+                                fontWeight:
+                                FontWeight.bold
+                            ),
                           ),
-                          Text("Kindly complete your daily tracker to help us improve the SmileApp",style:TextStyle(color:Theme.of(context).primaryColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
+                          Text("Kindly complete your daily tracker to help us improve the SmileApp",
+                            style:TextStyle(
+                                color:Theme.of(context).primaryColor,
+                                fontFamily: 'Poppins',
+                                fontSize: 12.sp,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                           Row(
                             children: <Widget>[
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                   color: Theme.of(context).primaryColor,
-                                ),
-                                width: 260,
-                                height: 4,
 
-                              ),
-                              // Expanded(
-                              //   child: Container(
-                              //     decoration: BoxDecoration(
-                              //       borderRadius: BorderRadius.circular(12.0),
-                              //       color: Colors.indigo,
-                              //     ),
-                              //     height: 4,
-                              //   ),
-                              // ),
                             ],
                           ),
 
@@ -100,13 +95,9 @@ class _SettingState extends State<Setting> {
                 ),
                 child: Column(
                   children: <Widget>[
-                    _dropDownListe(Icon(Icons.bubble_chart,color: Theme.of(context).colorScheme.secondary,),'Daily Questionnaire',1,'/questionnaire',context),
-                    _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).colorScheme.secondary,),'How to use SmileApp',1,'/welcome',context),
-                    // _dropDownListe(Icon(Icons.card_giftcard,color: Theme.of(context).colorScheme.secondary,),'Health Tips',1,'/health',context),
-                    // _dropDownListe(Icon(Icons.local_offer,color: Theme.of(context).colorScheme.secondary,),'Services',1,'/services',context),
-                    // _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Support',1,'',context),
-                    // _dropDownListe(Icon(Icons.payment,color: Theme.of(context).colorScheme.secondary,),'Payment Methods',1,'',context),
-                    _dropDownListe(Icon(Icons.arrow_upward,color: Theme.of(context).colorScheme.secondary,),'Logout',0,'/',context, logout: true),
+                    _dropDownListe(Icon(Icons.bubble_chart,color: Theme.of(context).colorScheme.secondary, size: 20.sp,),'Daily Questionnaire',1,'/questionnaire',context),
+                    _dropDownListe(Icon(Icons.calendar_today,color: Theme.of(context).colorScheme.secondary, size: 20.sp,),'How to use SmileApp',1,'/welcome',context),
+                    _dropDownListe(Icon(Icons.arrow_upward,color: Theme.of(context).colorScheme.secondary,size: 20.sp,),'Logout',0,'/',context, logout: true),
                   ],
                 ),
               ),
@@ -142,7 +133,7 @@ Widget _dropDownListe(Icon icon ,String title,double borderWidth,String route,Bu
                   style: TextStyle(
                     color: Colors.grey,
                     fontFamily: 'Poppins',
-                    fontSize: 16.0,
+                    fontSize: 14.0.sp,
 
                   ),
 
@@ -154,7 +145,7 @@ Widget _dropDownListe(Icon icon ,String title,double borderWidth,String route,Bu
             child: Icon(
               Icons.chevron_right,
               color: Colors.grey,
-              size: 20,
+              size: 18.sp,
             ),
           ),
         ],

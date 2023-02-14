@@ -5,6 +5,7 @@ import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sizer/sizer.dart';
 
 class GlassmorphicSmilegramDisplay extends StatefulWidget {
   const GlassmorphicSmilegramDisplay({Key? key}) : super(key: key);
@@ -119,7 +120,7 @@ class _GlassmorphicSmilegramDisplayState
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(0.5),
                             fontFamily: 'Poppins',
-                            fontSize: 14.0,
+                            fontSize: 12.0.sp,
                           ),
                         );
                       }),
@@ -129,7 +130,7 @@ class _GlassmorphicSmilegramDisplayState
                   Icon(
                     FontAwesomeIcons.solidCircle,
                     color: Theme.of(context).colorScheme.secondary,
-                    size: 14,
+                    size: 12.sp,
                   ),
                   SizedBox(
                     width: 2,
@@ -143,7 +144,7 @@ class _GlassmorphicSmilegramDisplayState
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(0.5),
                             fontFamily: 'Poppins',
-                            fontSize: 14.0,
+                            fontSize: 12.0.sp,
                           ),
                         );
                       }),

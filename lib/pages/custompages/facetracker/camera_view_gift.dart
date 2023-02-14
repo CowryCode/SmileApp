@@ -24,6 +24,7 @@ import 'package:rating_dialog/rating_dialog.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:wakelock/wakelock.dart';
 import '../../../main.dart';
+import 'package:sizer/sizer.dart';
 
 enum ScreenMode { liveFeed, gallery }
 
@@ -423,7 +424,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                     child: Container(
                         height: MediaQuery.of(context).size.height * 0.1,
                         width: MediaQuery.of(context).size.width * 0.2,
-                        margin: EdgeInsets.only(left: 15.0),
+                        margin: EdgeInsets.only(left: 8.0.sp),
                         // child: CameraPreview(_controller!)
                         child: CameraPreview(_controller!)));
               } else {
@@ -453,7 +454,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return GlassmorphicSmilegramDisplay();
               } else {
                 return SizedBox(
-                  height: 3.0,
+                  height: 1.0.h,
                 );
               }
             },
@@ -467,7 +468,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return Center(child: SmileGramGame());
               } else {
                 return SizedBox(
-                  height: 3.0,
+                  height: 1.0.h,
                 );
               }
             },
@@ -480,7 +481,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                 return GlassmorphicReadMessage();
               } else {
                 return SizedBox(
-                  height: 3.0,
+                  height: 1.0.h,
                 );
               }
             },
@@ -495,11 +496,11 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                   //   child: RatingView(),
                   // );
                   return SizedBox(
-                    height: 3.0,
+                    height: 1.0.h,
                   );
                 } else {
                   return SizedBox(
-                    height: 3.0,
+                    height: 1.0.h,
                   );
                 }
               }),
@@ -508,13 +509,13 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     );
   }
 
-  ScaleAnimatedText scaleValue({required String val}) {
+  ScaleAnimatedText _scaleValue({required String val}) {
     return ScaleAnimatedText('$val',
         scalingFactor: 0.2,
         textStyle: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.red,
-          fontSize: 35.0,
+          fontSize: 25.0.sp,
         ));
   }
 

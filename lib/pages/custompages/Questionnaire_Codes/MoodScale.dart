@@ -60,11 +60,10 @@ class _MoodScale extends State<MoodScale> {
   }
 
   Future<bool> _onWillPop() async {
-
-  // Navigator.of(context).popAndPushNamed('/home',);
-   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
 
    return false;
+
   }
 
   @override
@@ -86,7 +85,6 @@ class _MoodScale extends State<MoodScale> {
           body: SafeArea(
             child: Column(
               children: [
-
                 Expanded(
                   child: Container(
                     child: PageView.builder(
