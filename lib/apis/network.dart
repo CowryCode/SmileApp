@@ -125,6 +125,7 @@ class ApiAccess {
       );
 
       if (response.statusCode == 200) {
+
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
 
         smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
@@ -169,6 +170,8 @@ class ApiAccess {
   }
 
   Future<TribeMessage?> sendTribeMessage({required TribeMessage message}) async {
+    print('GOT TO THIS POINT :::::::');
+
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
     await tk.then((value) => {token = value!});
@@ -227,7 +230,6 @@ class ApiAccess {
 
   void saveMood({required MoodModel moodModel, required String url}) async {
     try{
-      if(moodModel.startMood == null || moodModel.endMood == null) return;
       String? token;
       Future<String?> tk = Localstorage().getString(key_login_token);
       await tk.then((value) => {token = value!});

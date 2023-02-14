@@ -1,4 +1,5 @@
 import 'package:SmileApp/apis/models/triberequest.dart';
+import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/pages/custompages/tribe_pending_task_widget.dart';
 import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
@@ -42,13 +43,17 @@ class _TribePageState extends State<TribePage> {
           title: ValueListenableBuilder(
               valueListenable: tribeEmpathyRequestNotifier,
               builder: (context, List<TribeRequest> value, child) {
-                  return Text(
-                    'Pending Requests (${value.length})',
-                    style: TextStyle(
-                      fontSize: 22.0.sp,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
+                  return Padding(
+                    padding: EdgeInsets.only(top: 3.h, left: 2.h, right: 2.h),
+                    child: Text(
+                      'Pending Requests (${value.length})',
+                      style: TextStyle(
+                        fontSize: 22.0.sp,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   );
               }),
@@ -58,13 +63,13 @@ class _TribePageState extends State<TribePage> {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) => AlertDialog(
-                title: const Text(
-                  'My Tribe',
-                  style: TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),
-                ),
-                content: const Text(
-                    'Get beautiful messages from other users. Will you want to continue ?',
-                  style: TextStyle(color: Colors.black),
+                title: const Text('My Tribe', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                content: Text(
+                  "There are many anonymous users willing to support with encouraging words. When you don't feel strong, you can anonymously "
+                      "inform the community members by clicking on the floating button and select the emotion(s) that reflects how you feel. \n\n"
+                      "Do you want to continue ?",
+                  style: CustomeStyling().customContenttextBlack(opecity: 1),
+                  //style: TextStyle(color: Colors.black),
                 ),
                 actions: <Widget>[
                   TextButton(
@@ -73,7 +78,8 @@ class _TribePageState extends State<TribePage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, '/emotions');
+                      // Navigator.of(context).pushNamed('/tribemessages');
+                      Navigator.popAndPushNamed(context, '/tribemessages');
                     },
                     child: const Text('Yes'),
                   ),

@@ -353,7 +353,7 @@ class _HomeState extends State<Home> {
                                       child: Icon(
                                         FontAwesomeIcons.message,
                                         color: Theme.of(context).primaryColor,
-                                        size: 30,
+                                        size: 30.sp,
                                       ),
                                     ),
                                     Column(
@@ -382,12 +382,16 @@ class _HomeState extends State<Home> {
                                                   color:  Colors.orange,
                                                 ),
                                                 textAlign: TextAlign.center),
-                                            Text("our AI bot ",
+                                            Text("our AI bot.",
                                                 style: CustomeStyling().customContenttextWhite(opecity: 1),
                                                 // style: Theme.of(context).textTheme.bodyMedium,
                                                 textAlign: TextAlign.center),
                                           ],
                                         ),
+                                        Text("She is always willing to chat.",
+                                            style: CustomeStyling().customContenttextWhite(opecity: 1),
+                                            // style: Theme.of(context).textTheme.bodyMedium,
+                                            textAlign: TextAlign.center),
                                       ],
                                     ),
                                     Icon(
@@ -423,7 +427,6 @@ class _HomeState extends State<Home> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                       // Navigator.of(context).pushNamed('/tribemessages');
                                         Navigator.popAndPushNamed(context, '/tribemessages');
                                       },
                                       child: const Text('Yes'),
