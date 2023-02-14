@@ -2,6 +2,7 @@ import 'package:SmileApp/statemanagement/notifiers/notifierCentral.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sizer/sizer.dart';
 
 class GlobalPerformanceTable extends StatefulWidget {
   const GlobalPerformanceTable({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
         Stack(
           children: <Widget>[
             Container(
-              height: 50,
+              height: 8.h,
               padding: const EdgeInsets.only(top:5,left:12.0,right: 12.0, bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(bottomLeft:Radius.circular(25.0),bottomRight: Radius.circular(25.0)),
@@ -32,11 +33,11 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
                   Text(
                     'Top Smilers',
                     // textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontFamily: 'Poppins',
-                      fontSize: 18.0,
+                      fontSize: 18.0.sp,
                     ),
                   ),
                 ],
@@ -44,7 +45,7 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
             ),
           ],
         ),
-        SizedBox(height: 5,),
+        SizedBox(height: 1.h,),
         Flexible(
           child: ListView.builder(
             // itemCount: 20,
@@ -65,7 +66,7 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width ,
-            padding: EdgeInsets.all(7.0),
+            padding: EdgeInsets.all(7.0.sp),
             decoration: BoxDecoration(
               border: Border.all(
                 width: 0,
@@ -77,8 +78,9 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
             child: Text(""),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * (1 - (index + 1)/(index + 3)),
-            padding: EdgeInsets.all(7.0),
+           // width: MediaQuery.of(context).size.width * (1 - (index + 1)/(index + 3)),
+            width: MediaQuery.of(context).size.width * (1 - (rank + 1)/(rank + 3)),
+            padding: EdgeInsets.all(7.0.sp),
             decoration: BoxDecoration(
               border: Border.all(
                 width: 0,
@@ -95,15 +97,14 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget> [
-                SizedBox(width: 5,),
+                SizedBox(width: 2.w,),
                 Text("${globalscoresTable.value[index].username}"),
-                SizedBox(width: 10,),
-               // Icon(FontAwesomeIcons.solidStar, color: Colors.orange, size: 12,),
+                SizedBox(width: 2.w,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children:  _getGlobalTableStars(globalRank: rank),
                 ),
-                SizedBox(width: 20,),
+                SizedBox(width: 2.w,),
                 Text("${globalscoresTable.value[index].globalpercent}%"),
               ],
             ),

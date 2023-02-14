@@ -4,6 +4,7 @@ import 'package:SmileApp/apis/network.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:SmileApp/models/mymodels/user.dart';
+import 'package:sizer/sizer.dart';
 
 Color randomColor() {
   return Color(0xFFFFFFFF & Random().nextInt(0xFFFFFFFF));
@@ -91,7 +92,7 @@ class _EmotionsState extends State<Emotions> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.85,
+          height: MediaQuery.of(context).size.height * 0.8 ,
           width: MediaQuery.of(context).size.width * 80,
           margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
           child: Card(
@@ -100,378 +101,62 @@ class _EmotionsState extends State<Emotions> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Container(
-              padding: EdgeInsets.all(9),
+              padding: EdgeInsets.only(top: 10.sp, left: 5.sp),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: <
-                      Widget>[
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
                           "Kindly select all that apply ",
                           style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: 16.0.sp,
                             fontFamily: 'Poppins',
-                            color:
-                                Theme.of(context).primaryColor.withOpacity(0.8),
+                            color: Theme.of(context).primaryColor.withOpacity(0.8),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      child: Text(
-                        "I feel. . .",
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'Poppins',
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold),
+                    //SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 3.h),
+                      child: Container(
+                        child: Text(
+                          "I feel. . .",
+                          style: TextStyle(
+                              fontSize: 16.0.sp,
+                              fontFamily: 'Poppins',
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                   // SizedBox(height: 20),
                     Row(
                       children: <Widget>[
-                        buttonAction(clicked: Clicked0, index: 0, label: "Not \n Happy", buttonicon:FontAwesomeIcons.squarePersonConfined ),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     // changeColor();
-                        //     setState(() {
-                        //       if (Clicked0 == true) {
-                        //         Clicked0 = false;
-                        //       } else {
-                        //         Clicked0 = true;
-                        //       }
-                        //     });
-                        //   },
-                        //   child: Container(
-                        //     height: MediaQuery.of(context).size.height * 0.10,
-                        //     width: MediaQuery.of(context).size.width * 0.40,
-                        //     decoration: BoxDecoration(
-                        //       color: Clicked0 == true
-                        //           ? Colors.green
-                        //           : Colors.white,
-                        //       // color: Theme.of(context).primaryColor,
-                        //       border: Border.all(
-                        //           width: 1.0,
-                        //           color: Colors.grey.withOpacity(0.2)),
-                        //       borderRadius: BorderRadius.circular(16.0),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.start,
-                        //       children: <Widget>[
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           FontAwesomeIcons.squarePersonConfined,
-                        //           color:
-                        //           Theme.of(context).colorScheme.secondary,
-                        //           size: 20,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Text(
-                        //           " Not \n Happy ",
-                        //           style: TextStyle(
-                        //               fontFamily: 'Poppins',
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.bold,
-                        //               color: Theme.of(context)
-                        //                   .colorScheme
-                        //                   .secondary),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+                        buttonAction(clicked: Clicked0, index: 0, label: "Not Happy", buttonicon:FontAwesomeIcons.squarePersonConfined ),
                         buttonAction(clicked: Clicked1, index: 1, label: "Surprised", buttonicon:FontAwesomeIcons.faceTired ),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     // changeColor();
-                        //     setState(() {
-                        //       if (Clicked1 == true) {
-                        //         Clicked1 = false;
-                        //       } else {
-                        //         Clicked1 = true;
-                        //       }
-                        //     });
-                        //   },
-                        //   child: Container(
-                        //     height: MediaQuery.of(context).size.height * 0.10,
-                        //     width: MediaQuery.of(context).size.width * 0.40,
-                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                        //     decoration: BoxDecoration(
-                        //       color: Clicked1 == true
-                        //           ? Colors.green
-                        //           : Colors.white,
-                        //       // color: Theme.of(context).primaryColor,
-                        //       border: Border.all(
-                        //           width: 1.0,
-                        //           color: Colors.grey.withOpacity(0.2)),
-                        //       borderRadius: BorderRadius.circular(16.0),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.start,
-                        //       children: <Widget>[
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           FontAwesomeIcons.faceTired,
-                        //           color:
-                        //           Theme.of(context).colorScheme.secondary,
-                        //           size: 20,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Text(
-                        //           " Surprised ",
-                        //           style: TextStyle(
-                        //               fontFamily: 'Poppins',
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.bold,
-                        //               color: Theme.of(context)
-                        //                   .colorScheme
-                        //                   .secondary),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         buttonAction(clicked: Clicked2, index: 2, label: "Fearful", buttonicon: FontAwesomeIcons.faceSmileBeam),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     print('Clicked on 2');
-                        //     // changeColor();
-                        //     setState(() {
-                        //       if (Clicked2 == true) {
-                        //         Clicked2 = false;
-                        //       } else {
-                        //         Clicked2 = true;
-                        //       }
-                        //     });
-                        //   },
-                        //   child: Container(
-                        //     height: MediaQuery.of(context).size.height * 0.10,
-                        //     width: MediaQuery.of(context).size.width * 0.40,
-                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                        //     decoration: BoxDecoration(
-                        //       color: Clicked2 == true
-                        //           ? Colors.green
-                        //           : Colors.white,
-                        //       // color: Theme.of(context).primaryColor,
-                        //       border: Border.all(
-                        //           width: 1.0,
-                        //           color: Colors.grey.withOpacity(0.2)),
-                        //       borderRadius: BorderRadius.circular(16.0),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.start,
-                        //       children: <Widget>[
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           FontAwesomeIcons.faceSmileBeam,
-                        //           color:
-                        //           Theme.of(context).colorScheme.secondary,
-                        //           size: 20,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Text(
-                        //           " Fearful ",
-                        //           style: TextStyle(
-                        //               fontFamily: 'Poppins',
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.bold,
-                        //               color: Theme.of(context)
-                        //                   .colorScheme
-                        //                   .secondary),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+
                         buttonAction(clicked: Clicked3, index: 3, label: "Sad", buttonicon: FontAwesomeIcons.faceDizzy),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     // changeColor();
-                        //     setState(() {
-                        //       if (Clicked3 == true) {
-                        //         Clicked3 = false;
-                        //       } else {
-                        //         Clicked3 = true;
-                        //       }
-                        //     });
-                        //   },
-                        //   child: Container(
-                        //     height: MediaQuery.of(context).size.height * 0.10,
-                        //     width: MediaQuery.of(context).size.width * 0.40,
-                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                        //     decoration: BoxDecoration(
-                        //       color: Clicked3 == true
-                        //           ? Colors.green
-                        //           : Colors.white,
-                        //       // color: Theme.of(context).primaryColor,
-                        //       border: Border.all(
-                        //           width: 1.0,
-                        //           color: Colors.grey.withOpacity(0.2)),
-                        //       borderRadius: BorderRadius.circular(16.0),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.start,
-                        //       children: <Widget>[
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           FontAwesomeIcons.faceDizzy,
-                        //           color:
-                        //           Theme.of(context).colorScheme.secondary,
-                        //           size: 20,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Text(
-                        //           " Sad ",
-                        //           style: TextStyle(
-                        //               fontFamily: 'Poppins',
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.bold,
-                        //               color: Theme.of(context)
-                        //                   .colorScheme
-                        //                   .secondary),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         buttonAction(clicked: Clicked4, index: 4, label: "Angry" , buttonicon: FontAwesomeIcons.faceFrown),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     // changeColor();
-                        //     setState(() {
-                        //       if (Clicked4 == true) {
-                        //         Clicked4 = false;
-                        //       } else {
-                        //         Clicked4 = true;
-                        //       }
-                        //     });
-                        //   },
-                        //   child: Container(
-                        //     height: MediaQuery.of(context).size.height * 0.10,
-                        //     width: MediaQuery.of(context).size.width * 0.40,
-                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                        //     decoration: BoxDecoration(
-                        //       color: Clicked4 == true
-                        //           ? Colors.green
-                        //           : Colors.white,
-                        //       // color: Theme.of(context).primaryColor,
-                        //       border: Border.all(
-                        //           width: 1.0,
-                        //           color: Colors.grey.withOpacity(0.2)),
-                        //       borderRadius: BorderRadius.circular(16.0),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.start,
-                        //       children: <Widget>[
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           FontAwesomeIcons.faceFrown,
-                        //           color:
-                        //           Theme.of(context).colorScheme.secondary,
-                        //           size: 20,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Text(
-                        //           " Angry ",
-                        //           style: TextStyle(
-                        //               fontFamily: 'Poppins',
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.bold,
-                        //               color: Theme.of(context)
-                        //                   .colorScheme
-                        //                   .secondary),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+
                         buttonAction(clicked: Clicked5, index: 5, label: "Disgusted", buttonicon: FontAwesomeIcons.faceFlushed),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     // changeColor();
-                        //     setState(() {
-                        //       if (Clicked5 == true) {
-                        //         Clicked5 = false;
-                        //       } else {
-                        //         Clicked5 = true;
-                        //       }
-                        //     });
-                        //   },
-                        //   child: Container(
-                        //     height: MediaQuery.of(context).size.height * 0.10,
-                        //     width: MediaQuery.of(context).size.width * 0.40,
-                        //     // margin: const EdgeInsets.only(left: 5, right: 5, top: 1),
-                        //     decoration: BoxDecoration(
-                        //       color: Clicked5 == true
-                        //           ? Colors.green
-                        //           : Colors.white,
-                        //       // color: Theme.of(context).primaryColor,
-                        //       border: Border.all(
-                        //           width: 1.0,
-                        //           color: Colors.grey.withOpacity(0.2)),
-                        //       borderRadius: BorderRadius.circular(16.0),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.start,
-                        //       children: <Widget>[
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Icon(
-                        //           FontAwesomeIcons.faceFlushed,
-                        //           color:
-                        //           Theme.of(context).colorScheme.secondary,
-                        //           size: 20,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 10,
-                        //         ),
-                        //         Text(
-                        //           " Disgusted ",
-                        //           style: TextStyle(
-                        //               fontFamily: 'Poppins',
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.bold,
-                        //               color: Theme.of(context)
-                        //                   .colorScheme
-                        //                   .secondary),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+
                       ],
                     ),
                   ]),
@@ -519,13 +204,6 @@ class _EmotionsState extends State<Emotions> {
      key: Key("$index"),
       onPressed: () {
         clickedButton(index: index);
-        // setState(() {
-        //   if (clicked == true) {
-        //     clicked = false;
-        //   } else {
-        //     clicked = true;
-        //   }
-        // });
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.10,
@@ -537,31 +215,29 @@ class _EmotionsState extends State<Emotions> {
               : Colors.white,
           // color: Theme.of(context).primaryColor,
           border: Border.all(
-              width: 1.0,
+              width: 1.0.w,
               color: Colors.grey.withOpacity(0.2)),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              width: 10,
+            Padding(
+              padding: EdgeInsets.only(right: 10, left: 5),
+              child: Icon(
+                buttonicon,
+               // FontAwesomeIcons.squarePersonConfined,
+                color:
+                Theme.of(context).colorScheme.secondary,
+                size: 20.sp,
+              ),
             ),
-            Icon(
-              buttonicon,
-             // FontAwesomeIcons.squarePersonConfined,
-              color:
-              Theme.of(context).colorScheme.secondary,
-              size: 25,
-            ),
-            SizedBox(
-              width: 10,
-            ),
+
             Text(
              "$label",
               style: TextStyle(
                   fontFamily: 'Poppins',
-                  fontSize: 18,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context)
                       .colorScheme
@@ -573,7 +249,7 @@ class _EmotionsState extends State<Emotions> {
     );
   }
 
-  Widget getEomtionsWidget(String feeling, IconData iconData, int buttonID, bool isclicked) {
+  Widget _getEomtionsWidget(String feeling, IconData iconData, int buttonID, bool isclicked) {
     Color? newColor;
     switch(buttonID){
       case 0:
