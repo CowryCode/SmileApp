@@ -707,11 +707,11 @@ class _CameraViewGiftState extends State<CameraViewGift> {
             )),
         content: Text(
           "We noticed that you are yet to complete today's questionnaire. \n \n Completing this questionnaire will help us improve the app. \n \n Will you want to complete it now?",
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black45,
             fontFamily: 'Poppins',
-            fontSize: 14.0,
+            fontSize: 12.0.sp,
           ),
           textAlign: TextAlign.center,
         ),
@@ -751,60 +751,5 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       ),
     );
   }
-
-
-  // RatingDialog _showRatingAlert(BuildContext context,
-  //     {required bool justreadmessage}) {
-  //   return RatingDialog(
-  //     showCloseButton: false,
-  //     initialRating: 0.0,
-  //     starSize: 30.0,
-  //     // your app's name?
-  //     title: Text(
-  //       'Rate Your Mood',
-  //       textAlign: TextAlign.center,
-  //       style: const TextStyle(
-  //         fontSize: 25,
-  //         fontWeight: FontWeight.bold,
-  //       ),
-  //     ),
-  //     message: Text(
-  //       (widget.readmessage == true)
-  //           ? 'How happy does it feel to unlock your message with a smile?'
-  //           : 'How happy does it feel to smile this long?',
-  //       textAlign: TextAlign.center,
-  //       style: const TextStyle(fontSize: 15),
-  //     ),
-  //     image: Image.asset(
-  //       "assets/logo1.jpeg",
-  //       width: 100,
-  //       height: 100,
-  //     ),
-  //     submitButtonText: 'Submit',
-  //     commentHint: 'Set your custom comment hint',
-  //     onCancelled: () => print('cancelled'),
-  //     onSubmitted: (response) {
-  //       MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
-  //       mood.captureMood(
-  //         rating: response.rating.round(),
-  //         smileduration: smileGameNofitier.getSmileDurationInSecound(),
-  //         countrycount: smileGameNofitier.getNumberofCountriesPainted(),
-  //         timeSpent: stopwatch!.elapsedMilliseconds / 1000,
-  //       );
-  //
-  //       ApiAccess().saveMood(
-  //           moodModel: mood,
-  //           url: (widget.readmessage == true)
-  //               ? Tribe_Mood_URL
-  //               : SmileGram_Mood_URL);
-  //       Navigator.of(context).popAndPushNamed(
-  //         '/home',
-  //       );
-  //     },
-  //     submitButtonTextStyle: const TextStyle(
-  //         fontWeight: FontWeight.bold, fontSize: 17, color: Colors.green),
-  //   );
-  // }
-
 
 }

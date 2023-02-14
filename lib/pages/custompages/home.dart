@@ -9,6 +9,7 @@ import 'package:SmileApp/config/custom_design.dart';
 import 'package:SmileApp/models/mymodels/giftvariableobject.dart';
 import 'package:SmileApp/notification/notification.dart';
 import 'package:SmileApp/pages/custompages/Questionnaire_Codes/MoodScale.dart';
+import 'package:SmileApp/pages/custompages/SmilyRating/SmileGram_Achievement_Alert.dart';
 import 'package:SmileApp/pages/custompages/SmilyRating/rating_view.dart';
 import 'package:SmileApp/pages/custompages/navigationtabs.dart';
 import 'package:SmileApp/pages/custompages/setting.dart';
@@ -70,7 +71,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
     // WidgetsBinding.instance.addPostFrameCallback((_)=> {
     // if(ApiAccess().hasPayLoad() == false) {
     //     _showNetworkAlert(context: context,
@@ -514,6 +514,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               }),
+
                         ],
                     ),
             ),
@@ -733,10 +734,10 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: Center(
-            child: const Icon(
+            child: Icon(
               FontAwesomeIcons.triangleExclamation,
               color: Colors.red,
-              size: 26,
+              size: 20.sp,
             )),
         content: Text(
           "It seems your device is not connected to the internet, Kindly check.",
@@ -773,17 +774,17 @@ class _HomeState extends State<Home> {
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.secondary,
                 fontFamily: 'Poppins',
-                fontSize: 22.0,
+                fontSize: 20.0.sp,
               ),
               textAlign: TextAlign.center,
             )),
         content: Text(
           "We noticed that you are yet to complete today's questionnaire. \n \n Completing this questionnaire will help us improve the app. \n \n Will you want to complete it now?",
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black45,
             fontFamily: 'Poppins',
-            fontSize: 14.0,
+            fontSize: 12.0.sp,
           ),
           textAlign: TextAlign.center,
         ),
@@ -821,6 +822,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
 
 
 }
