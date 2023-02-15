@@ -145,7 +145,17 @@ class ApiAccess {
 
         // UNREPLIED TRIBE CALL
         UnrepliedTribeCalls? unrepliedTribecalls = profile.unrepliedTribeCalls;
-        if(unrepliedTribecalls != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls.msgcalls!);
+       // if(unrepliedTribecalls != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls.msgcalls!);
+
+        if(tribeEmpathyRequestNotifier.value != null){
+          if(tribeEmpathyRequestNotifier.value.length < 2){
+            tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls!.msgcalls!);
+          }
+        }else{
+          if(unrepliedTribecalls != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls.msgcalls!);
+        }
+
+
 
         // UPDATE USERPROFILE NOTIFIER
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
@@ -411,7 +421,13 @@ class ApiAccess {
 
       if (response.statusCode == 200) {
         UnrepliedTribeCalls msges = UnrepliedTribeCalls.fromJson(jsonDecode(response.body));
-        tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+        if(tribeEmpathyRequestNotifier.value != null){
+          if(tribeEmpathyRequestNotifier.value.length < 2 ){
+            tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+          }
+        }else{
+          tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+        }
         return msges;
       } else {
         return null;
@@ -484,8 +500,14 @@ class ApiAccess {
 
     if (response.statusCode == 200) {
       UnrepliedTribeCalls msges = UnrepliedTribeCalls.fromJson(jsonDecode(response.body));
-      tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
-      //TribeMessage msg = TribeMessage.fromJson(jsonDecode(response.body));
+     // tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+      if(tribeEmpathyRequestNotifier.value != null){
+        if(tribeEmpathyRequestNotifier.value.length < 2){
+          tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+        }
+      }else{
+        if(msges != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: msges.msgcalls!);
+      }
       return msges;
     } else {
       return null;

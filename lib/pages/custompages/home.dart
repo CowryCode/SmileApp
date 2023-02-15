@@ -508,8 +508,7 @@ class _HomeState extends State<Home> {
                               valueListenable: tribeMessagesNotifier,
                               builder: (context, List<TribeMessage> value, child) {
                                 return Container(
-                                 // height: MediaQuery.of(context).size.height * 0.2.h,
-                                  height: 0.2.h,
+                                  height: MediaQuery.of(context).size.height * 0.2,
                                   child: ListView(
                                     scrollDirection: Axis.horizontal,
                                     //  children: getSmilePacks(tribeMessagesNotifier.value),

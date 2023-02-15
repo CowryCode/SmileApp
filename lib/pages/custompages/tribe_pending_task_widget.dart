@@ -16,7 +16,8 @@ import '../../apis/models/moodmodel.dart';
 class TribePendingTaskWidget extends StatefulWidget {
   //final String msg;
   final TribeRequest msg;
-  const TribePendingTaskWidget({Key? key, required this.msg}) : super(key: key);
+  final int index;
+  const TribePendingTaskWidget({Key? key, required this.msg, required this.index}) : super(key: key);
 
   @override
   _TribePendingTaskWidgetState createState() => _TribePendingTaskWidgetState();
@@ -137,8 +138,8 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
                       if(sentimentScore > 0){
                         _processPageExit();
                         setState(() {
-                          print('DID IT GET HERE ? :::::::::::');
-                          // textEditingController.clear();
+                          tribeEmpathyRequestNotifier.removedTheRepliedItem(index: widget.index);
+                         // textEditingController.clear();
                           showfulltext = !showfulltext;
                         });
                       }else {

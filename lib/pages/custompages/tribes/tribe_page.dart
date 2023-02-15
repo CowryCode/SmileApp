@@ -78,8 +78,7 @@ class _TribePageState extends State<TribePage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Navigator.of(context).pushNamed('/tribemessages');
-                      Navigator.popAndPushNamed(context, '/tribemessages');
+                      Navigator.popAndPushNamed(context, '/emotions');
                     },
                     child: const Text('Yes'),
                   ),
@@ -112,7 +111,7 @@ class _TribePageState extends State<TribePage> {
                 builder: (context, List<TribeRequest> value, child) {
                   if ((value.length < 1)) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 200),
+                         margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 100),
                           child: Text(" No Requests yet"),
                         );
                   } else {
@@ -121,7 +120,7 @@ class _TribePageState extends State<TribePage> {
                               // itemCount: _leaderBoardModelLIST.length,
                               itemCount: value.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return TribePendingTaskWidget(msg: value[index]);
+                                return TribePendingTaskWidget(msg: value[index], index: index,);
                               }),
                         );
                   }

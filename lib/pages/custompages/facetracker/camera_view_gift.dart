@@ -177,7 +177,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+           // icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               //_openRatingDialog(ratingOnly: widget.readmessage);
               _processPageExit();
@@ -190,6 +191,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
+         // backgroundColor: Theme.of(context).colorScheme.secondary,
           backgroundColor: Theme.of(context).colorScheme.secondary,
           title: Text(widget.title),
         ),
