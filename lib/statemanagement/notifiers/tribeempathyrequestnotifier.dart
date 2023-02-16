@@ -8,7 +8,6 @@ class TribeEmpathyRequestNotifier extends ValueNotifier<List<TribeRequest>>{
   TribeEmpathyRequestNotifier({required List<TribeRequest> value }) : super(value);
 
   void updateEmpathyRequests({required List<TribeRequest> update}){
-    print('The List Original is : ${value.length}');
     value = update;
     notifyListeners();
   }

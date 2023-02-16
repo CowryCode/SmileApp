@@ -191,8 +191,8 @@ class _CameraViewGiftState extends State<CameraViewGift> {
               }
             },
           ),
-         // backgroundColor: Theme.of(context).colorScheme.secondary,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
+        //  backgroundColor: Theme.of(context).colorScheme.secondary,
+          backgroundColor: Colors.teal[10],
           title: Text(widget.title),
         ),
         body: _body(),
@@ -233,7 +233,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
                                 primary:
                                     Theme.of(context).colorScheme.secondary),
                             child: const Text(
-                              'Refresh Camera',
+                              'Start Camera',
                             ),
                             onPressed: () {
                               refreshCamera(); // Refresh
@@ -357,17 +357,20 @@ class _CameraViewGiftState extends State<CameraViewGift> {
       if (_controller?.value != null) {
         if (_controller?.value.isInitialized == false) {
           return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+           // height: MediaQuery.of(context).size.height * 0.6,
+            height: 6.h,
           );
         }
       } else {
         return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.6,
+         // height: MediaQuery.of(context).size.height * 0.6,
+          height: 6.h,
         );
       }
     } else {
       return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.6,
+       // height: MediaQuery.of(context).size.height * 0.6,
+        height: 6.h,
       );
     }
     final size = MediaQuery.of(context).size;
@@ -381,8 +384,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
     // to prevent scaling down, invert the value
     if (scale < 1) scale = 1 / scale;
 
-    // added by me
-    // end of added by me
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width,
@@ -609,6 +611,7 @@ class _CameraViewGiftState extends State<CameraViewGift> {
   }
 
   _processPageExit() async{
+    smileAppValueNotifier.showMoodRating(show_pop_up: false);
     smileAppValueNotifier.updateSoundDeactivation(deactivateSound: false);
     MoodModel mood = smileAppValueNotifier.value.moodmodel.value;
     mood.captureMood(

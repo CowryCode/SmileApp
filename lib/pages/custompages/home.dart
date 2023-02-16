@@ -682,7 +682,7 @@ class _HomeState extends State<Home> {
       builder: (BuildContext context) => AlertDialog(
         title: const Text('My Tribe'),
         content: const Text(
-          'To unlock this message, you need to maintain a smile as the message unfolds',
+          'To unlock this message need to maintain a smile as the message unfolds until you see "***end" which is the end of the message.',
           style: TextStyle(color: Colors.black45),
         ),
         actions: <Widget>[

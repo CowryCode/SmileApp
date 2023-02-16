@@ -102,7 +102,7 @@ class _FaceDetectorGiftViewState extends State<FaceDetectorGiftView> {
                // smileGameNofitier.moveObject(smilesize: prob, isSmileGram: false);
                 smileGameNofitier.moveSmileGramGame(isSmileGram: false);
                 // This condition is to make the text drop gradually
-                if(smileGameNofitier.getSmileDurationCounter() % 4 == 0 ){
+                if(smileGameNofitier.getSmileDurationCounter() % 3 == 0 ){
                   _msg = messageNotifier.value.msg + " " + _tokenArray![messageNotifier.value.index];
                   (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? _msg = _msg + " *** End" : _msg = _msg;
                   (messageNotifier.value.index) == (_tokenArrayLength! - 1) ? ApiAccess().readTribeMessage(messageID: widget.giftVariableObject.id!):"";

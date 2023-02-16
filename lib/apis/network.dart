@@ -128,6 +128,8 @@ class ApiAccess {
 
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
 
+        print('The BMI status is : ${profile.submittedBMI}');
+
         smileAppValueNotifier.updateCountriesIndexString(countriesIndex: profile.smilegrammappoints!,nextID: 0);
 
         //LEADER BOARD
@@ -135,9 +137,16 @@ class ApiAccess {
         if(lb != null) _populateProgressTable(progress: lb.personalProgresses!);
         if(lb != null) _populateGlobalLeaderBoard(gloableranking: lb.globalProgresses!);
 
-        // SMILE PACK
+        // UNREAD SMILE PACK
         UnreadTribeMessage? unreadsmilePacks = profile.unreadTribeMessage;
         if(unreadsmilePacks != null) tribeMessagesNotifier.updateTribeMessageList(requestlist: unreadsmilePacks.messages!);
+        if(tribeMessagesNotifier.value != null){
+          if(tribeMessagesNotifier.value.length < 2){
+            if(unreadsmilePacks != null) tribeMessagesNotifier.updateTribeMessageList(requestlist: unreadsmilePacks.messages!);
+          }
+        }else{
+          if(unreadsmilePacks != null) tribeMessagesNotifier.updateTribeMessageList(requestlist: unreadsmilePacks.messages!);
+        }
 
         // READ SMILE PACKS
         UnreadTribeMessage? readsmilePacks = profile.readTribeMessages;
@@ -146,9 +155,8 @@ class ApiAccess {
         // UNREPLIED TRIBE CALL
         UnrepliedTribeCalls? unrepliedTribecalls = profile.unrepliedTribeCalls;
        // if(unrepliedTribecalls != null) tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls.msgcalls!);
-
         if(tribeEmpathyRequestNotifier.value != null){
-          if(tribeEmpathyRequestNotifier.value.length < 2){
+          if(tribeEmpathyRequestNotifier.value.length < 2 ){
             tribeEmpathyRequestNotifier.updateEmpathyRequests(update: unrepliedTribecalls!.msgcalls!);
           }
         }else{
@@ -180,7 +188,6 @@ class ApiAccess {
   }
 
   Future<TribeMessage?> sendTribeMessage({required TribeMessage message}) async {
-    print('GOT TO THIS POINT :::::::');
 
     String? token;
     Future<String?> tk = Localstorage().getString(key_login_token);
@@ -260,9 +267,11 @@ class ApiAccess {
               "endDate" : moodModel.endDate,
               "endTime" : moodModel.endTime,
               "endMood" : moodModel.endMood,
-              "smileduration" : moodModel.smileduration,
+              //"smileduration" : moodModel.smileduration,
+              "smileduration" : roundUpValau(value:moodModel.smileduration!, decimalPlaces: 2 ),
               "countrycount" : moodModel.countrycount,
-              "timeSpentSec" : moodModel.timeSpentSec,
+             // "timeSpentSec" : moodModel.timeSpentSec,
+              "timeSpentSec" : roundUpValau(value:moodModel.timeSpentSec!, decimalPlaces: 2 ),
             }),
       );
 
@@ -275,6 +284,10 @@ class ApiAccess {
     }catch(e){
       print('Error: ${e.toString()}');
     }
+  }
+
+  String roundUpValau({required double value, required int decimalPlaces}){
+    return value.toStringAsFixed(decimalPlaces);
   }
 
   Future<LeaderBoard?> getLeaderBoard() async {
@@ -592,6 +605,7 @@ class ApiAccess {
 
     if (response.statusCode == 200) {
      // QuesionnaireBMIScale savedQuestionnaire = QuesionnaireBMIScale.fromJson(jsonDecode(response.body));
+      refreshData();
     }
   }
 
