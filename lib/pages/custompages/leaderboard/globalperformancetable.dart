@@ -60,6 +60,7 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
 
 
   Widget progress({required int index, required double rank}){
+    print('Rank : $rank' );
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Stack(
@@ -79,7 +80,8 @@ class _GlobalPerformanceTableState extends State<GlobalPerformanceTable> {
           ),
           Container(
            // width: MediaQuery.of(context).size.width * (1 - (index + 1)/(index + 3)),
-            width: MediaQuery.of(context).size.width * (1 - (rank + 1)/(rank + 3)),
+           // width: MediaQuery.of(context).size.width * (1 - (rank + 1)/(rank + 3)),
+            width: MediaQuery.of(context).size.width * rank/100,
             padding: EdgeInsets.all(7.0.sp),
             decoration: BoxDecoration(
               border: Border.all(
