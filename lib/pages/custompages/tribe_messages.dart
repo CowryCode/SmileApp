@@ -43,7 +43,7 @@ class _TribeMessageListState extends State<TribeMessageList> {
            // Navigator.of(context).pop();
           },
         ),
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(
           'Opened Notes',
           style: TextStyle(

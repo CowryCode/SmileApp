@@ -49,7 +49,6 @@ class _LoginProcessingState extends State<LoginProcessing> {
           _timer!.cancel(),
           if(value.smilegrampoints! > 0){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)))
-
           }else{
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()))
           }

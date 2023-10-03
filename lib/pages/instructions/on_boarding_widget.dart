@@ -96,7 +96,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: (){
                    Navigator.of(context).pushNamed('/home_with_alert');
                    Navigator.push(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: true,)));

@@ -50,14 +50,14 @@ class _GetStarted3State extends State<GetStarted3> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                FlatButton(
+                TextButton(
                   onPressed: (){
                      Navigator.of(context).pushNamed('/signup');
                   },
                   child: Text(
                     "Skip",
                     style: TextStyle(
-                      color:Theme.of(context).accentColor,
+                      color:Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0,
                       fontFamily: "Poppins"
@@ -78,7 +78,7 @@ class _GetStarted3State extends State<GetStarted3> {
                   Container(
                     width: 50,
                     height: 3,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ],)
               ],

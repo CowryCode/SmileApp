@@ -7,7 +7,13 @@ class ChatHistoryValueNotifier extends ValueNotifier<List<BuddyChat>>{
   void updateComment({required String chat, required bool isbot, required bool isPlaceholder}){
     if(isPlaceholder == false && isbot == true){
       value.elementAt(0).responseReady(botResponse: chat);
-    }else{
+    }
+
+    // else if(isPlaceholder == false && isbot == false){
+    //   // Do Nothing because nothing was returning from the
+    // }
+    //
+    else{
       value.insert(0, new BuddyChat( text:chat , isBot: isbot, isPlaceholder: isPlaceholder));
     }
     notifyListeners();

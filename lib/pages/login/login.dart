@@ -203,18 +203,15 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       margin: EdgeInsets.only(top:50.0,bottom: 20.0,right:30.0,left: 30.0 ),
                       height: 40,
-                      child: RaisedButton(
-                        color: Theme.of(context).accentColor,
+                      child: ElevatedButton(
                         onPressed: (){
                           String userid = textEditingController.value.text.trim();
-                          //ApiAccess().login(logincode: textEditingController.value.text.trim());
-                          //Navigator.of(context).pushNamed('/welcome');
                           GiftVariableObject variables = GiftVariableObject(readmessage: false, msg: userid);
                           Navigator.of(context).pushNamed('/processlogin', arguments: variables);
                       },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
+                        // shape: RoundedRectangleBorder(
+                        //   borderRadius: BorderRadius.circular(30.0),
+                        // ),
                         child: Container(
                           child:  Center(
                             child:Text(

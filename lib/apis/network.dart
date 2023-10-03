@@ -56,6 +56,8 @@ class ApiAccess {
   Future<UserProfile> login({required String logincode}) async {
     print('LOGIN GOT HERE 1 with $logincode');
     print('URL IS : $getProfile_URL');
+
+
     try {
       final response = await http.get(Uri.parse(getProfile_URL),
         headers: <String, String>{
@@ -66,7 +68,7 @@ class ApiAccess {
         },
       );
 
-      if (response.statusCode == 200) {
+        if (response.statusCode == 200) {
         UserProfile profile = UserProfile.fromJson(jsonDecode(response.body));
         // UPDATE USERPROFILE NOTIFIER
         userProfileNotifier.updateUserProfileNotifier(userProfile: profile);
@@ -97,14 +99,15 @@ class ApiAccess {
        // smileGameNofitier.setTodayScore(countryCount: profile.todayAchievedValue!);
         smileGameNofitier.setTodayScore(countryCount:  profile.smilegrampoints!);
 
+
         Localstorage().saveString(key_login_token, logincode);
         Localstorage().saveBoolean(key_login_status, true);
-        return profile;
+      return profile;
       } else {
          throw Exception("`Couldn't pull the profile ");
       }
     } catch (e) {
-       throw Exception("Error, status code ${e.toString()}");
+      throw Exception("Error, status code ${e.toString()}");
     }
  }
 
@@ -541,8 +544,15 @@ class ApiAccess {
       chatcontent = chat;
     }
 
+    List messages = [
+      {"role": "system", "content": "You are a lovely friend who responds empathically, limit response to 20 words"},
+      {"role": "user", "content": "$chat"},
+      // {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+      // {"role": "user", "content": "Where was it played?"}
+    ];
+
     final response = await http.post(Uri.parse("$chaturl"),
-   // final response = await http.post(Uri.parse("https://api.openai.com/v1/completions"),
+      //final response = await http.post(Uri.parse("https://api.openai.com/v1/completions"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -550,21 +560,34 @@ class ApiAccess {
       },
       body: jsonEncode(
           <String, dynamic>{
-            "model" : "text-davinci-003",
-            "prompt" : chatcontent,
-            "max_tokens" : 1000,
+            "model" : "gpt-4",
+            "messages" : messages,
+            "max_tokens" : 500,
             "temperature" : 1.0,
           }),
-    );
+      );
+      // body: jsonEncode(
+      //     <String, dynamic>{
+      //       "model" : "text-davinci-003",
+      //       "prompt" : chatcontent,
+      //       "max_tokens" : 1000,
+      //       "temperature" : 1.0,
+      //     }),
+      // );
 
     if (response.statusCode == 200) {
-      chatbotPODO botmessage = chatbotPODO.fromJson(jsonDecode(response.body));
-     //chatcentralnotifier.updateComment(chat: response.body, isbot: true, isPlaceholder: false);
-      String chat = botmessage.choices![0].text!.trim();
-      chatcentralnotifier.updateComment(chat: '$chat', isbot: true, isPlaceholder: false);
+      ChatbotPODO botmessage = ChatbotPODO.fromJson(jsonDecode(response.body));
+     // String chat = botmessage.choices![0].text!.trim();
+     // chatcentralnotifier.updateComment(chat: '$chat', isbot: true, isPlaceholder: false);
+      // chatcentralnotifier.updateComment(chat: '$chat', isbot: true, isPlaceholder: false);
+      String? feedback = botmessage.choices!.elementAt(0).message!.content;
+      print('RESPONSE : ${botmessage.choices!.elementAt(0).message!.content}');
+      chatcentralnotifier.updateComment(chat: '$feedback', isbot: true, isPlaceholder: false);
       return true;
     } else {
-      return null;
+      print('ERRRROOOOOORRRRRR !!!!! ${response.body}');
+      chatcentralnotifier.updateComment(chat: 'I cannot really think straight now, please can you give me a moment? ', isbot: true, isPlaceholder: false);
+      return false;
     }
   }
 

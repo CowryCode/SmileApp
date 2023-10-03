@@ -104,7 +104,8 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Poppins',
               primaryColor: Colors.white,
               brightness: Brightness.light,
-              accentColor: config.Colors().mainColor(1),
+             // accentColor: config.Colors().mainColor(1),
+              secondaryHeaderColor: config.Colors().mainColor(1),
               focusColor: config.Colors().accentColor(1),
               hintColor: config.Colors().secondColor(1),
               textTheme: TextTheme(
@@ -155,7 +156,8 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Poppins',
           primaryColor: Colors.white,
           brightness: Brightness.light,
-          accentColor: config.Colors().mainColor(1),
+         // accentColor: config.Colors().mainColor(1),
+            secondaryHeaderColor: config.Colors().mainColor(1),
           focusColor: config.Colors().accentColor(1),
           hintColor: config.Colors().secondColor(1),
           textTheme: TextTheme(

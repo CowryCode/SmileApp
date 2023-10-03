@@ -43,7 +43,7 @@ class ChatMessageListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                 //  new Text(this.chat.user!.name!, style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).accentColor,fontWeight: FontWeight.bold),),
-                  new Text('You', style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).accentColor,fontWeight: FontWeight.bold),),
+                  new Text('You', style: TextStyle(fontFamily: 'Poppins',color: Theme.of(context).colorScheme.secondary,fontWeight: FontWeight.bold),),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(chat.text!,style: TextStyle(fontFamily: 'Poppins',color: Colors.black,),),
@@ -74,7 +74,8 @@ class ChatMessageListItem extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Container(
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor.withOpacity(0.8),
+           // color: Theme.of(context).accentColor.withOpacity(0.8),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
         padding: EdgeInsets.symmetric(vertical: 7, horizontal: 10),

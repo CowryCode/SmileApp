@@ -79,7 +79,7 @@ class _EmotionsState extends State<Emotions> {
             Navigator.of(context).pop();
           },
         ),
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(
           'My Tribe',
           style: TextStyle(

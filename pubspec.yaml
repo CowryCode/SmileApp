@@ -12,7 +12,7 @@ description: SmileApp
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+5
+version: 1.0.0+7
 
 environment:
   #sdk: ">=2.2.0 <3.0.0"
@@ -25,15 +25,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.4
   font_awesome_flutter:
-  flutter_swiper: ^1.1.6
+  #flutter_swiper: ^1.1.6
   carousel_slider: ^4.0.0
-  titled_navigation_bar: ^4.1.0
+  #titled_navigation_bar: ^4.1.0
+  titled_navigation_bar:
   flutter_svg: ^1.0.3
   curved_navigation_bar: ^1.0.3
-  flutter_form_builder: ^7.1.1
-  form_builder_validators: ^8.1.1
+  #flutter_form_builder: ^7.1.1
+  flutter_form_builder: ^9.0.0
+  #form_builder_validators: ^8.1.1
+  form_builder_validators: ^9.0.0
   meta: ^1.7.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   # Smile Detection
   google_mlkit_face_detection: ^0.4.0
   #image_picker: ^0.8.5+3

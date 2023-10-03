@@ -29,12 +29,13 @@ class _SettingState extends State<Setting> {
           child: Column(
             children: <Widget>[
               Container(
-                height: 130.0,
+               // height: 130.0,
+                height: MediaQuery.of(context).size.height * 0.25,
                 padding:EdgeInsets.all(12.0),
                 margin:EdgeInsets.only(top: 40.0,left: 12.0,right: 12.0),
                 decoration: BoxDecoration(
                  borderRadius: BorderRadius.circular(16.0),
-                 color: Theme.of(context).accentColor,
+                 color: Theme.of(context).colorScheme.secondary,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,7 +115,7 @@ Widget _dropDownListe(Icon icon ,String title,double borderWidth,String route,Bu
     decoration: BoxDecoration(
       border: Border(bottom:BorderSide(width: borderWidth ,color: Colors.grey.withOpacity(0.2))),
     ),
-    child: FlatButton(
+    child: TextButton(
       onPressed: (){
         Navigator.of(context).pushNamed(route);
       },

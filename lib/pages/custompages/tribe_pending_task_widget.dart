@@ -51,16 +51,16 @@ class _TribePendingTaskWidgetState extends State<TribePendingTaskWidget> {
         Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(6.0),
-          child:FlatButton(
-            highlightColor: Theme.of(context).primaryColor,
+          child: TextButton(
+            // highlightColor: Theme.of(context).primaryColor,
             onPressed: (){
               setState(() {
                 showfulltext = !showfulltext;
               });
             },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.circular(16.0),
+            // ),
             child: Card(
               elevation:0.2,
               shape: RoundedRectangleBorder(

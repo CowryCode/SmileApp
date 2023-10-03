@@ -78,7 +78,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                   bottomLeft: Radius.circular(16.0),
                   bottomRight: Radius.circular(16.0)),
             ),
-            backgroundColor: Theme.of(context).accentColor,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             title: Text(
                   "Your PocketBuddy",
               style: TextStyle(
@@ -89,26 +89,6 @@ class _ChatWidgetState extends State<ChatWidget> {
             ),
           ),
           body: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
-            // Expanded(
-            //   child: ValueListenableBuilder(
-            //       valueListenable: chatcentralnotifier,
-            //       builder: (context, List<BuddyChat> value, child) {
-            //         return AnimatedList(
-            //           key: _myListKey,
-            //           reverse: true,
-            //           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            //           initialItemCount: value.length,
-            //           // Latest
-            //           itemBuilder: (context, index, Animation<double> animation) {
-            //             return ChatMessageListItem(
-            //              // chat: _buddyconversationList.conversation[0].buddychats![index],
-            //               chat: value[index],
-            //               animation: animation,
-            //             );
-            //           },
-            //         );
-            //       }),
-            // ),
             Expanded(
                   child:  ValueListenableBuilder(
                       valueListenable: chatcentralnotifier,
@@ -154,7 +134,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                     padding: EdgeInsets.only(right: 30),
                     onPressed: () {
                       if(myController.text.isNotEmpty){
-                        chatcentralnotifier.updateComment(chat: myController.text, isbot: false, isPlaceholder: false);
+                        chatcentralnotifier.updateComment(chat: myController.text, isbot: false,isPlaceholder: false);
                         chatcentralnotifier.updateComment(chat: "typing . . .", isbot: true, isPlaceholder: true);
                       }
 
@@ -169,7 +149,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                     },
                     icon: Icon(
                       Icons.send,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       size: 25,
                     ),
                   ),
@@ -265,7 +245,7 @@ class _ChatWidgetState extends State<ChatWidget> {
       alignment: Alignment.centerLeft,
       child: Container(
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor.withOpacity(0.8),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(15),
                 bottomLeft: Radius.circular(15),
