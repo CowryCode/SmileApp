@@ -545,7 +545,7 @@ class ApiAccess {
     }
 
     List messages = [
-      {"role": "system", "content": "You are a lovely friend who responds empathically, limit response to 20 words"},
+      {"role": "system", "content": "You are a lovely friend who responds empathically, limit your response to 20 words"},
       {"role": "user", "content": "$chat"},
       // {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
       // {"role": "user", "content": "Where was it played?"}

@@ -306,34 +306,33 @@ class _HomeState extends State<Home> {
                           //POCKET BUDDY
                           TextButton(
                             onPressed: () {
-                              (ApiAccess().hasPayLoad() == false) ?
-                              _showNetworkAlert(context: context)
-                                  :
-                              showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text('Pocket Buddy', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
-                                  content: Text(
-                                    'The conversational AI bot keeps you company by holding a conversation with you. You can ask her anything in any field.'
-                                        'The bot can compose music, poem, etc. Spend some time with the bot and enjoy the functionality. \n\n'
-                                        'Do you want to continue ?',
-                                    style: CustomeStyling().customContenttextBlack(opecity: 1),
-                                    //  style: TextStyle(color: Colors.black),
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                                      child: const Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.popAndPushNamed(context, '/chat');
-                                      },
-                                      child: const Text('Yes'),
-                                    ),
-                                  ],
-                                ),
-                              );
+                              // (ApiAccess().hasPayLoad() == false) ?
+                              // _showNetworkAlert(context: context)
+                              //     :
+                              // showDialog<String>(
+                              //   context: context,
+                              //   builder: (BuildContext context) => AlertDialog(
+                              //     title: const Text('Pocket Buddy', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                              //     content: Text(
+                              //       'The conversational AI bot keeps you company by holding a conversation with you. You can ask her anything in any field.'
+                              //           'The bot can compose music, poem, etc. Spend some time with the bot and enjoy the functionality. \n\n'
+                              //           'Do you want to continue ?',
+                              //       style: CustomeStyling().customContenttextBlack(opecity: 1),
+                              //     ),
+                              //     actions: <Widget>[
+                              //       TextButton(
+                              //         onPressed: () => Navigator.pop(context, 'Cancel'),
+                              //         child: const Text('Cancel'),
+                              //       ),
+                              //       TextButton(
+                              //         onPressed: () {
+                              //           Navigator.popAndPushNamed(context, '/chat');
+                              //         },
+                              //         child: const Text('Yes'),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // );
                             },
                             child: Container(
                              // height: 120.0,
@@ -366,6 +365,71 @@ class _HomeState extends State<Home> {
                                                 fontWeight: FontWeight.bold,
                                                 color: Theme.of(context).primaryColor),
                                             textAlign: TextAlign.center),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            IconButton(
+                                              padding: EdgeInsets.only(right: 30),
+                                              onPressed: () {
+                                                (ApiAccess().hasPayLoad() == false) ?
+                                                _showNetworkAlert(context: context)
+                                                    :
+                                                showDialog<String>(
+                                                  context: context,
+                                                  builder: (BuildContext context) => AlertDialog(
+                                                    title: const Text('Pocket Buddy', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                                                    content: Text(
+                                                      'The conversational AI bot keeps you company by holding a conversation with you. You can ask her anything in any field.'
+                                                          'The bot can compose music, poem, etc. Spend some time with the bot and enjoy the functionality. \n\n'
+                                                          'Do you want to continue ?',
+                                                      style: CustomeStyling().customContenttextBlack(opecity: 1),
+                                                      //  style: TextStyle(color: Colors.black),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () => Navigator.pop(context, 'Cancel'),
+                                                        child: const Text('Cancel'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.popAndPushNamed(context, '/chat');
+                                                        },
+                                                        child: const Text('Yes'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                              icon: Icon(
+                                                Icons.chat,
+                                                color: Theme.of(context).primaryColor,
+                                                size: 25,
+                                              ),
+                                            ),
+                                            IconButton(
+                                              padding: EdgeInsets.only(right: 30),
+                                              onPressed: () {
+                                                _showComingSoonAlert(context: context, name: "Voice-Chat");
+                                              },
+                                              icon: Icon(
+                                                Icons.voice_chat,
+                                                color: Theme.of(context).primaryColor,
+                                                size: 25,
+                                              ),
+                                            ),
+                                            IconButton(
+                                              padding: EdgeInsets.only(right: 30),
+                                              onPressed: () {
+                                                _showComingSoonAlert(context: context, name: "Video-Chat");
+                                              },
+                                              icon: Icon(
+                                                Icons.video_call,
+                                                color: Theme.of(context).primaryColor,
+                                                size: 25,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                         Wrap(
                                           children: [
                                             Text(
@@ -388,10 +452,10 @@ class _HomeState extends State<Home> {
                                                 textAlign: TextAlign.center),
                                           ],
                                         ),
-                                        Text("She is always willing to chat.",
-                                            style: CustomeStyling().customContenttextWhite(opecity: 1),
-                                            // style: Theme.of(context).textTheme.bodyMedium,
-                                            textAlign: TextAlign.center),
+                                        // Text("She is always willing to chat.",
+                                        //     style: CustomeStyling().customContenttextWhite(opecity: 1),
+                                        //     // style: Theme.of(context).textTheme.bodyMedium,
+                                        //     textAlign: TextAlign.center),
                                       ],
                                     ),
                                     Icon(
@@ -756,6 +820,40 @@ class _HomeState extends State<Home> {
           TextButton(
             onPressed: () {
              // ApiAccess().Logout();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _showComingSoonAlert({required BuildContext context, required String name}) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Center(
+            child: Icon(
+              FontAwesomeIcons.timeline,
+              color: Colors.red,
+              size: 20.sp,
+            )),
+        content: Text(
+          "The $name is under development, will be published soon.",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black45,
+            fontFamily: 'Poppins',
+            fontSize: 18.0,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          // TextButton( onPressed: () => Navigator.pop(context, 'OK'), child: const Text('OK'),),
+          TextButton(
+            onPressed: () {
+              // ApiAccess().Logout();
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavigateTabsWidget(showEmotionalert: false,)));
             },
             child: const Text('OK'),

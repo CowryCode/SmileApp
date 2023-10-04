@@ -130,29 +130,39 @@ class _ChatWidgetState extends State<ChatWidget> {
                       left: 20.0, right: 20.0, top: 10, bottom: 10),
                   hintText: 'Message ...',
                   hintStyle: TextStyle(color: Colors.grey, fontFamily: 'Poppins'),
-                  suffixIcon: IconButton(
-                    padding: EdgeInsets.only(right: 30),
-                    onPressed: () {
-                      if(myController.text.isNotEmpty){
-                        chatcentralnotifier.updateComment(chat: myController.text, isbot: false,isPlaceholder: false);
-                        chatcentralnotifier.updateComment(chat: "typing . . .", isbot: true, isPlaceholder: true);
-                      }
-
-                      setState(() {
-                        _myListKey.currentState!.insertItem(0);
-                      });
-                     if(myController.text.isNotEmpty) ApiAccess().sendChat(chat: myController.text.trim());
-                      myController.clear();
-                      // Timer(Duration(milliseconds: 100), () {
-                      //   myController.clear();
-                      // });
-                    },
-                    icon: Icon(
-                      Icons.send,
-                      color: Theme.of(context).colorScheme.secondary,
-                      size: 25,
-                    ),
-                  ),
+                  suffixIcon:
+                      IconButton(
+                        padding: EdgeInsets.only(right: 30),
+                        onPressed: () {
+                          if(myController.text.isNotEmpty){
+                            chatcentralnotifier.updateComment(chat: myController.text, isbot: false,isPlaceholder: false);
+                            chatcentralnotifier.updateComment(chat: "typing . . .", isbot: true, isPlaceholder: true);
+                          }
+                          setState(() {
+                            _myListKey.currentState!.insertItem(0);
+                          });
+                         if(myController.text.isNotEmpty) ApiAccess().sendChat(chat: myController.text.trim());
+                          myController.clear();
+                          // Timer(Duration(milliseconds: 100), () {
+                          //   myController.clear();
+                          // });
+                        },
+                        icon: Icon(
+                          Icons.send,
+                          color: Theme.of(context).colorScheme.secondary,
+                          size: 25,
+                        ),
+                      ),
+                      // IconButton(
+                      //   padding: EdgeInsets.only(right: 30),
+                      //   onPressed: () {
+                      //   },
+                      //   icon: Icon(
+                      //     Icons.mic,
+                      //     color: Theme.of(context).colorScheme.secondary,
+                      //     size: 25,
+                      //   ),
+                      // ),
                   border: UnderlineInputBorder(borderSide: BorderSide.none),
                   enabledBorder:
                       UnderlineInputBorder(borderSide: BorderSide.none),

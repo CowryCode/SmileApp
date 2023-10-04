@@ -211,7 +211,7 @@ class _EmotionsState extends State<Emotions> {
         decoration: BoxDecoration(
          // color: Clicked0 == true
           color: clicked == true
-              ? Colors.green
+              ? Colors.white70
               : Colors.white,
           // color: Theme.of(context).primaryColor,
           border: Border.all(
